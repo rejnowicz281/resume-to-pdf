@@ -3,7 +3,7 @@ import React, { createContext, ReactNode, useContext, useState } from "react";
 export type WorkExperience = {
     title: string;
     company?: string;
-    location: string;
+    location?: string;
     startDate: string;
     endDate?: string;
     description?: string;
@@ -87,7 +87,7 @@ export const ResumeCreatorProvider = ({ children }: { children: ReactNode }) => 
     const [showImage, setShowImage] = useState(true);
     const [firstName, setFirstName] = useState("John");
     const [lastName, setLastName] = useState("Doe");
-    const [dateOfBirth, setDateOfBirth] = useState("1990-01-01");
+    const [dateOfBirth, setDateOfBirth] = useState("1990.01.01");
     const [country, setCountry] = useState("USA");
     const [city, setCity] = useState("New York");
     const [email, setEmail] = useState("john.doe@example.com");
@@ -98,16 +98,16 @@ export const ResumeCreatorProvider = ({ children }: { children: ReactNode }) => 
             title: "Software Engineer",
             company: "Tech Company",
             location: "New York, USA",
-            startDate: "2018-01-01",
-            endDate: "2020-01-01",
+            startDate: "01.2018",
+            endDate: "04.2018",
             description: "Worked on various projects using React and Node.js."
         },
         {
             title: "Frontend Developer",
             company: "Startup",
             location: "San Francisco, USA",
-            startDate: "2015-01-01",
-            endDate: "2018-01-01",
+            startDate: "01.2021",
+            endDate: "09.2021",
             description: "Developed web applications using React."
         }
     ]);
@@ -115,16 +115,16 @@ export const ResumeCreatorProvider = ({ children }: { children: ReactNode }) => 
     const [education, setEducation] = useState<Education[]>([
         {
             institution: "University",
-            startDate: "2010-01-01",
-            endDate: "2014-01-01",
+            startDate: "2010.01.01",
+            endDate: "2014.01.01",
             specialization: "Computer Science",
             level: "Bachelor",
             description: "Studied various subjects including algorithms, data structures, and web development."
         },
         {
             institution: "High School",
-            startDate: "2006-01-01",
-            endDate: "2010-01-01",
+            startDate: "2006.01.01",
+            endDate: "2010.01.01",
             level: "High School",
             description: "Graduated with honors."
         }
@@ -138,13 +138,13 @@ export const ResumeCreatorProvider = ({ children }: { children: ReactNode }) => 
     const [trainingAndCertification, setTrainingAndCertification] = useState<TrainingAndCertification[]>([
         {
             name: "React Certification",
-            issueDate: "2021-01-01",
+            issueDate: "2021.01.01",
             organization: "Online Course",
             description: "Completed an online course on React."
         },
         {
             name: "Node.js Certification",
-            issueDate: "2020-01-01",
+            issueDate: "2020.01.01",
             organization: "Online Course",
             description: "Completed an online course on Node.js."
         }
@@ -156,13 +156,13 @@ export const ResumeCreatorProvider = ({ children }: { children: ReactNode }) => 
         {
             name: "Volunteer",
             location: "Local Community Center",
-            startDate: "2019-01-01",
+            startDate: "2019.01.01",
             endDate: "Present",
             description: "Organized community events and activities."
         },
         {
             name: "Hobbies",
-            startDate: "2010-01-01",
+            startDate: "2010.01.01",
             description: "Reading, hiking, and playing guitar."
         }
     ]);
