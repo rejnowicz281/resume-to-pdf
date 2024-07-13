@@ -6,6 +6,7 @@ export type WorkExperience = {
     location?: string;
     startDate: string;
     endDate?: string;
+    duration: string;
     description?: string;
 };
 
@@ -13,6 +14,7 @@ export type Education = {
     institution: string;
     startDate: string;
     endDate?: string;
+    duration: string;
     specialization?: string;
     level: string;
     description?: string;
@@ -35,6 +37,7 @@ export type AdditionalActivity = {
     location?: string;
     startDate: string;
     endDate?: string;
+    duration: string;
     description?: string;
 };
 
@@ -100,7 +103,8 @@ export const ResumeCreatorProvider = ({ children }: { children: ReactNode }) => 
             location: "New York, USA",
             startDate: "01.2018",
             endDate: "04.2018",
-            description: "Worked on various projects using React and Node.js."
+            duration: "3 months",
+            description: "Developed web applications using React and Node.js."
         },
         {
             title: "Frontend Developer",
@@ -108,6 +112,7 @@ export const ResumeCreatorProvider = ({ children }: { children: ReactNode }) => 
             location: "San Francisco, USA",
             startDate: "01.2021",
             endDate: "09.2021",
+            duration: "9 months",
             description: "Developed web applications using React."
         }
     ]);
@@ -117,6 +122,7 @@ export const ResumeCreatorProvider = ({ children }: { children: ReactNode }) => 
             institution: "University",
             startDate: "2010.01.01",
             endDate: "2014.01.01",
+            duration: "4 years",
             specialization: "Computer Science",
             level: "Bachelor",
             description: "Studied various subjects including algorithms, data structures, and web development."
@@ -125,6 +131,7 @@ export const ResumeCreatorProvider = ({ children }: { children: ReactNode }) => 
             institution: "High School",
             startDate: "2006.01.01",
             endDate: "2010.01.01",
+            duration: "4 years",
             level: "High School",
             description: "Graduated with honors."
         }
@@ -158,11 +165,13 @@ export const ResumeCreatorProvider = ({ children }: { children: ReactNode }) => 
             location: "Local Community Center",
             startDate: "2019.01.01",
             endDate: "Present",
+            duration: "3 years",
             description: "Organized community events and activities."
         },
         {
             name: "Hobbies",
             startDate: "2010.01.01",
+            duration: "10 years",
             description: "Reading, hiking, and playing guitar."
         }
     ]);

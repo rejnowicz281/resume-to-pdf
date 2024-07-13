@@ -1,4 +1,4 @@
-import { js } from "@/lib/utils";
+import { js } from "@/lib/utils/general";
 import {
     AdditionalActivity,
     Education,
@@ -16,7 +16,9 @@ const styles = StyleSheet.create({
         fontFamily: "OpenSans",
         padding: 30,
         flexDirection: "row",
-        fontSize: 9
+        fontSize: 9,
+        gap: 20,
+        lineHeight: 1.7
     },
     leftSection: {
         flex: 1,
@@ -57,6 +59,10 @@ const styles = StyleSheet.create({
     link: {
         textDecoration: "none",
         color: "#000000"
+    },
+    date: {
+        fontSize: 8,
+        fontWeight: "semibold"
     }
 });
 
@@ -108,33 +114,33 @@ export default function ResumePDF({
         <Document>
             <Page size="A4" style={styles.page}>
                 {/* Left Section */}
-                <View style={js(styles.leftSection, { paddingRight: 20 })}>
+                <View style={styles.leftSection}>
                     {showImage && <View style={styles.imagePlaceholder} />}
 
-                    <View style={{ paddingTop: 10 }}>
+                    <View style={{ marginTop: 10 }}>
                         <Text style={styles.sectionTitle}>Contact</Text>
                         <View style={js(styles.flexColumn, { gap: 6 })}>
                             {email && (
                                 <View>
-                                    <Text style={{ marginBottom: 2 }}>E-Mail:</Text>
+                                    <Text>E-Mail:</Text>
                                     <Text style={styles.bold}>{email}</Text>
                                 </View>
                             )}
                             {phone && (
                                 <View>
-                                    <Text style={{ marginBottom: 2 }}>Phone:</Text>
+                                    <Text>Phone:</Text>
                                     <Text style={styles.bold}>{phone}</Text>
                                 </View>
                             )}
                             {dateOfBirth && (
                                 <View>
-                                    <Text style={{ marginBottom: 2 }}>Date of Birth:</Text>
+                                    <Text>Date of Birth:</Text>
                                     <Text>{dateOfBirth}</Text>
                                 </View>
                             )}
                             {(city || country) && (
                                 <View>
-                                    <Text style={{ marginBottom: 2 }}>Location:</Text>
+                                    <Text>Location:</Text>
                                     <Text>
                                         {city && (
                                             <>
@@ -155,15 +161,16 @@ export default function ResumePDF({
                             <Text style={styles.sectionTitle}>Skills</Text>
                             {skills.map((skill, idx) => (
                                 <View>
-                                    <Text
-                                        key={idx}
-                                        style={{
-                                            fontSize: 9,
-                                            fontWeight: "bold"
-                                        }}
-                                    >
-                                        {skill}
-                                    </Text>
+                                    <ListItem>
+                                        <Text
+                                            key={idx}
+                                            style={{
+                                                fontWeight: "bold"
+                                            }}
+                                        >
+                                            {skill}
+                                        </Text>
+                                    </ListItem>
                                 </View>
                             ))}
                         </View>
@@ -212,9 +219,12 @@ export default function ResumePDF({
                                                     </>
                                                 )}
                                             </View>
-                                            <Text>
-                                                {experience.startDate} - {experience.endDate || "Present"}
-                                            </Text>
+                                            <View style={js(styles.flexRow, { gap: 3 })}>
+                                                <Text style={styles.date}>
+                                                    {experience.startDate} - {experience.endDate || "Present"}
+                                                </Text>
+                                                <Text style={{ fontSize: 8 }}>[{experience.duration}]</Text>
+                                            </View>
                                             {experience.description && (
                                                 <View style={{ marginTop: 4 }}>
                                                     <Text>Description:</Text>
@@ -233,10 +243,15 @@ export default function ResumePDF({
                                 <View style={js(styles.flexColumn, { gap: 12 })}>
                                     {education.map((edu, idx) => (
                                         <View key={idx} style={js(styles.flexColumn, { gap: 1 })}>
-                                            <Text style={styles.bold}>{edu.institution}</Text>
-                                            <Text>
-                                                {edu.startDate} - {edu.endDate || "Present"}
-                                            </Text>
+                                            <ListItem>
+                                                <Text style={styles.bold}>{edu.institution}</Text>
+                                            </ListItem>
+                                            <View style={js(styles.flexRow, { gap: 3 })}>
+                                                <Text style={styles.date}>
+                                                    {edu.startDate} - {edu.endDate || "Present"}
+                                                </Text>
+                                                <Text style={{ fontSize: 8 }}>[{edu.duration}]</Text>
+                                            </View>
                                             {edu.specialization && <Text>Specialization: {edu.specialization}</Text>}
                                             <Text>Level of education: {edu.level}</Text>
                                             {edu.description && (
@@ -257,8 +272,10 @@ export default function ResumePDF({
                                 <View style={js(styles.flexColumn, { gap: 12 })}>
                                     {trainingAndCertification.map((cert, idx) => (
                                         <View key={idx} style={js(styles.flexColumn, { gap: 1 })}>
-                                            <Text style={styles.bold}>{cert.name}</Text>
-                                            <Text>{cert.issueDate}</Text>
+                                            <ListItem>
+                                                <Text style={styles.bold}>{cert.name}</Text>
+                                            </ListItem>
+                                            <Text style={styles.date}>{cert.issueDate}</Text>
                                             <Text>Organization: {cert.organization}</Text>
                                             {cert.description && (
                                                 <View style={{ marginTop: 4 }}>
@@ -280,9 +297,12 @@ export default function ResumePDF({
                                         <View key={idx} style={js(styles.flexColumn, { gap: 1 })}>
                                             <Text style={styles.bold}>{activity.name}</Text>
                                             {activity.location && <Text>{activity.location}</Text>}
-                                            <Text>
-                                                {activity.startDate} - {activity.endDate || "Present"}
-                                            </Text>
+                                            <View style={js(styles.flexRow, { gap: 3 })}>
+                                                <Text style={styles.date}>
+                                                    {activity.startDate} - {activity.endDate || "Present"}
+                                                </Text>
+                                                <Text style={{ fontSize: 8 }}>[{activity.duration}]</Text>
+                                            </View>
                                             {activity.description && (
                                                 <View style={{ marginTop: 4 }}>
                                                     <Text>Description:</Text>
