@@ -1,24 +1,15 @@
-import "./App.css";
+import DownloadPdfButton from "@/components/download-pdf-button";
+import ResumePreview from "@/components/resume-preview";
+import { ResumeCreatorProvider } from "@/providers/resume-creator-provider";
+import { ThemeProvider } from "@/providers/theme-provider";
 
-function App() {
-    const downloadPDF = async () => {
-        const response = await fetch("http://localhost:8080/pdf/generate", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify({ body: "<h1>Some Sample Header</h1>" })
-        });
-
-        const blob = await response.blob();
-        const url = window.URL.createObjectURL(blob);
-        const a = document.createElement("a");
-        a.href = url;
-        a.download = "resume.pdf";
-        a.click();
-    };
-
-    return <button onClick={downloadPDF}>Download PDF</button>;
+export default function App() {
+    return (
+        <ThemeProvider defaultTheme="light" storageKey="vite-ui-theme">
+            <ResumeCreatorProvider>
+                <DownloadPdfButton />
+                <ResumePreview />
+            </ResumeCreatorProvider>
+        </ThemeProvider>
+    );
 }
-
-export default App;
