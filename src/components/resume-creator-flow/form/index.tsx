@@ -29,8 +29,8 @@ export default function ResumeCreatorForm() {
         <div className="flex-1 relative flex flex-col">
             <div className="flex-1 relative">
                 <div className="absolute inset-0 overflow-y-scroll p-8 flex flex-col">
-                    <h1 className="mb-12 text-4xl font-semibold">
-                        Step {step}: {getStepName()}
+                    <h1 className="mb-6 pb-6 text-4xl font-semibold border-b-neutral-300 dark:border-b-neutral-800 border-b">
+                        Step {step} - {getStepName()}
                     </h1>
                     {renderStep()}
                 </div>

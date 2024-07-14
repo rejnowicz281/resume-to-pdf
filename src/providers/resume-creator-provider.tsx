@@ -1,6 +1,8 @@
 import React, { createContext, ReactNode, useContext, useState } from "react";
+import uniqid from "uniqid";
 
 export type WorkExperience = {
+    id: string;
     title: string;
     company?: string;
     location?: string;
@@ -10,7 +12,10 @@ export type WorkExperience = {
     description?: string;
 };
 
+export type WorkExperienceNoId = Omit<WorkExperience, "id">;
+
 export type Education = {
+    id: string;
     institution: string;
     startDate: string;
     endDate?: string;
@@ -21,11 +26,13 @@ export type Education = {
 };
 
 export type Language = {
+    id: string;
     language: string;
     level: string;
 };
 
 export type TrainingAndCertification = {
+    id: string;
     name: string;
     issueDate: string;
     organization: string;
@@ -33,6 +40,7 @@ export type TrainingAndCertification = {
 };
 
 export type AdditionalActivity = {
+    id: string;
     name: string;
     location?: string;
     startDate: string;
@@ -42,6 +50,7 @@ export type AdditionalActivity = {
 };
 
 export type Link = {
+    id: string;
     description?: string;
     url: string;
 };
@@ -65,6 +74,9 @@ export type ResumeCreatorContextType = {
     setPhone: React.Dispatch<React.SetStateAction<string>>;
     workExperience: WorkExperience[];
     setWorkExperience: React.Dispatch<React.SetStateAction<WorkExperience[]>>;
+    addWorkExperience: (experience: WorkExperience) => void;
+    editWorkExperience: (id: string, experience: WorkExperienceNoId) => void;
+    removeWorkExperience: (id: string) => void;
     education: Education[];
     setEducation: React.Dispatch<React.SetStateAction<Education[]>>;
     languages: Language[];
@@ -98,6 +110,7 @@ export const ResumeCreatorProvider = ({ children }: { children: ReactNode }) => 
 
     const [workExperience, setWorkExperience] = useState<WorkExperience[]>([
         {
+            id: uniqid(),
             title: "Software Engineer",
             company: "Tech Company",
             location: "New York, USA",
@@ -107,6 +120,7 @@ export const ResumeCreatorProvider = ({ children }: { children: ReactNode }) => 
             description: "Developed web applications using React and Node.js."
         },
         {
+            id: uniqid(),
             title: "Frontend Developer",
             company: "Startup",
             location: "San Francisco, USA",
@@ -117,8 +131,21 @@ export const ResumeCreatorProvider = ({ children }: { children: ReactNode }) => 
         }
     ]);
 
+    const addWorkExperience = (experience: WorkExperience) => {
+        setWorkExperience([...workExperience, experience]);
+    };
+
+    const editWorkExperience = (id: string, experience: WorkExperienceNoId) => {
+        setWorkExperience(workExperience.map((exp) => (exp.id === id ? { ...exp, ...experience } : exp)));
+    };
+
+    const removeWorkExperience = (id: string) => {
+        setWorkExperience(workExperience.filter((experience) => experience.id !== id));
+    };
+
     const [education, setEducation] = useState<Education[]>([
         {
+            id: uniqid(),
             institution: "University",
             startDate: "01.2024",
             endDate: "01.2020",
@@ -128,6 +155,7 @@ export const ResumeCreatorProvider = ({ children }: { children: ReactNode }) => 
             description: "Studied various subjects including algorithms, data structures, and web development."
         },
         {
+            id: uniqid(),
             institution: "High School",
             startDate: "01.2025",
             endDate: "01.2028",
@@ -138,18 +166,20 @@ export const ResumeCreatorProvider = ({ children }: { children: ReactNode }) => 
     ]);
 
     const [languages, setLanguages] = useState<Language[]>([
-        { language: "English", level: "Native" },
-        { language: "Spanish", level: "Intermediate" }
+        { id: uniqid(), language: "English", level: "Native" },
+        { id: uniqid(), language: "Spanish", level: "Intermediate" }
     ]);
 
     const [trainingAndCertification, setTrainingAndCertification] = useState<TrainingAndCertification[]>([
         {
+            id: uniqid(),
             name: "React Certification",
             issueDate: "01.2026",
             organization: "Online Course",
             description: "Completed an online course on React."
         },
         {
+            id: uniqid(),
             name: "Node.js Certification",
             issueDate: "01.2028",
             organization: "Online Course",
@@ -161,6 +191,7 @@ export const ResumeCreatorProvider = ({ children }: { children: ReactNode }) => 
 
     const [additionalActivities, setAdditionalActivities] = useState<AdditionalActivity[]>([
         {
+            id: uniqid(),
             name: "Volunteer",
             location: "Local Community Center",
             startDate: "05.2000",
@@ -169,6 +200,7 @@ export const ResumeCreatorProvider = ({ children }: { children: ReactNode }) => 
             description: "Organized community events and activities."
         },
         {
+            id: uniqid(),
             name: "Hobbies",
             startDate: "01.2010",
             duration: "10 years",
@@ -179,14 +211,8 @@ export const ResumeCreatorProvider = ({ children }: { children: ReactNode }) => 
     const [interests, setInterests] = useState<string>("I like reading and stuff.");
 
     const [links, setLinks] = useState<Link[]>([
-        {
-            description: "LinkedIn",
-            url: "https://www.linkedin.com/in/johndoe"
-        },
-        {
-            description: "GitHub",
-            url: "https://github.com/rejnowicz281"
-        }
+        { id: uniqid(), description: "LinkedIn", url: "https://www.linkedin.com/in/johndoe" },
+        { id: uniqid(), description: "GitHub", url: "https://github.com/rejnowicz281" }
     ]);
 
     const [step, setStep] = useState(1);
@@ -227,6 +253,9 @@ export const ResumeCreatorProvider = ({ children }: { children: ReactNode }) => 
                 setPhone,
                 workExperience,
                 setWorkExperience,
+                addWorkExperience,
+                editWorkExperience,
+                removeWorkExperience,
                 education,
                 setEducation,
                 languages,

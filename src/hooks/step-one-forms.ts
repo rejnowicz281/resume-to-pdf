@@ -11,7 +11,7 @@ const basicInfoSchema = z.object({
     lastName: z.string().min(1, {
         message: "Last name is required"
     }),
-    dateOfBirth: z.string()
+    dateOfBirth: z.string().optional()
 });
 
 export function useBasicInfoForm() {
@@ -29,15 +29,15 @@ export function useBasicInfoForm() {
     function onSubmit(values: z.infer<typeof basicInfoSchema>) {
         setFirstName(values.firstName);
         setLastName(values.lastName);
-        setDateOfBirth(values.dateOfBirth === "" ? "" : dateToString(new Date(values.dateOfBirth), "dd.mm.yyyy"));
+        setDateOfBirth(values.dateOfBirth ? dateToString(new Date(values.dateOfBirth), "dd.mm.yyyy") : "");
     }
 
     return { form, onSubmit };
 }
 
 const locationSchema = z.object({
-    country: z.string(),
-    city: z.string()
+    country: z.string().optional(),
+    city: z.string().optional()
 });
 
 export function useLocationForm() {
@@ -52,15 +52,15 @@ export function useLocationForm() {
     });
 
     function onSubmit(values: z.infer<typeof locationSchema>) {
-        setCountry(values.country);
-        setCity(values.city);
+        setCountry(values.country || "");
+        setCity(values.city || "");
     }
 
     return { form, onSubmit };
 }
 
 const contactSchema = z.object({
-    phone: z.string(),
+    phone: z.string().optional(),
     email: z
         .string()
         .email({
@@ -83,8 +83,8 @@ export function useContactForm() {
     });
 
     function onSubmit(values: z.infer<typeof contactSchema>) {
-        if (values.email) setEmail(values.email);
-        setPhone(values.phone);
+        setEmail(values.email);
+        setPhone(values.phone || "");
     }
 
     return { form, onSubmit };
