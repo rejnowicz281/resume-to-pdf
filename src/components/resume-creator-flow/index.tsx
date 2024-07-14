@@ -18,7 +18,7 @@ const ResumeCreatorFlow = () => {
         languages,
         training,
         skills,
-        additionalActivities,
+        activities,
         interests,
         links
     } = useResumeCreator();
@@ -40,7 +40,7 @@ const ResumeCreatorFlow = () => {
                     languages={languages}
                     training={training}
                     skills={skills}
-                    additionalActivities={additionalActivities}
+                    activities={activities}
                     interests={interests}
                     links={links}
                 />

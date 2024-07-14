@@ -1,6 +1,6 @@
 import { js } from "@/lib/utils/general";
 import {
-    AdditionalActivity,
+    Activity,
     Education,
     Language,
     Link as ResumeLink,
@@ -81,7 +81,7 @@ export default function ResumePDF({
     languages,
     training,
     skills,
-    additionalActivities,
+    activities,
     interests,
     links
 }: {
@@ -98,7 +98,7 @@ export default function ResumePDF({
     languages: Language[];
     training: Training[];
     skills: Skill[];
-    additionalActivities: AdditionalActivity[];
+    activities: Activity[];
     interests?: string;
     links: ResumeLink[];
 }) {
@@ -289,11 +289,11 @@ export default function ResumePDF({
                             </View>
                         )}
                         {/* Additional Activities */}
-                        {additionalActivities.length < 0 && (
+                        {activities.length > 0 && (
                             <View>
                                 <Text style={styles.sectionTitle}>Additional Activities</Text>
                                 <View style={js(styles.flexColumn, { gap: 12 })}>
-                                    {additionalActivities.map((activity) => (
+                                    {activities.map((activity) => (
                                         <View key={activity.id} style={js(styles.flexColumn, { gap: 1 })}>
                                             <Text style={styles.bold}>{activity.name}</Text>
                                             {activity.location && <Text>{activity.location}</Text>}

@@ -45,7 +45,7 @@ export type Training = {
 
 export type TrainingNoId = Omit<Training, "id">;
 
-export type AdditionalActivity = {
+export type Activity = {
     id: string;
     name: string;
     location?: string;
@@ -54,6 +54,8 @@ export type AdditionalActivity = {
     duration: string;
     description?: string;
 };
+
+export type ActivityNoId = Omit<Activity, "id">;
 
 export type Skill = {
     id: string;
@@ -111,8 +113,11 @@ export type ResumeCreatorContextType = {
     setSkills: React.Dispatch<React.SetStateAction<Skill[]>>;
     addSkill: (skill: Skill) => void;
     removeSkill: (id: string) => void;
-    additionalActivities: AdditionalActivity[];
-    setAdditionalActivities: React.Dispatch<React.SetStateAction<AdditionalActivity[]>>;
+    activities: Activity[];
+    setActivities: React.Dispatch<React.SetStateAction<Activity[]>>;
+    addActivity: (activity: Activity) => void;
+    editActivity: (id: string, activity: ActivityNoId) => void;
+    removeActivity: (id: string) => void;
     interests: string;
     setInterests: React.Dispatch<React.SetStateAction<string>>;
     links: Link[];
@@ -263,7 +268,7 @@ export const ResumeCreatorProvider = ({ children }: { children: ReactNode }) => 
         setSkills(skills.filter((skill) => skill.id !== id));
     };
 
-    const [additionalActivities, setAdditionalActivities] = useState<AdditionalActivity[]>([
+    const [activities, setActivities] = useState<Activity[]>([
         {
             id: uniqid(),
             name: "Volunteer",
@@ -281,6 +286,18 @@ export const ResumeCreatorProvider = ({ children }: { children: ReactNode }) => 
             description: "Reading, hiking, and playing guitar."
         }
     ]);
+
+    const addActivity = (activity: Activity) => {
+        setActivities([...activities, activity]);
+    };
+
+    const editActivity = (id: string, activity: ActivityNoId) => {
+        setActivities(activities.map((act) => (act.id === id ? { ...act, ...activity } : act)));
+    };
+
+    const removeActivity = (id: string) => {
+        setActivities(activities.filter((act) => act.id !== id));
+    };
 
     const [interests, setInterests] = useState<string>("I like reading and stuff.");
 
@@ -349,8 +366,11 @@ export const ResumeCreatorProvider = ({ children }: { children: ReactNode }) => 
                 setSkills,
                 addSkill,
                 removeSkill,
-                additionalActivities,
-                setAdditionalActivities,
+                activities,
+                setActivities,
+                addActivity,
+                editActivity,
+                removeActivity,
                 interests,
                 setInterests,
                 links,

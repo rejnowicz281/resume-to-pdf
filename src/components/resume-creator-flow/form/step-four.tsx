@@ -29,7 +29,7 @@ const DownloadLink = () => {
         languages,
         training,
         skills,
-        additionalActivities,
+        activities,
         interests,
         links
     } = useResumeCreator();
@@ -51,7 +51,7 @@ const DownloadLink = () => {
                     languages={languages}
                     training={training}
                     skills={skills}
-                    additionalActivities={additionalActivities}
+                    activities={activities}
                     interests={interests}
                     links={links}
                 />
