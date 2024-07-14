@@ -15,7 +15,7 @@ export default function WorkExperience() {
                 {workExperience.map((experience) => (
                     <Card className="relative break-words" key={experience.id}>
                         <div className="absolute top-6 right-6">
-                            <EditExperience experienceId={experience.id} />
+                            <EditExperience experience={experience} />
                             <DeleteExperience experience={experience} />
                         </div>
                         <CardHeader>

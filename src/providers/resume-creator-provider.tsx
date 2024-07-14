@@ -25,6 +25,8 @@ export type Education = {
     description?: string;
 };
 
+export type EducationNoId = Omit<Education, "id">;
+
 export type Language = {
     id: string;
     language: string;
@@ -79,6 +81,9 @@ export type ResumeCreatorContextType = {
     removeWorkExperience: (id: string) => void;
     education: Education[];
     setEducation: React.Dispatch<React.SetStateAction<Education[]>>;
+    addEducation: (education: Education) => void;
+    editEducation: (id: string, education: EducationNoId) => void;
+    removeEducation: (id: string) => void;
     languages: Language[];
     setLanguages: React.Dispatch<React.SetStateAction<Language[]>>;
     trainingAndCertification: TrainingAndCertification[];
@@ -164,6 +169,18 @@ export const ResumeCreatorProvider = ({ children }: { children: ReactNode }) => 
             description: "Graduated with honors."
         }
     ]);
+
+    const addEducation = (educationToAdd: Education) => {
+        setEducation([...education, educationToAdd]);
+    };
+
+    const editEducation = (id: string, educationToEdit: EducationNoId) => {
+        setEducation(education.map((edu) => (edu.id === id ? { ...edu, ...educationToEdit } : edu)));
+    };
+
+    const removeEducation = (id: string) => {
+        setEducation(education.filter((edu) => edu.id !== id));
+    };
 
     const [languages, setLanguages] = useState<Language[]>([
         { id: uniqid(), language: "English", level: "Native" },
@@ -258,6 +275,9 @@ export const ResumeCreatorProvider = ({ children }: { children: ReactNode }) => 
                 removeWorkExperience,
                 education,
                 setEducation,
+                addEducation,
+                editEducation,
+                removeEducation,
                 languages,
                 setLanguages,
                 trainingAndCertification,

@@ -1,11 +1,11 @@
 import { Button } from "@/components/ui/button";
 import { Dialog, DialogContent, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
-import { WorkExperience } from "@/providers/resume-creator-provider";
+import { Education } from "@/providers/resume-creator-provider";
 import { Edit } from "lucide-react";
 import { useState } from "react";
-import ExperienceForm from "./experience-form";
+import EducationForm from "./education-form";
 
-export default function EditExperience({ experience }: { experience: WorkExperience }) {
+export default function EditEducation({ education }: { education: Education }) {
     const [open, setOpen] = useState(false);
 
     return (
@@ -16,8 +16,8 @@ export default function EditExperience({ experience }: { experience: WorkExperie
                 </Button>
             </DialogTrigger>
             <DialogContent>
-                <DialogTitle className="text-3xl font-bold">Edit Experience</DialogTitle>
-                <ExperienceForm experience={experience} afterSubmit={() => setOpen(false)} />
+                <DialogTitle className="text-3xl font-bold">Edit Education</DialogTitle>
+                <EducationForm education={education} afterSubmit={() => setOpen(false)} />
             </DialogContent>
         </Dialog>
     );
