@@ -4,6 +4,7 @@ import {
     Education,
     Language,
     Link as ResumeLink,
+    Skill,
     Training,
     WorkExperience
 } from "@/providers/resume-creator-provider";
@@ -96,7 +97,7 @@ export default function ResumePDF({
     education: Education[];
     languages: Language[];
     training: Training[];
-    skills: string[];
+    skills: Skill[];
     additionalActivities: AdditionalActivity[];
     interests?: string;
     links: ResumeLink[];
@@ -159,16 +160,15 @@ export default function ResumePDF({
                     {skills.length > 0 && (
                         <View style={{ borderTop: 0.5, marginTop: 10, paddingTop: 10, borderTopColor: "#D3D3D3" }}>
                             <Text style={styles.sectionTitle}>Skills</Text>
-                            {skills.map((skill, idx) => (
-                                <View key={idx}>
+                            {skills.map((skill) => (
+                                <View key={skill.id}>
                                     <ListItem>
                                         <Text
-                                            key={idx}
                                             style={{
                                                 fontWeight: "bold"
                                             }}
                                         >
-                                            {skill}
+                                            {skill.name}
                                         </Text>
                                     </ListItem>
                                 </View>
@@ -180,8 +180,8 @@ export default function ResumePDF({
                     {languages.length > 0 && (
                         <View style={{ borderTop: 0.5, marginTop: 10, paddingTop: 10, borderTopColor: "#D3D3D3" }}>
                             <Text style={styles.sectionTitle}>Languages</Text>
-                            {languages.map((language, idx) => (
-                                <Text key={idx}>
+                            {languages.map((language) => (
+                                <Text key={language.id}>
                                     {language.language}: {language.level}
                                 </Text>
                             ))}
@@ -200,8 +200,8 @@ export default function ResumePDF({
                             <View>
                                 <Text style={styles.sectionTitle}>Work Experience</Text>
                                 <View style={js(styles.flexColumn, { gap: 12 })}>
-                                    {workExperience.map((experience, idx) => (
-                                        <View key={idx} style={js(styles.flexColumn, { gap: 1 })}>
+                                    {workExperience.map((experience) => (
+                                        <View key={experience.id} style={js(styles.flexColumn, { gap: 1 })}>
                                             <View style={js(styles.flexRow, { gap: 4 })}>
                                                 <ListItem>
                                                     <Text style={styles.bold}>{experience.title}</Text>
@@ -241,8 +241,8 @@ export default function ResumePDF({
                             <View>
                                 <Text style={styles.sectionTitle}>Education</Text>
                                 <View style={js(styles.flexColumn, { gap: 12 })}>
-                                    {education.map((edu, idx) => (
-                                        <View key={idx} style={js(styles.flexColumn, { gap: 1 })}>
+                                    {education.map((edu) => (
+                                        <View key={edu.id} style={js(styles.flexColumn, { gap: 1 })}>
                                             <ListItem>
                                                 <Text style={styles.bold}>{edu.institution}</Text>
                                             </ListItem>
@@ -270,8 +270,8 @@ export default function ResumePDF({
                             <View>
                                 <Text style={styles.sectionTitle}>Training and Certification</Text>
                                 <View style={js(styles.flexColumn, { gap: 12 })}>
-                                    {training.map((cert, idx) => (
-                                        <View key={idx} style={js(styles.flexColumn, { gap: 1 })}>
+                                    {training.map((cert) => (
+                                        <View key={cert.id} style={js(styles.flexColumn, { gap: 1 })}>
                                             <ListItem>
                                                 <Text style={styles.bold}>{cert.name}</Text>
                                             </ListItem>
@@ -293,8 +293,8 @@ export default function ResumePDF({
                             <View>
                                 <Text style={styles.sectionTitle}>Additional Activities</Text>
                                 <View style={js(styles.flexColumn, { gap: 12 })}>
-                                    {additionalActivities.map((activity, idx) => (
-                                        <View key={idx} style={js(styles.flexColumn, { gap: 1 })}>
+                                    {additionalActivities.map((activity) => (
+                                        <View key={activity.id} style={js(styles.flexColumn, { gap: 1 })}>
                                             <Text style={styles.bold}>{activity.name}</Text>
                                             {activity.location && <Text>{activity.location}</Text>}
                                             <View style={js(styles.flexRow, { gap: 3 })}>
@@ -326,8 +326,8 @@ export default function ResumePDF({
                             <View>
                                 <Text style={styles.sectionTitle}>Links</Text>
                                 <View style={js(styles.flexColumn, { gap: 12 })}>
-                                    {links.map((link, idx) => (
-                                        <View key={idx} style={js(styles.flexColumn, { gap: 1 })}>
+                                    {links.map((link) => (
+                                        <View key={link.id} style={js(styles.flexColumn, { gap: 1 })}>
                                             {link.description && <Text style={styles.bold}>{link.description}</Text>}
                                             <Link style={styles.link} src={link.url}>
                                                 {link.url}

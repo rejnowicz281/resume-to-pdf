@@ -55,11 +55,20 @@ export type AdditionalActivity = {
     description?: string;
 };
 
+export type Skill = {
+    id: string;
+    name: string;
+};
+
+export type SkillNoId = Omit<Skill, "id">;
+
 export type Link = {
     id: string;
     description?: string;
     url: string;
 };
+
+export type LinkNoId = Omit<Link, "id">;
 
 export type ResumeCreatorContextType = {
     showImage: boolean;
@@ -98,8 +107,10 @@ export type ResumeCreatorContextType = {
     addTraining: (training: Training) => void;
     editTraining: (id: string, training: TrainingNoId) => void;
     removeTraining: (id: string) => void;
-    skills: string[];
-    setSkills: React.Dispatch<React.SetStateAction<string[]>>;
+    skills: Skill[];
+    setSkills: React.Dispatch<React.SetStateAction<Skill[]>>;
+    addSkill: (skill: Skill) => void;
+    removeSkill: (id: string) => void;
     additionalActivities: AdditionalActivity[];
     setAdditionalActivities: React.Dispatch<React.SetStateAction<AdditionalActivity[]>>;
     interests: string;
@@ -238,7 +249,19 @@ export const ResumeCreatorProvider = ({ children }: { children: ReactNode }) => 
         setTraining(training.filter((t) => t.id !== id));
     };
 
-    const [skills, setSkills] = useState<string[]>(["JavaScript", "React", "Node.js"]);
+    const [skills, setSkills] = useState<Skill[]>([
+        { id: uniqid(), name: "JavaScript" },
+        { id: uniqid(), name: "React" },
+        { id: uniqid(), name: "Node.js" }
+    ]);
+
+    const addSkill = (skill: Skill) => {
+        setSkills([...skills, skill]);
+    };
+
+    const removeSkill = (id: string) => {
+        setSkills(skills.filter((skill) => skill.id !== id));
+    };
 
     const [additionalActivities, setAdditionalActivities] = useState<AdditionalActivity[]>([
         {
@@ -324,6 +347,8 @@ export const ResumeCreatorProvider = ({ children }: { children: ReactNode }) => 
                 removeTraining,
                 skills,
                 setSkills,
+                addSkill,
+                removeSkill,
                 additionalActivities,
                 setAdditionalActivities,
                 interests,
