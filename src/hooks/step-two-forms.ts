@@ -1,4 +1,5 @@
 import { dateToString, getDurationBetweenDates, stringToDate } from "@/lib/utils/date";
+import { withID } from "@/lib/utils/general";
 import {
     Education,
     EducationNoId,
@@ -8,7 +9,6 @@ import {
 } from "@/providers/resume-creator-provider";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
-import uniqid from "uniqid";
 import { z } from "zod";
 
 const workExperienceSchema = z.object({
@@ -57,7 +57,7 @@ export function useWorkExperienceForm(initialExperience?: WorkExperience) {
         if (initialExperience?.id) {
             editWorkExperience(initialExperience.id, newExperience);
         } else {
-            addWorkExperience({ ...newExperience, id: uniqid() });
+            addWorkExperience(withID(newExperience));
         }
     }
 
@@ -110,7 +110,7 @@ export function useEducationForm(initialEducation?: Education) {
         if (initialEducation?.id) {
             editEducation(initialEducation.id, newEducation);
         } else {
-            addEducation({ ...newEducation, id: uniqid() });
+            addEducation(withID(newEducation));
         }
     }
 
@@ -138,7 +138,7 @@ export const useLanguageForm = (initialLanguage?: { language: string; level: str
         if (initialLanguage) {
             editLanguage(initialLanguage.language, values);
         } else {
-            addLanguage({ ...values, id: uniqid() });
+            addLanguage(withID(values));
         }
     };
 
@@ -178,7 +178,7 @@ export const useTrainingForm = (initialTraining?: {
         if (initialTraining) {
             editTraining(initialTraining.name, values);
         } else {
-            addTraining({ ...values, id: uniqid() });
+            addTraining(withID(values));
         }
     };
 

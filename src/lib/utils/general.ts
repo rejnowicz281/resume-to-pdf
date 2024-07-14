@@ -1,7 +1,7 @@
+import { Style } from "@react-pdf/types";
 import { type ClassValue, clsx } from "clsx";
 import { twMerge } from "tailwind-merge";
-
-import { Style } from "@react-pdf/types";
+import uniqid from "uniqid";
 
 export function cn(...inputs: ClassValue[]) {
     return twMerge(clsx(inputs));
@@ -15,4 +15,9 @@ export function js(...styles: Style[]): Style {
         }
         return acc;
     }, {});
+}
+
+// Add an id to an object
+export function withID<T>(obj: T): T & { id: string } {
+    return { ...obj, id: uniqid() };
 }

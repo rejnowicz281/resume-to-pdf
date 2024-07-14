@@ -1,9 +1,9 @@
 import { dateToString, getDurationBetweenDates, stringToDate } from "@/lib/utils/date";
-import { Activity, ActivityNoId, useResumeCreator } from "@/providers/resume-creator-provider";
+import { withID } from "@/lib/utils/general";
+import { Activity, ActivityNoId, Link, useResumeCreator } from "@/providers/resume-creator-provider";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useEffect } from "react";
 import { useForm } from "react-hook-form";
-import uniqid from "uniqid";
 import { z } from "zod";
 
 const skillSchema = z.object({
@@ -24,7 +24,7 @@ export function useSkillForm() {
     }, [form.formState.isSubmitSuccessful]);
 
     function onSubmit(values: z.infer<typeof skillSchema>) {
-        addSkill({ ...values, id: uniqid() });
+        addSkill(withID(values));
     }
 
     return { form, onSubmit };
@@ -72,7 +72,7 @@ export function useActivityForm(initialActivity?: Activity) {
         if (initialActivity?.id) {
             editActivity(initialActivity.id, newActivity);
         } else {
-            addActivity({ ...newActivity, id: uniqid() });
+            addActivity(withID(newActivity));
         }
     }
 
@@ -96,6 +96,30 @@ export function useInterestsForm() {
     function onSubmit(values: z.infer<typeof interestsSchema>) {
         setInterests(values.interests || "");
         setShowImage(true);
+    }
+
+    return { form, onSubmit };
+}
+
+const linkSchema = z.object({
+    url: z.string().url("Please enter a valid URL"),
+    description: z.string().optional()
+});
+
+export function useLinkForm(initialLink?: Link) {
+    const { addLink, editLink } = useResumeCreator();
+
+    const form = useForm<z.infer<typeof linkSchema>>({
+        resolver: zodResolver(linkSchema),
+        defaultValues: initialLink
+    });
+
+    function onSubmit(values: z.infer<typeof linkSchema>) {
+        if (initialLink) {
+            editLink(initialLink.id, values);
+        } else {
+            addLink(withID(values));
+        }
     }
 
     return { form, onSubmit };

@@ -122,6 +122,9 @@ export type ResumeCreatorContextType = {
     setInterests: React.Dispatch<React.SetStateAction<string>>;
     links: Link[];
     setLinks: React.Dispatch<React.SetStateAction<Link[]>>;
+    addLink: (link: Link) => void;
+    editLink: (id: string, link: LinkNoId) => void;
+    removeLink: (id: string) => void;
     step: number;
     setStep: React.Dispatch<React.SetStateAction<number>>;
     getStepName: () => string;
@@ -306,6 +309,18 @@ export const ResumeCreatorProvider = ({ children }: { children: ReactNode }) => 
         { id: uniqid(), description: "GitHub", url: "https://github.com/rejnowicz281" }
     ]);
 
+    const addLink = (link: Link) => {
+        setLinks([...links, link]);
+    };
+
+    const editLink = (id: string, link: LinkNoId) => {
+        setLinks(links.map((l) => (l.id === id ? { ...l, ...link } : l)));
+    };
+
+    const removeLink = (id: string) => {
+        setLinks(links.filter((l) => l.id !== id));
+    };
+
     const [step, setStep] = useState(1);
 
     const getStepName = () => {
@@ -375,6 +390,9 @@ export const ResumeCreatorProvider = ({ children }: { children: ReactNode }) => 
                 setInterests,
                 links,
                 setLinks,
+                addLink,
+                editLink,
+                removeLink,
                 step,
                 setStep,
                 getStepName

@@ -1,6 +1,6 @@
 import Activities from "./additional-activities";
 import InterestsForm from "./interests-form";
-import LinksForm from "./links-form";
+import Links from "./links";
 import Skills from "./skills";
 
 export default function StepThree() {
@@ -9,7 +9,7 @@ export default function StepThree() {
             <Skills />
             <Activities />
             <InterestsForm />
-            <LinksForm />
+            <Links />
         </div>
     );
 }
