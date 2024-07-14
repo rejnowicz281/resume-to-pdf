@@ -8,7 +8,7 @@ import StepThree from "./step-three";
 import StepTwo from "./step-two";
 
 export default function ResumeCreatorForm() {
-    const { step, setStep } = useResumeCreator();
+    const { step, setStep, getStepName } = useResumeCreator();
 
     const renderStep = () => {
         switch (step) {
@@ -28,7 +28,12 @@ export default function ResumeCreatorForm() {
     return (
         <div className="flex-1 relative flex flex-col">
             <div className="flex-1 relative">
-                <div className="absolute inset-0 overflow-y-scroll p-8 flex flex-col">{renderStep()}</div>
+                <div className="absolute inset-0 overflow-y-scroll p-8 flex flex-col">
+                    <h1 className="mb-12 text-4xl font-semibold">
+                        Step {step}: {getStepName()}
+                    </h1>
+                    {renderStep()}
+                </div>
             </div>
             <div className={"flex p-8 justify-between gap-8"}>
                 {step !== 1 && (

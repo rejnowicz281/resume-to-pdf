@@ -98,7 +98,7 @@ export default function ResumePDF({
     trainingAndCertification: TrainingAndCertification[];
     skills: string[];
     additionalActivities: AdditionalActivity[];
-    interests: string;
+    interests?: string;
     links: ResumeLink[];
 }) {
     Font.register({
@@ -160,7 +160,7 @@ export default function ResumePDF({
                         <View style={{ borderTop: 0.5, marginTop: 10, paddingTop: 10, borderTopColor: "#D3D3D3" }}>
                             <Text style={styles.sectionTitle}>Skills</Text>
                             {skills.map((skill, idx) => (
-                                <View>
+                                <View key={idx}>
                                     <ListItem>
                                         <Text
                                             key={idx}
@@ -315,7 +315,7 @@ export default function ResumePDF({
                             </View>
                         )}
                         {/* Interests */}
-                        {interests.length > 0 && (
+                        {interests && (
                             <View>
                                 <Text style={styles.sectionTitle}>Interests</Text>
                                 <Text>{interests}</Text>

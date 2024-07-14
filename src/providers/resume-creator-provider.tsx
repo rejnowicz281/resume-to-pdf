@@ -90,7 +90,7 @@ export const ResumeCreatorProvider = ({ children }: { children: ReactNode }) => 
     const [showImage, setShowImage] = useState(true);
     const [firstName, setFirstName] = useState("John");
     const [lastName, setLastName] = useState("Doe");
-    const [dateOfBirth, setDateOfBirth] = useState("1990.01.01");
+    const [dateOfBirth, setDateOfBirth] = useState("01.01.1990");
     const [country, setCountry] = useState("USA");
     const [city, setCity] = useState("New York");
     const [email, setEmail] = useState("john.doe@example.com");
@@ -120,8 +120,8 @@ export const ResumeCreatorProvider = ({ children }: { children: ReactNode }) => 
     const [education, setEducation] = useState<Education[]>([
         {
             institution: "University",
-            startDate: "2010.01.01",
-            endDate: "2014.01.01",
+            startDate: "01.2024",
+            endDate: "01.2020",
             duration: "4 years",
             specialization: "Computer Science",
             level: "Bachelor",
@@ -129,8 +129,8 @@ export const ResumeCreatorProvider = ({ children }: { children: ReactNode }) => 
         },
         {
             institution: "High School",
-            startDate: "2006.01.01",
-            endDate: "2010.01.01",
+            startDate: "01.2025",
+            endDate: "01.2028",
             duration: "4 years",
             level: "High School",
             description: "Graduated with honors."
@@ -145,13 +145,13 @@ export const ResumeCreatorProvider = ({ children }: { children: ReactNode }) => 
     const [trainingAndCertification, setTrainingAndCertification] = useState<TrainingAndCertification[]>([
         {
             name: "React Certification",
-            issueDate: "2021.01.01",
+            issueDate: "01.2026",
             organization: "Online Course",
             description: "Completed an online course on React."
         },
         {
             name: "Node.js Certification",
-            issueDate: "2020.01.01",
+            issueDate: "01.2028",
             organization: "Online Course",
             description: "Completed an online course on Node.js."
         }
@@ -163,14 +163,14 @@ export const ResumeCreatorProvider = ({ children }: { children: ReactNode }) => 
         {
             name: "Volunteer",
             location: "Local Community Center",
-            startDate: "2019.01.01",
+            startDate: "05.2000",
             endDate: "Present",
             duration: "3 years",
             description: "Organized community events and activities."
         },
         {
             name: "Hobbies",
-            startDate: "2010.01.01",
+            startDate: "01.2010",
             duration: "10 years",
             description: "Reading, hiking, and playing guitar."
         }
