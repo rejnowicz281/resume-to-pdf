@@ -8,7 +8,7 @@ export default function WorkExperience() {
     const { workExperience } = useResumeCreator();
 
     return (
-        <div>
+        <div className="flex flex-col">
             <h2 className="text-3xl font-bold">Work Experience</h2>
 
             <div className="flex flex-col gap-9 my-6">

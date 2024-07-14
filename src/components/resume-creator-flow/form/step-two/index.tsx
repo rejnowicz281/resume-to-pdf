@@ -1,6 +1,6 @@
 import Education from "./education";
 import Languages from "./languages";
-import TrainingAndCertification from "./training-and-certification";
+import Training from "./training";
 import WorkExperience from "./work-experience";
 
 export default function StepTwo() {
@@ -9,7 +9,7 @@ export default function StepTwo() {
             <WorkExperience />
             <Education />
             <Languages />
-            <TrainingAndCertification />
+            <Training />
         </div>
     );
 }

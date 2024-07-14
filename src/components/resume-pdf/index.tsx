@@ -4,7 +4,7 @@ import {
     Education,
     Language,
     Link as ResumeLink,
-    TrainingAndCertification,
+    Training,
     WorkExperience
 } from "@/providers/resume-creator-provider";
 import { Document, Font, Link, Page, StyleSheet, Text, View } from "@react-pdf/renderer";
@@ -78,7 +78,7 @@ export default function ResumePDF({
     workExperience,
     education,
     languages,
-    trainingAndCertification,
+    training,
     skills,
     additionalActivities,
     interests,
@@ -95,7 +95,7 @@ export default function ResumePDF({
     workExperience: WorkExperience[];
     education: Education[];
     languages: Language[];
-    trainingAndCertification: TrainingAndCertification[];
+    training: Training[];
     skills: string[];
     additionalActivities: AdditionalActivity[];
     interests?: string;
@@ -266,11 +266,11 @@ export default function ResumePDF({
                             </View>
                         )}
                         {/* Training and Certification */}
-                        {trainingAndCertification.length > 0 && (
+                        {training.length > 0 && (
                             <View>
                                 <Text style={styles.sectionTitle}>Training and Certification</Text>
                                 <View style={js(styles.flexColumn, { gap: 12 })}>
-                                    {trainingAndCertification.map((cert, idx) => (
+                                    {training.map((cert, idx) => (
                                         <View key={idx} style={js(styles.flexColumn, { gap: 1 })}>
                                             <ListItem>
                                                 <Text style={styles.bold}>{cert.name}</Text>

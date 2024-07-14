@@ -27,7 +27,7 @@ const DownloadLink = () => {
         workExperience,
         education,
         languages,
-        trainingAndCertification,
+        training,
         skills,
         additionalActivities,
         interests,
@@ -49,7 +49,7 @@ const DownloadLink = () => {
                     workExperience={workExperience}
                     education={education}
                     languages={languages}
-                    trainingAndCertification={trainingAndCertification}
+                    training={training}
                     skills={skills}
                     additionalActivities={additionalActivities}
                     interests={interests}

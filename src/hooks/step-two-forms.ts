@@ -144,3 +144,43 @@ export const useLanguageForm = (initialLanguage?: { language: string; level: str
 
     return { form, onSubmit };
 };
+
+const trainingSchema = z.object({
+    name: z.string().min(1, {
+        message: "Name is required"
+    }),
+    issueDate: z.string().date("Please select a valid date"),
+    organization: z.string().min(1, {
+        message: "Organization is required"
+    }),
+    description: z.string().optional()
+});
+
+export const useTrainingForm = (initialTraining?: {
+    name: string;
+    issueDate: string;
+    organization: string;
+    description?: string;
+}) => {
+    const { addTraining, editTraining } = useResumeCreator();
+
+    const form = useForm<z.infer<typeof trainingSchema>>({
+        resolver: zodResolver(trainingSchema),
+        defaultValues: {
+            ...initialTraining,
+            issueDate: initialTraining?.issueDate
+                ? dateToString(stringToDate(initialTraining.issueDate), "yyyy-mm-dd")
+                : ""
+        }
+    });
+
+    const onSubmit = (values: z.infer<typeof trainingSchema>) => {
+        if (initialTraining) {
+            editTraining(initialTraining.name, values);
+        } else {
+            addTraining({ ...values, id: uniqid() });
+        }
+    };
+
+    return { form, onSubmit };
+};

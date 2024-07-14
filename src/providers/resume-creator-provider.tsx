@@ -35,13 +35,15 @@ export type Language = {
 
 export type LanguageNoId = Omit<Language, "id">;
 
-export type TrainingAndCertification = {
+export type Training = {
     id: string;
     name: string;
     issueDate: string;
     organization: string;
     description?: string;
 };
+
+export type TrainingNoId = Omit<Training, "id">;
 
 export type AdditionalActivity = {
     id: string;
@@ -91,8 +93,11 @@ export type ResumeCreatorContextType = {
     editLanguage: (id: string, language: LanguageNoId) => void;
     removeLanguage: (id: string) => void;
     setLanguages: React.Dispatch<React.SetStateAction<Language[]>>;
-    trainingAndCertification: TrainingAndCertification[];
-    setTrainingAndCertification: React.Dispatch<React.SetStateAction<TrainingAndCertification[]>>;
+    training: Training[];
+    setTraining: React.Dispatch<React.SetStateAction<Training[]>>;
+    addTraining: (training: Training) => void;
+    editTraining: (id: string, training: TrainingNoId) => void;
+    removeTraining: (id: string) => void;
     skills: string[];
     setSkills: React.Dispatch<React.SetStateAction<string[]>>;
     additionalActivities: AdditionalActivity[];
@@ -204,7 +209,7 @@ export const ResumeCreatorProvider = ({ children }: { children: ReactNode }) => 
         setLanguages(languages.filter((lang) => lang.id !== id));
     };
 
-    const [trainingAndCertification, setTrainingAndCertification] = useState<TrainingAndCertification[]>([
+    const [training, setTraining] = useState<Training[]>([
         {
             id: uniqid(),
             name: "React Certification",
@@ -220,6 +225,18 @@ export const ResumeCreatorProvider = ({ children }: { children: ReactNode }) => 
             description: "Completed an online course on Node.js."
         }
     ]);
+
+    const addTraining = (trainingToAdd: Training) => {
+        setTraining([...training, trainingToAdd]);
+    };
+
+    const editTraining = (id: string, trainingToEdit: TrainingNoId) => {
+        setTraining(training.map((t) => (t.id === id ? { ...t, ...trainingToEdit } : t)));
+    };
+
+    const removeTraining = (id: string) => {
+        setTraining(training.filter((t) => t.id !== id));
+    };
 
     const [skills, setSkills] = useState<string[]>(["JavaScript", "React", "Node.js"]);
 
@@ -300,8 +317,11 @@ export const ResumeCreatorProvider = ({ children }: { children: ReactNode }) => 
                 addLanguage,
                 editLanguage,
                 removeLanguage,
-                trainingAndCertification,
-                setTrainingAndCertification,
+                training,
+                setTraining,
+                addTraining,
+                editTraining,
+                removeTraining,
                 skills,
                 setSkills,
                 additionalActivities,

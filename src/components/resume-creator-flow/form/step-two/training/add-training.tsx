@@ -2,9 +2,9 @@ import { Button } from "@/components/ui/button";
 import { Dialog, DialogContent, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 import { Plus } from "lucide-react";
 import { useState } from "react";
-import EducationForm from "./education-form";
+import TrainingForm from "./training-form";
 
-export default function AddEducation() {
+export default function AddTraining() {
     const [open, setOpen] = useState(false);
 
     return (
@@ -12,12 +12,12 @@ export default function AddEducation() {
             <DialogTrigger asChild>
                 <Button className="self-center flex gap-2">
                     <Plus />
-                    Insert Education
+                    Insert Training
                 </Button>
             </DialogTrigger>
             <DialogContent>
-                <DialogTitle className="text-3xl font-bold">Add Education</DialogTitle>
-                <EducationForm afterSubmit={() => setOpen(false)} />
+                <DialogTitle className="text-3xl font-bold">Add Training</DialogTitle>
+                <TrainingForm afterSubmit={() => setOpen(false)} />
             </DialogContent>
         </Dialog>
     );

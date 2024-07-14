@@ -16,7 +16,7 @@ const ResumeCreatorFlow = () => {
         workExperience,
         education,
         languages,
-        trainingAndCertification,
+        training,
         skills,
         additionalActivities,
         interests,
@@ -38,7 +38,7 @@ const ResumeCreatorFlow = () => {
                     workExperience={workExperience}
                     education={education}
                     languages={languages}
-                    trainingAndCertification={trainingAndCertification}
+                    training={training}
                     skills={skills}
                     additionalActivities={additionalActivities}
                     interests={interests}

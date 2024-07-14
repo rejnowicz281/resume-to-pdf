@@ -10,7 +10,7 @@ export default function AddLanguage() {
     return (
         <Dialog open={open} onOpenChange={setOpen}>
             <DialogTrigger asChild>
-                <Button className="flex gap-2">
+                <Button className="self-center flex gap-2">
                     <Plus />
                     Insert Language
                 </Button>

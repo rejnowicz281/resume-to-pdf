@@ -26,7 +26,7 @@ export default function EducationForm({ education, afterSubmit }: { education?: 
                             <FormControl>
                                 <Input
                                     defaultValue={education?.institution}
-                                    placeholder="Software Developer"
+                                    placeholder="University of California"
                                     {...field}
                                 />
                             </FormControl>
@@ -102,7 +102,11 @@ export default function EducationForm({ education, afterSubmit }: { education?: 
                         <FormItem>
                             <FormLabel>Description</FormLabel>
                             <FormControl>
-                                <Textarea defaultValue={education?.description} placeholder="Description" {...field} />
+                                <Textarea
+                                    defaultValue={education?.description}
+                                    placeholder="Describe your education"
+                                    {...field}
+                                />
                             </FormControl>
                             <FormMessage />
                         </FormItem>

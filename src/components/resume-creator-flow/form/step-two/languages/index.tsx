@@ -8,7 +8,7 @@ export default function Languages() {
     const { languages } = useResumeCreator();
 
     return (
-        <div>
+        <div className="flex flex-col">
             <h2 className="text-3xl font-bold">Languages</h2>
 
             <div className="flex flex-col gap-9 my-6">
