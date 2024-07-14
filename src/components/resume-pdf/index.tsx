@@ -2,13 +2,14 @@ import { js } from "@/lib/utils/general";
 import {
     Activity,
     Education,
+    ImageOptions,
     Language,
     Link as ResumeLink,
     Skill,
     Training,
     WorkExperience
 } from "@/providers/resume-creator-provider";
-import { Document, Font, Link, Page, StyleSheet, Text, View } from "@react-pdf/renderer";
+import { Document, Font, Image, Link, Page, StyleSheet, Text, View } from "@react-pdf/renderer";
 import ListItem from "./list-item";
 
 // Styles for the PDF document
@@ -68,7 +69,7 @@ const styles = StyleSheet.create({
 });
 
 export default function ResumePDF({
-    showImage,
+    imageOptions,
     firstName,
     lastName,
     dateOfBirth,
@@ -85,7 +86,7 @@ export default function ResumePDF({
     interests,
     links
 }: {
-    showImage: boolean;
+    imageOptions: ImageOptions;
     firstName: string;
     lastName: string;
     dateOfBirth?: string;
@@ -116,7 +117,22 @@ export default function ResumePDF({
             <Page size="A4" style={styles.page}>
                 {/* Left Section */}
                 <View style={styles.leftSection}>
-                    {showImage && <View style={styles.imagePlaceholder} />}
+                    {imageOptions.show && (
+                        <Image
+                            src={{
+                                uri: imageOptions.url,
+                                method: "GET",
+                                headers: { "Cache-Control": "no-cache" },
+                                body: ""
+                            }}
+                            style={{
+                                width: 100,
+                                height: 100,
+                                objectFit: "cover",
+                                borderRadius: 50
+                            }}
+                        />
+                    )}
 
                     <View style={{ marginTop: 10 }}>
                         <Text style={styles.sectionTitle}>Contact</Text>

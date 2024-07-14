@@ -1,6 +1,11 @@
 import React, { createContext, ReactNode, useContext, useState } from "react";
 import uniqid from "uniqid";
 
+export type ImageOptions = {
+    show: boolean;
+    url: string;
+};
+
 export type WorkExperience = {
     id: string;
     title: string;
@@ -73,8 +78,8 @@ export type Link = {
 export type LinkNoId = Omit<Link, "id">;
 
 export type ResumeCreatorContextType = {
-    showImage: boolean;
-    setShowImage: React.Dispatch<React.SetStateAction<boolean>>;
+    imageOptions: ImageOptions;
+    setImageOptions: React.Dispatch<React.SetStateAction<ImageOptions>>;
     firstName: string;
     setFirstName: React.Dispatch<React.SetStateAction<string>>;
     lastName: string;
@@ -133,7 +138,7 @@ export type ResumeCreatorContextType = {
 const ResumeCreatorContext = createContext<ResumeCreatorContextType | undefined>(undefined);
 
 export const ResumeCreatorProvider = ({ children }: { children: ReactNode }) => {
-    const [showImage, setShowImage] = useState(true);
+    const [imageOptions, setImageOptions] = useState<ImageOptions>({ show: false, url: "" });
     const [firstName, setFirstName] = useState("John");
     const [lastName, setLastName] = useState("Doe");
     const [dateOfBirth, setDateOfBirth] = useState("01.01.1990");
@@ -341,8 +346,8 @@ export const ResumeCreatorProvider = ({ children }: { children: ReactNode }) => 
     return (
         <ResumeCreatorContext.Provider
             value={{
-                showImage,
-                setShowImage,
+                imageOptions,
+                setImageOptions,
                 firstName,
                 setFirstName,
                 lastName,

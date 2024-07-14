@@ -5,7 +5,7 @@ import ResumeCreatorForm from "./form";
 
 const ResumeCreatorFlow = () => {
     const {
-        showImage,
+        imageOptions,
         firstName,
         lastName,
         dateOfBirth,
@@ -27,7 +27,7 @@ const ResumeCreatorFlow = () => {
         <div className="flex flex-1">
             <PDFViewer width="45%" className="h-[100vh]">
                 <ResumePDF
-                    showImage={showImage}
+                    imageOptions={imageOptions}
                     firstName={firstName}
                     lastName={lastName}
                     dateOfBirth={dateOfBirth}

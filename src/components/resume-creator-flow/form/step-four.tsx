@@ -16,7 +16,7 @@ export default function StepFour() {
 
 const DownloadLink = () => {
     const {
-        showImage,
+        imageOptions,
         firstName,
         lastName,
         dateOfBirth,
@@ -38,7 +38,7 @@ const DownloadLink = () => {
         <PDFDownloadLink
             document={
                 <ResumePDF
-                    showImage={showImage}
+                    imageOptions={imageOptions}
                     firstName={firstName}
                     lastName={lastName}
                     dateOfBirth={dateOfBirth}
