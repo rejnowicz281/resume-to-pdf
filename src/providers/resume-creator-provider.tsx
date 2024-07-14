@@ -118,7 +118,7 @@ export type ResumeCreatorContextType = {
     addActivity: (activity: Activity) => void;
     editActivity: (id: string, activity: ActivityNoId) => void;
     removeActivity: (id: string) => void;
-    interests: string;
+    interests?: string;
     setInterests: React.Dispatch<React.SetStateAction<string>>;
     links: Link[];
     setLinks: React.Dispatch<React.SetStateAction<Link[]>>;

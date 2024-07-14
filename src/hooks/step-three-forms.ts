@@ -78,3 +78,25 @@ export function useActivityForm(initialActivity?: Activity) {
 
     return { form, onSubmit };
 }
+
+const interestsSchema = z.object({
+    interests: z.string().optional()
+});
+
+export function useInterestsForm() {
+    const { setInterests, interests, setShowImage } = useResumeCreator();
+
+    const form = useForm<z.infer<typeof interestsSchema>>({
+        resolver: zodResolver(interestsSchema),
+        defaultValues: {
+            interests
+        }
+    });
+
+    function onSubmit(values: z.infer<typeof interestsSchema>) {
+        setInterests(values.interests || "");
+        setShowImage(true);
+    }
+
+    return { form, onSubmit };
+}

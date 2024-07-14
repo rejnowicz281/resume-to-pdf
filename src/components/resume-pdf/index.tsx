@@ -315,7 +315,7 @@ export default function ResumePDF({
                             </View>
                         )}
                         {/* Interests */}
-                        {interests && (
+                        {!!interests && (
                             <View>
                                 <Text style={styles.sectionTitle}>Interests</Text>
                                 <Text>{interests}</Text>
