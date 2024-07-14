@@ -13,7 +13,7 @@ export default function WorkExperience() {
 
             <div className="flex flex-col gap-9 my-6">
                 {workExperience.map((experience) => (
-                    <Card className="relative" key={experience.id}>
+                    <Card className="relative break-words" key={experience.id}>
                         <div className="absolute top-6 right-6">
                             <EditExperience experienceId={experience.id} />
                             <DeleteExperience experience={experience} />
@@ -26,7 +26,9 @@ export default function WorkExperience() {
                                 {experience.endDate || "Present"} | {experience.duration}
                             </CardDescription>
                         </CardHeader>
-                        {experience.description && <CardContent>{experience.description}</CardContent>}
+                        {experience.description && (
+                            <CardContent className="whitespace-pre-line">{experience.description}</CardContent>
+                        )}
                     </Card>
                 ))}
             </div>

@@ -1,5 +1,5 @@
 import { Button } from "@/components/ui/button";
-import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
+import { Dialog, DialogContent, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 import { Plus } from "lucide-react";
 import { useState } from "react";
 import ExperienceForm from "./experience-form";
@@ -16,6 +16,7 @@ export default function AddExperience() {
                 </Button>
             </DialogTrigger>
             <DialogContent>
+                <DialogTitle className="text-3xl font-bold">Add Experience</DialogTitle>
                 <ExperienceForm afterSubmit={() => setOpen(false)} />
             </DialogContent>
         </Dialog>

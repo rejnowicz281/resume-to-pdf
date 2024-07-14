@@ -27,7 +27,7 @@ export default function DeleteExperience({ experience }: { experience: WorkExper
                 <AlertDialogHeader>
                     <AlertDialogTitle>Are you sure?</AlertDialogTitle>
                     <AlertDialogDescription>
-                        You are about to delete the <b>'{experience.title}'</b> position. This action cannot be undone.
+                        You are about to delete the <b>{experience.title}</b> position. This action cannot be undone.
                     </AlertDialogDescription>
                 </AlertDialogHeader>
                 <AlertDialogFooter>

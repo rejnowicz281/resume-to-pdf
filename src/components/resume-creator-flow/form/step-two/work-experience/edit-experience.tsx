@@ -1,5 +1,5 @@
 import { Button } from "@/components/ui/button";
-import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
+import { Dialog, DialogContent, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 import { Edit } from "lucide-react";
 import { useState } from "react";
 import ExperienceForm from "./experience-form";
@@ -15,6 +15,7 @@ export default function EditExperience({ experienceId }: { experienceId: string 
                 </Button>
             </DialogTrigger>
             <DialogContent>
+                <DialogTitle className="text-3xl font-bold">Edit Experience</DialogTitle>
                 <ExperienceForm experienceId={experienceId} afterSubmit={() => setOpen(false)} />
             </DialogContent>
         </Dialog>
