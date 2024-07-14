@@ -116,3 +116,31 @@ export function useEducationForm(initialEducation?: Education) {
 
     return { form, onSubmit };
 }
+
+const languageSchema = z.object({
+    language: z.string().min(1, {
+        message: "Language is required"
+    }),
+    level: z.string().min(1, {
+        message: "Level is required"
+    })
+});
+
+export const useLanguageForm = (initialLanguage?: { language: string; level: string }) => {
+    const { addLanguage, editLanguage } = useResumeCreator();
+
+    const form = useForm<z.infer<typeof languageSchema>>({
+        resolver: zodResolver(languageSchema),
+        defaultValues: initialLanguage
+    });
+
+    const onSubmit = (values: z.infer<typeof languageSchema>) => {
+        if (initialLanguage) {
+            editLanguage(initialLanguage.language, values);
+        } else {
+            addLanguage({ ...values, id: uniqid() });
+        }
+    };
+
+    return { form, onSubmit };
+};
