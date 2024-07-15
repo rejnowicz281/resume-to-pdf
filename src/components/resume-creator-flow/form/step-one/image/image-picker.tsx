@@ -58,7 +58,7 @@ const ImagePicker = () => {
                     </button>
                 </div>
             ) : (
-                <button className="flex flex-col relative hover:opacity-70 transition-opacity gap-6 max-w-[400px] p-9 w-full border border-dashed rounded-xl border-neutral-300 dark:border-neutral-800">
+                <button className="flex flex-col relative hover:opacity-70 transition-opacity gap-6 max-w-[400px] p-9 w-full border border-dashed rounded-xl border-neutral-300 dark:border-neutral-600">
                     <input
                         className="absolute inset-0 opacity-0 cursor-pointer"
                         ref={inputRef}
@@ -68,8 +68,8 @@ const ImagePicker = () => {
                         onChange={handleImageChange}
                     />
                     <div className="flex flex-col items-center">
-                        <Camera size={50} className="text-gray-700" />
-                        <div className="text-gray-700">Upload image from disk</div>
+                        <Camera size={50} className="text-gray-700 dark:text-gray-300" />
+                        <div className="text-gray-700 dark:text-gray-300">Upload image from disk</div>
                         <span className="text-center text-gray-500 text-sm">Or drag and drop an image here</span>
                     </div>
                     <div className="text-center text-gray-500 text-sm">Supported formats: JPEG, PNG (max. 6MB)</div>

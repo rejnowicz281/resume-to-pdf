@@ -25,7 +25,7 @@ const ResumeCreatorFlow = () => {
 
     return (
         <div className="flex flex-1">
-            <PDFViewer width="45%" className="h-[100vh]">
+            <PDFViewer className="w-[45%]">
                 <ResumePDF
                     imageOptions={imageOptions}
                     firstName={firstName}
