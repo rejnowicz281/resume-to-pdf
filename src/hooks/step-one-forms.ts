@@ -52,7 +52,7 @@ export function useLocationForm() {
     });
 
     function onSubmit(values: z.infer<typeof locationSchema>) {
-        setCountry(values.country || "");
+        setCountry(values.country?.trim() || "");
         setCity(values.city || "");
     }
 

@@ -142,7 +142,7 @@ export const ResumeCreatorProvider = ({ children }: { children: ReactNode }) => 
     const [firstName, setFirstName] = useState("John");
     const [lastName, setLastName] = useState("Doe");
     const [dateOfBirth, setDateOfBirth] = useState("01.01.1990");
-    const [country, setCountry] = useState("USA");
+    const [country, setCountry] = useState("");
     const [city, setCity] = useState("New York");
     const [email, setEmail] = useState("john.doe@example.com");
     const [phone, setPhone] = useState("123-456-7890");
