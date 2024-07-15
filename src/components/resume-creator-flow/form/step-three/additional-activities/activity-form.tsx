@@ -24,7 +24,7 @@ export default function ActivityForm({ activity, afterSubmit }: { activity?: Act
                         <FormItem>
                             <FormLabel>Name *</FormLabel>
                             <FormControl>
-                                <Input defaultValue={activity?.name} placeholder="Volunteering" {...field} />
+                                <Input placeholder="Volunteering" {...field} />
                             </FormControl>
                             <FormMessage />
                         </FormItem>
@@ -38,11 +38,7 @@ export default function ActivityForm({ activity, afterSubmit }: { activity?: Act
                         <FormItem>
                             <FormLabel>Location</FormLabel>
                             <FormControl>
-                                <Input
-                                    defaultValue={activity?.location}
-                                    placeholder="Local Community Center"
-                                    {...field}
-                                />
+                                <Input placeholder="Local Community Center" {...field} />
                             </FormControl>
                             <FormMessage />
                         </FormItem>
@@ -56,7 +52,7 @@ export default function ActivityForm({ activity, afterSubmit }: { activity?: Act
                         <FormItem>
                             <FormLabel>Start Date *</FormLabel>
                             <FormControl>
-                                <Input defaultValue={activity?.startDate} type="date" {...field} />
+                                <Input type="date" {...field} />
                             </FormControl>
                             <FormMessage />
                         </FormItem>
@@ -70,7 +66,7 @@ export default function ActivityForm({ activity, afterSubmit }: { activity?: Act
                         <FormItem>
                             <FormLabel>End Date</FormLabel>
                             <FormControl>
-                                <Input defaultValue={activity?.endDate} type="date" {...field} />
+                                <Input type="date" {...field} />
                             </FormControl>
                             <FormMessage />
                         </FormItem>
@@ -84,11 +80,7 @@ export default function ActivityForm({ activity, afterSubmit }: { activity?: Act
                         <FormItem>
                             <FormLabel>Description</FormLabel>
                             <FormControl>
-                                <Textarea
-                                    defaultValue={activity?.description}
-                                    placeholder="Describe this activity"
-                                    {...field}
-                                />
+                                <Textarea placeholder="Describe this activity" {...field} />
                             </FormControl>
                             <FormMessage />
                         </FormItem>

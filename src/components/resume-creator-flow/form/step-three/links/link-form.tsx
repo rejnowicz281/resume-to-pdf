@@ -23,7 +23,7 @@ export default function LinkForm({ link, afterSubmit }: { link?: Link; afterSubm
                         <FormItem>
                             <FormLabel>URL *</FormLabel>
                             <FormControl>
-                                <Input defaultValue={link?.url} placeholder="https://github.com" {...field} />
+                                <Input placeholder="https://github.com" {...field} />
                             </FormControl>
                             <FormMessage />
                         </FormItem>
@@ -37,7 +37,7 @@ export default function LinkForm({ link, afterSubmit }: { link?: Link; afterSubm
                         <FormItem>
                             <FormLabel>Description</FormLabel>
                             <FormControl>
-                                <Input defaultValue={link?.description} placeholder="My GitHub profile" {...field} />
+                                <Input placeholder="My GitHub profile" {...field} />
                             </FormControl>
                             <FormMessage />
                         </FormItem>

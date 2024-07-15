@@ -3,6 +3,8 @@ import { withID } from "@/lib/utils/general";
 import {
     Education,
     EducationNoId,
+    Language,
+    Training,
     useResumeCreator,
     WorkExperience,
     WorkExperienceNoId
@@ -126,7 +128,7 @@ const languageSchema = z.object({
     })
 });
 
-export const useLanguageForm = (initialLanguage?: { language: string; level: string }) => {
+export const useLanguageForm = (initialLanguage?: Language) => {
     const { addLanguage, editLanguage } = useResumeCreator();
 
     const form = useForm<z.infer<typeof languageSchema>>({
@@ -136,7 +138,7 @@ export const useLanguageForm = (initialLanguage?: { language: string; level: str
 
     const onSubmit = (values: z.infer<typeof languageSchema>) => {
         if (initialLanguage) {
-            editLanguage(initialLanguage.language, values);
+            editLanguage(initialLanguage.id, values);
         } else {
             addLanguage(withID(values));
         }
@@ -156,12 +158,7 @@ const trainingSchema = z.object({
     description: z.string().optional()
 });
 
-export const useTrainingForm = (initialTraining?: {
-    name: string;
-    issueDate: string;
-    organization: string;
-    description?: string;
-}) => {
+export const useTrainingForm = (initialTraining?: Training) => {
     const { addTraining, editTraining } = useResumeCreator();
 
     const form = useForm<z.infer<typeof trainingSchema>>({
@@ -175,10 +172,15 @@ export const useTrainingForm = (initialTraining?: {
     });
 
     const onSubmit = (values: z.infer<typeof trainingSchema>) => {
+        const newTraining = {
+            ...values,
+            issueDate: dateToString(new Date(values.issueDate), "mm.yyyy")
+        };
+
         if (initialTraining) {
-            editTraining(initialTraining.name, values);
+            editTraining(initialTraining.id, newTraining);
         } else {
-            addTraining(withID(values));
+            addTraining(withID(newTraining));
         }
     };
 

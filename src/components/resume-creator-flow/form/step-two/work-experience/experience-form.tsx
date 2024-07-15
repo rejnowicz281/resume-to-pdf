@@ -30,7 +30,7 @@ export default function ExperienceForm({
                         <FormItem>
                             <FormLabel>Title *</FormLabel>
                             <FormControl>
-                                <Input defaultValue={experience?.title} placeholder="Software Developer" {...field} />
+                                <Input placeholder="Software Developer" {...field} />
                             </FormControl>
                             <FormMessage />
                         </FormItem>
@@ -43,7 +43,7 @@ export default function ExperienceForm({
                         <FormItem>
                             <FormLabel>Company</FormLabel>
                             <FormControl>
-                                <Input defaultValue={experience?.company} placeholder="Google" {...field} />
+                                <Input placeholder="Google" {...field} />
                             </FormControl>
                             <FormMessage />
                         </FormItem>
@@ -56,7 +56,7 @@ export default function ExperienceForm({
                         <FormItem>
                             <FormLabel>Location</FormLabel>
                             <FormControl>
-                                <Input defaultValue={experience?.location} placeholder="Mountain View, CA" {...field} />
+                                <Input placeholder="Mountain View, CA" {...field} />
                             </FormControl>
                             <FormMessage />
                         </FormItem>
@@ -69,7 +69,7 @@ export default function ExperienceForm({
                         <FormItem>
                             <FormLabel>Start Date *</FormLabel>
                             <FormControl>
-                                <Input defaultValue={experience?.startDate} type="date" {...field} />
+                                <Input type="date" {...field} />
                             </FormControl>
                             <FormMessage />
                         </FormItem>
@@ -82,7 +82,7 @@ export default function ExperienceForm({
                         <FormItem>
                             <FormLabel>End Date</FormLabel>
                             <FormControl>
-                                <Input defaultValue={experience?.endDate} type="date" {...field} />
+                                <Input type="date" {...field} />
                             </FormControl>
                             <FormMessage />
                         </FormItem>
@@ -95,11 +95,7 @@ export default function ExperienceForm({
                         <FormItem>
                             <FormLabel>Description</FormLabel>
                             <FormControl>
-                                <Textarea
-                                    defaultValue={experience?.description}
-                                    placeholder="Describe your responsibilities and achievements"
-                                    {...field}
-                                />
+                                <Textarea placeholder="Describe your responsibilities and achievements" {...field} />
                             </FormControl>
                             <FormMessage />
                         </FormItem>

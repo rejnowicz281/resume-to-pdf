@@ -23,7 +23,7 @@ export default function LanguageForm({ language, afterSubmit }: { language?: Lan
                         <FormItem>
                             <FormLabel>Language *</FormLabel>
                             <FormControl>
-                                <Input defaultValue={language?.language} placeholder="English" {...field} />
+                                <Input placeholder="English" {...field} />
                             </FormControl>
                             <FormMessage />
                         </FormItem>
@@ -37,7 +37,7 @@ export default function LanguageForm({ language, afterSubmit }: { language?: Lan
                         <FormItem>
                             <FormLabel>Level *</FormLabel>
                             <FormControl>
-                                <Input defaultValue={language?.level} placeholder="Native" {...field} />
+                                <Input placeholder="Native" {...field} />
                             </FormControl>
                             <FormMessage />
                         </FormItem>

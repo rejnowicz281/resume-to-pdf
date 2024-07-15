@@ -1,5 +1,4 @@
 import React, { createContext, ReactNode, useContext, useState } from "react";
-import uniqid from "uniqid";
 
 export type ImageOptions = {
     show: boolean;
@@ -135,40 +134,40 @@ export type ResumeCreatorContextType = {
     getStepName: () => string;
 };
 
+export type Resume = {
+    imageOptions: ImageOptions;
+    firstName: string;
+    lastName: string;
+    dateOfBirth?: string;
+    country?: string;
+    city?: string;
+    email: string;
+    phone?: string;
+    workExperience: WorkExperience[];
+    education: Education[];
+    languages: Language[];
+    training: Training[];
+    skills: Skill[];
+    activities: Activity[];
+    interests?: string;
+    links: Link[];
+};
+
 const ResumeCreatorContext = createContext<ResumeCreatorContextType | undefined>(undefined);
 
-export const ResumeCreatorProvider = ({ children }: { children: ReactNode }) => {
-    const [imageOptions, setImageOptions] = useState<ImageOptions>({ show: false, url: "" });
-    const [firstName, setFirstName] = useState("John");
-    const [lastName, setLastName] = useState("Doe");
-    const [dateOfBirth, setDateOfBirth] = useState("01.01.1990");
-    const [country, setCountry] = useState("");
-    const [city, setCity] = useState("New York");
-    const [email, setEmail] = useState("john.doe@example.com");
-    const [phone, setPhone] = useState("123-456-7890");
+export const ResumeCreatorProvider = ({ children, initialResume }: { children: ReactNode; initialResume?: Resume }) => {
+    const [imageOptions, setImageOptions] = useState<ImageOptions>(
+        initialResume?.imageOptions || { show: false, url: "" }
+    );
+    const [firstName, setFirstName] = useState(initialResume?.firstName || "");
+    const [lastName, setLastName] = useState(initialResume?.lastName || "");
+    const [dateOfBirth, setDateOfBirth] = useState(initialResume?.dateOfBirth || "");
+    const [country, setCountry] = useState(initialResume?.country || "");
+    const [city, setCity] = useState(initialResume?.city || "");
+    const [email, setEmail] = useState(initialResume?.email || "");
+    const [phone, setPhone] = useState(initialResume?.phone || "");
 
-    const [workExperience, setWorkExperience] = useState<WorkExperience[]>([
-        {
-            id: uniqid(),
-            title: "Software Engineer",
-            company: "Tech Company",
-            location: "New York, USA",
-            startDate: "01.2018",
-            endDate: "04.2018",
-            duration: "3 months",
-            description: "Developed web applications using React and Node.js."
-        },
-        {
-            id: uniqid(),
-            title: "Frontend Developer",
-            company: "Startup",
-            location: "San Francisco, USA",
-            startDate: "01.2021",
-            endDate: "09.2021",
-            duration: "9 months",
-            description: "Developed web applications using React."
-        }
-    ]);
+    const [workExperience, setWorkExperience] = useState<WorkExperience[]>(initialResume?.workExperience || []);
 
     const addWorkExperience = (experience: WorkExperience) => {
         setWorkExperience([...workExperience, experience]);
@@ -182,27 +181,7 @@ export const ResumeCreatorProvider = ({ children }: { children: ReactNode }) => 
         setWorkExperience(workExperience.filter((experience) => experience.id !== id));
     };
 
-    const [education, setEducation] = useState<Education[]>([
-        {
-            id: uniqid(),
-            institution: "University",
-            startDate: "01.2024",
-            endDate: "01.2020",
-            duration: "4 years",
-            specialization: "Computer Science",
-            level: "Bachelor",
-            description: "Studied various subjects including algorithms, data structures, and web development."
-        },
-        {
-            id: uniqid(),
-            institution: "High School",
-            startDate: "01.2025",
-            endDate: "01.2028",
-            duration: "4 years",
-            level: "High School",
-            description: "Graduated with honors."
-        }
-    ]);
+    const [education, setEducation] = useState<Education[]>(initialResume?.education || []);
 
     const addEducation = (educationToAdd: Education) => {
         setEducation([...education, educationToAdd]);
@@ -216,10 +195,7 @@ export const ResumeCreatorProvider = ({ children }: { children: ReactNode }) => 
         setEducation(education.filter((edu) => edu.id !== id));
     };
 
-    const [languages, setLanguages] = useState<Language[]>([
-        { id: uniqid(), language: "English", level: "Native" },
-        { id: uniqid(), language: "Spanish", level: "Intermediate" }
-    ]);
+    const [languages, setLanguages] = useState<Language[]>(initialResume?.languages || []);
 
     const addLanguage = (language: Language) => {
         setLanguages([...languages, language]);
@@ -233,22 +209,7 @@ export const ResumeCreatorProvider = ({ children }: { children: ReactNode }) => 
         setLanguages(languages.filter((lang) => lang.id !== id));
     };
 
-    const [training, setTraining] = useState<Training[]>([
-        {
-            id: uniqid(),
-            name: "React Certification",
-            issueDate: "01.2026",
-            organization: "Online Course",
-            description: "Completed an online course on React."
-        },
-        {
-            id: uniqid(),
-            name: "Node.js Certification",
-            issueDate: "01.2028",
-            organization: "Online Course",
-            description: "Completed an online course on Node.js."
-        }
-    ]);
+    const [training, setTraining] = useState<Training[]>(initialResume?.training || []);
 
     const addTraining = (trainingToAdd: Training) => {
         setTraining([...training, trainingToAdd]);
@@ -262,11 +223,7 @@ export const ResumeCreatorProvider = ({ children }: { children: ReactNode }) => 
         setTraining(training.filter((t) => t.id !== id));
     };
 
-    const [skills, setSkills] = useState<Skill[]>([
-        { id: uniqid(), name: "JavaScript" },
-        { id: uniqid(), name: "React" },
-        { id: uniqid(), name: "Node.js" }
-    ]);
+    const [skills, setSkills] = useState<Skill[]>(initialResume?.skills || []);
 
     const addSkill = (skill: Skill) => {
         setSkills([...skills, skill]);
@@ -276,24 +233,7 @@ export const ResumeCreatorProvider = ({ children }: { children: ReactNode }) => 
         setSkills(skills.filter((skill) => skill.id !== id));
     };
 
-    const [activities, setActivities] = useState<Activity[]>([
-        {
-            id: uniqid(),
-            name: "Volunteer",
-            location: "Local Community Center",
-            startDate: "05.2000",
-            endDate: "Present",
-            duration: "3 years",
-            description: "Organized community events and activities."
-        },
-        {
-            id: uniqid(),
-            name: "Hobbies",
-            startDate: "01.2010",
-            duration: "10 years",
-            description: "Reading, hiking, and playing guitar."
-        }
-    ]);
+    const [activities, setActivities] = useState<Activity[]>(initialResume?.activities || []);
 
     const addActivity = (activity: Activity) => {
         setActivities([...activities, activity]);
@@ -307,12 +247,9 @@ export const ResumeCreatorProvider = ({ children }: { children: ReactNode }) => 
         setActivities(activities.filter((act) => act.id !== id));
     };
 
-    const [interests, setInterests] = useState<string>("I like reading and stuff.");
+    const [interests, setInterests] = useState<string>(initialResume?.interests || "");
 
-    const [links, setLinks] = useState<Link[]>([
-        { id: uniqid(), description: "LinkedIn", url: "https://www.linkedin.com/in/johndoe" },
-        { id: uniqid(), description: "GitHub", url: "https://github.com/rejnowicz281" }
-    ]);
+    const [links, setLinks] = useState<Link[]>(initialResume?.links || []);
 
     const addLink = (link: Link) => {
         setLinks([...links, link]);

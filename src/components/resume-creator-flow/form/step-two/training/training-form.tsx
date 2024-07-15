@@ -24,7 +24,7 @@ export default function TrainingForm({ training, afterSubmit }: { training?: Tra
                         <FormItem>
                             <FormLabel>Name *</FormLabel>
                             <FormControl>
-                                <Input defaultValue={training?.name} placeholder="Node.js Course" {...field} />
+                                <Input placeholder="Node.js Course" {...field} />
                             </FormControl>
                             <FormMessage />
                         </FormItem>
@@ -38,7 +38,7 @@ export default function TrainingForm({ training, afterSubmit }: { training?: Tra
                         <FormItem>
                             <FormLabel>Organization *</FormLabel>
                             <FormControl>
-                                <Input defaultValue={training?.organization} placeholder="Coursera" {...field} />
+                                <Input placeholder="Coursera" {...field} />
                             </FormControl>
                             <FormMessage />
                         </FormItem>
@@ -52,7 +52,7 @@ export default function TrainingForm({ training, afterSubmit }: { training?: Tra
                         <FormItem>
                             <FormLabel>Issue Date *</FormLabel>
                             <FormControl>
-                                <Input defaultValue={training?.issueDate} placeholder="02.2024" {...field} />
+                                <Input type="date" {...field} />
                             </FormControl>
                             <FormMessage />
                         </FormItem>
@@ -66,11 +66,7 @@ export default function TrainingForm({ training, afterSubmit }: { training?: Tra
                         <FormItem>
                             <FormLabel>Description</FormLabel>
                             <FormControl>
-                                <Textarea
-                                    defaultValue={training?.description}
-                                    placeholder="Describe your training experience"
-                                    {...field}
-                                />
+                                <Textarea placeholder="Describe your training experience" {...field} />
                             </FormControl>
                             <FormMessage />
                         </FormItem>

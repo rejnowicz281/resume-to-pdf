@@ -44,7 +44,7 @@ export default function BasicInfoForm() {
                             <FormItem>
                                 <FormLabel>Date of Birth</FormLabel>
                                 <FormControl>
-                                    <Input type="date" placeholder="01.01.2000" {...field} />
+                                    <Input type="date" {...field} />
                                 </FormControl>
                                 <FormMessage />
                             </FormItem>

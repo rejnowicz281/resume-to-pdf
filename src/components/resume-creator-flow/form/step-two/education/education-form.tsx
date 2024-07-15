@@ -24,11 +24,7 @@ export default function EducationForm({ education, afterSubmit }: { education?: 
                         <FormItem>
                             <FormLabel>Institution *</FormLabel>
                             <FormControl>
-                                <Input
-                                    defaultValue={education?.institution}
-                                    placeholder="University of California"
-                                    {...field}
-                                />
+                                <Input placeholder="University of California" {...field} />
                             </FormControl>
                             <FormMessage />
                         </FormItem>
@@ -42,7 +38,7 @@ export default function EducationForm({ education, afterSubmit }: { education?: 
                         <FormItem>
                             <FormLabel>Level *</FormLabel>
                             <FormControl>
-                                <Input defaultValue={education?.level} placeholder="Bachelor's" {...field} />
+                                <Input placeholder="Bachelor's" {...field} />
                             </FormControl>
                             <FormMessage />
                         </FormItem>
@@ -56,11 +52,7 @@ export default function EducationForm({ education, afterSubmit }: { education?: 
                         <FormItem>
                             <FormLabel>Specialization</FormLabel>
                             <FormControl>
-                                <Input
-                                    defaultValue={education?.specialization}
-                                    placeholder="Computer Science"
-                                    {...field}
-                                />
+                                <Input placeholder="Computer Science" {...field} />
                             </FormControl>
                             <FormMessage />
                         </FormItem>
@@ -74,7 +66,7 @@ export default function EducationForm({ education, afterSubmit }: { education?: 
                         <FormItem>
                             <FormLabel>Start Date *</FormLabel>
                             <FormControl>
-                                <Input defaultValue={education?.startDate} type="date" {...field} />
+                                <Input type="date" {...field} />
                             </FormControl>
                             <FormMessage />
                         </FormItem>
@@ -88,7 +80,7 @@ export default function EducationForm({ education, afterSubmit }: { education?: 
                         <FormItem>
                             <FormLabel>End Date</FormLabel>
                             <FormControl>
-                                <Input defaultValue={education?.endDate} type="date" {...field} />
+                                <Input type="date" {...field} />
                             </FormControl>
                             <FormMessage />
                         </FormItem>
@@ -102,11 +94,7 @@ export default function EducationForm({ education, afterSubmit }: { education?: 
                         <FormItem>
                             <FormLabel>Description</FormLabel>
                             <FormControl>
-                                <Textarea
-                                    defaultValue={education?.description}
-                                    placeholder="Describe your education"
-                                    {...field}
-                                />
+                                <Textarea placeholder="Describe your education" {...field} />
                             </FormControl>
                             <FormMessage />
                         </FormItem>

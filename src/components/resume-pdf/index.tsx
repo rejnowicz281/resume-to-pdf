@@ -134,43 +134,45 @@ export default function ResumePDF({
                         />
                     )}
 
-                    <View style={{ marginTop: 10 }}>
-                        <Text style={styles.sectionTitle}>Contact</Text>
-                        <View style={js(styles.flexColumn, { gap: 6 })}>
-                            {email && (
-                                <View>
-                                    <Text>E-Mail:</Text>
-                                    <Text style={styles.bold}>{email}</Text>
-                                </View>
-                            )}
-                            {phone && (
-                                <View>
-                                    <Text>Phone:</Text>
-                                    <Text style={styles.bold}>{phone}</Text>
-                                </View>
-                            )}
-                            {dateOfBirth && (
-                                <View>
-                                    <Text>Date of Birth:</Text>
-                                    <Text>{dateOfBirth}</Text>
-                                </View>
-                            )}
-                            {(city || country) && (
-                                <View>
-                                    <Text>Location:</Text>
-                                    <Text>
-                                        {city && (
-                                            <>
-                                                {city}
-                                                {country && ", "}
-                                            </>
-                                        )}
-                                        {country}
-                                    </Text>
-                                </View>
-                            )}
+                    {(email || phone || dateOfBirth || city || country) && (
+                        <View style={{ marginTop: 10 }}>
+                            <Text style={styles.sectionTitle}>Contact</Text>
+                            <View style={js(styles.flexColumn, { gap: 6 })}>
+                                {!!email && (
+                                    <View>
+                                        <Text>E-Mail:</Text>
+                                        <Text style={styles.bold}>{email}</Text>
+                                    </View>
+                                )}
+                                {!!phone && (
+                                    <View>
+                                        <Text>Phone:</Text>
+                                        <Text style={styles.bold}>{phone}</Text>
+                                    </View>
+                                )}
+                                {!!dateOfBirth && (
+                                    <View>
+                                        <Text>Date of Birth:</Text>
+                                        <Text>{dateOfBirth}</Text>
+                                    </View>
+                                )}
+                                {(city || country) && (
+                                    <View>
+                                        <Text>Location:</Text>
+                                        <Text>
+                                            {city && (
+                                                <>
+                                                    {city}
+                                                    {country && ", "}
+                                                </>
+                                            )}
+                                            {country}
+                                        </Text>
+                                    </View>
+                                )}
+                            </View>
                         </View>
-                    </View>
+                    )}
 
                     {/* Skills */}
                     {skills.length > 0 && (
