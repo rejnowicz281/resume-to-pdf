@@ -1,160 +1,8 @@
-import React from "react";
 import uniqid from "uniqid";
-
-export type ImageOptions = {
-    show: boolean;
-    url: string;
-};
-
-export type WorkExperience = {
-    id: string;
-    title: string;
-    company?: string;
-    location?: string;
-    startDate: string;
-    endDate?: string;
-    duration: string;
-    description?: string;
-};
-
-export type WorkExperienceNoId = Omit<WorkExperience, "id">;
-
-export type Education = {
-    id: string;
-    institution: string;
-    startDate: string;
-    endDate?: string;
-    duration: string;
-    specialization?: string;
-    level: string;
-    description?: string;
-};
-
-export type EducationNoId = Omit<Education, "id">;
-
-export type Language = {
-    id: string;
-    language: string;
-    level: string;
-};
-
-export type LanguageNoId = Omit<Language, "id">;
-
-export type Training = {
-    id: string;
-    name: string;
-    issueDate: string;
-    organization: string;
-    description?: string;
-};
-
-export type TrainingNoId = Omit<Training, "id">;
-
-export type Activity = {
-    id: string;
-    name: string;
-    location?: string;
-    startDate: string;
-    endDate?: string;
-    duration: string;
-    description?: string;
-};
-
-export type ActivityNoId = Omit<Activity, "id">;
-
-export type Skill = {
-    id: string;
-    name: string;
-};
-
-export type SkillNoId = Omit<Skill, "id">;
-
-export type Link = {
-    id: string;
-    description?: string;
-    url: string;
-};
-
-export type LinkNoId = Omit<Link, "id">;
-
-export type ResumeCreatorContextType = {
-    imageOptions: ImageOptions;
-    setImageOptions: React.Dispatch<React.SetStateAction<ImageOptions>>;
-    firstName: string;
-    setFirstName: React.Dispatch<React.SetStateAction<string>>;
-    lastName: string;
-    setLastName: React.Dispatch<React.SetStateAction<string>>;
-    dateOfBirth?: string;
-    setDateOfBirth: React.Dispatch<React.SetStateAction<string>>;
-    country?: string;
-    setCountry: React.Dispatch<React.SetStateAction<string>>;
-    city?: string;
-    setCity: React.Dispatch<React.SetStateAction<string>>;
-    email: string;
-    setEmail: React.Dispatch<React.SetStateAction<string>>;
-    phone?: string;
-    setPhone: React.Dispatch<React.SetStateAction<string>>;
-    workExperience: WorkExperience[];
-    setWorkExperience: React.Dispatch<React.SetStateAction<WorkExperience[]>>;
-    addWorkExperience: (experience: WorkExperience) => void;
-    editWorkExperience: (id: string, experience: WorkExperienceNoId) => void;
-    removeWorkExperience: (id: string) => void;
-    education: Education[];
-    setEducation: React.Dispatch<React.SetStateAction<Education[]>>;
-    addEducation: (education: Education) => void;
-    editEducation: (id: string, education: EducationNoId) => void;
-    removeEducation: (id: string) => void;
-    languages: Language[];
-    addLanguage: (language: Language) => void;
-    editLanguage: (id: string, language: LanguageNoId) => void;
-    removeLanguage: (id: string) => void;
-    setLanguages: React.Dispatch<React.SetStateAction<Language[]>>;
-    training: Training[];
-    setTraining: React.Dispatch<React.SetStateAction<Training[]>>;
-    addTraining: (training: Training) => void;
-    editTraining: (id: string, training: TrainingNoId) => void;
-    removeTraining: (id: string) => void;
-    skills: Skill[];
-    setSkills: React.Dispatch<React.SetStateAction<Skill[]>>;
-    addSkill: (skill: Skill) => void;
-    removeSkill: (id: string) => void;
-    activities: Activity[];
-    setActivities: React.Dispatch<React.SetStateAction<Activity[]>>;
-    addActivity: (activity: Activity) => void;
-    editActivity: (id: string, activity: ActivityNoId) => void;
-    removeActivity: (id: string) => void;
-    interests?: string;
-    setInterests: React.Dispatch<React.SetStateAction<string>>;
-    links: Link[];
-    setLinks: React.Dispatch<React.SetStateAction<Link[]>>;
-    addLink: (link: Link) => void;
-    editLink: (id: string, link: LinkNoId) => void;
-    removeLink: (id: string) => void;
-    step: number;
-    setStep: React.Dispatch<React.SetStateAction<number>>;
-    getStepName: () => string;
-};
-
-export type Resume = {
-    imageOptions: ImageOptions;
-    firstName: string;
-    lastName: string;
-    dateOfBirth?: string;
-    country?: string;
-    city?: string;
-    email: string;
-    phone?: string;
-    workExperience: WorkExperience[];
-    education: Education[];
-    languages: Language[];
-    training: Training[];
-    skills: Skill[];
-    activities: Activity[];
-    interests?: string;
-    links: Link[];
-};
+import { Resume } from "../types/resume";
 
 const SAMPLE_RESUME: Resume = {
+    id: "sample-resume",
     imageOptions: {
         show: false,
         url: ""
@@ -257,7 +105,9 @@ const SAMPLE_RESUME: Resume = {
     links: [
         { id: uniqid(), description: "LinkedIn", url: "https://www.linkedin.com/in/johndoe" },
         { id: uniqid(), description: "GitHub", url: "https://github.com/rejnowicz281" }
-    ]
+    ],
+    createdAt: new Date().toISOString(),
+    updatedAt: new Date().toISOString()
 };
 
 export default SAMPLE_RESUME;

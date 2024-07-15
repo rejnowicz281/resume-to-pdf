@@ -1,14 +1,7 @@
+import { Education, EducationNoId, Language, Training, WorkExperience, WorkExperienceNoId } from "@/lib/types/resume";
 import { dateToString, getDurationBetweenDates, stringToDate } from "@/lib/utils/date";
 import { withID } from "@/lib/utils/general";
-import {
-    Education,
-    EducationNoId,
-    Language,
-    Training,
-    useResumeCreator,
-    WorkExperience,
-    WorkExperienceNoId
-} from "@/providers/resume-creator-provider";
+import { useResumeCreator } from "@/providers/resume-creator-provider";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";

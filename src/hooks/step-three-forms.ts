@@ -1,6 +1,7 @@
+import { Activity, ActivityNoId, Link } from "@/lib/types/resume";
 import { dateToString, getDurationBetweenDates, stringToDate } from "@/lib/utils/date";
 import { withID } from "@/lib/utils/general";
-import { Activity, ActivityNoId, Link, useResumeCreator } from "@/providers/resume-creator-provider";
+import { useResumeCreator } from "@/providers/resume-creator-provider";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useEffect } from "react";
 import { useForm } from "react-hook-form";
@@ -84,7 +85,7 @@ const interestsSchema = z.object({
 });
 
 export function useInterestsForm() {
-    const { setInterests, interests, setShowImage } = useResumeCreator();
+    const { setInterests, interests } = useResumeCreator();
 
     const form = useForm<z.infer<typeof interestsSchema>>({
         resolver: zodResolver(interestsSchema),
@@ -95,7 +96,6 @@ export function useInterestsForm() {
 
     function onSubmit(values: z.infer<typeof interestsSchema>) {
         setInterests(values.interests || "");
-        setShowImage(true);
     }
 
     return { form, onSubmit };
