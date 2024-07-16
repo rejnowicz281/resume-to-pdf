@@ -2,7 +2,6 @@ import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
 import { useResumeCreator } from "@/providers/resume-creator-provider";
 import { ArrowLeft, ArrowRight } from "lucide-react";
-import { Link } from "react-router-dom";
 import StepFour from "./step-four";
 import StepOne from "./step-one";
 import StepThree from "./step-three";
@@ -31,7 +30,6 @@ export default function ResumeCreatorForm() {
             <div className="flex-1 relative">
                 <div className="absolute inset-0 overflow-y-scroll p-8 flex flex-col">
                     <h1 className="mb-6 pb-6 text-4xl font-semibold border-b-neutral-300 dark:border-b-neutral-800 border-b">
-                        <Link to="/">Home</Link>
                         Step {step} - {getStepName()}
                     </h1>
                     {renderStep()}

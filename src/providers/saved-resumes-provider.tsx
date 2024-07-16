@@ -1,6 +1,6 @@
 import SAMPLE_RESUME from "@/lib/constants/sample-resume";
 import { Resume, ResumeNoId } from "@/lib/types/resume";
-import { createContext, ReactNode, useContext, useState } from "react";
+import { createContext, ReactNode, useContext, useEffect, useState } from "react";
 import uniqid from "uniqid";
 
 export type SavedResumesContextType = {
@@ -18,7 +18,21 @@ export type SavedResumesContextType = {
 const SavedResumesContext = createContext<SavedResumesContextType | undefined>(undefined);
 
 export const SavedResumesProvider = ({ children }: { children: ReactNode }) => {
-    const [resumes, setResumes] = useState<Resume[]>([SAMPLE_RESUME]);
+    const [resumes, setResumes] = useState<Resume[]>(() => {
+        const localResumes = localStorage.getItem("resumes");
+
+        if (!localResumes) localStorage.setItem("resumes", JSON.stringify([SAMPLE_RESUME]));
+
+        const parsed = JSON.parse(localResumes || "[]");
+
+        if (!parsed.length) parsed.push(SAMPLE_RESUME);
+
+        return parsed;
+    });
+
+    useEffect(() => {
+        localStorage.setItem("resumes", JSON.stringify(resumes));
+    }, [resumes]);
 
     const getResume = (id: string) => {
         return resumes.find((r) => r.id === id);

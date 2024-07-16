@@ -9,21 +9,21 @@ const resumeSchema = z.object({
 });
 
 export function useResumeForm(id: string) {
-    const { getResume, setName, setDescription } = useSavedResumes();
+    const { setName, setDescription, getOrCreateResume } = useSavedResumes();
 
-    const resume = getResume(id);
+    const resume = getOrCreateResume(id);
 
     const form = useForm<z.infer<typeof resumeSchema>>({
         resolver: zodResolver(resumeSchema),
         defaultValues: {
-            name: resume?.name,
-            description: resume?.description
+            name: resume.name,
+            description: resume.description
         }
     });
 
     function onSubmit(values: z.infer<typeof resumeSchema>) {
-        setName(id, `${values.name}`);
-        setDescription(id, `${values.description}`);
+        setName(id, values.name || "");
+        setDescription(id, values.description || "");
     }
 
     return { form, onSubmit };

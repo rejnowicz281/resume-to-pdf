@@ -11,7 +11,7 @@ export default function HomePage() {
         <div className="p-24 flex flex-1 flex-col gap-6">
             <div className="flex flex-col gap-6">
                 {resumes.map((resume) => (
-                    <ResumeCard resume={resume} />
+                    <ResumeCard key={resume.id} resume={resume} />
                 ))}
             </div>
             <Button className="self-center flex gap-2" asChild>

@@ -3,15 +3,13 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Resume } from "@/lib/types/resume";
 import { getResumeName } from "@/lib/utils/resume";
 import { MoveDiagonal2 } from "lucide-react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import DeleteResume from "./delete-resume";
 import EditResume from "./edit-resume";
 
 export default function ResumeCard({ resume }: { resume: Resume }) {
-    const navigate = useNavigate();
-
     return (
-        <Card className="relative break-words" key={resume.id}>
+        <Card className="relative break-words">
             <div className="absolute top-6 right-6">
                 <Button size="icon" variant="ghost" asChild>
                     <Link to={`/resumes/${resume.id}`}>
@@ -24,9 +22,9 @@ export default function ResumeCard({ resume }: { resume: Resume }) {
             </div>
             <CardHeader>
                 <CardTitle>{getResumeName(resume)}</CardTitle>
-                <CardDescription>
-                    <div>Created {resume.createdAt}</div>
-                    {resume.createdAt != resume.updatedAt && <div>Updated {resume.updatedAt}</div>}
+                <CardDescription className="flex flex-col">
+                    <span>Created {resume.createdAt}</span>
+                    {resume.createdAt != resume.updatedAt && <span>Updated {resume.updatedAt}</span>}
                 </CardDescription>
             </CardHeader>
             {resume.description && <CardContent className="whitespace-pre-line">{resume.description}</CardContent>}

@@ -2,9 +2,11 @@ import { Button } from "@/components/ui/button";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { useResumeForm } from "@/hooks/resume-form";
+import { Resume } from "@/lib/types/resume";
+import { getResumeName } from "@/lib/utils/resume";
 
-export default function ResumeForm({ id, afterSubmit }: { id: string; afterSubmit?: () => void }) {
-    const { form, onSubmit } = useResumeForm(id);
+export default function ResumeForm({ resume, afterSubmit }: { resume: Resume; afterSubmit?: () => void }) {
+    const { form, onSubmit } = useResumeForm(resume.id);
 
     return (
         <Form {...form}>
@@ -22,7 +24,7 @@ export default function ResumeForm({ id, afterSubmit }: { id: string; afterSubmi
                         <FormItem>
                             <FormLabel>Custom Name</FormLabel>
                             <FormControl>
-                                <Input placeholder="John Doe" {...field} />
+                                <Input placeholder={getResumeName(resume)} {...field} />
                             </FormControl>
                             <FormMessage />
                         </FormItem>

@@ -17,7 +17,7 @@ export default function EditResume({ resume }: { resume: Resume }) {
             </DialogTrigger>
             <DialogContent>
                 <DialogTitle className="text-3xl font-bold">Edit Resume</DialogTitle>
-                <ResumeForm id={resume.id} afterSubmit={() => setOpen(false)} />
+                <ResumeForm resume={resume} afterSubmit={() => setOpen(false)} />
             </DialogContent>
         </Dialog>
     );
