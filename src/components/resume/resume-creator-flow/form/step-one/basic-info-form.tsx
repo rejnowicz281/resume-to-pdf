@@ -18,7 +18,7 @@ export default function BasicInfoForm() {
                             <FormItem>
                                 <FormLabel>First Name *</FormLabel>
                                 <FormControl>
-                                    <Input placeholder="John Doe" {...field} />
+                                    <Input placeholder="John" {...field} />
                                 </FormControl>
                                 <FormMessage />
                             </FormItem>
@@ -31,7 +31,7 @@ export default function BasicInfoForm() {
                             <FormItem>
                                 <FormLabel>Last Name *</FormLabel>
                                 <FormControl>
-                                    <Input placeholder="John Doe" {...field} />
+                                    <Input placeholder="Doe" {...field} />
                                 </FormControl>
                                 <FormMessage />
                             </FormItem>

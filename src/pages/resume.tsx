@@ -3,13 +3,11 @@ import { useSavedResumes } from "@/providers/saved-resumes-provider";
 import { useParams } from "react-router-dom";
 
 export default function ResumePage() {
-    const { getResume } = useSavedResumes();
+    const { getOrInitializeResume } = useSavedResumes();
 
     const { id } = useParams();
 
-    const resume = getResume(id as string);
-
-    if (!resume) return <div>Resume not found</div>;
+    const resume = getOrInitializeResume(`${id}`);
 
     return <ResumeCreatorFlow initialResume={resume} />;
 }

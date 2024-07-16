@@ -1,7 +1,7 @@
 import SAMPLE_RESUME from "@/lib/constants/sample-resume";
 import { Resume, ResumeNoId } from "@/lib/types/resume";
+import { newEmptyResume } from "@/lib/utils/resume";
 import { createContext, ReactNode, useContext, useEffect, useState } from "react";
-import uniqid from "uniqid";
 
 export type SavedResumesContextType = {
     resumes: Resume[];
@@ -9,8 +9,7 @@ export type SavedResumesContextType = {
     addResume: (resume: Resume) => void;
     editResume: (id: string, resume: ResumeNoId) => void;
     removeResume: (id: string) => void;
-    createEmptyResume: () => Resume;
-    getOrCreateResume: (id: string) => Resume;
+    getOrInitializeResume: (id: string) => Resume;
     setName: (id: string, name: string) => void;
     setDescription: (id: string, description: string) => void;
 };
@@ -58,24 +57,12 @@ export const SavedResumesProvider = ({ children }: { children: ReactNode }) => {
         setResumes((prev) => prev.filter((r) => r.id !== id));
     };
 
-    const getOrCreateResume = (id: string): Resume => {
+    const getOrInitializeResume = (id: string): Resume => {
         let resume = getResume(id);
 
-        if (!resume) {
-            resume = createEmptyResume();
-            addResume(resume);
-        }
+        if (!resume) resume = newEmptyResume(id);
 
         return resume;
-    };
-
-    const createEmptyResume = (): Resume => {
-        return {
-            id: uniqid(),
-            imageOptions: { show: false, url: "" },
-            createdAt: new Date().toISOString(),
-            updatedAt: new Date().toISOString()
-        };
     };
 
     return (
@@ -86,8 +73,8 @@ export const SavedResumesProvider = ({ children }: { children: ReactNode }) => {
                 addResume,
                 editResume,
                 removeResume,
-                createEmptyResume,
-                getOrCreateResume,
+
+                getOrInitializeResume,
                 setName,
                 setDescription
             }}

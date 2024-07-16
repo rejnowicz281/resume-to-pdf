@@ -3,6 +3,7 @@ import { Button } from "@/components/ui/button";
 import { useSavedResumes } from "@/providers/saved-resumes-provider";
 import { Plus } from "lucide-react";
 import { Link } from "react-router-dom";
+import uniqid from "uniqid";
 
 export default function HomePage() {
     const { resumes } = useSavedResumes();
@@ -15,7 +16,7 @@ export default function HomePage() {
                 ))}
             </div>
             <Button className="self-center flex gap-2" asChild>
-                <Link to="/resumes/create">
+                <Link to={`/resumes/${uniqid()}`}>
                     <Plus />
                     Insert Resume
                 </Link>

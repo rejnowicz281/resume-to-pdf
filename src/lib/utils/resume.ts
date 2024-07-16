@@ -1,3 +1,4 @@
+import uniqid from "uniqid";
 import { Resume } from "../types/resume";
 
 export const getResumeName = (resume: Resume) => {
@@ -10,4 +11,13 @@ export const getResumeName = (resume: Resume) => {
     if (resume.phone) return resume.phone;
 
     return resume.id;
+};
+
+export const newEmptyResume = (id: string = uniqid()): Resume => {
+    return {
+        id,
+        imageOptions: { show: false, url: "" },
+        createdAt: new Date().toISOString(),
+        updatedAt: new Date().toISOString()
+    };
 };
