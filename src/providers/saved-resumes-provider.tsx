@@ -11,6 +11,8 @@ export type SavedResumesContextType = {
     removeResume: (id: string) => void;
     createEmptyResume: () => Resume;
     getOrCreateResume: (id: string) => Resume;
+    setName: (id: string, name: string) => void;
+    setDescription: (id: string, description: string) => void;
 };
 
 const SavedResumesContext = createContext<SavedResumesContextType | undefined>(undefined);
@@ -28,6 +30,14 @@ export const SavedResumesProvider = ({ children }: { children: ReactNode }) => {
 
     const editResume = (id: string, resume: ResumeNoId) => {
         setResumes((prev) => prev.map((r) => (r.id === id ? { ...r, ...resume } : r)));
+    };
+
+    const setName = (id: string, name: string) => {
+        setResumes((prev) => prev.map((r) => (r.id === id ? { ...r, name } : r)));
+    };
+
+    const setDescription = (id: string, description: string) => {
+        setResumes((prev) => prev.map((r) => (r.id === id ? { ...r, description } : r)));
     };
 
     const removeResume = (id: string) => {
@@ -63,7 +73,9 @@ export const SavedResumesProvider = ({ children }: { children: ReactNode }) => {
                 editResume,
                 removeResume,
                 createEmptyResume,
-                getOrCreateResume
+                getOrCreateResume,
+                setName,
+                setDescription
             }}
         >
             {children}

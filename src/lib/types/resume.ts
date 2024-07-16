@@ -76,6 +76,11 @@ export type LinkNoId = Omit<Link, "id">;
 
 export type Resume = {
     id: string;
+    name?: string;
+    createdAt: string;
+    updatedAt: string;
+    description?: string;
+
     imageOptions: ImageOptions;
     firstName?: string;
     lastName?: string;
@@ -92,9 +97,6 @@ export type Resume = {
     activities?: Activity[];
     interests?: string;
     links?: Link[];
-    createdAt: string;
-    updatedAt: string;
-    description?: string;
 };
 
 export type ResumeNoId = Omit<Resume, "id">;
