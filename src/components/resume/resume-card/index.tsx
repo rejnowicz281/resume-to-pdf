@@ -5,6 +5,7 @@ import { getResumeName } from "@/lib/utils/resume";
 import { MoveDiagonal2 } from "lucide-react";
 import { Link } from "react-router-dom";
 import DeleteResume from "./delete-resume";
+import DownloadJsonButton from "./download-json-button";
 import EditResume from "./edit-resume";
 
 export default function ResumeCard({ resume }: { resume: Resume }) {
@@ -16,6 +17,7 @@ export default function ResumeCard({ resume }: { resume: Resume }) {
                         <MoveDiagonal2 size={20} className="text-gray-500" />
                     </Link>
                 </Button>
+                <DownloadJsonButton resume={resume} />
                 <EditResume resume={resume} />
 
                 <DeleteResume resume={resume} />

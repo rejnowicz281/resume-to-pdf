@@ -1,5 +1,7 @@
 import ResumePDF from "@/components/resume/resume-pdf";
 import { Button } from "@/components/ui/button";
+import { makeUnderscore } from "@/lib/utils/general";
+import { getResumeName } from "@/lib/utils/resume";
 import { useResumeCreator } from "@/providers/resume-creator-provider";
 import { PDFDownloadLink } from "@react-pdf/renderer";
 import { Download, LoaderCircle } from "lucide-react";
@@ -56,7 +58,14 @@ const DownloadLink = () => {
                     links={links}
                 />
             }
-            fileName={`${firstName}_${lastName}_Resume.pdf`}
+            fileName={`${makeUnderscore(
+                getResumeName({
+                    firstName,
+                    lastName,
+                    email,
+                    phone
+                })
+            )}_Resume.pdf`}
         >
             {({ loading }) => (
                 <Button

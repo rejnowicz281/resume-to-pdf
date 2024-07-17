@@ -21,3 +21,7 @@ export function js(...styles: Style[]): Style {
 export function withID<T>(obj: T): T & { id: string } {
     return { ...obj, id: uniqid() };
 }
+
+export function makeUnderscore(str: string) {
+    return str.replace(/\s/g, "_");
+}
