@@ -21,6 +21,7 @@ import React, { createContext, ReactNode, useContext, useEffect, useState } from
 import uniqid from "uniqid";
 
 export type ResumeCreatorContextType = {
+    resumeToSave: Resume;
     imageOptions: ImageOptions;
     setImageOptions: React.Dispatch<React.SetStateAction<ImageOptions>>;
     firstName: string;
@@ -205,28 +206,7 @@ export const ResumeCreatorProvider = ({ children, initialResume }: { children: R
         }
     };
 
-    useEffect(() => {
-        saveResume({
-            imageOptions,
-            firstName,
-            lastName,
-            dateOfBirth,
-            country,
-            city,
-            email,
-            phone,
-            workExperience,
-            education,
-            languages,
-            training,
-            skills,
-            activities,
-            interests,
-            links,
-            createdAt: initialResume?.createdAt || formatTimestamp(new Date()),
-            id: initialResume?.id || uniqid()
-        });
-    }, [
+    const resumeToSave = {
         imageOptions,
         firstName,
         lastName,
@@ -242,12 +222,19 @@ export const ResumeCreatorProvider = ({ children, initialResume }: { children: R
         skills,
         activities,
         interests,
-        links
-    ]);
+        links,
+        createdAt: initialResume?.createdAt || formatTimestamp(new Date()),
+        id: initialResume?.id || uniqid()
+    };
+
+    useEffect(() => {
+        saveResume(resumeToSave);
+    }, [resumeToSave]);
 
     return (
         <ResumeCreatorContext.Provider
             value={{
+                resumeToSave,
                 imageOptions,
                 setImageOptions,
                 firstName,

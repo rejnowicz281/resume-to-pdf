@@ -1,13 +1,4 @@
-import {
-    Activity,
-    Education,
-    ImageOptions,
-    Language,
-    Link as ResumeLink,
-    Skill,
-    Training,
-    WorkExperience
-} from "@/lib/types/resume";
+import { Resume } from "@/lib/types/resume";
 import { js } from "@/lib/utils/general";
 import { Document, Font, Image, Link, Page, StyleSheet, Text, View } from "@react-pdf/renderer";
 import ListItem from "./list-item";
@@ -68,41 +59,7 @@ const styles = StyleSheet.create({
     }
 });
 
-export default function ResumePDF({
-    imageOptions,
-    firstName,
-    lastName,
-    dateOfBirth,
-    country,
-    city,
-    email,
-    phone,
-    workExperience,
-    education,
-    languages,
-    training,
-    skills,
-    activities,
-    interests,
-    links
-}: {
-    imageOptions: ImageOptions;
-    firstName: string;
-    lastName: string;
-    dateOfBirth?: string;
-    country?: string;
-    city?: string;
-    email: string;
-    phone?: string;
-    workExperience: WorkExperience[];
-    education: Education[];
-    languages: Language[];
-    training: Training[];
-    skills: Skill[];
-    activities: Activity[];
-    interests?: string;
-    links: ResumeLink[];
-}) {
+export default function ResumePDF({ resume }: { resume: Resume }) {
     Font.register({
         family: "OpenSans",
         fonts: [
@@ -111,6 +68,25 @@ export default function ResumePDF({
             { src: "/fonts/OpenSans-Bold.ttf", fontWeight: "bold" }
         ]
     });
+
+    const {
+        firstName,
+        lastName,
+        dateOfBirth,
+        country,
+        city,
+        email,
+        phone,
+        workExperience,
+        education,
+        languages,
+        training,
+        skills,
+        activities,
+        interests,
+        links,
+        imageOptions
+    } = resume;
 
     return (
         <Document>
@@ -175,7 +151,7 @@ export default function ResumePDF({
                     )}
 
                     {/* Skills */}
-                    {skills.length > 0 && (
+                    {skills && skills.length > 0 && (
                         <View style={{ borderTop: 0.5, marginTop: 10, paddingTop: 10, borderTopColor: "#D3D3D3" }}>
                             <Text style={styles.sectionTitle}>Skills</Text>
                             {skills.map((skill) => (
@@ -195,7 +171,7 @@ export default function ResumePDF({
                     )}
 
                     {/* Languages */}
-                    {languages.length > 0 && (
+                    {languages && languages.length > 0 && (
                         <View style={{ borderTop: 0.5, marginTop: 10, paddingTop: 10, borderTopColor: "#D3D3D3" }}>
                             <Text style={styles.sectionTitle}>Languages</Text>
                             {languages.map((language) => (
@@ -210,11 +186,11 @@ export default function ResumePDF({
                 {/* Right Section */}
                 <View style={styles.rightSection}>
                     {/* Name */}
-                    <Text style={styles.nameHeader}>{`${firstName} ${lastName}`}</Text>
+                    {(firstName || lastName) && <Text style={styles.nameHeader}>{`${firstName} ${lastName}`}</Text>}
 
                     {/* Work Experience */}
                     <View style={js(styles.flexColumn, { gap: 16 })}>
-                        {workExperience.length > 0 && (
+                        {workExperience && workExperience.length > 0 && (
                             <View>
                                 <Text style={styles.sectionTitle}>Work Experience</Text>
                                 <View style={js(styles.flexColumn, { gap: 12 })}>
@@ -255,7 +231,7 @@ export default function ResumePDF({
                             </View>
                         )}
                         {/* Education */}
-                        {education.length > 0 && (
+                        {education && education.length > 0 && (
                             <View>
                                 <Text style={styles.sectionTitle}>Education</Text>
                                 <View style={js(styles.flexColumn, { gap: 12 })}>
@@ -284,7 +260,7 @@ export default function ResumePDF({
                             </View>
                         )}
                         {/* Training and Certification */}
-                        {training.length > 0 && (
+                        {training && training.length > 0 && (
                             <View>
                                 <Text style={styles.sectionTitle}>Training and Certification</Text>
                                 <View style={js(styles.flexColumn, { gap: 12 })}>
@@ -307,7 +283,7 @@ export default function ResumePDF({
                             </View>
                         )}
                         {/* Additional Activities */}
-                        {activities.length > 0 && (
+                        {activities && activities.length > 0 && (
                             <View>
                                 <Text style={styles.sectionTitle}>Additional Activities</Text>
                                 <View style={js(styles.flexColumn, { gap: 12 })}>
@@ -340,7 +316,7 @@ export default function ResumePDF({
                             </View>
                         )}
                         {/* Links */}
-                        {links.length > 0 && (
+                        {links && links.length > 0 && (
                             <View>
                                 <Text style={styles.sectionTitle}>Links</Text>
                                 <View style={js(styles.flexColumn, { gap: 12 })}>

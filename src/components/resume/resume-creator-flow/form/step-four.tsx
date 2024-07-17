@@ -1,10 +1,7 @@
-import ResumePDF from "@/components/resume/resume-pdf";
 import { Button } from "@/components/ui/button";
-import { makeUnderscore } from "@/lib/utils/general";
-import { getResumeName } from "@/lib/utils/resume";
 import { useResumeCreator } from "@/providers/resume-creator-provider";
-import { PDFDownloadLink } from "@react-pdf/renderer";
 import { Download, LoaderCircle } from "lucide-react";
+import DownloadPdfButton from "../../download-pdf-button";
 
 export default function StepFour() {
     return (
@@ -17,57 +14,12 @@ export default function StepFour() {
 }
 
 const DownloadLink = () => {
-    const {
-        imageOptions,
-        firstName,
-        lastName,
-        dateOfBirth,
-        country,
-        city,
-        email,
-        phone,
-        workExperience,
-        education,
-        languages,
-        training,
-        skills,
-        activities,
-        interests,
-        links
-    } = useResumeCreator();
+    const { resumeToSave } = useResumeCreator();
 
     return (
-        <PDFDownloadLink
-            document={
-                <ResumePDF
-                    imageOptions={imageOptions}
-                    firstName={firstName}
-                    lastName={lastName}
-                    dateOfBirth={dateOfBirth}
-                    country={country}
-                    city={city}
-                    email={email}
-                    phone={phone}
-                    workExperience={workExperience}
-                    education={education}
-                    languages={languages}
-                    training={training}
-                    skills={skills}
-                    activities={activities}
-                    interests={interests}
-                    links={links}
-                />
-            }
-            fileName={`${makeUnderscore(
-                getResumeName({
-                    firstName,
-                    lastName,
-                    email,
-                    phone
-                })
-            )}_Resume.pdf`}
-        >
-            {({ loading }) => (
+        <DownloadPdfButton
+            resume={resumeToSave}
+            content={(loading: boolean) => (
                 <Button
                     disabled={loading}
                     className="flex items-center gap-2 disabled:cursor-not-allowed disabled:text-gray-500 disabled:bg-slate-200"
@@ -76,6 +28,6 @@ const DownloadLink = () => {
                     {loading ? <LoaderCircle className="animate-spin" /> : <Download />}
                 </Button>
             )}
-        </PDFDownloadLink>
+        />
     );
 };

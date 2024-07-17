@@ -2,18 +2,7 @@ import uniqid from "uniqid";
 import { Resume } from "../types/resume";
 import { formatTimestamp } from "./date";
 
-export const getResumeName = (
-    resume:
-        | Resume
-        | {
-              name?: string;
-              firstName?: string;
-              lastName?: string;
-              email?: string;
-              phone?: string;
-              id?: string;
-          }
-) => {
+export const getResumeName = (resume: Resume) => {
     if (resume.name) return resume.name;
 
     if (resume.firstName && resume.lastName) return `${resume.firstName} ${resume.lastName}`;
