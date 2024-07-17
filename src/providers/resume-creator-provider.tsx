@@ -15,7 +15,10 @@ import {
     WorkExperience,
     WorkExperienceNoId
 } from "@/lib/types/resume";
-import React, { createContext, ReactNode, useContext, useState } from "react";
+import { formatTimestamp } from "@/lib/utils/date";
+import { saveResume } from "@/lib/utils/local-storage";
+import React, { createContext, ReactNode, useContext, useEffect, useState } from "react";
+import uniqid from "uniqid";
 
 export type ResumeCreatorContextType = {
     imageOptions: ImageOptions;
@@ -201,6 +204,46 @@ export const ResumeCreatorProvider = ({ children, initialResume }: { children: R
                 return "Basic Info";
         }
     };
+
+    useEffect(() => {
+        saveResume({
+            imageOptions,
+            firstName,
+            lastName,
+            dateOfBirth,
+            country,
+            city,
+            email,
+            phone,
+            workExperience,
+            education,
+            languages,
+            training,
+            skills,
+            activities,
+            interests,
+            links,
+            createdAt: initialResume?.createdAt || formatTimestamp(new Date()),
+            id: initialResume?.id || uniqid()
+        });
+    }, [
+        imageOptions,
+        firstName,
+        lastName,
+        dateOfBirth,
+        country,
+        city,
+        email,
+        phone,
+        workExperience,
+        education,
+        languages,
+        training,
+        skills,
+        activities,
+        interests,
+        links
+    ]);
 
     return (
         <ResumeCreatorContext.Provider

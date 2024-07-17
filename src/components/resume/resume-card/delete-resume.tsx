@@ -12,11 +12,11 @@ import {
 import { Button } from "@/components/ui/button";
 import { Resume } from "@/lib/types/resume";
 import { getResumeName } from "@/lib/utils/resume";
-import { useSavedResumes } from "@/providers/saved-resumes-provider";
+import { useLocalResumes } from "@/providers/local-resumes-provider";
 import { Trash } from "lucide-react";
 
 export default function DeleteResume({ resume }: { resume: Resume }) {
-    const { removeResume } = useSavedResumes();
+    const { removeResume } = useLocalResumes();
 
     return (
         <AlertDialog>

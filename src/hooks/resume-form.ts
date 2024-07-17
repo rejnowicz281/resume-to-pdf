@@ -1,5 +1,5 @@
 import { newEmptyResume } from "@/lib/utils/resume";
-import { useSavedResumes } from "@/providers/saved-resumes-provider";
+import { useLocalResumes } from "@/providers/local-resumes-provider";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
@@ -10,7 +10,7 @@ const resumeSchema = z.object({
 });
 
 export function useResumeForm(id: string) {
-    const { setName, setDescription, getResume, addResume } = useSavedResumes();
+    const { getResume, addResume, editResume } = useLocalResumes();
 
     const resume = getResume(id);
 
@@ -24,10 +24,7 @@ export function useResumeForm(id: string) {
 
     function onSubmit(values: z.infer<typeof resumeSchema>) {
         if (!resume) addResume({ ...newEmptyResume(id), ...values });
-        else {
-            setName(id, values.name || "");
-            setDescription(id, values.description || "");
-        }
+        else editResume({ id, ...values });
     }
 
     return { form, onSubmit };

@@ -24,7 +24,6 @@ export default function ResumeCard({ resume }: { resume: Resume }) {
                 <CardTitle>{getResumeName(resume)}</CardTitle>
                 <CardDescription className="flex flex-col">
                     <span>Created {resume.createdAt}</span>
-                    {resume.createdAt != resume.updatedAt && <span>Updated {resume.updatedAt}</span>}
                 </CardDescription>
             </CardHeader>
             {resume.description && <CardContent className="whitespace-pre-line">{resume.description}</CardContent>}

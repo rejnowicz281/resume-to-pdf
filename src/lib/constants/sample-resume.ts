@@ -1,5 +1,6 @@
 import uniqid from "uniqid";
 import { Resume } from "../types/resume";
+import { formatTimestamp } from "../utils/date";
 
 const SAMPLE_RESUME: Resume = {
     id: "sample-resume",
@@ -106,8 +107,7 @@ const SAMPLE_RESUME: Resume = {
         { id: uniqid(), description: "LinkedIn", url: "https://www.linkedin.com/in/johndoe" },
         { id: uniqid(), description: "GitHub", url: "https://github.com/rejnowicz281" }
     ],
-    createdAt: new Date().toISOString(),
-    updatedAt: new Date().toISOString()
+    createdAt: formatTimestamp(new Date())
 };
 
 export default SAMPLE_RESUME;

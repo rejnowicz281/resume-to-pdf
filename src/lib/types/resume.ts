@@ -78,7 +78,7 @@ export type Resume = {
     id: string;
     name?: string;
     createdAt: string;
-    updatedAt: string;
+
     description?: string;
 
     imageOptions: ImageOptions;
