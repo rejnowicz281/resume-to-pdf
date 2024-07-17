@@ -224,6 +224,8 @@ export const ResumeCreatorProvider = ({ children, initialResume }: { children: R
         interests,
         links,
         createdAt: initialResume?.createdAt || formatTimestamp(new Date()),
+        name: initialResume?.name,
+        description: initialResume?.description,
         id: initialResume?.id || uniqid()
     };
 

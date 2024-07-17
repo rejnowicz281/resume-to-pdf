@@ -9,7 +9,8 @@ export default function HomePage() {
     const { resumes } = useLocalResumes();
 
     return (
-        <div className="p-24 flex flex-1 flex-col gap-6">
+        <div className="flex max-w-[800px] md:px-24 py-16 px-6 mx-auto w-full flex-1 flex-col gap-6">
+            <h1 className="text-4xl">Resumes</h1>
             <div className="flex flex-col gap-6">
                 {Object.values(resumes).map((resume) => (
                     <ResumeCard key={resume.id} resume={resume} />

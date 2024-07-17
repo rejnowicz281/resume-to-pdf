@@ -23,3 +23,17 @@ export const newEmptyResume = (id: string = uniqid()): Resume => {
         createdAt: formatTimestamp(new Date())
     };
 };
+
+export const getResumeProgress = (resume: Resume) => {
+    const { id, name, createdAt, description, imageOptions, ...progressFields } = resume;
+
+    const totalFields = Object.keys(progressFields).length;
+    const filledFields = Object.values(progressFields).filter((value) => {
+        if (Array.isArray(value)) {
+            return value.length > 0;
+        }
+        return value !== undefined && value !== null && value !== "";
+    }).length;
+
+    return Math.floor((filledFields / totalFields) * 100);
+};
