@@ -2,13 +2,14 @@ import { Button } from "@/components/ui/button";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { Textarea } from "@/components/ui/textarea";
 import { useInterestsForm } from "@/hooks/step-three-forms";
+import { Plus } from "lucide-react";
 
 export default function InterestsForm() {
     const { form, onSubmit } = useInterestsForm();
 
     return (
         <Form {...form}>
-            <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
+            <form onSubmit={form.handleSubmit(onSubmit)} className="flex flex-col space-y-8">
                 <FormField
                     control={form.control}
                     name="interests"
@@ -25,7 +26,10 @@ export default function InterestsForm() {
                     )}
                 />
 
-                <Button type="submit">Submit</Button>
+                <Button className="flex gap-2 self-center" type="submit">
+                    <Plus />
+                    Submit
+                </Button>
             </form>
         </Form>
     );

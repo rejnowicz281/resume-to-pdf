@@ -3,6 +3,7 @@ import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "
 import { Input } from "@/components/ui/input";
 import { useLinkForm } from "@/hooks/step-three-forms";
 import { Link } from "@/lib/types/resume";
+import { Plus } from "lucide-react";
 
 export default function LinkForm({ link, afterSubmit }: { link?: Link; afterSubmit?: () => void }) {
     const { form, onSubmit } = useLinkForm(link);
@@ -44,7 +45,10 @@ export default function LinkForm({ link, afterSubmit }: { link?: Link; afterSubm
                     )}
                 />
 
-                <Button type="submit">Submit</Button>
+                <Button className="flex gap-2 self-center" type="submit">
+                    <Plus />
+                    Submit
+                </Button>
             </form>
         </Form>
     );

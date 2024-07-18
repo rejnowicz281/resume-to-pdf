@@ -21,6 +21,8 @@ import React, { createContext, ReactNode, useContext, useEffect, useState } from
 import uniqid from "uniqid";
 
 export type ResumeCreatorContextType = {
+    previewState: boolean;
+    togglePreviewState: () => void;
     resumeToSave: Resume;
     imageOptions: ImageOptions;
     setImageOptions: React.Dispatch<React.SetStateAction<ImageOptions>>;
@@ -82,6 +84,10 @@ export type ResumeCreatorContextType = {
 const ResumeCreatorContext = createContext<ResumeCreatorContextType | undefined>(undefined);
 
 export const ResumeCreatorProvider = ({ children, initialResume }: { children: ReactNode; initialResume?: Resume }) => {
+    const [previewState, setPreviewState] = useState(false);
+
+    const togglePreviewState = () => setPreviewState(!previewState);
+
     const [imageOptions, setImageOptions] = useState<ImageOptions>(
         initialResume?.imageOptions || { show: false, url: "" }
     );
@@ -236,6 +242,8 @@ export const ResumeCreatorProvider = ({ children, initialResume }: { children: R
     return (
         <ResumeCreatorContext.Provider
             value={{
+                previewState,
+                togglePreviewState,
                 resumeToSave,
                 imageOptions,
                 setImageOptions,

@@ -4,6 +4,7 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { useActivityForm } from "@/hooks/step-three-forms";
 import { Activity } from "@/lib/types/resume";
+import { Plus } from "lucide-react";
 
 export default function ActivityForm({ activity, afterSubmit }: { activity?: Activity; afterSubmit?: () => void }) {
     const { form, onSubmit } = useActivityForm(activity);
@@ -87,7 +88,10 @@ export default function ActivityForm({ activity, afterSubmit }: { activity?: Act
                     )}
                 />
 
-                <Button type="submit">Submit</Button>
+                <Button className="flex gap-2 self-center" type="submit">
+                    <Plus />
+                    Submit
+                </Button>
             </form>
         </Form>
     );

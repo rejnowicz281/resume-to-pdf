@@ -4,6 +4,7 @@ import { Input } from "@/components/ui/input";
 import { useResumeForm } from "@/hooks/resume-form";
 import { Resume } from "@/lib/types/resume";
 import { getResumeName } from "@/lib/utils/resume";
+import { Plus } from "lucide-react";
 
 export default function ResumeForm({ resume, afterSubmit }: { resume: Resume; afterSubmit?: () => void }) {
     const { form, onSubmit } = useResumeForm(resume.id);
@@ -45,7 +46,10 @@ export default function ResumeForm({ resume, afterSubmit }: { resume: Resume; af
                     )}
                 />
 
-                <Button type="submit">Submit</Button>
+                <Button className="flex gap-2 self-center" type="submit">
+                    <Plus />
+                    Submit
+                </Button>
             </form>
         </Form>
     );

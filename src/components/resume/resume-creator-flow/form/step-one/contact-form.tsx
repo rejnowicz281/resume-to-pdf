@@ -2,6 +2,7 @@ import { Button } from "@/components/ui/button";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { useContactForm } from "@/hooks/step-one-forms";
+import { Plus } from "lucide-react";
 
 export default function ContactForm() {
     const { form, onSubmit } = useContactForm();
@@ -10,7 +11,7 @@ export default function ContactForm() {
         <div>
             <h2 className="mb-6 text-3xl font-bold">Contact Information</h2>
             <Form {...form}>
-                <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
+                <form onSubmit={form.handleSubmit(onSubmit)} className="flex flex-col space-y-8">
                     <FormField
                         control={form.control}
                         name="phone"
@@ -37,7 +38,10 @@ export default function ContactForm() {
                             </FormItem>
                         )}
                     />
-                    <Button type="submit">Submit</Button>
+                    <Button className="flex gap-2 self-center" type="submit">
+                        <Plus />
+                        Submit
+                    </Button>
                 </form>
             </Form>
         </div>

@@ -4,6 +4,7 @@ import { Input } from "@/components/ui/input";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { useLocationForm } from "@/hooks/step-one-forms";
 import COUNTRY_NAMES from "@/lib/constants/country-names";
+import { Plus } from "lucide-react";
 
 export function LocationForm() {
     const { form, onSubmit } = useLocationForm();
@@ -12,7 +13,7 @@ export function LocationForm() {
         <div>
             <h2 className="mb-6 text-3xl font-bold">Location Information</h2>
             <Form {...form}>
-                <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
+                <form onSubmit={form.handleSubmit(onSubmit)} className="flex flex-col space-y-8">
                     <FormField
                         control={form.control}
                         name="country"
@@ -52,7 +53,10 @@ export function LocationForm() {
                             </FormItem>
                         )}
                     />
-                    <Button type="submit">Submit</Button>
+                    <Button className="flex gap-2 self-center" type="submit">
+                        <Plus />
+                        Submit
+                    </Button>
                 </form>
             </Form>
         </div>

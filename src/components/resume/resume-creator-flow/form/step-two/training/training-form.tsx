@@ -4,6 +4,7 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { useTrainingForm } from "@/hooks/step-two-forms";
 import { Training } from "@/lib/types/resume";
+import { Plus } from "lucide-react";
 
 export default function TrainingForm({ training, afterSubmit }: { training?: Training; afterSubmit?: () => void }) {
     const { form, onSubmit } = useTrainingForm(training);
@@ -73,7 +74,10 @@ export default function TrainingForm({ training, afterSubmit }: { training?: Tra
                     )}
                 />
 
-                <Button type="submit">Submit</Button>
+                <Button className="flex gap-2 self-center" type="submit">
+                    <Plus />
+                    Submit
+                </Button>
             </form>
         </Form>
     );
