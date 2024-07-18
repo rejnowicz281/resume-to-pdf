@@ -1,7 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils/general";
 import { useResumeCreator } from "@/providers/resume-creator-provider";
-import { ArrowLeft, ArrowRight, FileSearch2, Home } from "lucide-react";
+import { ArrowLeft, ArrowRight, Edit, FileSearch2, Home } from "lucide-react";
 import { Link } from "react-router-dom";
 import ProgressBar from "./progress-bar";
 import StepFour from "./step-four";
@@ -36,7 +36,7 @@ export default function ResumeCreatorForm() {
                     className={cn(previewState ? "fixed" : "absolute", "xl:hidden bottom-6 right-6 z-50")}
                     onClick={togglePreviewState}
                 >
-                    <FileSearch2 />
+                    {previewState ? <Edit /> : <FileSearch2 />}
                 </Button>
             </div>
             <div className="flex flex-col py-6 px-8 gap-4 border-t border-t-zinc-200 dark:border-t-zinc-800">
