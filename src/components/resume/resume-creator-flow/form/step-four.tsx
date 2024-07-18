@@ -7,7 +7,7 @@ export default function StepFour() {
     return (
         <div className="flex flex-col flex-1 justify-center items-center gap-6">
             <h1 className="text-6xl">Your Resume is ready!</h1>
-            <p>Click the button below to download your resume.</p>
+            <p className="text-gray-500">Click the button below to download your resume.</p>
             <DownloadLink />
         </div>
     );
