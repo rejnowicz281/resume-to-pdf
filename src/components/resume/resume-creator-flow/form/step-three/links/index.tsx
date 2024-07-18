@@ -14,15 +14,19 @@ export default function Links() {
             <div className="flex flex-col gap-9 my-6">
                 {links.map((link) => (
                     <Card className="relative break-words" key={link.id}>
-                        <div className="absolute top-6 right-6">
-                            <EditLink link={link} />
-                            <DeleteLink link={link} />
+                        <div className="flex justify-between pr-6">
+                            <CardHeader className="truncate">
+                                <CardTitle className="truncate">
+                                    <a className="truncate" href={link.url}>
+                                        {link.url}
+                                    </a>
+                                </CardTitle>
+                            </CardHeader>
+                            <div className="flex pt-4">
+                                <EditLink link={link} />
+                                <DeleteLink link={link} />
+                            </div>
                         </div>
-                        <CardHeader>
-                            <CardTitle>
-                                <a href={link.url}>{link.url}</a>
-                            </CardTitle>
-                        </CardHeader>
                         {link.description && (
                             <CardContent className="whitespace-pre-line">{link.description}</CardContent>
                         )}

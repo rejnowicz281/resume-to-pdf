@@ -14,18 +14,29 @@ export default function WorkExperience() {
             <div className="flex flex-col gap-9 my-6">
                 {workExperience.map((experience) => (
                     <Card className="relative break-words" key={experience.id}>
-                        <div className="absolute top-6 right-6">
-                            <EditExperience experience={experience} />
-                            <DeleteExperience experience={experience} />
+                        <div className="flex justify-between pr-6">
+                            <CardHeader className="truncate">
+                                <CardTitle className="truncate">{experience.title}</CardTitle>
+                                <CardDescription className="flex flex-col">
+                                    {experience.company && (
+                                        <span className="truncate">Company: {experience.company}</span>
+                                    )}
+                                    {experience.location && (
+                                        <span className="truncate">Location: {experience.location}</span>
+                                    )}
+                                    <span className="flex flex-wrap gap-1">
+                                        <span className="truncate">
+                                            Duration: {experience.startDate} - {experience.endDate || "Present"}
+                                        </span>
+                                        <span className="truncate">[{experience.duration}]</span>
+                                    </span>
+                                </CardDescription>
+                            </CardHeader>
+                            <div className="flex pt-4">
+                                <EditExperience experience={experience} />
+                                <DeleteExperience experience={experience} />
+                            </div>
                         </div>
-                        <CardHeader>
-                            <CardTitle>{experience.title}</CardTitle>
-                            <CardDescription>
-                                {experience.company && `${experience.company} | `}
-                                {experience.location ? `${experience.location} | ` : ""} {experience.startDate} -{" "}
-                                {experience.endDate || "Present"} | {experience.duration}
-                            </CardDescription>
-                        </CardHeader>
                         {experience.description && (
                             <CardContent className="whitespace-pre-line">{experience.description}</CardContent>
                         )}

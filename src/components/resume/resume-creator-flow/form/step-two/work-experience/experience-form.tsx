@@ -4,6 +4,7 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { useWorkExperienceForm } from "@/hooks/step-two-forms";
 import { WorkExperience } from "@/lib/types/resume";
+import { Plus } from "lucide-react";
 
 export default function ExperienceForm({
     experience,
@@ -101,7 +102,10 @@ export default function ExperienceForm({
                         </FormItem>
                     )}
                 />
-                <Button type="submit">Submit</Button>
+                <Button className="flex gap-2 self-center" type="submit">
+                    <Plus />
+                    Submit
+                </Button>
             </form>
         </Form>
     );

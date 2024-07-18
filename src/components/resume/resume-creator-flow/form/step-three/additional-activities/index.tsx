@@ -14,17 +14,26 @@ export default function Activities() {
             <div className="flex flex-col gap-9 my-6">
                 {activities.map((activity) => (
                     <Card className="relative break-words" key={activity.id}>
-                        <div className="absolute top-6 right-6">
-                            <EditActivity activity={activity} />
-                            <DeleteActivity activity={activity} />
+                        <div className="flex justify-between pr-6">
+                            <CardHeader className="truncate">
+                                <CardTitle className="truncate">{activity.name}</CardTitle>
+                                <CardDescription className="flex flex-col">
+                                    {activity.location && (
+                                        <span className="truncate">Location: {activity.location}</span>
+                                    )}
+                                    <span className="flex flex-wrap gap-1">
+                                        <span className="truncate">
+                                            Duration: {activity.startDate} - {activity.endDate || "Present"}
+                                        </span>
+                                        <span className="truncate">[{activity.duration}]</span>
+                                    </span>
+                                </CardDescription>
+                            </CardHeader>
+                            <div className="flex pt-4">
+                                <EditActivity activity={activity} />
+                                <DeleteActivity activity={activity} />
+                            </div>
                         </div>
-                        <CardHeader>
-                            <CardTitle>{activity.name}</CardTitle>
-                            <CardDescription>
-                                {activity.location ? `${activity.location} | ` : ""}
-                                {activity.startDate} - {activity.endDate || "Present"} | {activity.duration}
-                            </CardDescription>
-                        </CardHeader>
                         {activity.description && (
                             <CardContent className="whitespace-pre-line">{activity.description}</CardContent>
                         )}

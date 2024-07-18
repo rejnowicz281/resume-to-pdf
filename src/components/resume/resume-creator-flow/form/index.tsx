@@ -1,14 +1,16 @@
 import { Button } from "@/components/ui/button";
-import { getResumeProgress } from "@/lib/utils/resume";
+import { cn } from "@/lib/utils/general";
 import { useResumeCreator } from "@/providers/resume-creator-provider";
-import { ArrowLeft, ArrowRight } from "lucide-react";
+import { ArrowLeft, ArrowRight, FileSearch2, Home } from "lucide-react";
+import { Link } from "react-router-dom";
+import ProgressBar from "./progress-bar";
 import StepFour from "./step-four";
 import StepOne from "./step-one";
 import StepThree from "./step-three";
 import StepTwo from "./step-two";
 
 export default function ResumeCreatorForm() {
-    const { step, setStep, getStepName, resumeToSave } = useResumeCreator();
+    const { step, setStep, getStepName, togglePreviewState, previewState } = useResumeCreator();
 
     const renderStep = () => {
         switch (step) {
@@ -28,25 +30,46 @@ export default function ResumeCreatorForm() {
     return (
         <div className="flex-1 relative flex flex-col">
             <div className="flex-1 relative">
-                <div className="absolute inset-0 overflow-y-scroll p-8 flex flex-col">
-                    <h1 className="mb-6 pb-6 text-4xl font-semibold border-b-zinc-200 dark:border-b-zinc-800 border-b">
-                        Step {step} - {getStepName()}
-                    </h1>
-                    {renderStep()}
-                </div>
+                <div className="absolute inset-0 overflow-y-scroll p-8 flex flex-col">{renderStep()}</div>
+                <Button
+                    variant="outline"
+                    className={cn(previewState ? "fixed" : "absolute", "xl:hidden bottom-6 right-6 z-50")}
+                    onClick={togglePreviewState}
+                >
+                    <FileSearch2 />
+                </Button>
             </div>
-            <div className="flex items-center justify-between px-8 py-6 border-t border-t-zinc-200 dark:border-t-zinc-800">
-                <div className="text-sm text-gray-500">{getResumeProgress(resumeToSave)}% Complete</div>
-                <div className={"flex justify-end gap-8"}>
-                    {step !== 1 && (
-                        <Button variant="outline" className="flex gap-2 self-start" onClick={() => setStep(step - 1)}>
+            <div className="flex flex-col py-6 px-8 gap-4 border-t border-t-zinc-200 dark:border-t-zinc-800">
+                <h1 className="text-2xl text-center">
+                    Step {step} - {getStepName()}
+                </h1>
+                <div className="flex gap-8 items-center justify-between">
+                    {step === 1 ? (
+                        <Button variant="outline" className="flex gap-2" asChild>
+                            <Link to="/">
+                                <Home />
+                                <span className="hidden xl:inline">Home</span>
+                            </Link>
+                        </Button>
+                    ) : (
+                        <Button variant="outline" className="flex gap-2" onClick={() => setStep(step - 1)}>
                             <ArrowLeft />
-                            Previous Step
+                            <span className="hidden xl:inline">Previous Step</span>
                         </Button>
                     )}
-                    {step !== 4 && (
+                    <div className="flex-1">
+                        <ProgressBar />
+                    </div>
+                    {step === 4 ? (
+                        <Button className="flex gap-2" asChild>
+                            <Link to="/">
+                                <Home />
+                                <span className="hidden xl:inline">Home</span>
+                            </Link>
+                        </Button>
+                    ) : (
                         <Button className="flex gap-2" onClick={() => setStep(step + 1)}>
-                            Next Step <ArrowRight />
+                            <span className="hidden xl:inline">Next Step</span> <ArrowRight />
                         </Button>
                     )}
                 </div>

@@ -3,6 +3,7 @@ import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "
 import { Input } from "@/components/ui/input";
 import { useLanguageForm } from "@/hooks/step-two-forms";
 import { Language } from "@/lib/types/resume";
+import { Plus } from "lucide-react";
 
 export default function LanguageForm({ language, afterSubmit }: { language?: Language; afterSubmit?: () => void }) {
     const { form, onSubmit } = useLanguageForm(language);
@@ -44,7 +45,10 @@ export default function LanguageForm({ language, afterSubmit }: { language?: Lan
                     )}
                 />
 
-                <Button type="submit">Submit</Button>
+                <Button className="flex gap-2 self-center" type="submit">
+                    <Plus />
+                    Submit
+                </Button>
             </form>
         </Form>
     );

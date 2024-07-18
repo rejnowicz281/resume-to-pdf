@@ -14,16 +14,19 @@ export default function Training() {
             <div className="flex flex-col gap-9 my-6">
                 {training.map((training) => (
                     <Card className="relative break-words" key={training.id}>
-                        <div className="absolute top-6 right-6">
-                            <EditTraining training={training} />
-                            <DeleteTraining training={training} />
+                        <div className="flex justify-between pr-6">
+                            <CardHeader className="truncate">
+                                <CardTitle className="truncate">{training.name}</CardTitle>
+                                <CardDescription className="flex flex-col">
+                                    <span className="truncate">Issue Date: {training.issueDate}</span>
+                                    <span className="truncate">Organization: {training.organization}</span>
+                                </CardDescription>
+                            </CardHeader>
+                            <div className="flex pt-4">
+                                <EditTraining training={training} />
+                                <DeleteTraining training={training} />
+                            </div>
                         </div>
-                        <CardHeader>
-                            <CardTitle>{training.name}</CardTitle>
-                            <CardDescription>
-                                {training.issueDate} | {training.organization}
-                            </CardDescription>
-                        </CardHeader>
                         {training.description && (
                             <CardContent className="whitespace-pre-line">{training.description}</CardContent>
                         )}

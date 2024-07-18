@@ -14,17 +14,27 @@ export default function Education() {
             <div className="flex flex-col gap-9 my-6">
                 {education.map((edu) => (
                     <Card className="relative break-words" key={edu.id}>
-                        <div className="absolute top-6 right-6">
-                            <EditEducation education={edu} />
-                            <DeleteEducation education={edu} />
+                        <div className="flex justify-between pr-6">
+                            <CardHeader className="truncate">
+                                <CardTitle className="truncate">{edu.institution}</CardTitle>
+                                <CardDescription className="flex flex-col">
+                                    <span className="truncate">Level: {edu.level}</span>
+                                    {edu.specialization && (
+                                        <span className="truncate">Specialization: {edu.specialization}</span>
+                                    )}
+                                    <span className="flex flex-wrap gap-1">
+                                        <span className="truncate">
+                                            Duration: {edu.startDate} - {edu.endDate || "Present"}
+                                        </span>
+                                        <span className="truncate">[{edu.duration}]</span>
+                                    </span>
+                                </CardDescription>
+                            </CardHeader>
+                            <div className="flex pt-4">
+                                <EditEducation education={edu} />
+                                <DeleteEducation education={edu} />
+                            </div>
                         </div>
-                        <CardHeader>
-                            <CardTitle>{edu.institution}</CardTitle>
-                            <CardDescription>
-                                {edu.level} | {edu.specialization ? `${edu.specialization} | ` : ""}
-                                {edu.startDate} - {edu.endDate || "Present"} | {edu.duration}
-                            </CardDescription>
-                        </CardHeader>
                         {edu.description && (
                             <CardContent className="whitespace-pre-line">{edu.description}</CardContent>
                         )}
