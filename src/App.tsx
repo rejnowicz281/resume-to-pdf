@@ -1,9 +1,12 @@
 import { ThemeProvider } from "@/providers/theme-provider";
+import { pdfjs } from "react-pdf";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import ThemeButton from "./components/general/theme-button";
 import HomePage from "./pages";
 import ResumePage from "./pages/resume";
 import { LocalResumesProvider } from "./providers/local-resumes-provider";
+
+pdfjs.GlobalWorkerOptions.workerSrc = new URL("pdfjs-dist/build/pdf.worker.min.mjs", import.meta.url).toString();
 
 export default function App() {
     return (
