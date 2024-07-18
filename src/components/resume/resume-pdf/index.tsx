@@ -11,17 +11,21 @@ import "react-pdf/dist/esm/Page/TextLayer.css";
 export default function ResumePDF() {
     const { resumeToSave, previewState } = useResumeCreator();
     const containerRef = useRef<HTMLDivElement>(null);
-    const [_, resize] = useState(1);
+    const [width, setWidth] = useState(200);
+
+    useEffect(() => {
+        setWidth(getWidth());
+    }, [previewState]);
 
     useEffect(() => {
         const handleResize = () => {
-            resize((prev) => prev + 0.000000000001);
+            setWidth(getWidth());
         };
 
         window.addEventListener("resize", handleResize);
 
         return () => window.removeEventListener("resize", handleResize);
-    }, [containerRef]);
+    }, []);
 
     const getWidth = () => {
         if (containerRef.current) return containerRef.current.getBoundingClientRect().width;
@@ -51,7 +55,7 @@ export default function ResumePDF() {
                             <Loading />
                         ) : (
                             <Document renderMode="canvas" file={url} loading={null} noData={null}>
-                                <Page pageNumber={1} width={getWidth()} />
+                                <Page pageNumber={1} width={width} />
                             </Document>
                         );
                     }}
