@@ -1,8 +1,16 @@
 import { default as ResumeDocument } from "@/components/resume/resume-pdf/resume-document";
+import {
+    Pagination,
+    PaginationContent,
+    PaginationItem,
+    PaginationNext,
+    PaginationPrevious
+} from "@/components/ui/pagination";
 import { cn } from "@/lib/utils/general";
 import { useResumeCreator } from "@/providers/resume-creator-provider";
 import { BlobProvider } from "@react-pdf/renderer";
 import { LucideLoader } from "lucide-react";
+import type { PDFDocumentProxy } from "pdfjs-dist";
 import { useEffect, useRef, useState } from "react";
 import { Document, Page } from "react-pdf";
 import "react-pdf/dist/esm/Page/AnnotationLayer.css";
@@ -12,6 +20,8 @@ export default function ResumePDF() {
     const { resumeToSave, previewState } = useResumeCreator();
     const containerRef = useRef<HTMLDivElement>(null);
     const [width, setWidth] = useState(200);
+    const [numPages, setNumPages] = useState(1);
+    const [currentPage, setCurrentPage] = useState(1);
 
     useEffect(() => {
         setWidth(getWidth());
@@ -40,6 +50,10 @@ export default function ResumePDF() {
         </div>
     );
 
+    function onDocumentLoadSuccess({ numPages: nextNumPages }: PDFDocumentProxy): void {
+        setNumPages(nextNumPages);
+    }
+
     return (
         <div
             ref={containerRef}
@@ -48,19 +62,43 @@ export default function ResumePDF() {
                 "xl:relative xl:h-auto xl:w-[45%] bg-white text-gray-500 xl:flex justify-center flex-col text-center items-center"
             )}
         >
-            <div className="absolute inset-0 overflow-y-auto">
+            <div className={cn("absolute inset-0 overflow-y-auto", numPages > 1 && "pb-9")}>
                 <BlobProvider document={<ResumeDocument resume={resumeToSave} />}>
                     {({ loading, url, blob }) => {
                         return loading || !blob ? (
                             <Loading />
                         ) : (
-                            <Document renderMode="canvas" file={url} loading={null} noData={null}>
-                                <Page pageNumber={1} width={width} />
+                            <Document
+                                renderMode="canvas"
+                                onLoadSuccess={onDocumentLoadSuccess}
+                                file={url}
+                                loading={null}
+                                noData={null}
+                            >
+                                <Page pageNumber={currentPage} width={width} />
                             </Document>
                         );
                     }}
                 </BlobProvider>
             </div>
+            {numPages > 1 && (
+                <div className="absolute border z-50 text-zinc-950 dark:text-zinc-50 bg-zinc-50 dark:bg-zinc-950 border-zinc-200 dark:border-zinc-800 bottom-6 rounded-full">
+                    <Pagination>
+                        <PaginationContent className="gap-3">
+                            <PaginationItem onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}>
+                                <PaginationPrevious className="rounded-l-full" href="#" />
+                            </PaginationItem>
+                            <PaginationItem className="text-sm">
+                                Page {currentPage} / {numPages}
+                            </PaginationItem>
+
+                            <PaginationItem onClick={() => setCurrentPage((prev) => Math.min(prev + 1, numPages))}>
+                                <PaginationNext className="rounded-r-full" href="#" />
+                            </PaginationItem>
+                        </PaginationContent>
+                    </Pagination>
+                </div>
+            )}
         </div>
     );
 }
