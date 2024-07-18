@@ -59,7 +59,7 @@ export default function ResumePDF() {
             ref={containerRef}
             className={cn(
                 previewState ? "fixed z-50 w-screen h-screen flex" : "hidden",
-                "xl:relative xl:h-auto xl:w-[45%] bg-white text-gray-500 xl:flex justify-center flex-col text-center items-center"
+                "xl:relative xl:h-auto xl:w-[45%] border-r border-r-zinc-200 dark:border-r-zinc-800 bg-white text-gray-500 xl:flex justify-center flex-col text-center items-center"
             )}
         >
             <div className={cn("absolute inset-0 overflow-y-auto", numPages > 1 && "pb-9")}>
