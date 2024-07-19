@@ -9,8 +9,8 @@ import { useRef, useState } from "react";
 export default function Importer({ onSuccess }: { onSuccess?: () => void }) {
     const { addManyResumes } = useLocalResumes();
     const inputRef = useRef<HTMLInputElement>(null);
-    const [resumes, setResumes] = useState<Resume[]>(null);
-    const [jsonInput, setJsonInput] = useState<string>(null);
+    const [resumes, setResumes] = useState<Resume[]>([]);
+    const [jsonInput, setJsonInput] = useState<string>("");
 
     const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         if (e.target.files && e.target.files[0]) {
@@ -46,7 +46,7 @@ export default function Importer({ onSuccess }: { onSuccess?: () => void }) {
             });
         } catch (error) {
             alert("Failed to parse JSON data\n" + error);
-            return null;
+            return [];
         }
     };
 
@@ -60,7 +60,7 @@ export default function Importer({ onSuccess }: { onSuccess?: () => void }) {
             {resumes ? (
                 <div className="flex flex-col gap-6">
                     <div className="flex gap-3">
-                        <Button variant="outline" onClick={() => setResumes(null)}>
+                        <Button variant="outline" onClick={() => setResumes([])}>
                             Clear Data
                         </Button>
                         <Button onClick={onImport}>Import</Button>
@@ -103,7 +103,7 @@ export default function Importer({ onSuccess }: { onSuccess?: () => void }) {
 
                                 setResumes(parsed);
 
-                                setJsonInput(null);
+                                setJsonInput("");
                             }}
                         >
                             Parse
