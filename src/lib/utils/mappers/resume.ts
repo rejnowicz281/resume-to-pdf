@@ -106,6 +106,8 @@ const mapLinks = (arr: any[]) => {
 export const mapResume = (object: Record<string, any>): Resume => {
     const resume: Resume = {
         id: mapString(object.id) || uniqid(),
+        name: mapString(object.name),
+        description: mapString(object.description),
         createdAt: mapString(object.createdAt) || formatTimestamp(new Date()),
         firstName: mapString(object.firstName),
         imageOptions: {
