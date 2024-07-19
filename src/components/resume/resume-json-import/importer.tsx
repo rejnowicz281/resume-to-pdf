@@ -146,8 +146,8 @@ export default function Importer({ onSuccess }: { onSuccess?: () => void }) {
       {
         "id": "lyq65541",
         "institution": "University",
-        "startDate": "01.2024",
-        "endDate": "01.2020",
+        "startDate": "01.2020",
+        "endDate": "01.2024",
         "duration": "4 years",
         "specialization": "Computer Science",
         "level": "Bachelor",
