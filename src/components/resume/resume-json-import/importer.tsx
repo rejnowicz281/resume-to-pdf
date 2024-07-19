@@ -102,8 +102,6 @@ export default function Importer({ onSuccess }: { onSuccess?: () => void }) {
                                 const parsed = parseJSON(jsonInput);
 
                                 setResumes(parsed);
-
-                                setJsonInput("");
                             }}
                         >
                             Parse
