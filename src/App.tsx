@@ -13,7 +13,7 @@ export default function App() {
         <div className="min-h-[100vh] flex flex-col bg-white text-zinc-950 dark:bg-zinc-950 dark:text-zinc-50">
             <ThemeProvider defaultTheme="light" storageKey="vite-ui-theme">
                 <ThemeButton />
-                <BrowserRouter>
+                <BrowserRouter basename="resume-to-pdf">
                     <Routes>
                         <Route
                             path="/"

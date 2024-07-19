@@ -63,9 +63,9 @@ export default function ResumeDocument({ resume }: { resume: Resume }) {
     Font.register({
         family: "OpenSans",
         fonts: [
-            { src: "/fonts/OpenSans-Regular.ttf", fontWeight: "normal" },
-            { src: "/fonts/OpenSans-SemiBold.ttf", fontWeight: "semibold" },
-            { src: "/fonts/OpenSans-Bold.ttf", fontWeight: "bold" }
+            { src: "/resume-to-pdf/fonts/OpenSans-Regular.ttf", fontWeight: "normal" },
+            { src: "/resume-to-pdf/fonts/OpenSans-SemiBold.ttf", fontWeight: "semibold" },
+            { src: "/resume-to-pdf/fonts/OpenSans-Bold.ttf", fontWeight: "bold" }
         ]
     });
 
