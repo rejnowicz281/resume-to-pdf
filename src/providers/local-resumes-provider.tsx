@@ -1,6 +1,8 @@
 import { Resume } from "@/lib/types/resume";
+import { formatTimestamp } from "@/lib/utils/date";
 import { getResumes as getLocalResumes } from "@/lib/utils/local-storage";
 import { createContext, ReactNode, useContext, useEffect, useState } from "react";
+import uniqid from "uniqid";
 
 export type LocalResumesContextType = {
     resumes: Resume[];
@@ -8,6 +10,7 @@ export type LocalResumesContextType = {
     addResume: (resume: Resume) => void;
     editResume: (resume: Partial<Resume>) => void;
     removeResume: (id: string) => void;
+    addManyResumes: (resumes: Resume[]) => void;
 };
 
 const LocalResumesContext = createContext<LocalResumesContextType | undefined>(undefined);
@@ -50,6 +53,22 @@ export const LocalResumesProvider = ({ children }: { children: ReactNode }) => {
         });
     };
 
+    const addManyResumes = (resumesArray: Resume[]) => {
+        setResumes((prev) => {
+            const newResumes = { ...prev };
+
+            resumesArray.forEach((resume) => {
+                if (newResumes[resume.id]) {
+                    const id = uniqid();
+                    const createdAt = formatTimestamp(new Date());
+                    newResumes[id] = { ...resume, id, createdAt };
+                } else newResumes[resume.id] = resume;
+            });
+
+            return newResumes;
+        });
+    };
+
     return (
         <LocalResumesContext.Provider
             value={{
@@ -57,7 +76,8 @@ export const LocalResumesProvider = ({ children }: { children: ReactNode }) => {
                 getResume,
                 addResume,
                 editResume,
-                removeResume
+                removeResume,
+                addManyResumes
             }}
         >
             {children}

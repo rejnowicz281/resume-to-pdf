@@ -6,7 +6,9 @@ import { FileJson } from "lucide-react";
 
 export default function DownloadJsonButton({ resume }: { resume: Resume }) {
     const onClick = () => {
-        const data = JSON.stringify(resume, null, 2);
+        const { imageOptions, ...resumeToParse } = resume;
+
+        const data = JSON.stringify(resumeToParse, null, 2);
         const blob = new Blob([data], { type: "application/json" });
         const url = URL.createObjectURL(blob);
         const a = document.createElement("a");

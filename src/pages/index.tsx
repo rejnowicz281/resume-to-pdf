@@ -1,4 +1,5 @@
 import ResumeCard from "@/components/resume/resume-card";
+import ResumeJsonImport from "@/components/resume/resume-json-import";
 import { Button } from "@/components/ui/button";
 import { useLocalResumes } from "@/providers/local-resumes-provider";
 import { Plus } from "lucide-react";
@@ -22,6 +23,7 @@ export default function HomePage() {
                     Insert Resume
                 </Link>
             </Button>
+            <ResumeJsonImport />
         </div>
     );
 }
