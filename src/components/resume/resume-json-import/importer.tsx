@@ -57,7 +57,7 @@ export default function Importer({ onSuccess }: { onSuccess?: () => void }) {
 
     return (
         <div className="flex flex-col">
-            {resumes ? (
+            {resumes.length > 0 ? (
                 <div className="flex flex-col gap-6">
                     <div className="flex gap-3">
                         <Button variant="outline" onClick={() => setResumes([])}>
