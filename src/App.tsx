@@ -1,9 +1,11 @@
 import { ThemeProvider } from "@/providers/theme-provider";
 import { pdfjs } from "react-pdf";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { BrowserRouter, Outlet, Route, Routes } from "react-router-dom";
+import SettingsButton from "./components/general/settings-button";
 import ThemeButton from "./components/general/theme-button";
 import HomePage from "./pages";
 import ResumePage from "./pages/resume";
+import SettingsPage from "./pages/settings";
 import { LocalResumesProvider } from "./providers/local-resumes-provider";
 
 pdfjs.GlobalWorkerOptions.workerSrc = new URL("pdfjs-dist/build/pdf.worker.min.mjs", import.meta.url).toString();
@@ -16,13 +18,16 @@ export default function App() {
                 <BrowserRouter basename="resume-to-pdf">
                     <Routes>
                         <Route
-                            path="/"
                             element={
                                 <LocalResumesProvider>
-                                    <HomePage />
+                                    <SettingsButton />
+                                    <Outlet />
                                 </LocalResumesProvider>
                             }
-                        />
+                        >
+                            <Route path="/" element={<HomePage />} />
+                            <Route path="/settings" element={<SettingsPage />} />
+                        </Route>
                         <Route path="/resumes/:id" element={<ResumePage />} />
                     </Routes>
                 </BrowserRouter>
