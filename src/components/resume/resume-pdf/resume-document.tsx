@@ -54,8 +54,8 @@ export default function ResumeDocument({ resume }: { resume: Resume }) {
     Font.register({
         family: "OpenSans",
         fonts: [
-            { src: "/resume-to-pdf/fonts/Arial.ttf", fontWeight: "normal" },
-            { src: "/resume-to-pdf/fonts/Arial-Bold.ttf", fontWeight: "bold" }
+            { src: "/fonts/Arial.ttf", fontWeight: "normal" },
+            { src: "/fonts/Arial-Bold.ttf", fontWeight: "bold" }
         ]
     });
 
@@ -95,13 +95,12 @@ export default function ResumeDocument({ resume }: { resume: Resume }) {
                                 width: 100,
                                 height: 100,
                                 objectFit: "cover",
-                                borderRadius: 50,
-                                marginBottom: 10
+                                borderRadius: 50
                             }}
                         />
                     )}
 
-                    <View>
+                    <View style={{ marginTop: 10 }}>
                         {(email || phone || dateOfBirth || city || country) && (
                             <>
                                 <Text style={styles.sectionTitle}>Contact</Text>
