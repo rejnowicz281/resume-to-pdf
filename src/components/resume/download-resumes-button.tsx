@@ -6,7 +6,11 @@ export default function DownloadResumesButton() {
     const { resumes } = useLocalResumes();
 
     const onClick = () => {
-        const data = JSON.stringify(resumes, null, 2);
+        const resumesToDownload = resumes.map((resume) => {
+            const { imageOptions, ...rest } = resume;
+            return rest;
+        });
+        const data = JSON.stringify(resumesToDownload, null, 2);
         const blob = new Blob([data], { type: "application/json" });
         const url = URL.createObjectURL(blob);
         const a = document.createElement("a");

@@ -105,50 +105,53 @@ export default function ResumeDocument({ resume }: { resume: Resume }) {
                                 width: 100,
                                 height: 100,
                                 objectFit: "cover",
-                                borderRadius: 50
+                                borderRadius: 50,
+                                marginBottom: 10
                             }}
                         />
                     )}
 
-                    {(email || phone || dateOfBirth || city || country) && (
-                        <View style={{ marginTop: 10 }}>
-                            <Text style={styles.sectionTitle}>Contact</Text>
-                            <View style={js(styles.flexColumn, { gap: 6 })}>
-                                {!!email && (
-                                    <View>
-                                        <Text>E-Mail:</Text>
-                                        <Text style={styles.bold}>{email}</Text>
-                                    </View>
-                                )}
-                                {!!phone && (
-                                    <View>
-                                        <Text>Phone:</Text>
-                                        <Text style={styles.bold}>{phone}</Text>
-                                    </View>
-                                )}
-                                {!!dateOfBirth && (
-                                    <View>
-                                        <Text>Date of Birth:</Text>
-                                        <Text>{dateOfBirth}</Text>
-                                    </View>
-                                )}
-                                {(city || country) && (
-                                    <View>
-                                        <Text>Location:</Text>
-                                        <Text>
-                                            {city && (
-                                                <>
-                                                    {city}
-                                                    {country && ", "}
-                                                </>
-                                            )}
-                                            {country}
-                                        </Text>
-                                    </View>
-                                )}
-                            </View>
-                        </View>
-                    )}
+                    <View>
+                        {(email || phone || dateOfBirth || city || country) && (
+                            <>
+                                <Text style={styles.sectionTitle}>Contact</Text>
+                                <View style={js(styles.flexColumn, { gap: 6 })}>
+                                    {!!email && (
+                                        <View>
+                                            <Text>E-Mail:</Text>
+                                            <Text style={styles.bold}>{email}</Text>
+                                        </View>
+                                    )}
+                                    {!!phone && (
+                                        <View>
+                                            <Text>Phone:</Text>
+                                            <Text style={styles.bold}>{phone}</Text>
+                                        </View>
+                                    )}
+                                    {!!dateOfBirth && (
+                                        <View>
+                                            <Text>Date of Birth:</Text>
+                                            <Text>{dateOfBirth}</Text>
+                                        </View>
+                                    )}
+                                    {(city || country) && (
+                                        <View>
+                                            <Text>Location:</Text>
+                                            <Text>
+                                                {city && (
+                                                    <>
+                                                        {city}
+                                                        {country && ", "}
+                                                    </>
+                                                )}
+                                                {country}
+                                            </Text>
+                                        </View>
+                                    )}
+                                </View>
+                            </>
+                        )}
+                    </View>
 
                     {/* Skills */}
                     {skills && skills.length > 0 && (
