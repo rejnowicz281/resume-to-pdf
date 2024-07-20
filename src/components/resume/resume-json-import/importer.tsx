@@ -73,7 +73,7 @@ export default function Importer({ onSuccess }: { onSuccess?: () => void }) {
                 </div>
             ) : (
                 <div className="flex flex-col gap-4">
-                    <button className="flex flex-col relative hover:opacity-70 transition-opacity gap-6 max-w-[400px] p-9 w-full border border-dashed rounded-xl border-neutral-300 dark:border-neutral-600">
+                    <button className="flex items-center flex-col relative hover:opacity-70 transition-opacity gap-6 max-w-[400px] p-9 w-full border border-dashed rounded-xl border-neutral-300 dark:border-neutral-600">
                         <input
                             className="absolute inset-0 opacity-0 cursor-pointer"
                             ref={inputRef}
