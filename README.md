@@ -46,7 +46,7 @@ For the components, the **shadcn** component library was used. For the icons, th
 -   [x] Customization
 -   [x] Responsive
 -   [x] Multiple resumes
--   [ ] JSON Import
+-   [x] JSON Import
 -   [ ] Localization
 -   [ ] PWA Offline Functionality
 -   [ ] Multiple resume themes
@@ -55,7 +55,7 @@ For the components, the **shadcn** component library was used. For the icons, th
 
 The project uses **localStorage** to store the resumes.
 This means that the resumes are stored in the browser's local storage and are not shared with any server. This also means that the resumes are not available on other devices.\
-To transport your resumes to another device, you can download them as a JSON file and then import them on another device. Although this is not the most convenient solution, it is the only one available at the moment. Might add a dedicated server to store the resumes in the future.
+To transport your resumes to another device, you can download them as a JSON file and then import them on another device. Although not the most convenient, it is the only option available at the moment. Might add a dedicated server to store the resumes in the future.
 
 ## Demo
 

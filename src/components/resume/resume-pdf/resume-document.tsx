@@ -11,7 +11,7 @@ const styles = StyleSheet.create({
         flexDirection: "row",
         fontSize: 9,
         gap: 20,
-        lineHeight: 1.7
+        lineHeight: 1.5
     },
     leftSection: {
         flex: 1,
@@ -22,16 +22,13 @@ const styles = StyleSheet.create({
     },
     nameHeader: {
         fontSize: 24,
-        fontWeight: "semibold",
+        fontWeight: "bold",
         marginBottom: 20
     },
     sectionTitle: {
         fontSize: 12,
         fontWeight: "bold",
         marginBottom: 10
-    },
-    semibold: {
-        fontWeight: "semibold"
     },
     bold: {
         fontWeight: "bold"
@@ -42,20 +39,14 @@ const styles = StyleSheet.create({
     flexColumn: {
         flexDirection: "column"
     },
-    imagePlaceholder: {
-        width: 100,
-        height: 100,
-        borderRadius: 50,
-        backgroundColor: "#D7D7D7",
-        marginBottom: 10
-    },
+
     link: {
         textDecoration: "none",
         color: "#000000"
     },
     date: {
         fontSize: 8,
-        fontWeight: "semibold"
+        fontWeight: "bold"
     }
 });
 
@@ -63,9 +54,8 @@ export default function ResumeDocument({ resume }: { resume: Resume }) {
     Font.register({
         family: "OpenSans",
         fonts: [
-            { src: "/resume-to-pdf/fonts/OpenSans-Regular.ttf", fontWeight: "normal" },
-            { src: "/resume-to-pdf/fonts/OpenSans-SemiBold.ttf", fontWeight: "semibold" },
-            { src: "/resume-to-pdf/fonts/OpenSans-Bold.ttf", fontWeight: "bold" }
+            { src: "/resume-to-pdf/fonts/Arial.ttf", fontWeight: "normal" },
+            { src: "/resume-to-pdf/fonts/Arial-Bold.ttf", fontWeight: "bold" }
         ]
     });
 
@@ -223,10 +213,7 @@ export default function ResumeDocument({ resume }: { resume: Resume }) {
                                                 <Text style={{ fontSize: 8 }}>[{experience.duration}]</Text>
                                             </View>
                                             {experience.description && (
-                                                <View style={{ marginTop: 4 }}>
-                                                    <Text>Description:</Text>
-                                                    <Text>{experience.description}</Text>
-                                                </View>
+                                                <Text style={{ marginTop: 4 }}>{experience.description}</Text>
                                             )}
                                         </View>
                                     ))}
@@ -251,12 +238,7 @@ export default function ResumeDocument({ resume }: { resume: Resume }) {
                                             </View>
                                             {edu.specialization && <Text>Specialization: {edu.specialization}</Text>}
                                             <Text>Level of education: {edu.level}</Text>
-                                            {edu.description && (
-                                                <View style={{ marginTop: 4 }}>
-                                                    <Text>Description:</Text>
-                                                    <Text>{edu.description}</Text>
-                                                </View>
-                                            )}
+                                            {edu.description && <Text style={{ marginTop: 4 }}>{edu.description}</Text>}
                                         </View>
                                     ))}
                                 </View>
@@ -275,10 +257,7 @@ export default function ResumeDocument({ resume }: { resume: Resume }) {
                                             <Text style={styles.date}>{cert.issueDate}</Text>
                                             <Text>Organization: {cert.organization}</Text>
                                             {cert.description && (
-                                                <View style={{ marginTop: 4 }}>
-                                                    <Text>Description:</Text>
-                                                    <Text>{cert.description}</Text>
-                                                </View>
+                                                <Text style={{ marginTop: 4 }}>{cert.description}</Text>
                                             )}
                                         </View>
                                     ))}
@@ -301,10 +280,7 @@ export default function ResumeDocument({ resume }: { resume: Resume }) {
                                                 <Text style={{ fontSize: 8 }}>[{activity.duration}]</Text>
                                             </View>
                                             {activity.description && (
-                                                <View style={{ marginTop: 4 }}>
-                                                    <Text>Description:</Text>
-                                                    <Text>{activity.description}</Text>
-                                                </View>
+                                                <Text style={{ marginTop: 4 }}>{activity.description}</Text>
                                             )}
                                         </View>
                                     ))}
