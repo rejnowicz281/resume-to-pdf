@@ -270,8 +270,17 @@ export default function ResumeDocument({ resume }: { resume: Resume }) {
                                 <View style={js(styles.flexColumn, { gap: 12 })}>
                                     {activities.map((activity) => (
                                         <View key={activity.id} style={js(styles.flexColumn, { gap: 1 })}>
-                                            <Text style={styles.bold}>{activity.name}</Text>
-                                            {activity.location && <Text>{activity.location}</Text>}
+                                            <View style={js(styles.flexRow, { gap: 4 })}>
+                                                <ListItem>
+                                                    <Text style={styles.bold}>{activity.name}</Text>
+                                                </ListItem>
+                                                {activity.location && (
+                                                    <>
+                                                        <Text>/</Text>
+                                                        <Text>{activity.location}</Text>
+                                                    </>
+                                                )}
+                                            </View>
                                             <View style={js(styles.flexRow, { gap: 3 })}>
                                                 <Text style={styles.date}>
                                                     {activity.startDate} - {activity.endDate || "Present"}
