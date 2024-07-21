@@ -1,7 +1,9 @@
 import { Button } from "@/components/ui/button";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { useLanguageForm } from "@/hooks/step-two-forms";
+import LANGUAGE_LEVELS from "@/lib/constants/language-levels";
 import { Language } from "@/lib/types/resume";
 import { Plus } from "lucide-react";
 
@@ -38,7 +40,18 @@ export default function LanguageForm({ language, afterSubmit }: { language?: Lan
                         <FormItem>
                             <FormLabel>Level *</FormLabel>
                             <FormControl>
-                                <Input placeholder="Native" {...field} />
+                                <Select onValueChange={field.onChange} defaultValue={field.value}>
+                                    <SelectTrigger>
+                                        <SelectValue placeholder="Select language level" />
+                                    </SelectTrigger>
+                                    <SelectContent>
+                                        {LANGUAGE_LEVELS.map((level) => (
+                                            <SelectItem key={level} value={level}>
+                                                {level}
+                                            </SelectItem>
+                                        ))}
+                                    </SelectContent>
+                                </Select>
                             </FormControl>
                             <FormMessage />
                         </FormItem>
