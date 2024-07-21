@@ -6,7 +6,7 @@ import { mapResume } from "@/lib/utils/mappers/resume";
 import { useLocalResumes } from "@/providers/local-resumes-provider";
 import { FileJson2 } from "lucide-react";
 import { useRef, useState } from "react";
-import { useTranslation } from "react-i18next";
+import { Trans, useTranslation } from "react-i18next";
 
 export default function Importer({ onSuccess }: { onSuccess?: () => void }) {
     const { addManyResumes } = useLocalResumes();
@@ -118,7 +118,10 @@ export default function Importer({ onSuccess }: { onSuccess?: () => void }) {
                         <AccordionItem className="border-b-0" value="item-1">
                             <AccordionTrigger>{t("resumeJsonImport.importer.lookLikeTitle")}</AccordionTrigger>
                             <AccordionContent className="flex flex-col gap-4">
-                                <div>{t("resumeJsonImport.importer.lookLikeDescription")}</div>
+                                <Trans
+                                    i18nKey="resumeJsonImport.importer.lookLikeDescription"
+                                    components={{ br: <br /> }}
+                                />
                                 <div className="p-4 border border-gray-300 rounded-md">
                                     <pre>
                                         {JSON.stringify(
