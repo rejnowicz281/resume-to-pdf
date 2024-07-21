@@ -1,15 +1,17 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { useResumeCreator } from "@/providers/resume-creator-provider";
+import { useTranslation } from "react-i18next";
 import AddLink from "./add-link";
 import DeleteLink from "./delete-link";
 import EditLink from "./edit-link";
 
 export default function Links() {
     const { links } = useResumeCreator();
+    const { t } = useTranslation();
 
     return (
         <div className="flex flex-col">
-            <h2 className="text-3xl font-bold">Links</h2>
+            <h2 className="text-3xl font-bold">{t("resumeCreator.stepThree.links.title")}</h2>
 
             <div className="flex flex-col gap-9 my-6">
                 {links.map((link) => (

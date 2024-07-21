@@ -5,9 +5,11 @@ import { Textarea } from "@/components/ui/textarea";
 import { useEducationForm } from "@/hooks/step-two-forms";
 import { Education } from "@/lib/types/resume";
 import { Plus } from "lucide-react";
+import { useTranslation } from "react-i18next";
 
 export default function EducationForm({ education, afterSubmit }: { education?: Education; afterSubmit?: () => void }) {
     const { form, onSubmit } = useEducationForm(education);
+    const { t } = useTranslation();
 
     return (
         <Form {...form}>
@@ -23,9 +25,12 @@ export default function EducationForm({ education, afterSubmit }: { education?: 
                     name="institution"
                     render={({ field }) => (
                         <FormItem>
-                            <FormLabel>Institution *</FormLabel>
+                            <FormLabel>{t("resumeCreator.stepTwo.educationForm.institution")} *</FormLabel>
                             <FormControl>
-                                <Input placeholder="University of California" {...field} />
+                                <Input
+                                    placeholder={t("resumeCreator.stepTwo.educationForm.institutionPlaceholder")}
+                                    {...field}
+                                />
                             </FormControl>
                             <FormMessage />
                         </FormItem>
@@ -37,9 +42,12 @@ export default function EducationForm({ education, afterSubmit }: { education?: 
                     name="level"
                     render={({ field }) => (
                         <FormItem>
-                            <FormLabel>Level *</FormLabel>
+                            <FormLabel>{t("resumeCreator.stepTwo.educationForm.level")} *</FormLabel>
                             <FormControl>
-                                <Input placeholder="Bachelor's" {...field} />
+                                <Input
+                                    placeholder={t("resumeCreator.stepTwo.educationForm.levelPlaceholder")}
+                                    {...field}
+                                />
                             </FormControl>
                             <FormMessage />
                         </FormItem>
@@ -51,9 +59,12 @@ export default function EducationForm({ education, afterSubmit }: { education?: 
                     name="specialization"
                     render={({ field }) => (
                         <FormItem>
-                            <FormLabel>Specialization</FormLabel>
+                            <FormLabel>{t("resumeCreator.stepTwo.educationForm.specialization")}</FormLabel>
                             <FormControl>
-                                <Input placeholder="Computer Science" {...field} />
+                                <Input
+                                    placeholder={t("resumeCreator.stepTwo.educationForm.specializationPlaceholder")}
+                                    {...field}
+                                />
                             </FormControl>
                             <FormMessage />
                         </FormItem>
@@ -65,7 +76,7 @@ export default function EducationForm({ education, afterSubmit }: { education?: 
                     name="startDate"
                     render={({ field }) => (
                         <FormItem>
-                            <FormLabel>Start Date *</FormLabel>
+                            <FormLabel>{t("resumeCreator.stepTwo.educationForm.startDate")} *</FormLabel>
                             <FormControl>
                                 <Input type="date" {...field} />
                             </FormControl>
@@ -79,7 +90,7 @@ export default function EducationForm({ education, afterSubmit }: { education?: 
                     name="endDate"
                     render={({ field }) => (
                         <FormItem>
-                            <FormLabel>End Date</FormLabel>
+                            <FormLabel>{t("resumeCreator.stepTwo.educationForm.endDate")}</FormLabel>
                             <FormControl>
                                 <Input type="date" {...field} />
                             </FormControl>
@@ -93,9 +104,12 @@ export default function EducationForm({ education, afterSubmit }: { education?: 
                     name="description"
                     render={({ field }) => (
                         <FormItem>
-                            <FormLabel>Description</FormLabel>
+                            <FormLabel>{t("resumeCreator.stepTwo.educationForm.description")}</FormLabel>
                             <FormControl>
-                                <Textarea placeholder="Describe your education" {...field} />
+                                <Textarea
+                                    placeholder={t("resumeCreator.stepTwo.educationForm.descriptionPlaceholder")}
+                                    {...field}
+                                />
                             </FormControl>
                             <FormMessage />
                         </FormItem>
@@ -104,7 +118,7 @@ export default function EducationForm({ education, afterSubmit }: { education?: 
 
                 <Button className="flex gap-2 self-center" type="submit">
                     <Plus />
-                    Submit
+                    {t("submit")}
                 </Button>
             </form>
         </Form>

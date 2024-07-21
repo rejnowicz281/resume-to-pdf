@@ -6,6 +6,7 @@ import { BlobProvider } from "@react-pdf/renderer";
 import { ChevronLeft, ChevronRight, LucideLoader } from "lucide-react";
 import type { PDFDocumentProxy } from "pdfjs-dist";
 import { useEffect, useRef, useState } from "react";
+import { useTranslation } from "react-i18next";
 import { Document, Page } from "react-pdf";
 import "react-pdf/dist/esm/Page/AnnotationLayer.css";
 import "react-pdf/dist/esm/Page/TextLayer.css";
@@ -16,6 +17,7 @@ export default function ResumePDF() {
     const [width, setWidth] = useState(200);
     const [numPages, setNumPages] = useState(1);
     const [currentPage, setCurrentPage] = useState(1);
+    const { t } = useTranslation();
 
     useEffect(() => {
         setWidth(getWidth());
@@ -40,7 +42,7 @@ export default function ResumePDF() {
     const Loading = () => (
         <div className={cn("flex flex-col justify-center items-center flex-1 w-full h-full")}>
             <LucideLoader className="animate-spin" />
-            Your PDF is being generated...
+            {t("resumePdf.generating")}
         </div>
     );
 
@@ -86,7 +88,7 @@ export default function ResumePDF() {
                             <ChevronLeft size={20} />
                         </Button>
                         <div className="text-sm">
-                            Page {currentPage} / {numPages}
+                            {t("page")} {currentPage} / {numPages}
                         </div>
 
                         <Button

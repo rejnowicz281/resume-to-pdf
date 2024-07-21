@@ -13,9 +13,11 @@ import { Button } from "@/components/ui/button";
 import { WorkExperience } from "@/lib/types/resume";
 import { useResumeCreator } from "@/providers/resume-creator-provider";
 import { Trash } from "lucide-react";
+import { Trans, useTranslation } from "react-i18next";
 
 export default function DeleteExperience({ experience }: { experience: WorkExperience }) {
     const { removeWorkExperience } = useResumeCreator();
+    const { t } = useTranslation();
 
     return (
         <AlertDialog>
@@ -26,14 +28,22 @@ export default function DeleteExperience({ experience }: { experience: WorkExper
             </AlertDialogTrigger>
             <AlertDialogContent>
                 <AlertDialogHeader>
-                    <AlertDialogTitle>Are you sure?</AlertDialogTitle>
+                    <AlertDialogTitle>{t("resumeCreator.stepTwo.deleteWorkExperience.dialogTitle")}</AlertDialogTitle>
                     <AlertDialogDescription>
-                        You are about to delete the <b>{experience.title}</b> position. This action cannot be undone.
+                        <Trans
+                            i18nKey="resumeCreator.stepTwo.deleteWorkExperience.dialogDescription"
+                            values={{ title: experience.title }}
+                            components={{ b: <strong /> }}
+                        />
                     </AlertDialogDescription>
                 </AlertDialogHeader>
                 <AlertDialogFooter>
-                    <AlertDialogCancel>Cancel</AlertDialogCancel>
-                    <AlertDialogAction onClick={() => removeWorkExperience(experience.id)}>Delete</AlertDialogAction>
+                    <AlertDialogCancel>
+                        {t("resumeCreator.stepTwo.deleteWorkExperience.cancelButton")}
+                    </AlertDialogCancel>
+                    <AlertDialogAction onClick={() => removeWorkExperience(experience.id)}>
+                        {t("resumeCreator.stepTwo.deleteWorkExperience.deleteButton")}
+                    </AlertDialogAction>
                 </AlertDialogFooter>
             </AlertDialogContent>
         </AlertDialog>

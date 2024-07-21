@@ -1,3 +1,5 @@
+import i18next from "i18next";
+
 export function formatTimestamp(timestamp: string | Date) {
     const date = typeof timestamp === "string" ? new Date(timestamp) : timestamp;
     const day = date.getDate();
@@ -64,15 +66,78 @@ export function getDurationBetweenDates(startDate: Date, endDate?: Date) {
     const months = calculateMonthsBetweenDates(startDate, endDate);
 
     if (months < 12) {
-        return `${months} month${months > 1 ? "s" : ""}`;
+        switch (i18next.language) {
+            case "en":
+                return `${months} month${months > 1 ? "s" : ""}`;
+            case "pl":
+                const lastDigit = months % 10;
+                const lastTwoDigits = months % 100;
+
+                if (lastTwoDigits > 10 && lastTwoDigits < 20) {
+                    return `${months} miesięcy`;
+                }
+
+                if (lastDigit === 1) {
+                    return `${months} miesiąc`;
+                }
+
+                if (lastDigit > 1 && lastDigit < 5) {
+                    return `${months} miesiące`;
+                }
+
+                return `${months} miesięcy`;
+            default:
+                return `${months} month${months > 1 ? "s" : ""}`;
+        }
     }
 
     const years = Math.floor(months / 12);
     const remainingMonths = months % 12;
 
     if (remainingMonths === 0) {
-        return `${years} year${years > 1 ? "s" : ""}`;
+        switch (i18next.language) {
+            case "en":
+                return `${years} year${years > 1 ? "s" : ""}`;
+            case "pl":
+                if (years === 1) {
+                    return `${years} rok`;
+                }
+
+                const lastDigit = years % 10;
+                const lastTwoDigits = years % 100;
+
+                if (lastTwoDigits > 10 && lastTwoDigits < 20) {
+                    return `${years} lat`;
+                }
+
+                if (lastDigit === 1) {
+                    return `${years} rok`;
+                }
+
+                if (lastDigit > 1 && lastDigit < 5) {
+                    return `${years} lata`;
+                }
+
+                return `${years} lat`;
+            default:
+                return `${years} year${years > 1 ? "s" : ""}`;
+        }
     }
 
-    return `${years} year${years > 1 ? "s" : ""} and ${remainingMonths} month${remainingMonths > 1 ? "s" : ""}`;
+    switch (i18next.language) {
+        case "en":
+            return `${years} year${years > 1 ? "s" : ""} ${remainingMonths} month${remainingMonths > 1 ? "s" : ""}`;
+        case "pl":
+            const yearsText = years === 1 ? `${years} rok` : `${years} lata`;
+            const monthsText =
+                remainingMonths === 1
+                    ? `${remainingMonths} miesiąc`
+                    : remainingMonths > 1 && remainingMonths < 5
+                    ? `${remainingMonths} miesiące`
+                    : `${remainingMonths} miesięcy`;
+
+            return `${yearsText} ${monthsText}`;
+        default:
+            return `${years} year${years > 1 ? "s" : ""} ${remainingMonths} month${remainingMonths > 1 ? "s" : ""}`;
+    }
 }

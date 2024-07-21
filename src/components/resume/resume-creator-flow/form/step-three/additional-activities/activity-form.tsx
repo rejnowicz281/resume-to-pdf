@@ -5,9 +5,11 @@ import { Textarea } from "@/components/ui/textarea";
 import { useActivityForm } from "@/hooks/step-three-forms";
 import { Activity } from "@/lib/types/resume";
 import { Plus } from "lucide-react";
+import { useTranslation } from "react-i18next";
 
 export default function ActivityForm({ activity, afterSubmit }: { activity?: Activity; afterSubmit?: () => void }) {
     const { form, onSubmit } = useActivityForm(activity);
+    const { t } = useTranslation();
 
     return (
         <Form {...form}>
@@ -23,9 +25,12 @@ export default function ActivityForm({ activity, afterSubmit }: { activity?: Act
                     name="name"
                     render={({ field }) => (
                         <FormItem>
-                            <FormLabel>Name *</FormLabel>
+                            <FormLabel>{t("resumeCreator.stepThree.activityForm.name")} *</FormLabel>
                             <FormControl>
-                                <Input placeholder="Volunteering" {...field} />
+                                <Input
+                                    placeholder={t("resumeCreator.stepThree.activityForm.namePlaceholder")}
+                                    {...field}
+                                />
                             </FormControl>
                             <FormMessage />
                         </FormItem>
@@ -37,9 +42,12 @@ export default function ActivityForm({ activity, afterSubmit }: { activity?: Act
                     name="location"
                     render={({ field }) => (
                         <FormItem>
-                            <FormLabel>Location</FormLabel>
+                            <FormLabel>{t("resumeCreator.stepThree.activityForm.location")}</FormLabel>
                             <FormControl>
-                                <Input placeholder="Local Community Center" {...field} />
+                                <Input
+                                    placeholder={t("resumeCreator.stepThree.activityForm.locationPlaceholder")}
+                                    {...field}
+                                />
                             </FormControl>
                             <FormMessage />
                         </FormItem>
@@ -51,7 +59,7 @@ export default function ActivityForm({ activity, afterSubmit }: { activity?: Act
                     name="startDate"
                     render={({ field }) => (
                         <FormItem>
-                            <FormLabel>Start Date *</FormLabel>
+                            <FormLabel>{t("resumeCreator.stepThree.activityForm.startDate")} *</FormLabel>
                             <FormControl>
                                 <Input type="date" {...field} />
                             </FormControl>
@@ -65,7 +73,7 @@ export default function ActivityForm({ activity, afterSubmit }: { activity?: Act
                     name="endDate"
                     render={({ field }) => (
                         <FormItem>
-                            <FormLabel>End Date</FormLabel>
+                            <FormLabel>{t("resumeCreator.stepThree.activityForm.endDate")}</FormLabel>
                             <FormControl>
                                 <Input type="date" {...field} />
                             </FormControl>
@@ -79,9 +87,12 @@ export default function ActivityForm({ activity, afterSubmit }: { activity?: Act
                     name="description"
                     render={({ field }) => (
                         <FormItem>
-                            <FormLabel>Description</FormLabel>
+                            <FormLabel>{t("resumeCreator.stepThree.activityForm.description")}</FormLabel>
                             <FormControl>
-                                <Textarea placeholder="Describe this activity" {...field} />
+                                <Textarea
+                                    placeholder={t("resumeCreator.stepThree.activityForm.descriptionPlaceholder")}
+                                    {...field}
+                                />
                             </FormControl>
                             <FormMessage />
                         </FormItem>
@@ -90,7 +101,7 @@ export default function ActivityForm({ activity, afterSubmit }: { activity?: Act
 
                 <Button className="flex gap-2 self-center" type="submit">
                     <Plus />
-                    Submit
+                    {t("submit")}
                 </Button>
             </form>
         </Form>

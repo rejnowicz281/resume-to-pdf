@@ -13,9 +13,11 @@ import { Button } from "@/components/ui/button";
 import { Link } from "@/lib/types/resume";
 import { useResumeCreator } from "@/providers/resume-creator-provider";
 import { Trash } from "lucide-react";
+import { Trans, useTranslation } from "react-i18next";
 
 export default function DeleteLink({ link }: { link: Link }) {
     const { removeLink } = useResumeCreator();
+    const { t } = useTranslation();
 
     return (
         <AlertDialog>
@@ -26,14 +28,21 @@ export default function DeleteLink({ link }: { link: Link }) {
             </AlertDialogTrigger>
             <AlertDialogContent>
                 <AlertDialogHeader>
-                    <AlertDialogTitle>Are you sure?</AlertDialogTitle>
+                    <AlertDialogTitle>{t("resumeCreator.stepThree.deleteLink.dialogTitle")}</AlertDialogTitle>
                     <AlertDialogDescription>
-                        You are about to delete the <b>{link.url}</b> link. This action cannot be undone.
+                        <Trans
+                            i18nKey="resumeCreator.stepThree.deleteLink.dialogDescription"
+                            values={{ url: link.url }}
+                            components={{ b: <strong /> }}
+                            tOptions={{ interpolation: { escapeValue: false } }}
+                        />
                     </AlertDialogDescription>
                 </AlertDialogHeader>
                 <AlertDialogFooter>
-                    <AlertDialogCancel>Cancel</AlertDialogCancel>
-                    <AlertDialogAction onClick={() => removeLink(link.id)}>Delete</AlertDialogAction>
+                    <AlertDialogCancel>{t("resumeCreator.stepThree.deleteLink.cancelButton")}</AlertDialogCancel>
+                    <AlertDialogAction onClick={() => removeLink(link.id)}>
+                        {t("resumeCreator.stepThree.deleteLink.deleteButton")}
+                    </AlertDialogAction>
                 </AlertDialogFooter>
             </AlertDialogContent>
         </AlertDialog>

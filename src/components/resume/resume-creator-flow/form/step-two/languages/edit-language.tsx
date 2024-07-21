@@ -3,10 +3,12 @@ import { Dialog, DialogContent, DialogTitle, DialogTrigger } from "@/components/
 import { Language } from "@/lib/types/resume";
 import { Edit } from "lucide-react";
 import { useState } from "react";
+import { useTranslation } from "react-i18next";
 import LanguageForm from "./language-form";
 
 export default function EditLanguage({ language }: { language: Language }) {
     const [open, setOpen] = useState(false);
+    const { t } = useTranslation();
 
     return (
         <Dialog open={open} onOpenChange={setOpen}>
@@ -16,7 +18,9 @@ export default function EditLanguage({ language }: { language: Language }) {
                 </Button>
             </DialogTrigger>
             <DialogContent>
-                <DialogTitle className="text-3xl font-bold">Edit Language</DialogTitle>
+                <DialogTitle className="text-3xl font-bold">
+                    {t("resumeCreator.stepTwo.editLanguage.dialogTitle")}
+                </DialogTitle>
                 <LanguageForm language={language} afterSubmit={() => setOpen(false)} />
             </DialogContent>
         </Dialog>

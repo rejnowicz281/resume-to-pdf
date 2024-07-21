@@ -3,6 +3,7 @@ import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle }
 import { Resume } from "@/lib/types/resume";
 import { getResumeName, getResumeProgress } from "@/lib/utils/resume";
 import { FileDown, MoveDiagonal2 } from "lucide-react";
+import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 import DownloadPdfButton from "../download-pdf-button";
 import DeleteResume from "./delete-resume";
@@ -10,20 +11,24 @@ import DownloadJsonButton from "./download-json-button";
 import EditResume from "./edit-resume";
 
 export default function ResumeCard({ resume }: { resume: Resume }) {
+    const { t } = useTranslation();
+
     return (
         <Card className="break-words">
             <Link className="hover:text-gray-500 text-center xsm:text-start" to={`/resumes/${resume.id}`}>
                 <CardHeader>
                     <CardTitle>{getResumeName(resume)}</CardTitle>
                     <CardDescription>
-                        <span>{getResumeProgress(resume)}% Complete</span>
+                        <span>
+                            {getResumeProgress(resume)}% {t("complete")}
+                        </span>
                     </CardDescription>
                 </CardHeader>
                 {resume.description && <CardContent className="whitespace-pre-line">{resume.description}</CardContent>}
             </Link>
             <CardFooter className="border-t border-t-zinc-200 dark:border-t-zinc-800 py-3 gap-2 flex-col xsm:flex-row xsm:justify-between">
                 <Link to={`/resumes/${resume.id}`} className="flex-1 text-gray-500 text-sm">
-                    Created {resume.createdAt}
+                    {t("created")} {resume.createdAt}
                 </Link>
                 <div>
                     <Button size="icon" variant="ghost" asChild>

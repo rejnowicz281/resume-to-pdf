@@ -18,6 +18,7 @@ import {
 import { formatTimestamp } from "@/lib/utils/date";
 import { saveResume } from "@/lib/utils/local-storage";
 import React, { createContext, ReactNode, useContext, useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
 import uniqid from "uniqid";
 
 export type ResumeCreatorContextType = {
@@ -84,6 +85,8 @@ export type ResumeCreatorContextType = {
 const ResumeCreatorContext = createContext<ResumeCreatorContextType | undefined>(undefined);
 
 export const ResumeCreatorProvider = ({ children, initialResume }: { children: ReactNode; initialResume?: Resume }) => {
+    const { t } = useTranslation();
+
     const [previewState, setPreviewState] = useState(false);
 
     const togglePreviewState = () => setPreviewState(!previewState);
@@ -200,15 +203,15 @@ export const ResumeCreatorProvider = ({ children, initialResume }: { children: R
     const getStepName = () => {
         switch (step) {
             case 1:
-                return "Basic Info";
+                return t("resumeCreator.stepOne.name");
             case 2:
-                return "Experience";
+                return t("resumeCreator.stepTwo.name");
             case 3:
-                return "Skills";
+                return t("resumeCreator.stepThree.name");
             case 4:
-                return "Download Resume";
+                return t("resumeCreator.stepFour.name");
             default:
-                return "Basic Info";
+                return t("resumeCreator.stepOne.name");
         }
     };
 

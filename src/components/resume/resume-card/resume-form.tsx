@@ -5,9 +5,11 @@ import { useResumeForm } from "@/hooks/resume-form";
 import { Resume } from "@/lib/types/resume";
 import { getResumeName } from "@/lib/utils/resume";
 import { Plus } from "lucide-react";
+import { useTranslation } from "react-i18next";
 
 export default function ResumeForm({ resume, afterSubmit }: { resume: Resume; afterSubmit?: () => void }) {
     const { form, onSubmit } = useResumeForm(resume.id);
+    const { t } = useTranslation();
 
     return (
         <Form {...form}>
@@ -23,7 +25,7 @@ export default function ResumeForm({ resume, afterSubmit }: { resume: Resume; af
                     name="name"
                     render={({ field }) => (
                         <FormItem>
-                            <FormLabel>Custom Name</FormLabel>
+                            <FormLabel>{t("resumeForm.name")}</FormLabel>
                             <FormControl>
                                 <Input placeholder={getResumeName(resume)} {...field} />
                             </FormControl>
@@ -37,9 +39,9 @@ export default function ResumeForm({ resume, afterSubmit }: { resume: Resume; af
                     name="description"
                     render={({ field }) => (
                         <FormItem>
-                            <FormLabel>Description</FormLabel>
+                            <FormLabel>{t("resumeForm.description")}</FormLabel>
                             <FormControl>
-                                <Input placeholder="Describe this resume" {...field} />
+                                <Input placeholder={t("resumeForm.descriptionPlaceholder")} {...field} />
                             </FormControl>
                             <FormMessage />
                         </FormItem>
@@ -48,7 +50,7 @@ export default function ResumeForm({ resume, afterSubmit }: { resume: Resume; af
 
                 <Button className="flex gap-2 self-center" type="submit">
                     <Plus />
-                    Submit
+                    {t("submit")}
                 </Button>
             </form>
         </Form>

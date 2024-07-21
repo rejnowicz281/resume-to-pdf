@@ -3,12 +3,17 @@ import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "
 import { Input } from "@/components/ui/input";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { useLanguageForm } from "@/hooks/step-two-forms";
-import LANGUAGE_LEVELS from "@/lib/constants/language-levels";
+import { getLanguageLevels } from "@/lib/constants/language-levels";
+
 import { Language } from "@/lib/types/resume";
 import { Plus } from "lucide-react";
+import { useTranslation } from "react-i18next";
 
 export default function LanguageForm({ language, afterSubmit }: { language?: Language; afterSubmit?: () => void }) {
     const { form, onSubmit } = useLanguageForm(language);
+    const { t, i18n } = useTranslation();
+
+    const languageLevels = getLanguageLevels(i18n.language);
 
     return (
         <Form {...form}>
@@ -24,9 +29,12 @@ export default function LanguageForm({ language, afterSubmit }: { language?: Lan
                     name="language"
                     render={({ field }) => (
                         <FormItem>
-                            <FormLabel>Language *</FormLabel>
+                            <FormLabel>{t("resumeCreator.stepTwo.languageForm.language")} *</FormLabel>
                             <FormControl>
-                                <Input placeholder="English" {...field} />
+                                <Input
+                                    placeholder={t("resumeCreator.stepTwo.languageForm.languagePlaceholder")}
+                                    {...field}
+                                />
                             </FormControl>
                             <FormMessage />
                         </FormItem>
@@ -38,14 +46,16 @@ export default function LanguageForm({ language, afterSubmit }: { language?: Lan
                     name="level"
                     render={({ field }) => (
                         <FormItem>
-                            <FormLabel>Level *</FormLabel>
+                            <FormLabel>{t("resumeCreator.stepTwo.languageForm.level")} *</FormLabel>
                             <FormControl>
                                 <Select onValueChange={field.onChange} defaultValue={field.value}>
                                     <SelectTrigger>
-                                        <SelectValue placeholder="Select language level" />
+                                        <SelectValue
+                                            placeholder={t("resumeCreator.stepTwo.languageForm.levelPlaceholder")}
+                                        />
                                     </SelectTrigger>
                                     <SelectContent>
-                                        {LANGUAGE_LEVELS.map((level) => (
+                                        {languageLevels.map((level) => (
                                             <SelectItem key={level} value={level}>
                                                 {level}
                                             </SelectItem>
@@ -60,7 +70,7 @@ export default function LanguageForm({ language, afterSubmit }: { language?: Lan
 
                 <Button className="flex gap-2 self-center" type="submit">
                     <Plus />
-                    Submit
+                    {t("submit")}
                 </Button>
             </form>
         </Form>

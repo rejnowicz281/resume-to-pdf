@@ -3,10 +3,12 @@ import { Dialog, DialogContent, DialogTitle, DialogTrigger } from "@/components/
 import { Education } from "@/lib/types/resume";
 import { Edit } from "lucide-react";
 import { useState } from "react";
+import { useTranslation } from "react-i18next";
 import EducationForm from "./education-form";
 
 export default function EditEducation({ education }: { education: Education }) {
     const [open, setOpen] = useState(false);
+    const { t } = useTranslation();
 
     return (
         <Dialog open={open} onOpenChange={setOpen}>
@@ -16,7 +18,9 @@ export default function EditEducation({ education }: { education: Education }) {
                 </Button>
             </DialogTrigger>
             <DialogContent>
-                <DialogTitle className="text-3xl font-bold">Edit Education</DialogTitle>
+                <DialogTitle className="text-3xl font-bold">
+                    {t("resumeCreator.stepTwo.editEducation.dialogTitle")}
+                </DialogTitle>
                 <EducationForm education={education} afterSubmit={() => setOpen(false)} />
             </DialogContent>
         </Dialog>

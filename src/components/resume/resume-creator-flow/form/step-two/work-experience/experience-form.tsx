@@ -5,6 +5,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { useWorkExperienceForm } from "@/hooks/step-two-forms";
 import { WorkExperience } from "@/lib/types/resume";
 import { Plus } from "lucide-react";
+import { useTranslation } from "react-i18next";
 
 export default function ExperienceForm({
     experience,
@@ -14,6 +15,7 @@ export default function ExperienceForm({
     afterSubmit?: () => void;
 }) {
     const { form, onSubmit } = useWorkExperienceForm(experience);
+    const { t } = useTranslation();
 
     return (
         <Form {...form}>
@@ -29,7 +31,7 @@ export default function ExperienceForm({
                     name="title"
                     render={({ field }) => (
                         <FormItem>
-                            <FormLabel>Title *</FormLabel>
+                            <FormLabel>{t("resumeCreator.stepTwo.workExperienceForm.title")} *</FormLabel>
                             <FormControl>
                                 <Input placeholder="Software Developer" {...field} />
                             </FormControl>
@@ -42,7 +44,7 @@ export default function ExperienceForm({
                     name="company"
                     render={({ field }) => (
                         <FormItem>
-                            <FormLabel>Company</FormLabel>
+                            <FormLabel>{t("resumeCreator.stepTwo.workExperienceForm.company")}</FormLabel>
                             <FormControl>
                                 <Input placeholder="Google" {...field} />
                             </FormControl>
@@ -55,9 +57,12 @@ export default function ExperienceForm({
                     name="location"
                     render={({ field }) => (
                         <FormItem>
-                            <FormLabel>Location</FormLabel>
+                            <FormLabel>{t("resumeCreator.stepTwo.workExperienceForm.location")}</FormLabel>
                             <FormControl>
-                                <Input placeholder="Mountain View, CA" {...field} />
+                                <Input
+                                    placeholder={t("resumeCreator.stepTwo.workExperienceForm.locationPlaceholder")}
+                                    {...field}
+                                />
                             </FormControl>
                             <FormMessage />
                         </FormItem>
@@ -68,7 +73,7 @@ export default function ExperienceForm({
                     name="startDate"
                     render={({ field }) => (
                         <FormItem>
-                            <FormLabel>Start Date *</FormLabel>
+                            <FormLabel>{t("resumeCreator.stepTwo.workExperienceForm.startDate")} *</FormLabel>
                             <FormControl>
                                 <Input type="date" {...field} />
                             </FormControl>
@@ -81,7 +86,7 @@ export default function ExperienceForm({
                     name="endDate"
                     render={({ field }) => (
                         <FormItem>
-                            <FormLabel>End Date</FormLabel>
+                            <FormLabel>{t("resumeCreator.stepTwo.workExperienceForm.endDate")}</FormLabel>
                             <FormControl>
                                 <Input type="date" {...field} />
                             </FormControl>
@@ -94,9 +99,12 @@ export default function ExperienceForm({
                     name="description"
                     render={({ field }) => (
                         <FormItem>
-                            <FormLabel>Description</FormLabel>
+                            <FormLabel>{t("resumeCreator.stepTwo.workExperienceForm.description")}</FormLabel>
                             <FormControl>
-                                <Textarea placeholder="Describe your responsibilities and achievements" {...field} />
+                                <Textarea
+                                    placeholder={t("resumeCreator.stepTwo.workExperienceForm.descriptionPlaceholder")}
+                                    {...field}
+                                />
                             </FormControl>
                             <FormMessage />
                         </FormItem>
@@ -104,7 +112,7 @@ export default function ExperienceForm({
                 />
                 <Button className="flex gap-2 self-center" type="submit">
                     <Plus />
-                    Submit
+                    {t("submit")}
                 </Button>
             </form>
         </Form>

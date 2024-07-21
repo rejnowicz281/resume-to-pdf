@@ -3,10 +3,12 @@ import { Dialog, DialogContent, DialogTitle, DialogTrigger } from "@/components/
 import { Resume } from "@/lib/types/resume";
 import { Edit } from "lucide-react";
 import { useState } from "react";
+import { useTranslation } from "react-i18next";
 import ResumeForm from "./resume-form";
 
 export default function EditResume({ resume }: { resume: Resume }) {
     const [open, setOpen] = useState(false);
+    const { t } = useTranslation();
 
     return (
         <Dialog open={open} onOpenChange={setOpen}>
@@ -16,7 +18,7 @@ export default function EditResume({ resume }: { resume: Resume }) {
                 </Button>
             </DialogTrigger>
             <DialogContent>
-                <DialogTitle className="text-3xl font-bold">Edit Resume</DialogTitle>
+                <DialogTitle className="text-3xl font-bold">{t("editResume.title")}</DialogTitle>
                 <ResumeForm resume={resume} afterSubmit={() => setOpen(false)} />
             </DialogContent>
         </Dialog>

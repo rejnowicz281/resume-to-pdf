@@ -3,9 +3,11 @@ import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "
 import { Input } from "@/components/ui/input";
 import { useSkillForm } from "@/hooks/step-three-forms";
 import { Plus } from "lucide-react";
+import { useTranslation } from "react-i18next";
 
 export default function SkillForm() {
     const { form, onSubmit } = useSkillForm();
+    const { t } = useTranslation();
 
     return (
         <Form {...form}>
@@ -15,7 +17,7 @@ export default function SkillForm() {
                     name="name"
                     render={({ field }) => (
                         <FormItem>
-                            <FormLabel>Skill *</FormLabel>
+                            <FormLabel>{t("resumeCreator.stepThree.skillForm.skill")} *</FormLabel>
                             <FormControl>
                                 <Input placeholder="React" {...field} />
                             </FormControl>
@@ -25,7 +27,7 @@ export default function SkillForm() {
                 />
                 <Button className="flex gap-2 self-center" type="submit">
                     <Plus />
-                    Submit
+                    {t("submit")}
                 </Button>
             </form>
         </Form>

@@ -13,9 +13,11 @@ import { Button } from "@/components/ui/button";
 import { Language } from "@/lib/types/resume";
 import { useResumeCreator } from "@/providers/resume-creator-provider";
 import { Trash } from "lucide-react";
+import { Trans, useTranslation } from "react-i18next";
 
 export default function DeleteLanguage({ language }: { language: Language }) {
     const { removeLanguage } = useResumeCreator();
+    const { t } = useTranslation();
 
     return (
         <AlertDialog>
@@ -26,14 +28,20 @@ export default function DeleteLanguage({ language }: { language: Language }) {
             </AlertDialogTrigger>
             <AlertDialogContent>
                 <AlertDialogHeader>
-                    <AlertDialogTitle>Are you sure?</AlertDialogTitle>
+                    <AlertDialogTitle>{t("resumeCreator.stepTwo.deleteLanguage.dialogTitle")}</AlertDialogTitle>
                     <AlertDialogDescription>
-                        You are about to delete the <b>{language.language}</b> language. This action cannot be undone.
+                        <Trans
+                            i18nKey="resumeCreator.stepTwo.deleteLanguage.dialogDescription"
+                            values={{ language: language.language }}
+                            components={{ b: <strong /> }}
+                        />
                     </AlertDialogDescription>
                 </AlertDialogHeader>
                 <AlertDialogFooter>
-                    <AlertDialogCancel>Cancel</AlertDialogCancel>
-                    <AlertDialogAction onClick={() => removeLanguage(language.id)}>Delete</AlertDialogAction>
+                    <AlertDialogCancel>{t("resumeCreator.stepTwo.deleteLanguage.cancelButton")}</AlertDialogCancel>
+                    <AlertDialogAction onClick={() => removeLanguage(language.id)}>
+                        {t("resumeCreator.stepTwo.deleteLanguage.deleteButton")}
+                    </AlertDialogAction>
                 </AlertDialogFooter>
             </AlertDialogContent>
         </AlertDialog>

@@ -14,9 +14,11 @@ import { Resume } from "@/lib/types/resume";
 import { getResumeName } from "@/lib/utils/resume";
 import { useLocalResumes } from "@/providers/local-resumes-provider";
 import { Trash } from "lucide-react";
+import { Trans, useTranslation } from "react-i18next";
 
 export default function DeleteResume({ resume }: { resume: Resume }) {
     const { removeResume } = useLocalResumes();
+    const { t } = useTranslation();
 
     return (
         <AlertDialog>
@@ -27,14 +29,20 @@ export default function DeleteResume({ resume }: { resume: Resume }) {
             </AlertDialogTrigger>
             <AlertDialogContent>
                 <AlertDialogHeader>
-                    <AlertDialogTitle>Are you sure?</AlertDialogTitle>
+                    <AlertDialogTitle>{t("deleteResume.title")}</AlertDialogTitle>
                     <AlertDialogDescription>
-                        You are about to delete the <b>{getResumeName(resume)}</b> resume. This action cannot be undone.
+                        <Trans
+                            i18nKey="deleteResume.description"
+                            values={{ name: getResumeName(resume) }}
+                            components={{ b: <strong /> }}
+                        />
                     </AlertDialogDescription>
                 </AlertDialogHeader>
                 <AlertDialogFooter>
-                    <AlertDialogCancel>Cancel</AlertDialogCancel>
-                    <AlertDialogAction onClick={() => removeResume(resume.id)}>Delete</AlertDialogAction>
+                    <AlertDialogCancel>{t("deleteResume.cancel")}</AlertDialogCancel>
+                    <AlertDialogAction onClick={() => removeResume(resume.id)}>
+                        {t("deleteResume.delete")}
+                    </AlertDialogAction>
                 </AlertDialogFooter>
             </AlertDialogContent>
         </AlertDialog>

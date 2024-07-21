@@ -4,9 +4,11 @@ import { Input } from "@/components/ui/input";
 import { useLinkForm } from "@/hooks/step-three-forms";
 import { Link } from "@/lib/types/resume";
 import { Plus } from "lucide-react";
+import { useTranslation } from "react-i18next";
 
 export default function LinkForm({ link, afterSubmit }: { link?: Link; afterSubmit?: () => void }) {
     const { form, onSubmit } = useLinkForm(link);
+    const { t } = useTranslation();
 
     return (
         <Form {...form}>
@@ -22,9 +24,9 @@ export default function LinkForm({ link, afterSubmit }: { link?: Link; afterSubm
                     name="url"
                     render={({ field }) => (
                         <FormItem>
-                            <FormLabel>URL *</FormLabel>
+                            <FormLabel>{t("resumeCreator.stepThree.linkForm.url")} *</FormLabel>
                             <FormControl>
-                                <Input placeholder="https://github.com" {...field} />
+                                <Input placeholder="https://linkedin.com" {...field} />
                             </FormControl>
                             <FormMessage />
                         </FormItem>
@@ -36,9 +38,12 @@ export default function LinkForm({ link, afterSubmit }: { link?: Link; afterSubm
                     name="description"
                     render={({ field }) => (
                         <FormItem>
-                            <FormLabel>Description</FormLabel>
+                            <FormLabel>{t("resumeCreator.stepThree.linkForm.description")}</FormLabel>
                             <FormControl>
-                                <Input placeholder="My GitHub profile" {...field} />
+                                <Input
+                                    placeholder={t("resumeCreator.stepThree.linkForm.descriptionPlaceholder")}
+                                    {...field}
+                                />
                             </FormControl>
                             <FormMessage />
                         </FormItem>
@@ -47,7 +52,7 @@ export default function LinkForm({ link, afterSubmit }: { link?: Link; afterSubm
 
                 <Button className="flex gap-2 self-center" type="submit">
                     <Plus />
-                    Submit
+                    {t("submit")}
                 </Button>
             </form>
         </Form>

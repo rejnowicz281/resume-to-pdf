@@ -13,9 +13,11 @@ import { Button } from "@/components/ui/button";
 import { Education } from "@/lib/types/resume";
 import { useResumeCreator } from "@/providers/resume-creator-provider";
 import { Trash } from "lucide-react";
+import { Trans, useTranslation } from "react-i18next";
 
 export default function DeleteEducation({ education }: { education: Education }) {
     const { removeEducation } = useResumeCreator();
+    const { t } = useTranslation();
 
     return (
         <AlertDialog>
@@ -26,15 +28,20 @@ export default function DeleteEducation({ education }: { education: Education })
             </AlertDialogTrigger>
             <AlertDialogContent>
                 <AlertDialogHeader>
-                    <AlertDialogTitle>Are you sure?</AlertDialogTitle>
+                    <AlertDialogTitle>{t("resumeCreator.stepTwo.deleteEducation.dialogTitle")}</AlertDialogTitle>
                     <AlertDialogDescription>
-                        You are about to delete the <b>{education.institution}</b> education. This action cannot be
-                        undone.
+                        <Trans
+                            i18nKey="resumeCreator.stepTwo.deleteEducation.dialogDescription"
+                            values={{ institution: education.institution }}
+                            components={{ b: <strong /> }}
+                        />
                     </AlertDialogDescription>
                 </AlertDialogHeader>
                 <AlertDialogFooter>
-                    <AlertDialogCancel>Cancel</AlertDialogCancel>
-                    <AlertDialogAction onClick={() => removeEducation(education.id)}>Delete</AlertDialogAction>
+                    <AlertDialogCancel>{t("resumeCreator.stepTwo.deleteEducation.cancelButton")}</AlertDialogCancel>
+                    <AlertDialogAction onClick={() => removeEducation(education.id)}>
+                        {t("resumeCreator.stepTwo.deleteEducation.deleteButton")}
+                    </AlertDialogAction>
                 </AlertDialogFooter>
             </AlertDialogContent>
         </AlertDialog>

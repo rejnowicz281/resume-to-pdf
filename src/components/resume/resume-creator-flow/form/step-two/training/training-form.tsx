@@ -5,9 +5,11 @@ import { Textarea } from "@/components/ui/textarea";
 import { useTrainingForm } from "@/hooks/step-two-forms";
 import { Training } from "@/lib/types/resume";
 import { Plus } from "lucide-react";
+import { useTranslation } from "react-i18next";
 
 export default function TrainingForm({ training, afterSubmit }: { training?: Training; afterSubmit?: () => void }) {
     const { form, onSubmit } = useTrainingForm(training);
+    const { t } = useTranslation();
 
     return (
         <Form {...form}>
@@ -23,9 +25,12 @@ export default function TrainingForm({ training, afterSubmit }: { training?: Tra
                     name="name"
                     render={({ field }) => (
                         <FormItem>
-                            <FormLabel>Name *</FormLabel>
+                            <FormLabel>{t("resumeCreator.stepTwo.trainingForm.name")} *</FormLabel>
                             <FormControl>
-                                <Input placeholder="Node.js Course" {...field} />
+                                <Input
+                                    placeholder={t("resumeCreator.stepTwo.trainingForm.namePlaceholder")}
+                                    {...field}
+                                />
                             </FormControl>
                             <FormMessage />
                         </FormItem>
@@ -37,9 +42,12 @@ export default function TrainingForm({ training, afterSubmit }: { training?: Tra
                     name="organization"
                     render={({ field }) => (
                         <FormItem>
-                            <FormLabel>Organization *</FormLabel>
+                            <FormLabel>{t("resumeCreator.stepTwo.trainingForm.organization")} *</FormLabel>
                             <FormControl>
-                                <Input placeholder="Coursera" {...field} />
+                                <Input
+                                    placeholder={t("resumeCreator.stepTwo.trainingForm.organizationPlaceholder")}
+                                    {...field}
+                                />
                             </FormControl>
                             <FormMessage />
                         </FormItem>
@@ -51,7 +59,7 @@ export default function TrainingForm({ training, afterSubmit }: { training?: Tra
                     name="issueDate"
                     render={({ field }) => (
                         <FormItem>
-                            <FormLabel>Issue Date *</FormLabel>
+                            <FormLabel>{t("resumeCreator.stepTwo.trainingForm.issueDate")} *</FormLabel>
                             <FormControl>
                                 <Input type="date" {...field} />
                             </FormControl>
@@ -65,9 +73,12 @@ export default function TrainingForm({ training, afterSubmit }: { training?: Tra
                     name="description"
                     render={({ field }) => (
                         <FormItem>
-                            <FormLabel>Description</FormLabel>
+                            <FormLabel>{t("resumeCreator.stepTwo.trainingForm.description")}</FormLabel>
                             <FormControl>
-                                <Textarea placeholder="Describe your training experience" {...field} />
+                                <Textarea
+                                    placeholder={t("resumeCreator.stepTwo.trainingForm.descriptionPlaceholder")}
+                                    {...field}
+                                />
                             </FormControl>
                             <FormMessage />
                         </FormItem>
@@ -76,7 +87,7 @@ export default function TrainingForm({ training, afterSubmit }: { training?: Tra
 
                 <Button className="flex gap-2 self-center" type="submit">
                     <Plus />
-                    Submit
+                    {t("submit")}
                 </Button>
             </form>
         </Form>

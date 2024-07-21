@@ -2,6 +2,7 @@ import { Switch } from "@/components/ui/switch";
 import { useResumeCreator } from "@/providers/resume-creator-provider";
 import { Camera, Trash2 } from "lucide-react";
 import { useRef } from "react";
+import { useTranslation } from "react-i18next";
 
 const ImagePicker = () => {
     const {
@@ -9,6 +10,7 @@ const ImagePicker = () => {
         setImageOptions
     } = useResumeCreator();
     const inputRef = useRef<HTMLInputElement>(null);
+    const { t } = useTranslation();
 
     const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         if (e.target.files && e.target.files[0]) {
@@ -41,7 +43,9 @@ const ImagePicker = () => {
                 <div className="flex flex-col gap-6">
                     <div className="flex gap-2 items-center">
                         <Switch checked={show} onCheckedChange={() => setImageOptions({ show: !show, url })} />
-                        <span className="font-semibold text-sm">Show Image</span>
+                        <span className="font-semibold text-sm">
+                            {t("resumeCreator.stepOne.imagePicker.showImage")}
+                        </span>
                     </div>
 
                     <button
@@ -69,10 +73,16 @@ const ImagePicker = () => {
                     />
                     <div className="flex flex-col items-center">
                         <Camera size={50} className="text-gray-700 dark:text-gray-300" />
-                        <div className="text-gray-700 dark:text-gray-300">Upload image from disk</div>
-                        <span className="text-center text-gray-500 text-sm">Or drag and drop an image here</span>
+                        <div className="text-gray-700 dark:text-gray-300">
+                            {t("resumeCreator.stepOne.imagePicker.upload")}
+                        </div>
+                        <span className="text-center text-gray-500 text-sm">
+                            {t("resumeCreator.stepOne.imagePicker.uploadOr")}
+                        </span>
                     </div>
-                    <div className="text-center text-gray-500 text-sm">Supported formats: JPEG, PNG (max. 6MB)</div>
+                    <div className="text-center text-gray-500 text-sm">
+                        {t("resumeCreator.stepOne.imagePicker.supportedFormats")}
+                    </div>
                 </button>
             )}
         </>

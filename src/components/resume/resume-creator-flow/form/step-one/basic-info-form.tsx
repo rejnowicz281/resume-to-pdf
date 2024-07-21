@@ -3,13 +3,15 @@ import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "
 import { Input } from "@/components/ui/input";
 import { useBasicInfoForm } from "@/hooks/step-one-forms";
 import { Plus } from "lucide-react";
+import { useTranslation } from "react-i18next";
 
 export default function BasicInfoForm() {
     const { form, onSubmit } = useBasicInfoForm();
+    const { t } = useTranslation();
 
     return (
         <div>
-            <h2 className="mb-6 text-3xl font-bold">Basic Information</h2>
+            <h2 className="mb-6 text-3xl font-bold">{t("resumeCreator.stepOne.basicInfoForm.title")}</h2>
             <Form {...form}>
                 <form onSubmit={form.handleSubmit(onSubmit)} className="flex flex-col space-y-8">
                     <FormField
@@ -17,9 +19,12 @@ export default function BasicInfoForm() {
                         name="firstName"
                         render={({ field }) => (
                             <FormItem>
-                                <FormLabel>First Name *</FormLabel>
+                                <FormLabel>{t("resumeCreator.stepOne.basicInfoForm.firstName")} *</FormLabel>
                                 <FormControl>
-                                    <Input placeholder="John" {...field} />
+                                    <Input
+                                        placeholder={t("resumeCreator.stepOne.basicInfoForm.firstNamePlaceholder")}
+                                        {...field}
+                                    />
                                 </FormControl>
                                 <FormMessage />
                             </FormItem>
@@ -30,9 +35,12 @@ export default function BasicInfoForm() {
                         name="lastName"
                         render={({ field }) => (
                             <FormItem>
-                                <FormLabel>Last Name *</FormLabel>
+                                <FormLabel>{t("resumeCreator.stepOne.basicInfoForm.lastName")} *</FormLabel>
                                 <FormControl>
-                                    <Input placeholder="Doe" {...field} />
+                                    <Input
+                                        placeholder={t("resumeCreator.stepOne.basicInfoForm.lastNamePlaceholder")}
+                                        {...field}
+                                    />
                                 </FormControl>
                                 <FormMessage />
                             </FormItem>
@@ -43,7 +51,7 @@ export default function BasicInfoForm() {
                         name="dateOfBirth"
                         render={({ field }) => (
                             <FormItem>
-                                <FormLabel>Date of Birth</FormLabel>
+                                <FormLabel>{t("resumeCreator.stepOne.basicInfoForm.dateOfBirth")}</FormLabel>
                                 <FormControl>
                                     <Input type="date" {...field} />
                                 </FormControl>
@@ -53,7 +61,7 @@ export default function BasicInfoForm() {
                     />
                     <Button className="flex gap-2 self-center" type="submit">
                         <Plus />
-                        Submit
+                        {t("submit")}
                     </Button>
                 </form>
             </Form>

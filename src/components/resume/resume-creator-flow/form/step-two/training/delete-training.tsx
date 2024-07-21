@@ -13,9 +13,11 @@ import { Button } from "@/components/ui/button";
 import { Training } from "@/lib/types/resume";
 import { useResumeCreator } from "@/providers/resume-creator-provider";
 import { Trash } from "lucide-react";
+import { Trans, useTranslation } from "react-i18next";
 
 export default function DeleteTraining({ training }: { training: Training }) {
     const { removeTraining } = useResumeCreator();
+    const { t } = useTranslation();
 
     return (
         <AlertDialog>
@@ -26,14 +28,20 @@ export default function DeleteTraining({ training }: { training: Training }) {
             </AlertDialogTrigger>
             <AlertDialogContent>
                 <AlertDialogHeader>
-                    <AlertDialogTitle>Are you sure?</AlertDialogTitle>
+                    <AlertDialogTitle>{t("resumeCreator.stepTwo.deleteTraining.dialogTitle")}</AlertDialogTitle>
                     <AlertDialogDescription>
-                        You are about to delete the <b>{training.name}</b> training. This action cannot be undone.
+                        <Trans
+                            i18nKey="resumeCreator.stepTwo.deleteTraining.dialogDescription"
+                            values={{ name: training.name }}
+                            components={{ b: <strong /> }}
+                        />
                     </AlertDialogDescription>
                 </AlertDialogHeader>
                 <AlertDialogFooter>
-                    <AlertDialogCancel>Cancel</AlertDialogCancel>
-                    <AlertDialogAction onClick={() => removeTraining(training.id)}>Delete</AlertDialogAction>
+                    <AlertDialogCancel>{t("resumeCreator.stepTwo.deleteTraining.cancelButton")}</AlertDialogCancel>
+                    <AlertDialogAction onClick={() => removeTraining(training.id)}>
+                        q{t("resumeCreator.stepTwo.deleteTraining.deleteButton")}
+                    </AlertDialogAction>
                 </AlertDialogFooter>
             </AlertDialogContent>
         </AlertDialog>

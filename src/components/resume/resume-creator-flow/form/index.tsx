@@ -2,6 +2,7 @@ import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils/general";
 import { useResumeCreator } from "@/providers/resume-creator-provider";
 import { ArrowLeft, ArrowRight, Edit, FileSearch2, Home } from "lucide-react";
+import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 import ProgressBar from "./progress-bar";
 import StepFour from "./step-four";
@@ -11,6 +12,7 @@ import StepTwo from "./step-two";
 
 export default function ResumeCreatorForm() {
     const { step, setStep, getStepName, togglePreviewState, previewState } = useResumeCreator();
+    const { t } = useTranslation();
 
     const renderStep = () => {
         switch (step) {
@@ -41,20 +43,20 @@ export default function ResumeCreatorForm() {
             </div>
             <div className="flex flex-col py-6 px-8 gap-4 border-t border-t-zinc-200 dark:border-t-zinc-800">
                 <h1 className="text-2xl text-center">
-                    Step {step} - {getStepName()}
+                    {t("step")} {step} - {getStepName()}
                 </h1>
                 <div className="flex gap-8 items-center justify-between">
                     {step === 1 ? (
                         <Button variant="outline" className="flex gap-2" asChild>
                             <Link to="/">
                                 <Home />
-                                <span className="hidden xl:inline">Home</span>
+                                <span className="hidden xl:inline">{t("home")}</span>
                             </Link>
                         </Button>
                     ) : (
                         <Button variant="outline" className="flex gap-2" onClick={() => setStep(step - 1)}>
                             <ArrowLeft />
-                            <span className="hidden xl:inline">Previous Step</span>
+                            <span className="hidden xl:inline">{t("previousStep")}</span>
                         </Button>
                     )}
                     <div className="flex-1">
@@ -64,12 +66,12 @@ export default function ResumeCreatorForm() {
                         <Button className="flex gap-2" asChild>
                             <Link to="/">
                                 <Home />
-                                <span className="hidden xl:inline">Home</span>
+                                <span className="hidden xl:inline">{t("home")}</span>
                             </Link>
                         </Button>
                     ) : (
                         <Button className="flex gap-2" onClick={() => setStep(step + 1)}>
-                            <span className="hidden xl:inline">Next Step</span> <ArrowRight />
+                            <span className="hidden xl:inline">{t("nextStep")}</span> <ArrowRight />
                         </Button>
                     )}
                 </div>

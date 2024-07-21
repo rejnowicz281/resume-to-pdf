@@ -1,3 +1,4 @@
+import i18next from "i18next";
 import uniqid from "uniqid";
 import { Resume } from "../types/resume";
 import { formatTimestamp } from "./date";
@@ -13,7 +14,7 @@ export const getResumeName = (resume: Resume) => {
 
     if (resume.id) return resume.id;
 
-    return "Resume";
+    return i18next.t("resume");
 };
 
 export const newEmptyResume = (id: string = uniqid()): Resume => {

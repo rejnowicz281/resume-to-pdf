@@ -1,6 +1,7 @@
 import { Resume } from "@/lib/types/resume";
 import { js } from "@/lib/utils/general";
 import { Document, Font, Image, Link, Page, StyleSheet, Text, View } from "@react-pdf/renderer";
+import { useTranslation } from "react-i18next";
 import ListItem from "./list-item";
 
 // Styles for the PDF document
@@ -58,6 +59,7 @@ export default function ResumeDocument({ resume }: { resume: Resume }) {
             { src: "/fonts/Arial-Bold.ttf", fontWeight: "bold" }
         ]
     });
+    const { t } = useTranslation();
 
     const {
         firstName,
@@ -103,7 +105,7 @@ export default function ResumeDocument({ resume }: { resume: Resume }) {
                     <View style={{ marginTop: 10 }}>
                         {(email || phone || dateOfBirth || city || country) && (
                             <>
-                                <Text style={styles.sectionTitle}>Contact</Text>
+                                <Text style={styles.sectionTitle}>{t("resumePdf.contact")}</Text>
                                 <View style={js(styles.flexColumn, { gap: 6 })}>
                                     {!!email && (
                                         <View>
@@ -113,19 +115,19 @@ export default function ResumeDocument({ resume }: { resume: Resume }) {
                                     )}
                                     {!!phone && (
                                         <View>
-                                            <Text>Phone:</Text>
+                                            <Text>{t("resumePdf.phone")}:</Text>
                                             <Text style={styles.bold}>{phone}</Text>
                                         </View>
                                     )}
                                     {!!dateOfBirth && (
                                         <View>
-                                            <Text>Date of Birth:</Text>
+                                            <Text>{t("resumePdf.dateOfBirth")}:</Text>
                                             <Text>{dateOfBirth}</Text>
                                         </View>
                                     )}
                                     {(city || country) && (
                                         <View>
-                                            <Text>Location:</Text>
+                                            <Text>{t("resumePdf.location")}:</Text>
                                             <Text>
                                                 {city && (
                                                     <>
@@ -145,7 +147,7 @@ export default function ResumeDocument({ resume }: { resume: Resume }) {
                     {/* Skills */}
                     {skills && skills.length > 0 && (
                         <View style={{ borderTop: 0.5, marginTop: 10, paddingTop: 10, borderTopColor: "#D3D3D3" }}>
-                            <Text style={styles.sectionTitle}>Skills</Text>
+                            <Text style={styles.sectionTitle}>{t("resumePdf.skills")}</Text>
                             {skills.map((skill) => (
                                 <View key={skill.id}>
                                     <ListItem>
@@ -165,7 +167,7 @@ export default function ResumeDocument({ resume }: { resume: Resume }) {
                     {/* Languages */}
                     {languages && languages.length > 0 && (
                         <View style={{ borderTop: 0.5, marginTop: 10, paddingTop: 10, borderTopColor: "#D3D3D3" }}>
-                            <Text style={styles.sectionTitle}>Languages</Text>
+                            <Text style={styles.sectionTitle}>{t("resumePdf.languages")}</Text>
                             {languages.map((language) => (
                                 <Text key={language.id}>
                                     {language.language}: {language.level}
@@ -184,7 +186,7 @@ export default function ResumeDocument({ resume }: { resume: Resume }) {
                     <View style={js(styles.flexColumn, { gap: 16 })}>
                         {workExperience && workExperience.length > 0 && (
                             <View>
-                                <Text style={styles.sectionTitle}>Work Experience</Text>
+                                <Text style={styles.sectionTitle}>{t("resumePdf.workExperience")}</Text>
                                 <View style={js(styles.flexColumn, { gap: 12 })}>
                                     {workExperience.map((experience) => (
                                         <View key={experience.id} style={js(styles.flexColumn, { gap: 1 })}>
@@ -222,7 +224,7 @@ export default function ResumeDocument({ resume }: { resume: Resume }) {
                         {/* Education */}
                         {education && education.length > 0 && (
                             <View>
-                                <Text style={styles.sectionTitle}>Education</Text>
+                                <Text style={styles.sectionTitle}>{t("resumePdf.education.title")}</Text>
                                 <View style={js(styles.flexColumn, { gap: 12 })}>
                                     {education.map((edu) => (
                                         <View key={edu.id} style={js(styles.flexColumn, { gap: 1 })}>
@@ -235,8 +237,14 @@ export default function ResumeDocument({ resume }: { resume: Resume }) {
                                                 </Text>
                                                 <Text style={{ fontSize: 8 }}>[{edu.duration}]</Text>
                                             </View>
-                                            {edu.specialization && <Text>Specialization: {edu.specialization}</Text>}
-                                            <Text>Level of education: {edu.level}</Text>
+                                            {edu.specialization && (
+                                                <Text>
+                                                    {t("resumePdf.education.specialization")}: {edu.specialization}
+                                                </Text>
+                                            )}
+                                            <Text>
+                                                {t("resumePdf.education.level")}: {edu.level}
+                                            </Text>
                                             {edu.description && <Text style={{ marginTop: 4 }}>{edu.description}</Text>}
                                         </View>
                                     ))}
@@ -246,7 +254,7 @@ export default function ResumeDocument({ resume }: { resume: Resume }) {
                         {/* Training and Certification */}
                         {training && training.length > 0 && (
                             <View>
-                                <Text style={styles.sectionTitle}>Training and Certification</Text>
+                                <Text style={styles.sectionTitle}>{t("resumePdf.training.title")}</Text>
                                 <View style={js(styles.flexColumn, { gap: 12 })}>
                                     {training.map((cert) => (
                                         <View key={cert.id} style={js(styles.flexColumn, { gap: 1 })}>
@@ -254,7 +262,9 @@ export default function ResumeDocument({ resume }: { resume: Resume }) {
                                                 <Text style={styles.bold}>{cert.name}</Text>
                                             </ListItem>
                                             <Text style={styles.date}>{cert.issueDate}</Text>
-                                            <Text>Organization: {cert.organization}</Text>
+                                            <Text>
+                                                {t("resumePdf.training.organization")}: {cert.organization}
+                                            </Text>
                                             {cert.description && (
                                                 <Text style={{ marginTop: 4 }}>{cert.description}</Text>
                                             )}
@@ -266,7 +276,7 @@ export default function ResumeDocument({ resume }: { resume: Resume }) {
                         {/* Additional Activities */}
                         {activities && activities.length > 0 && (
                             <View>
-                                <Text style={styles.sectionTitle}>Additional Activities</Text>
+                                <Text style={styles.sectionTitle}>{t("resumePdf.additionalActivity")}</Text>
                                 <View style={js(styles.flexColumn, { gap: 12 })}>
                                     {activities.map((activity) => (
                                         <View key={activity.id} style={js(styles.flexColumn, { gap: 1 })}>
@@ -298,14 +308,14 @@ export default function ResumeDocument({ resume }: { resume: Resume }) {
                         {/* Interests */}
                         {!!interests && (
                             <View>
-                                <Text style={styles.sectionTitle}>Interests</Text>
+                                <Text style={styles.sectionTitle}>{t("resumePdf.interests")}</Text>
                                 <Text>{interests}</Text>
                             </View>
                         )}
                         {/* Links */}
                         {links && links.length > 0 && (
                             <View>
-                                <Text style={styles.sectionTitle}>Links</Text>
+                                <Text style={styles.sectionTitle}>{t("resumePdf.links")}</Text>
                                 <View style={js(styles.flexColumn, { gap: 12 })}>
                                     {links.map((link) => (
                                         <View key={link.id} style={js(styles.flexColumn, { gap: 1 })}>

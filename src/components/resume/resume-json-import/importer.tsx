@@ -5,12 +5,14 @@ import { mapResume } from "@/lib/utils/mappers/resume";
 import { useLocalResumes } from "@/providers/local-resumes-provider";
 import { FileJson2 } from "lucide-react";
 import { useRef, useState } from "react";
+import { useTranslation } from "react-i18next";
 
 export default function Importer({ onSuccess }: { onSuccess?: () => void }) {
     const { addManyResumes } = useLocalResumes();
     const inputRef = useRef<HTMLInputElement>(null);
     const [resumes, setResumes] = useState<Resume[]>([]);
     const [jsonInput, setJsonInput] = useState<string>("");
+    const { t } = useTranslation();
 
     const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         if (e.target.files && e.target.files[0]) {
@@ -61,9 +63,9 @@ export default function Importer({ onSuccess }: { onSuccess?: () => void }) {
                 <div className="flex flex-col gap-6">
                     <div className="flex gap-3">
                         <Button variant="outline" onClick={() => setResumes([])}>
-                            Clear Data
+                            {t("resumeJsonImport.importer.clearButtonContent")}
                         </Button>
-                        <Button onClick={onImport}>Import</Button>
+                        <Button onClick={onImport}>{t("resumeJsonImport.importer.importButtonContent")}</Button>
                     </div>
                     <div className="flex flex-col gap-6">
                         <div className="p-4 border border-gray-300 rounded-md">
@@ -84,13 +86,17 @@ export default function Importer({ onSuccess }: { onSuccess?: () => void }) {
                         />
                         <div className="flex flex-col items-center">
                             <FileJson2 size={50} className="text-gray-700 dark:text-gray-300" />
-                            <div className="text-gray-700 dark:text-gray-300">Upload a JSON file from disk</div>
-                            <span className="text-center text-gray-500 text-sm">Or drag and drop a file here</span>
+                            <div className="text-gray-700 dark:text-gray-300">
+                                {t("resumeJsonImport.importer.upload")}
+                            </div>
+                            <span className="text-center text-gray-500 text-sm">
+                                {t("resumeJsonImport.importer.uploadOr")}
+                            </span>
                         </div>
                     </button>
                     <div className="flex flex-col gap-3 items-start">
                         <span className="text-sm text-zinc-500 dark:text-zinc-400">
-                            You can also paste your JSON data here:
+                            {t("resumeJsonImport.importer.paste")}
                         </span>
                         <textarea
                             value={jsonInput}
@@ -104,17 +110,14 @@ export default function Importer({ onSuccess }: { onSuccess?: () => void }) {
                                 setResumes(parsed);
                             }}
                         >
-                            Parse
+                            {t("parse")}
                         </Button>
                     </div>
                     <Accordion type="single" collapsible>
                         <AccordionItem className="border-b-0" value="item-1">
-                            <AccordionTrigger>What should my JSON data look like?</AccordionTrigger>
+                            <AccordionTrigger>{t("resumeJsonImport.importer.lookLikeTitle")}</AccordionTrigger>
                             <AccordionContent className="flex flex-col gap-4">
-                                <div>
-                                    Your JSON data should adhere to the following format (all fields are optional, IDs
-                                    will be set automatically if not specified):
-                                </div>
+                                <div>{t("resumeJsonImport.importer.lookLikeDescription")}</div>
                                 <div className="p-4 border border-gray-300 rounded-md">
                                     <pre>
                                         {`[
