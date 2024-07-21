@@ -9,9 +9,7 @@ import { useTranslation } from "react-i18next";
 
 export function LocationForm() {
     const { form, onSubmit } = useLocationForm();
-    const { t, i18n } = useTranslation();
-
-    const countryNames = getCountryNames(i18n.language);
+    const { t } = useTranslation();
 
     return (
         <div>
@@ -36,7 +34,7 @@ export function LocationForm() {
                                                 {t("resumeCreator.stepOne.locationForm.noCountry")}
                                             </SelectItem>
 
-                                            {countryNames.map((country) => (
+                                            {getCountryNames().map((country) => (
                                                 <SelectItem key={country} value={country}>
                                                     {country}
                                                 </SelectItem>

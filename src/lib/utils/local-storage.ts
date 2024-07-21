@@ -1,4 +1,4 @@
-import SAMPLE_RESUME from "@/lib/constants/sample-resume";
+import { getSampleResume } from "@/lib/constants/sample-resume";
 import uniqid from "uniqid";
 import { Resume, ResumeNoId } from "../types/resume";
 import { newEmptyResume } from "./resume";
@@ -9,7 +9,8 @@ export const getResumes = (): Record<string, Resume> => {
     const localResumes = localStorage.getItem(STORAGE_KEY);
 
     if (!localResumes) {
-        const initialData = { [SAMPLE_RESUME.id]: SAMPLE_RESUME };
+        const sampleResume = getSampleResume();
+        const initialData = { [sampleResume.id]: sampleResume };
         localStorage.setItem(STORAGE_KEY, JSON.stringify(initialData));
 
         return initialData;

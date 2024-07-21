@@ -1,5 +1,6 @@
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { Button } from "@/components/ui/button";
+import { getSampleResume } from "@/lib/constants/sample-resume";
 import { Resume } from "@/lib/types/resume";
 import { mapResume } from "@/lib/utils/mappers/resume";
 import { useLocalResumes } from "@/providers/local-resumes-provider";
@@ -120,94 +121,19 @@ export default function Importer({ onSuccess }: { onSuccess?: () => void }) {
                                 <div>{t("resumeJsonImport.importer.lookLikeDescription")}</div>
                                 <div className="p-4 border border-gray-300 rounded-md">
                                     <pre>
-                                        {`[
-  {
-    "id": "sample-resume",
-    "createdAt": "17.07.2024",
-    "name": "",
-    "description": "",
-    "firstName": "John",
-    "lastName": "Doe",
-    "dateOfBirth": "19.07.2024",
-    "country": "Poland",
-    "city": "Kraków",
-    "email": "john@doe.com",
-    "phone": "+48 123 123 123",
-    "workExperience": [
-      {
-        "title": "Software Developer",
-        "startDate": "07.2024",
-        "endDate": "09.2024",
-        "description": "Worked on various projects including a web application for a client.",
-        "duration": "3 months",
-        "id": "lysi4ykc"
-      }
-    ],
-    "education": [
-      {
-        "id": "lyq65541",
-        "institution": "University",
-        "startDate": "01.2020",
-        "endDate": "01.2024",
-        "duration": "4 years",
-        "specialization": "Computer Science",
-        "level": "Bachelor",
-        "description": "Studied various subjects including algorithms, data structures, and web development."
-      }
-    ],
-    "languages": [
-      {
-        "id": "lyq65543",
-        "language": "English",
-        "level": "Native"
-      }
-    ],
-    "training": [
-      {
-        "id": "lyq65546",
-        "name": "Node.js Certification",
-        "issueDate": "01.2028",
-        "organization": "Online Course",
-        "description": "Completed an online course on Node.js."
-      }
-    ],
-    "skills": [
-      {
-        "name": "React Query",
-        "id": "lysra7ey"
-      }
-    ],
-    "activities": [
-      {
-        "name": "Hackathon",
-        "description": "Participated in a hackathon.",
-        "startDate": "07.2024",
-        "endDate": "08.2024",
-        "duration": "1 month",
-        "id": "lysra5d3"
-      }
-    ],
-    "interests": "Reading, hiking, and playing guitar.",
-    "links": [
-      {
-        "id": "lyq6554c",
-        "description": "Linkedin",
-        "url": "https://www.linkedin.com/in/johndoe"
-      },
-      {
-        "id": "lyq6554d",
-        "description": "GitHub",
-        "url": "https://github.com/rejnowicz281"
-      }
-    ]
-  }, 
-  {
-    "id": "sample-resume-2",
-    "createdAt": "19.07.2024",
-    "name": "An empty resume",
-    "description": "This resume is empty."
-  }
-]`}
+                                        {JSON.stringify(
+                                            [
+                                                getSampleResume(),
+                                                {
+                                                    id: "sample-resume-2",
+                                                    createdAt: "19.07.2024",
+                                                    name: "An empty resume",
+                                                    description: "This resume is empty."
+                                                }
+                                            ],
+                                            null,
+                                            2
+                                        )}
                                     </pre>
                                 </div>
                             </AccordionContent>

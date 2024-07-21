@@ -11,9 +11,7 @@ import { useTranslation } from "react-i18next";
 
 export default function LanguageForm({ language, afterSubmit }: { language?: Language; afterSubmit?: () => void }) {
     const { form, onSubmit } = useLanguageForm(language);
-    const { t, i18n } = useTranslation();
-
-    const languageLevels = getLanguageLevels(i18n.language);
+    const { t } = useTranslation();
 
     return (
         <Form {...form}>
@@ -55,7 +53,7 @@ export default function LanguageForm({ language, afterSubmit }: { language?: Lan
                                         />
                                     </SelectTrigger>
                                     <SelectContent>
-                                        {languageLevels.map((level) => (
+                                        {getLanguageLevels().map((level) => (
                                             <SelectItem key={level} value={level}>
                                                 {level}
                                             </SelectItem>

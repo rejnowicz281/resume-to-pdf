@@ -350,7 +350,7 @@ i18next
                             title: "Szkolenia i certyfikaty",
                             organization: "Organizacja"
                         },
-                        additionalActivity: "Dodatkowa aktywność",
+                        additionalActivity: "Aktywność dodatkowa",
                         interests: "Zainteresowania",
                         links: "Linki"
                     },
@@ -434,7 +434,7 @@ i18next
                                 startDate: "Data rozpoczęcia",
                                 endDate: "Data zakończenia",
                                 description: "Opis",
-                                duration: "Czas trwania"
+                                duration: "Okres"
                             },
                             addWorkExperience: {
                                 buttonContent: "Dodaj doświadczenie",
@@ -451,7 +451,7 @@ i18next
                                 deleteButton: "Usuń"
                             },
                             workExperienceForm: {
-                                title: "Pozycja",
+                                title: "Stanowisko",
                                 company: "Firma",
                                 location: "Miejsce pracy",
                                 locationPlaceholder: "Warszawa",
@@ -513,9 +513,9 @@ i18next
                             },
                             education: {
                                 title: "Wykształcenie",
-                                level: "Poziom",
+                                level: "Poziom wykształcenia",
                                 specialization: "Specjalizacja",
-                                duration: "Czas trwania"
+                                duration: "Okres"
                             },
                             addEducation: {
                                 buttonContent: "Dodaj wykształcenie",
@@ -534,7 +534,7 @@ i18next
                             educationForm: {
                                 institution: "Instytucja",
                                 institutionPlaceholder: "Uniwersytet Warszawski",
-                                level: "Poziom",
+                                level: "Poziom wykształcenia",
                                 levelPlaceholder: "Licencjat",
                                 specialization: "Specjalizacja",
                                 specializationPlaceholder: "Informatyka",
@@ -579,9 +579,9 @@ i18next
                                 descriptionPlaceholder: "Mój profil LinkedIn"
                             },
                             activities: {
-                                title: "Dodatkowa aktywność",
+                                title: "Aktywność dodatkowa",
                                 location: "Miejsce",
-                                duration: "Czas trwania"
+                                duration: "Okres"
                             },
                             addActivity: {
                                 buttonContent: "Dodaj aktywność",
