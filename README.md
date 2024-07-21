@@ -47,15 +47,26 @@ For the components, the **shadcn** component library was used. For the icons, th
 -   [x] Responsive
 -   [x] Multiple resumes
 -   [x] JSON Import
--   [ ] Localization
--   [ ] PWA Offline Functionality
--   [ ] Multiple resume themes
+-   [x] Localization
+-   [x] PWA Offline Functionality
+-   [ ] Cover Letters
+-   [ ] Multiple PDF themes
 
 ## Local Storage
 
 The project uses **localStorage** to store the resumes.
 This means that the resumes are stored in the browser's local storage and are not shared with any server. This also means that the resumes are not available on other devices.\
 To transport your resumes to another device, you can download them as a JSON file and then import them on another device. Although not the most convenient, it is the only option available at the moment. Might add a dedicated server to store the resumes in the future.
+
+## Localization
+
+The project is available in two languages: **English** and **Polish**.\
+You can change the language in the settings.
+
+## Offline Functionality
+
+The project uses **PWA** technology and can be installed on your mobile and desktop device.\
+The app is also fully offline-friendly, meaning you don't need an internet connection to use it.
 
 ## Demo
 
