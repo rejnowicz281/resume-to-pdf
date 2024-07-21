@@ -4,6 +4,7 @@ import { useTranslation } from "react-i18next";
 
 export default function SettingsPage() {
     const { t, i18n } = useTranslation();
+
     return (
         <div className="flex-1 flex justify-center">
             <div className="py-12 px-7 max-w-[900px] w-full">
@@ -35,7 +36,7 @@ export default function SettingsPage() {
                                 </SelectTrigger>
                                 <SelectContent>
                                     <SelectItem value="en">English</SelectItem>
-                                    <SelectItem value="pl">Polski</SelectItem>
+                                    <SelectItem value="pl-PL">Polski</SelectItem>
                                 </SelectContent>
                             </Select>
                         </div>

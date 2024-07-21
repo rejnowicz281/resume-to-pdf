@@ -95,7 +95,7 @@ i18next
                             name: "Basic Info",
                             imagePicker: {
                                 showImage: "Show Image",
-                                upload: "Upload image from Disk",
+                                upload: "Upload an image from disk",
                                 uploadOr: "Or drag and drop an image here",
                                 supportedFormats: "Supported formats: JPG, PNG (max. 6 MB)"
                             },
