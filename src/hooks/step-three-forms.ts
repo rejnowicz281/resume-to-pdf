@@ -1,5 +1,5 @@
 import { Activity, ActivityNoId, Link } from "@/lib/types/resume";
-import { dateToString, getDurationBetweenDates, stringToDate } from "@/lib/utils/date";
+import { dateToString, stringToDate } from "@/lib/utils/date";
 import { withID } from "@/lib/utils/general";
 import { useResumeCreator } from "@/providers/resume-creator-provider";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -59,15 +59,13 @@ export function useActivityForm(initialActivity?: Activity) {
         const startDate = new Date(values.startDate);
 
         const endDate = values.endDate ? new Date(values.endDate) : new Date();
-        const duration = getDurationBetweenDates(startDate, endDate);
 
         const newActivity: ActivityNoId = {
             name: values.name,
             startDate: dateToString(startDate, "mm.yyyy"),
             endDate: values.endDate ? dateToString(endDate, "mm.yyyy") : "",
             description: values.description,
-            location: values.location,
-            duration
+            location: values.location
         };
 
         if (initialActivity?.id) {

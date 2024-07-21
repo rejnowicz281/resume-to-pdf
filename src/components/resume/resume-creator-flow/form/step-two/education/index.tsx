@@ -1,4 +1,5 @@
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { getDuration } from "@/lib/utils/date";
 import { useResumeCreator } from "@/providers/resume-creator-provider";
 import { useTranslation } from "react-i18next";
 import AddEducation from "./add-education";
@@ -33,7 +34,7 @@ export default function Education() {
                                             {t("resumeCreator.stepTwo.education.duration")}: {edu.startDate} -{" "}
                                             {edu.endDate || "Present"}
                                         </span>
-                                        <span className="truncate">[{edu.duration}]</span>
+                                        <span className="truncate">[{getDuration(edu)}]</span>
                                     </span>
                                 </CardDescription>
                             </CardHeader>

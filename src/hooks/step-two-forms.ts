@@ -1,5 +1,5 @@
 import { Education, EducationNoId, Language, Training, WorkExperience, WorkExperienceNoId } from "@/lib/types/resume";
-import { dateToString, getDurationBetweenDates, stringToDate } from "@/lib/utils/date";
+import { dateToString, stringToDate } from "@/lib/utils/date";
 import { withID } from "@/lib/utils/general";
 import { useResumeCreator } from "@/providers/resume-creator-provider";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -37,7 +37,6 @@ export function useWorkExperienceForm(initialExperience?: WorkExperience) {
         const startDate = new Date(values.startDate);
 
         const endDate = values.endDate ? new Date(values.endDate) : new Date();
-        const duration = getDurationBetweenDates(startDate, endDate);
 
         const newExperience: WorkExperienceNoId = {
             title: values.title,
@@ -45,8 +44,7 @@ export function useWorkExperienceForm(initialExperience?: WorkExperience) {
             endDate: values.endDate ? dateToString(endDate, "mm.yyyy") : "",
             description: values.description,
             company: values.company,
-            location: values.location,
-            duration
+            location: values.location
         };
 
         if (initialExperience?.id) {
@@ -90,7 +88,6 @@ export function useEducationForm(initialEducation?: Education) {
         const startDate = new Date(values.startDate);
 
         const endDate = values.endDate ? new Date(values.endDate) : new Date();
-        const duration = getDurationBetweenDates(startDate, endDate);
 
         const newEducation: EducationNoId = {
             institution: values.institution,
@@ -98,8 +95,7 @@ export function useEducationForm(initialEducation?: Education) {
             endDate: values.endDate ? dateToString(endDate, "mm.yyyy") : "",
             description: values.description,
             specialization: values.specialization,
-            level: values.level,
-            duration
+            level: values.level
         };
 
         if (initialEducation?.id) {

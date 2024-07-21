@@ -15,7 +15,6 @@ const mapWorkExperience = (arr: any[]) => {
             location: mapString(obj.location),
             startDate: mapString(obj.startDate),
             endDate: mapString(obj.endDate),
-            duration: mapString(obj.duration),
             description: mapString(obj.description)
         };
     });
@@ -30,7 +29,6 @@ const mapEducation = (arr: any[]) => {
             institution: mapString(obj.institution),
             startDate: mapString(obj.startDate),
             endDate: mapString(obj.endDate),
-            duration: mapString(obj.duration),
             specialization: mapString(obj.specialization),
             level: mapString(obj.level),
             description: mapString(obj.description)
@@ -85,7 +83,6 @@ const mapActivities = (arr: any[]) => {
             location: mapString(obj.location),
             startDate: mapString(obj.startDate),
             endDate: mapString(obj.endDate),
-            duration: mapString(obj.duration),
             description: mapString(obj.description)
         };
     });

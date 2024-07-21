@@ -10,7 +10,6 @@ export type WorkExperience = {
     location?: string;
     startDate: string;
     endDate?: string;
-    duration: string;
     description?: string;
 };
 
@@ -21,7 +20,6 @@ export type Education = {
     institution: string;
     startDate: string;
     endDate?: string;
-    duration: string;
     specialization?: string;
     level: string;
     description?: string;
@@ -53,7 +51,6 @@ export type Activity = {
     location?: string;
     startDate: string;
     endDate?: string;
-    duration: string;
     description?: string;
 };
 

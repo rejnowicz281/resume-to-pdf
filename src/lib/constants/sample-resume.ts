@@ -24,7 +24,6 @@ export const SAMPLE_RESUME_EN: Resume = {
             location: "New York, USA",
             startDate: "01.2018",
             endDate: "04.2018",
-            duration: "3 months",
             description: "Developed web applications using React and Node.js."
         },
         {
@@ -34,7 +33,6 @@ export const SAMPLE_RESUME_EN: Resume = {
             location: "San Francisco, USA",
             startDate: "01.2021",
             endDate: "09.2021",
-            duration: "9 months",
             description: "Developed web applications using React."
         }
     ],
@@ -42,9 +40,8 @@ export const SAMPLE_RESUME_EN: Resume = {
         {
             id: uniqid(),
             institution: "University",
-            startDate: "01.2024",
-            endDate: "01.2020",
-            duration: "4 years",
+            startDate: "01.2020",
+            endDate: "01.2024",
             specialization: "Computer Science",
             level: "Bachelor",
             description: "Studied various subjects including algorithms, data structures, and web development."
@@ -54,7 +51,6 @@ export const SAMPLE_RESUME_EN: Resume = {
             institution: "High School",
             startDate: "01.2025",
             endDate: "01.2028",
-            duration: "4 years",
             level: "High School",
             description: "Graduated with honors."
         }
@@ -91,7 +87,6 @@ export const SAMPLE_RESUME_EN: Resume = {
             location: "Local Community Center",
             startDate: "05.2000",
             endDate: "Present",
-            duration: "3 years",
             description: "Organized community events and activities."
         },
         {
@@ -99,7 +94,6 @@ export const SAMPLE_RESUME_EN: Resume = {
             name: "Hackathon",
             startDate: "01.2020",
             endDate: "01.2021",
-            duration: "1 year",
             description: "Participated in a hackathon and developed a web application."
         }
     ],
@@ -132,7 +126,6 @@ export const SAMPLE_RESUME_PL: Resume = {
             location: "Kraków, Polska",
             startDate: "01.2018",
             endDate: "04.2018",
-            duration: "3 miesiące",
             description: "Tworzenie aplikacji webowych przy użyciu React i Node.js."
         },
         {
@@ -142,7 +135,6 @@ export const SAMPLE_RESUME_PL: Resume = {
             location: "Wrocław, Polska",
             startDate: "01.2021",
             endDate: "09.2021",
-            duration: "9 miesięcy",
             description: "Tworzenie aplikacji webowych przy użyciu React."
         }
     ],
@@ -150,9 +142,8 @@ export const SAMPLE_RESUME_PL: Resume = {
         {
             id: uniqid(),
             institution: "Uniwersytet",
-            startDate: "01.2024",
-            endDate: "01.2020",
-            duration: "4 lata",
+            startDate: "01.2020",
+            endDate: "01.2024",
             specialization: "Informatyka",
             level: "Licencjat",
             description: "Studia algorytmów, struktur danych i tworzenia stron internetowych."
@@ -162,7 +153,6 @@ export const SAMPLE_RESUME_PL: Resume = {
             institution: "Liceum",
             startDate: "01.2025",
             endDate: "01.2028",
-            duration: "4 lata",
             level: "Szkoła średnia",
             description: "Ukończone z wyróżnieniem."
         }
@@ -199,7 +189,6 @@ export const SAMPLE_RESUME_PL: Resume = {
             location: "Lokalne Centrum Społeczności",
             startDate: "05.2000",
             endDate: "Obecnie",
-            duration: "3 lata",
             description: "Organizowałem aktywności społecznościowe."
         },
         {
@@ -207,7 +196,6 @@ export const SAMPLE_RESUME_PL: Resume = {
             name: "Hackathon",
             startDate: "01.2020",
             endDate: "01.2021",
-            duration: "1 rok",
             description: "Brałem udział w hackathonie i tworzeniu aplikacji webowej."
         }
     ],

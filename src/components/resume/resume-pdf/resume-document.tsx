@@ -1,4 +1,5 @@
 import { Resume } from "@/lib/types/resume";
+import { getDuration } from "@/lib/utils/date";
 import { js } from "@/lib/utils/general";
 import { Document, Font, Image, Link, Page, StyleSheet, Text, View } from "@react-pdf/renderer";
 import { useTranslation } from "react-i18next";
@@ -211,7 +212,7 @@ export default function ResumeDocument({ resume }: { resume: Resume }) {
                                                 <Text style={styles.date}>
                                                     {experience.startDate} - {experience.endDate || "Present"}
                                                 </Text>
-                                                <Text style={{ fontSize: 8 }}>[{experience.duration}]</Text>
+                                                <Text style={{ fontSize: 8 }}>[{getDuration(experience)}]</Text>
                                             </View>
                                             {experience.description && (
                                                 <Text style={{ marginTop: 4 }}>{experience.description}</Text>
@@ -235,7 +236,7 @@ export default function ResumeDocument({ resume }: { resume: Resume }) {
                                                 <Text style={styles.date}>
                                                     {edu.startDate} - {edu.endDate || "Present"}
                                                 </Text>
-                                                <Text style={{ fontSize: 8 }}>[{edu.duration}]</Text>
+                                                <Text style={{ fontSize: 8 }}>[{getDuration(edu)}]</Text>
                                             </View>
                                             {edu.specialization && (
                                                 <Text>
@@ -295,7 +296,7 @@ export default function ResumeDocument({ resume }: { resume: Resume }) {
                                                 <Text style={styles.date}>
                                                     {activity.startDate} - {activity.endDate || "Present"}
                                                 </Text>
-                                                <Text style={{ fontSize: 8 }}>[{activity.duration}]</Text>
+                                                <Text style={{ fontSize: 8 }}>[{getDuration(activity)}]</Text>
                                             </View>
                                             {activity.description && (
                                                 <Text style={{ marginTop: 4 }}>{activity.description}</Text>

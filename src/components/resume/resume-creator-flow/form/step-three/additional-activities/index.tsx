@@ -1,4 +1,5 @@
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { getDuration } from "@/lib/utils/date";
 import { useResumeCreator } from "@/providers/resume-creator-provider";
 import { useTranslation } from "react-i18next";
 import AddActivity from "./add-activity";
@@ -30,7 +31,7 @@ export default function Activities() {
                                             {t("resumeCreator.stepThree.activities.duration")}: {activity.startDate} -{" "}
                                             {activity.endDate || "Present"}
                                         </span>
-                                        <span className="truncate">[{activity.duration}]</span>
+                                        <span className="truncate">[{getDuration(activity)}]</span>
                                     </span>
                                 </CardDescription>
                             </CardHeader>
