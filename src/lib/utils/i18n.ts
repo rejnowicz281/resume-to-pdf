@@ -28,6 +28,7 @@ i18next
                     settings: "Settings",
                     phone: "Phone",
                     image: "Image",
+                    present: "Present",
                     resumePdf: {
                         generating: "Your PDF is being generated...",
                         contact: "Contact",
@@ -332,6 +333,7 @@ i18next
                     settings: "Ustawienia",
                     phone: "Telefon",
                     image: "Zdjęcie",
+                    present: "Obecnie",
                     resumePdf: {
                         generating: "Generowanie PDF...",
                         contact: "Kontakt",

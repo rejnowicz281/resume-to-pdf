@@ -34,7 +34,7 @@ export default function WorkExperience() {
                                     <span className="flex flex-wrap gap-1">
                                         <span className="truncate">
                                             {t("resumeCreator.stepTwo.workExperience.duration")}: {experience.startDate}{" "}
-                                            - {experience.endDate || "Present"}
+                                            - {experience.endDate || t("present")}
                                         </span>
                                         <span className="truncate">[{getDuration(experience)}]</span>
                                     </span>

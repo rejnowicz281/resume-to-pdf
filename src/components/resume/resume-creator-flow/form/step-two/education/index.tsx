@@ -32,7 +32,7 @@ export default function Education() {
                                     <span className="flex flex-wrap gap-1">
                                         <span className="truncate">
                                             {t("resumeCreator.stepTwo.education.duration")}: {edu.startDate} -{" "}
-                                            {edu.endDate || "Present"}
+                                            {edu.endDate || t("present")}
                                         </span>
                                         <span className="truncate">[{getDuration(edu)}]</span>
                                     </span>

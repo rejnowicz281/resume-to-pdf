@@ -170,9 +170,14 @@ export default function ResumeDocument({ resume }: { resume: Resume }) {
                         <View style={{ borderTop: 0.5, marginTop: 10, paddingTop: 10, borderTopColor: "#D3D3D3" }}>
                             <Text style={styles.sectionTitle}>{t("resumePdf.languages")}</Text>
                             {languages.map((language) => (
-                                <Text key={language.id}>
-                                    {language.language}: {language.level}
-                                </Text>
+                                <View style={{ flexDirection: "row", gap: 6 }} key={language.id}>
+                                    <Text>{language.language}:</Text>
+                                    <Text>
+                                        {language.level.split("").map((level, idx) => {
+                                            return <Text key={idx}>{level}</Text>;
+                                        })}
+                                    </Text>
+                                </View>
                             ))}
                         </View>
                     )}
@@ -210,7 +215,7 @@ export default function ResumeDocument({ resume }: { resume: Resume }) {
                                             </View>
                                             <View style={js(styles.flexRow, { gap: 3 })}>
                                                 <Text style={styles.date}>
-                                                    {experience.startDate} - {experience.endDate || "Present"}
+                                                    {experience.startDate} - {experience.endDate || t("present")}
                                                 </Text>
                                                 <Text style={{ fontSize: 8 }}>[{getDuration(experience)}]</Text>
                                             </View>
@@ -234,7 +239,7 @@ export default function ResumeDocument({ resume }: { resume: Resume }) {
                                             </ListItem>
                                             <View style={js(styles.flexRow, { gap: 3 })}>
                                                 <Text style={styles.date}>
-                                                    {edu.startDate} - {edu.endDate || "Present"}
+                                                    {edu.startDate} - {edu.endDate || t("present")}
                                                 </Text>
                                                 <Text style={{ fontSize: 8 }}>[{getDuration(edu)}]</Text>
                                             </View>
@@ -294,7 +299,7 @@ export default function ResumeDocument({ resume }: { resume: Resume }) {
                                             </View>
                                             <View style={js(styles.flexRow, { gap: 3 })}>
                                                 <Text style={styles.date}>
-                                                    {activity.startDate} - {activity.endDate || "Present"}
+                                                    {activity.startDate} - {activity.endDate || t("present")}
                                                 </Text>
                                                 <Text style={{ fontSize: 8 }}>[{getDuration(activity)}]</Text>
                                             </View>

@@ -86,7 +86,6 @@ export const SAMPLE_RESUME_EN: Resume = {
             name: "Volunteer",
             location: "Local Community Center",
             startDate: "05.2000",
-            endDate: "Present",
             description: "Organized community events and activities."
         },
         {

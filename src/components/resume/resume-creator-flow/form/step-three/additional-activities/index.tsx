@@ -29,7 +29,7 @@ export default function Activities() {
                                     <span className="flex flex-wrap gap-1">
                                         <span className="truncate">
                                             {t("resumeCreator.stepThree.activities.duration")}: {activity.startDate} -{" "}
-                                            {activity.endDate || "Present"}
+                                            {activity.endDate || t("present")}
                                         </span>
                                         <span className="truncate">[{getDuration(activity)}]</span>
                                     </span>
