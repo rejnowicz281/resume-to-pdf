@@ -46,7 +46,7 @@ For the components, the **shadcn** component library was used. For the icons, th
 -   [x] Customization
 -   [x] Responsive
 -   [x] Multiple resumes
--   [x] JSON Import
+-   [x] JSON Export/Import
 -   [x] Localization
 -   [x] PWA Offline Functionality
 -   [ ] Cover Letters
