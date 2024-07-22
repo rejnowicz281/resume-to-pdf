@@ -12,7 +12,8 @@ export default defineConfig({
         VitePWA({
             workbox: {
                 maximumFileSizeToCacheInBytes: 10485760, // 10MB
-                globPatterns: ["**/*"]
+                globPatterns: ["**/*"],
+                cleanupOutdatedCaches: true
             },
 
             includeAssets: ["**/*"],
