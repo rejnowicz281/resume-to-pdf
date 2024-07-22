@@ -70,7 +70,7 @@ The app is also fully offline-friendly, meaning you don't need an internet conne
 
 ## Demo
 
-Live demo here: [live demo](https://rejnowicz281.github.io/resume-to-pdf/)
+Live demo here: [live demo](https://resume-to-pdf.netlify.app)
 
 ## Available scripts
 
