@@ -4,7 +4,7 @@ import { db, getResumes } from "@/lib/utils/db";
 import { createContext, ReactNode, useContext, useEffect, useState } from "react";
 
 export type ResumesListContextType = {
-    resumes: Resume[];
+    resumes: Resume[] | null;
     getResume: (id: string) => Resume | undefined;
     addResume: (resume: Resume) => Promise<void>;
     editResume: (resume: Partial<Resume>) => Promise<void>;
@@ -23,38 +23,41 @@ export const ResumesListProvider = ({ children }: { children: ReactNode }) => {
         });
     }, []);
 
-    // TODO: This shouldn't be here?
-    if (!resumes) return "...";
-
     const getResume = (id: string) => {
-        return resumes.find((resume) => resume._id === id);
+        return resumes?.find((resume) => resume._id === id);
     };
 
     const removeResume = async (resume: Resume) => {
+        if (!resumes) return;
+
         const deleteId = resume._id;
 
         setResumes((prev) => {
-            const newResumes = prev.filter((resume) => resume._id !== deleteId);
+            const newResumes = prev?.filter((resume) => resume._id !== deleteId);
 
-            return newResumes;
+            return newResumes || [];
         });
 
-        await db.remove(resume);
+        await db.remove(resume as PouchDB.Core.RemoveDocument);
     };
 
     const addResume = async (resume: Resume) => {
+        if (!resumes) return;
+
         setResumes((prev) => {
             const newResumes = prev;
 
-            newResumes.push(resume);
+            newResumes?.push(resume);
 
-            return [...newResumes];
+            return [...(newResumes || [])];
         });
 
         await db.put(resume);
     };
 
     const editResume = async (resume: Partial<Resume>) => {
+        if (!resumes) return;
+
         const _id = resume._id;
 
         if (!_id) return;
@@ -72,6 +75,8 @@ export const ResumesListProvider = ({ children }: { children: ReactNode }) => {
     };
 
     const addManyResumes = async (resumesArray: Resume[]) => {
+        if (!resumes) return;
+
         const newResumes = [...resumes];
 
         resumesArray.forEach((resume) => {

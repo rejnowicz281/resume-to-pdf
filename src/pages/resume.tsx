@@ -1,3 +1,4 @@
+import Loading from "@/components/general/loading";
 import ResumeCreatorForm from "@/components/resume/resume-creator-flow/form";
 import ResumePDF from "@/components/resume/resume-pdf";
 import { Resume } from "@/lib/types/resume";
@@ -27,8 +28,7 @@ export default function ResumePage() {
         }
     }, [id]);
 
-    // TODO: Add loading screen
-    if (!resume) return null;
+    if (!resume) return <Loading />;
 
     return (
         <ResumeCreatorProvider initialResume={resume}>

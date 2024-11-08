@@ -37,7 +37,7 @@ export type ResumeCreatorContextType = {
     setCity: React.Dispatch<React.SetStateAction<string>>;
     email: string;
     setEmail: React.Dispatch<React.SetStateAction<string>>;
-    phone?: string;
+    phone: string;
     setPhone: React.Dispatch<React.SetStateAction<string>>;
     workExperience: WorkExperience[];
     setWorkExperience: React.Dispatch<React.SetStateAction<WorkExperience[]>>;
@@ -91,16 +91,18 @@ export const ResumeCreatorProvider = ({ children, initialResume }: { children: R
 
     const [rev, setRev] = useState(initialResume._rev);
 
-    const [imageOptions, setImageOptions] = useState<ImageOptions>(initialResume.imageOptions);
-    const [firstName, setFirstName] = useState(initialResume.firstName);
-    const [lastName, setLastName] = useState(initialResume.lastName);
-    const [dateOfBirth, setDateOfBirth] = useState(initialResume.dateOfBirth);
-    const [country, setCountry] = useState(initialResume.country);
-    const [city, setCity] = useState(initialResume.city);
-    const [email, setEmail] = useState(initialResume.email);
-    const [phone, setPhone] = useState(initialResume.phone);
+    const [imageOptions, setImageOptions] = useState<ImageOptions>(
+        initialResume.imageOptions || { show: false, url: "" }
+    );
+    const [firstName, setFirstName] = useState(initialResume.firstName || "");
+    const [lastName, setLastName] = useState(initialResume.lastName || "");
+    const [dateOfBirth, setDateOfBirth] = useState(initialResume.dateOfBirth || "");
+    const [country, setCountry] = useState(initialResume.country || "");
+    const [city, setCity] = useState(initialResume.city || "");
+    const [email, setEmail] = useState(initialResume.email || "");
+    const [phone, setPhone] = useState(initialResume.phone || "");
 
-    const [workExperience, setWorkExperience] = useState<WorkExperience[]>(initialResume.workExperience);
+    const [workExperience, setWorkExperience] = useState<WorkExperience[]>(initialResume.workExperience || []);
 
     const addWorkExperience = (experience: WorkExperience) => {
         setWorkExperience([...workExperience, experience]);
@@ -114,7 +116,7 @@ export const ResumeCreatorProvider = ({ children, initialResume }: { children: R
         setWorkExperience(workExperience.filter((experience) => experience._id !== _id));
     };
 
-    const [education, setEducation] = useState<Education[]>(initialResume.education);
+    const [education, setEducation] = useState<Education[]>(initialResume.education || []);
 
     const addEducation = (educationToAdd: Education) => {
         setEducation([...education, educationToAdd]);
@@ -128,7 +130,7 @@ export const ResumeCreatorProvider = ({ children, initialResume }: { children: R
         setEducation(education.filter((edu) => edu._id !== _id));
     };
 
-    const [languages, setLanguages] = useState<Language[]>(initialResume.languages);
+    const [languages, setLanguages] = useState<Language[]>(initialResume.languages || []);
 
     const addLanguage = (language: Language) => {
         setLanguages([...languages, language]);
@@ -142,7 +144,7 @@ export const ResumeCreatorProvider = ({ children, initialResume }: { children: R
         setLanguages(languages.filter((lang) => lang._id !== _id));
     };
 
-    const [training, setTraining] = useState<Training[]>(initialResume.training);
+    const [training, setTraining] = useState<Training[]>(initialResume.training || []);
 
     const addTraining = (trainingToAdd: Training) => {
         setTraining([...training, trainingToAdd]);
@@ -156,7 +158,7 @@ export const ResumeCreatorProvider = ({ children, initialResume }: { children: R
         setTraining(training.filter((t) => t._id !== _id));
     };
 
-    const [skills, setSkills] = useState<Skill[]>(initialResume.skills);
+    const [skills, setSkills] = useState<Skill[]>(initialResume.skills || []);
 
     const addSkill = (skill: Skill) => {
         setSkills([...skills, skill]);
@@ -166,7 +168,7 @@ export const ResumeCreatorProvider = ({ children, initialResume }: { children: R
         setSkills(skills.filter((skill) => skill._id !== _id));
     };
 
-    const [activities, setActivities] = useState<Activity[]>(initialResume.activities);
+    const [activities, setActivities] = useState<Activity[]>(initialResume.activities || []);
 
     const addActivity = (activity: Activity) => {
         setActivities([...activities, activity]);
@@ -180,9 +182,9 @@ export const ResumeCreatorProvider = ({ children, initialResume }: { children: R
         setActivities(activities.filter((act) => act._id !== _id));
     };
 
-    const [interests, setInterests] = useState<string>(initialResume.interests);
+    const [interests, setInterests] = useState(initialResume.interests || "");
 
-    const [links, setLinks] = useState<Link[]>(initialResume.links);
+    const [links, setLinks] = useState<Link[]>(initialResume.links || []);
 
     const addLink = (link: Link) => {
         setLinks([...links, link]);

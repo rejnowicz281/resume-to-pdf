@@ -86,7 +86,7 @@ export default function ResumeDocument({ resume }: { resume: Resume }) {
             <Page size="A4" style={styles.page}>
                 {/* Left Section */}
                 <View style={styles.leftSection}>
-                    {imageOptions.show && imageOptions.url && (
+                    {imageOptions?.show && imageOptions?.url && (
                         <Image
                             src={{
                                 uri: imageOptions.url,

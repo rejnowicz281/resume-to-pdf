@@ -8,7 +8,7 @@ export default function DownloadResumesButton() {
     const { t } = useTranslation();
 
     const onClick = () => {
-        const resumesToDownload = resumes.map((resume) => {
+        const resumesToDownload = resumes?.map((resume) => {
             const { imageOptions, ...rest } = resume;
             return rest;
         });
@@ -22,5 +22,9 @@ export default function DownloadResumesButton() {
         URL.revokeObjectURL(url);
     };
 
-    return <Button onClick={onClick}>{t("download")}</Button>;
+    return (
+        <Button disabled={!resumes} onClick={onClick}>
+            {t("download")}
+        </Button>
+    );
 }
