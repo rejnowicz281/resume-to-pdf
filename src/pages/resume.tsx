@@ -1,22 +1,30 @@
 import ResumeCreatorForm from "@/components/resume/resume-creator-flow/form";
 import ResumePDF from "@/components/resume/resume-pdf";
-import { getOrInitializeResume } from "@/lib/utils/db";
+import { Resume } from "@/lib/types/resume";
+import { getResumeById } from "@/lib/utils/db";
+import { newEmptyResume } from "@/lib/utils/resume";
 import { ResumeCreatorProvider } from "@/providers/resume-creator-provider";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 
 export default function ResumePage() {
     const { id } = useParams();
-    const [resume, setResume] = useState(null);
+    const [resume, setResume] = useState<Resume | null>(null);
+
+    const initializeResume = () => setResume(newEmptyResume());
 
     useEffect(() => {
-        getOrInitializeResume(id)
-            .then((resume) => {
+        if (!id) initializeResume();
+        else {
+            getResumeById(id).then((resume) => {
+                if (!resume) {
+                    initializeResume();
+                    return;
+                }
+
                 setResume(resume);
-            })
-            .catch((e) => {
-                console.error("erra", e);
             });
+        }
     }, [id]);
 
     // TODO: Add loading screen

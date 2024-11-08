@@ -1,6 +1,5 @@
 import PouchDB from "pouchdb";
 import { getSampleResume } from "../constants/sample-resume";
-import { newEmptyResume } from "./resume";
 
 export const db = new PouchDB("resume-to-pdf");
 
@@ -23,21 +22,4 @@ export const getResumeById = async (_id: string) => {
     } catch (error) {
         return null;
     }
-};
-
-export const initializeResume = async () => {
-    const sampleResume = newEmptyResume();
-    const newRes = await db.put(sampleResume);
-
-    return { ...sampleResume, _rev: newRes.rev };
-};
-
-export const getOrInitializeResume = async (_id?: string) => {
-    if (!_id) return initializeResume();
-
-    const resume = await getResumeById(_id);
-
-    if (!resume) return initializeResume();
-
-    return resume;
 };
