@@ -6,9 +6,10 @@ import { getResumeById } from "@/lib/utils/db";
 import { newEmptyResume } from "@/lib/utils/resume";
 import { ResumeCreatorProvider } from "@/providers/resume-creator-provider";
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useLocation, useParams } from "react-router-dom";
 
 export default function ResumePage() {
+    const { state } = useLocation();
     const { id } = useParams();
     const [resume, setResume] = useState<Resume | null>(null);
 
@@ -16,6 +17,7 @@ export default function ResumePage() {
 
     useEffect(() => {
         if (!id) initializeResume();
+        else if (state?.resume) setResume(state.resume);
         else {
             getResumeById(id).then((resume) => {
                 if (!resume) {

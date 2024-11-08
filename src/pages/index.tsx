@@ -12,11 +12,15 @@ export default function HomePage() {
     const { resumes } = useResumesList();
     const { t } = useTranslation();
 
+    if (!resumes) return <Loading />;
+
     return (
         <div className="flex max-w-[800px] md:px-24 py-16 px-6 mx-auto w-full flex-1 flex-col gap-6">
             <h1 className="text-4xl">{t("homepage.title")}</h1>
             <div className="flex flex-col gap-6">
-                {resumes ? resumes.map((resume) => <ResumeCard key={resume._id} resume={resume} />) : <Loading />}
+                {resumes.map((resume) => (
+                    <ResumeCard key={resume._id} resume={resume} />
+                ))}
             </div>
             <Button className="self-center flex gap-2" asChild>
                 <Link to={`/resumes/${uniqid()}`}>
