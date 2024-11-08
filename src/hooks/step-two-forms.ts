@@ -47,8 +47,8 @@ export function useWorkExperienceForm(initialExperience?: WorkExperience) {
             location: values.location
         };
 
-        if (initialExperience?.id) {
-            editWorkExperience(initialExperience.id, newExperience);
+        if (initialExperience?._id) {
+            editWorkExperience(initialExperience._id, newExperience);
         } else {
             addWorkExperience(withID(newExperience));
         }
@@ -98,8 +98,8 @@ export function useEducationForm(initialEducation?: Education) {
             level: values.level
         };
 
-        if (initialEducation?.id) {
-            editEducation(initialEducation.id, newEducation);
+        if (initialEducation?._id) {
+            editEducation(initialEducation._id, newEducation);
         } else {
             addEducation(withID(newEducation));
         }
@@ -127,7 +127,7 @@ export const useLanguageForm = (initialLanguage?: Language) => {
 
     const onSubmit = (values: z.infer<typeof languageSchema>) => {
         if (initialLanguage) {
-            editLanguage(initialLanguage.id, values);
+            editLanguage(initialLanguage._id, values);
         } else {
             addLanguage(withID(values));
         }
@@ -167,7 +167,7 @@ export const useTrainingForm = (initialTraining?: Training) => {
         };
 
         if (initialTraining) {
-            editTraining(initialTraining.id, newTraining);
+            editTraining(initialTraining._id, newTraining);
         } else {
             addTraining(withID(newTraining));
         }

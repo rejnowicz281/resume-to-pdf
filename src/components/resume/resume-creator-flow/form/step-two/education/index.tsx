@@ -16,7 +16,7 @@ export default function Education() {
 
             <div className="flex flex-col gap-9 my-6">
                 {education.map((edu) => (
-                    <Card className="relative break-words" key={edu.id}>
+                    <Card className="relative break-words" key={edu._id}>
                         <div className="flex justify-between pr-6">
                             <CardHeader className="truncate">
                                 <CardTitle className="truncate">{edu.institution}</CardTitle>

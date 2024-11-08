@@ -39,7 +39,7 @@ export default function DeleteLanguage({ language }: { language: Language }) {
                 </AlertDialogHeader>
                 <AlertDialogFooter>
                     <AlertDialogCancel>{t("resumeCreator.stepTwo.deleteLanguage.cancelButton")}</AlertDialogCancel>
-                    <AlertDialogAction onClick={() => removeLanguage(language.id)}>
+                    <AlertDialogAction onClick={() => removeLanguage(language._id)}>
                         {t("resumeCreator.stepTwo.deleteLanguage.deleteButton")}
                     </AlertDialogAction>
                 </AlertDialogFooter>

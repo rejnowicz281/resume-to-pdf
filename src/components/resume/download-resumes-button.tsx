@@ -1,10 +1,10 @@
 import { dateToString } from "@/lib/utils/date";
-import { useLocalResumes } from "@/providers/local-resumes-provider";
+import { useResumesList } from "@/providers/resumes-list-provider";
 import { useTranslation } from "react-i18next";
 import { Button } from "../ui/button";
 
 export default function DownloadResumesButton() {
-    const { resumes } = useLocalResumes();
+    const { resumes } = useResumesList();
     const { t } = useTranslation();
 
     const onClick = () => {

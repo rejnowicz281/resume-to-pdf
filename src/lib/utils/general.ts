@@ -18,8 +18,8 @@ export function js(...styles: Style[]): Style {
 }
 
 // Add an id to an object
-export function withID<T>(obj: T): T & { id: string } {
-    return { ...obj, id: uniqid() };
+export function withID<T>(obj: T): T & { _id: string } {
+    return { ...obj, _id: uniqid() };
 }
 
 export function makeUnderscore(str: string) {

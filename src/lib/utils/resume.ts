@@ -1,7 +1,6 @@
-import i18next from "i18next";
 import uniqid from "uniqid";
 import { Resume } from "../types/resume";
-import { formatTimestamp } from "./date";
+import { mapResume } from "./mappers/resume";
 
 export const getResumeName = (resume: Resume) => {
     if (resume.name) return resume.name;
@@ -12,23 +11,20 @@ export const getResumeName = (resume: Resume) => {
 
     if (resume.phone) return resume.phone;
 
-    if (resume.id) return resume.id;
-
-    return i18next.t("resume");
+    return resume._id;
 };
 
-export const newEmptyResume = (id: string = uniqid()): Resume => {
-    return {
-        id,
-        imageOptions: { show: false, url: "" },
-        createdAt: formatTimestamp(new Date())
-    };
+export const newEmptyResume = (_id: string = uniqid()): Resume => {
+    return mapResume({
+        _id
+    });
 };
 
 export const getResumeProgress = (resume: Resume) => {
-    const { id, name, createdAt, description, imageOptions, ...progressFields } = resume;
+    const { _id, _rev, name, createdAt, description, imageOptions, ...progressFields } = resume;
 
     const totalFields = Object.keys(progressFields).length;
+
     const filledFields = Object.values(progressFields).filter((value) => {
         if (Array.isArray(value)) {
             return value.length > 0;

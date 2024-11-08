@@ -16,7 +16,7 @@ export default function WorkExperience() {
 
             <div className="flex flex-col gap-9 my-6">
                 {workExperience.map((experience) => (
-                    <Card className="relative break-words" key={experience.id}>
+                    <Card className="relative break-words" key={experience._id}>
                         <div className="flex justify-between pr-6">
                             <CardHeader className="truncate">
                                 <CardTitle className="truncate">{experience.title}</CardTitle>

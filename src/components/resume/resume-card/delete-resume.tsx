@@ -12,12 +12,12 @@ import {
 import { Button } from "@/components/ui/button";
 import { Resume } from "@/lib/types/resume";
 import { getResumeName } from "@/lib/utils/resume";
-import { useLocalResumes } from "@/providers/local-resumes-provider";
+import { useResumesList } from "@/providers/resumes-list-provider";
 import { Trash } from "lucide-react";
 import { Trans, useTranslation } from "react-i18next";
 
 export default function DeleteResume({ resume }: { resume: Resume }) {
-    const { removeResume } = useLocalResumes();
+    const { removeResume } = useResumesList();
     const { t } = useTranslation();
 
     return (
@@ -40,7 +40,7 @@ export default function DeleteResume({ resume }: { resume: Resume }) {
                 </AlertDialogHeader>
                 <AlertDialogFooter>
                     <AlertDialogCancel>{t("deleteResume.cancel")}</AlertDialogCancel>
-                    <AlertDialogAction onClick={() => removeResume(resume.id)}>
+                    <AlertDialogAction onClick={() => removeResume(resume)}>
                         {t("deleteResume.delete")}
                     </AlertDialogAction>
                 </AlertDialogFooter>

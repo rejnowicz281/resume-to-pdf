@@ -41,7 +41,7 @@ export default function DeleteExperience({ experience }: { experience: WorkExper
                     <AlertDialogCancel>
                         {t("resumeCreator.stepTwo.deleteWorkExperience.cancelButton")}
                     </AlertDialogCancel>
-                    <AlertDialogAction onClick={() => removeWorkExperience(experience.id)}>
+                    <AlertDialogAction onClick={() => removeWorkExperience(experience._id)}>
                         {t("resumeCreator.stepTwo.deleteWorkExperience.deleteButton")}
                     </AlertDialogAction>
                 </AlertDialogFooter>

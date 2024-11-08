@@ -39,7 +39,7 @@ export default function DeleteActivity({ activity }: { activity: Activity }) {
                 </AlertDialogHeader>
                 <AlertDialogFooter>
                     <AlertDialogCancel>{t("resumeCreator.stepThree.deleteActivity.cancelButton")}</AlertDialogCancel>
-                    <AlertDialogAction onClick={() => removeActivity(activity.id)}>
+                    <AlertDialogAction onClick={() => removeActivity(activity._id)}>
                         {t("resumeCreator.stepThree.deleteActivity.deleteButton")}
                     </AlertDialogAction>
                 </AlertDialogFooter>

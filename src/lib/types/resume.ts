@@ -4,7 +4,7 @@ export type ImageOptions = {
 };
 
 export type WorkExperience = {
-    id: string;
+    _id: string;
     title: string;
     company?: string;
     location?: string;
@@ -13,10 +13,10 @@ export type WorkExperience = {
     description?: string;
 };
 
-export type WorkExperienceNoId = Omit<WorkExperience, "id">;
+export type WorkExperienceNoId = Omit<WorkExperience, "_id">;
 
 export type Education = {
-    id: string;
+    _id: string;
     institution: string;
     startDate: string;
     endDate?: string;
@@ -25,28 +25,28 @@ export type Education = {
     description?: string;
 };
 
-export type EducationNoId = Omit<Education, "id">;
+export type EducationNoId = Omit<Education, "_id">;
 
 export type Language = {
-    id: string;
+    _id: string;
     language: string;
     level: string;
 };
 
-export type LanguageNoId = Omit<Language, "id">;
+export type LanguageNoId = Omit<Language, "_id">;
 
 export type Training = {
-    id: string;
+    _id: string;
     name: string;
     issueDate: string;
     organization: string;
     description?: string;
 };
 
-export type TrainingNoId = Omit<Training, "id">;
+export type TrainingNoId = Omit<Training, "_id">;
 
 export type Activity = {
-    id: string;
+    _id: string;
     name: string;
     location?: string;
     startDate: string;
@@ -54,46 +54,47 @@ export type Activity = {
     description?: string;
 };
 
-export type ActivityNoId = Omit<Activity, "id">;
+export type ActivityNoId = Omit<Activity, "_id">;
 
 export type Skill = {
-    id: string;
+    _id: string;
     name: string;
 };
 
-export type SkillNoId = Omit<Skill, "id">;
+export type SkillNoId = Omit<Skill, "_id">;
 
 export type Link = {
-    id: string;
+    _id: string;
     description?: string;
     url: string;
 };
 
-export type LinkNoId = Omit<Link, "id">;
+export type LinkNoId = Omit<Link, "_id">;
 
 export type Resume = {
-    id: string;
-    name?: string;
+    _id: string;
+    _rev: string;
+    name: string;
     createdAt: string;
 
     description?: string;
 
     imageOptions: ImageOptions;
-    firstName?: string;
-    lastName?: string;
-    dateOfBirth?: string;
-    country?: string;
-    city?: string;
-    email?: string;
-    phone?: string;
-    workExperience?: WorkExperience[];
-    education?: Education[];
-    languages?: Language[];
-    training?: Training[];
-    skills?: Skill[];
-    activities?: Activity[];
-    interests?: string;
-    links?: Link[];
+    firstName: string;
+    lastName: string;
+    dateOfBirth: string;
+    country: string;
+    city: string;
+    email: string;
+    phone: string;
+    workExperience: WorkExperience[];
+    education: Education[];
+    languages: Language[];
+    training: Training[];
+    skills: Skill[];
+    activities: Activity[];
+    interests: string;
+    links: Link[];
 };
 
-export type ResumeNoId = Omit<Resume, "id">;
+export type ResumeNoId = Omit<Resume, "_id">;

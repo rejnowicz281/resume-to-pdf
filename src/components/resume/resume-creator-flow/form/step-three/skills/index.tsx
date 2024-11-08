@@ -14,9 +14,9 @@ export default function Skills() {
 
             <div className="flex gap-3 my-6 flex-wrap">
                 {skills.map((skill) => (
-                    <Badge className="flex gap-2 truncate" key={skill.id}>
+                    <Badge className="flex gap-2 truncate" key={skill._id}>
                         <span className="truncate">{skill.name}</span>
-                        <button onClick={() => removeSkill(skill.id)}>
+                        <button onClick={() => removeSkill(skill._id)}>
                             <X size={18} />
                         </button>
                     </Badge>

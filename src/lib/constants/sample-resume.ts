@@ -4,7 +4,7 @@ import { Resume } from "../types/resume";
 import { formatTimestamp } from "../utils/date";
 
 export const SAMPLE_RESUME_EN: Resume = {
-    id: "sample-resume",
+    _id: "sample-resume",
     imageOptions: {
         show: false,
         url: ""
@@ -18,7 +18,7 @@ export const SAMPLE_RESUME_EN: Resume = {
     phone: "+1234567890",
     workExperience: [
         {
-            id: uniqid(),
+            _id: uniqid(),
             title: "Software Engineer",
             company: "Tech Company",
             location: "New York, USA",
@@ -27,7 +27,7 @@ export const SAMPLE_RESUME_EN: Resume = {
             description: "Developed web applications using React and Node.js."
         },
         {
-            id: uniqid(),
+            _id: uniqid(),
             title: "Frontend Developer",
             company: "Startup",
             location: "San Francisco, USA",
@@ -38,7 +38,7 @@ export const SAMPLE_RESUME_EN: Resume = {
     ],
     education: [
         {
-            id: uniqid(),
+            _id: uniqid(),
             institution: "University",
             startDate: "01.2020",
             endDate: "01.2024",
@@ -47,7 +47,7 @@ export const SAMPLE_RESUME_EN: Resume = {
             description: "Studied various subjects including algorithms, data structures, and web development."
         },
         {
-            id: uniqid(),
+            _id: uniqid(),
             institution: "High School",
             startDate: "01.2025",
             endDate: "01.2028",
@@ -56,19 +56,19 @@ export const SAMPLE_RESUME_EN: Resume = {
         }
     ],
     languages: [
-        { id: uniqid(), language: "English", level: "Native" },
-        { id: uniqid(), language: "Spanish", level: "Intermediate" }
+        { _id: uniqid(), language: "English", level: "Native" },
+        { _id: uniqid(), language: "Spanish", level: "Intermediate" }
     ],
     training: [
         {
-            id: uniqid(),
+            _id: uniqid(),
             name: "React Certification",
             issueDate: "01.2026",
             organization: "Online Course",
             description: "Completed an online course on React."
         },
         {
-            id: uniqid(),
+            _id: uniqid(),
             name: "Node.js Certification",
             issueDate: "01.2028",
             organization: "Online Course",
@@ -76,20 +76,20 @@ export const SAMPLE_RESUME_EN: Resume = {
         }
     ],
     skills: [
-        { id: uniqid(), name: "JavaScript" },
-        { id: uniqid(), name: "React" },
-        { id: uniqid(), name: "Node.js" }
+        { _id: uniqid(), name: "JavaScript" },
+        { _id: uniqid(), name: "React" },
+        { _id: uniqid(), name: "Node.js" }
     ],
     activities: [
         {
-            id: uniqid(),
+            _id: uniqid(),
             name: "Volunteer",
             location: "Local Community Center",
             startDate: "05.2000",
             description: "Organized community events and activities."
         },
         {
-            id: uniqid(),
+            _id: uniqid(),
             name: "Hackathon",
             startDate: "01.2020",
             endDate: "01.2021",
@@ -98,14 +98,14 @@ export const SAMPLE_RESUME_EN: Resume = {
     ],
     interests: "Reading, hiking, and playing guitar.",
     links: [
-        { id: uniqid(), description: "LinkedIn", url: "https://www.linkedin.com/" },
-        { id: uniqid(), description: "GitHub", url: "https://github.com/rejnowicz281" }
+        { _id: uniqid(), description: "LinkedIn", url: "https://www.linkedin.com/" },
+        { _id: uniqid(), description: "GitHub", url: "https://github.com/rejnowicz281" }
     ],
     createdAt: formatTimestamp(new Date())
 };
 
 export const SAMPLE_RESUME_PL: Resume = {
-    id: "sample-resume",
+    _id: "sample-resume",
     imageOptions: {
         show: false,
         url: ""
@@ -119,7 +119,7 @@ export const SAMPLE_RESUME_PL: Resume = {
     phone: "+48 123 456 789",
     workExperience: [
         {
-            id: uniqid(),
+            _id: uniqid(),
             title: "Web Developer",
             company: "Firma Technologiczna",
             location: "Kraków, Polska",
@@ -128,7 +128,7 @@ export const SAMPLE_RESUME_PL: Resume = {
             description: "Tworzenie aplikacji webowych przy użyciu React i Node.js."
         },
         {
-            id: uniqid(),
+            _id: uniqid(),
             title: "Programista Frontend",
             company: "Startup",
             location: "Wrocław, Polska",
@@ -139,7 +139,7 @@ export const SAMPLE_RESUME_PL: Resume = {
     ],
     education: [
         {
-            id: uniqid(),
+            _id: uniqid(),
             institution: "Uniwersytet",
             startDate: "01.2020",
             endDate: "01.2024",
@@ -148,7 +148,7 @@ export const SAMPLE_RESUME_PL: Resume = {
             description: "Studia algorytmów, struktur danych i tworzenia stron internetowych."
         },
         {
-            id: uniqid(),
+            _id: uniqid(),
             institution: "Liceum",
             startDate: "01.2025",
             endDate: "01.2028",
@@ -157,19 +157,19 @@ export const SAMPLE_RESUME_PL: Resume = {
         }
     ],
     languages: [
-        { id: uniqid(), language: "Polski", level: "Ojczysty" },
-        { id: uniqid(), language: "Angielski", level: "Średnio zaawansowany" }
+        { _id: uniqid(), language: "Polski", level: "Ojczysty" },
+        { _id: uniqid(), language: "Angielski", level: "Średnio zaawansowany" }
     ],
     training: [
         {
-            id: uniqid(),
+            _id: uniqid(),
             name: "Certyfikat React",
             issueDate: "01.2026",
             organization: "Coursera",
             description: "Ukończyłem kurs online dotyczący React."
         },
         {
-            id: uniqid(),
+            _id: uniqid(),
             name: "Certyfikat Node.js",
             issueDate: "01.2028",
             organization: "Coursera",
@@ -177,13 +177,13 @@ export const SAMPLE_RESUME_PL: Resume = {
         }
     ],
     skills: [
-        { id: uniqid(), name: "JavaScript" },
-        { id: uniqid(), name: "React" },
-        { id: uniqid(), name: "Node.js" }
+        { _id: uniqid(), name: "JavaScript" },
+        { _id: uniqid(), name: "React" },
+        { _id: uniqid(), name: "Node.js" }
     ],
     activities: [
         {
-            id: uniqid(),
+            _id: uniqid(),
             name: "Wolontariat",
             location: "Lokalne Centrum Społeczności",
             startDate: "05.2000",
@@ -191,7 +191,7 @@ export const SAMPLE_RESUME_PL: Resume = {
             description: "Organizowałem aktywności społecznościowe."
         },
         {
-            id: uniqid(),
+            _id: uniqid(),
             name: "Hackathon",
             startDate: "01.2020",
             endDate: "01.2021",
@@ -200,8 +200,8 @@ export const SAMPLE_RESUME_PL: Resume = {
     ],
     interests: "Lubię czytać i grać na gitarze.",
     links: [
-        { id: uniqid(), description: "LinkedIn", url: "https://www.linkedin.com" },
-        { id: uniqid(), description: "GitHub", url: "https://github.com/rejnowicz281" }
+        { _id: uniqid(), description: "LinkedIn", url: "https://www.linkedin.com" },
+        { _id: uniqid(), description: "GitHub", url: "https://github.com/rejnowicz281" }
     ],
     createdAt: formatTimestamp(new Date())
 };

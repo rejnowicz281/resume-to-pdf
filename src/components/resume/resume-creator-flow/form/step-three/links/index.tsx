@@ -15,7 +15,7 @@ export default function Links() {
 
             <div className="flex flex-col gap-9 my-6">
                 {links.map((link) => (
-                    <Card className="relative break-words" key={link.id}>
+                    <Card className="relative break-words" key={link._id}>
                         <div className="flex justify-between pr-6">
                             <CardHeader className="truncate">
                                 <CardTitle className="truncate">

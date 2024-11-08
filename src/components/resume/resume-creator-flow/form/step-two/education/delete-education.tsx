@@ -39,7 +39,7 @@ export default function DeleteEducation({ education }: { education: Education })
                 </AlertDialogHeader>
                 <AlertDialogFooter>
                     <AlertDialogCancel>{t("resumeCreator.stepTwo.deleteEducation.cancelButton")}</AlertDialogCancel>
-                    <AlertDialogAction onClick={() => removeEducation(education.id)}>
+                    <AlertDialogAction onClick={() => removeEducation(education._id)}>
                         {t("resumeCreator.stepTwo.deleteEducation.deleteButton")}
                     </AlertDialogAction>
                 </AlertDialogFooter>

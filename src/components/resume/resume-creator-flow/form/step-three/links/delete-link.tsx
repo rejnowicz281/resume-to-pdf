@@ -40,7 +40,7 @@ export default function DeleteLink({ link }: { link: Link }) {
                 </AlertDialogHeader>
                 <AlertDialogFooter>
                     <AlertDialogCancel>{t("resumeCreator.stepThree.deleteLink.cancelButton")}</AlertDialogCancel>
-                    <AlertDialogAction onClick={() => removeLink(link.id)}>
+                    <AlertDialogAction onClick={() => removeLink(link._id)}>
                         {t("resumeCreator.stepThree.deleteLink.deleteButton")}
                     </AlertDialogAction>
                 </AlertDialogFooter>

@@ -15,7 +15,7 @@ export default function ResumeCard({ resume }: { resume: Resume }) {
 
     return (
         <Card className="break-words">
-            <Link className="hover:text-gray-500 text-center xsm:text-start" to={`/resumes/${resume.id}`}>
+            <Link className="hover:text-gray-500 text-center xsm:text-start" to={`/resumes/${resume._id}`}>
                 <CardHeader>
                     <CardTitle>{getResumeName(resume)}</CardTitle>
                     <CardDescription>
@@ -27,12 +27,12 @@ export default function ResumeCard({ resume }: { resume: Resume }) {
                 {resume.description && <CardContent className="whitespace-pre-line">{resume.description}</CardContent>}
             </Link>
             <CardFooter className="border-t border-t-zinc-200 dark:border-t-zinc-800 py-3 gap-2 flex-col xsm:flex-row xsm:justify-between">
-                <Link to={`/resumes/${resume.id}`} className="flex-1 text-gray-500 text-sm">
+                <Link to={`/resumes/${resume._id}`} className="flex-1 text-gray-500 text-sm">
                     {t("created")} {resume.createdAt}
                 </Link>
                 <div>
                     <Button size="icon" variant="ghost" asChild>
-                        <Link to={`/resumes/${resume.id}`}>
+                        <Link to={`/resumes/${resume._id}`}>
                             <MoveDiagonal2 size={20} className="text-gray-500" />
                         </Link>
                     </Button>

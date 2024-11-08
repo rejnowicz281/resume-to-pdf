@@ -16,7 +16,7 @@ export default function Activities() {
 
             <div className="flex flex-col gap-9 my-6">
                 {activities.map((activity) => (
-                    <Card className="relative break-words" key={activity.id}>
+                    <Card className="relative break-words" key={activity._id}>
                         <div className="flex justify-between pr-6">
                             <CardHeader className="truncate">
                                 <CardTitle className="truncate">{activity.name}</CardTitle>

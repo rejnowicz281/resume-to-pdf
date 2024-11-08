@@ -15,7 +15,7 @@ export default function Languages() {
 
             <div className="flex flex-col gap-9 my-6">
                 {languages.map((lang) => (
-                    <Card className="relative break-words" key={lang.id}>
+                    <Card className="relative break-words" key={lang._id}>
                         <div className="flex justify-between pr-6">
                             <CardHeader className="truncate">
                                 <CardTitle className="truncate">{lang.language}</CardTitle>

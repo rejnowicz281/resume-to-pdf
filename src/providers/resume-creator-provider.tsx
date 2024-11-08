@@ -15,16 +15,14 @@ import {
     WorkExperience,
     WorkExperienceNoId
 } from "@/lib/types/resume";
-import { formatTimestamp } from "@/lib/utils/date";
-import { saveResume } from "@/lib/utils/local-storage";
+import { db } from "@/lib/utils/db";
 import React, { createContext, ReactNode, useContext, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
-import uniqid from "uniqid";
 
 export type ResumeCreatorContextType = {
     previewState: boolean;
     togglePreviewState: () => void;
-    resumeToSave: Resume;
+    draftResume: Resume;
     imageOptions: ImageOptions;
     setImageOptions: React.Dispatch<React.SetStateAction<ImageOptions>>;
     firstName: string;
@@ -84,118 +82,118 @@ export type ResumeCreatorContextType = {
 
 const ResumeCreatorContext = createContext<ResumeCreatorContextType | undefined>(undefined);
 
-export const ResumeCreatorProvider = ({ children, initialResume }: { children: ReactNode; initialResume?: Resume }) => {
+export const ResumeCreatorProvider = ({ children, initialResume }: { children: ReactNode; initialResume: Resume }) => {
     const { t } = useTranslation();
 
     const [previewState, setPreviewState] = useState(false);
 
     const togglePreviewState = () => setPreviewState(!previewState);
 
-    const [imageOptions, setImageOptions] = useState<ImageOptions>(
-        initialResume?.imageOptions || { show: false, url: "" }
-    );
-    const [firstName, setFirstName] = useState(initialResume?.firstName || "");
-    const [lastName, setLastName] = useState(initialResume?.lastName || "");
-    const [dateOfBirth, setDateOfBirth] = useState(initialResume?.dateOfBirth || "");
-    const [country, setCountry] = useState(initialResume?.country || "");
-    const [city, setCity] = useState(initialResume?.city || "");
-    const [email, setEmail] = useState(initialResume?.email || "");
-    const [phone, setPhone] = useState(initialResume?.phone || "");
+    const [rev, setRev] = useState(initialResume._rev);
 
-    const [workExperience, setWorkExperience] = useState<WorkExperience[]>(initialResume?.workExperience || []);
+    const [imageOptions, setImageOptions] = useState<ImageOptions>(initialResume.imageOptions);
+    const [firstName, setFirstName] = useState(initialResume.firstName);
+    const [lastName, setLastName] = useState(initialResume.lastName);
+    const [dateOfBirth, setDateOfBirth] = useState(initialResume.dateOfBirth);
+    const [country, setCountry] = useState(initialResume.country);
+    const [city, setCity] = useState(initialResume.city);
+    const [email, setEmail] = useState(initialResume.email);
+    const [phone, setPhone] = useState(initialResume.phone);
+
+    const [workExperience, setWorkExperience] = useState<WorkExperience[]>(initialResume.workExperience);
 
     const addWorkExperience = (experience: WorkExperience) => {
         setWorkExperience([...workExperience, experience]);
     };
 
-    const editWorkExperience = (id: string, experience: WorkExperienceNoId) => {
-        setWorkExperience(workExperience.map((exp) => (exp.id === id ? { ...exp, ...experience } : exp)));
+    const editWorkExperience = (_id: string, experience: WorkExperienceNoId) => {
+        setWorkExperience(workExperience.map((exp) => (exp._id === _id ? { ...exp, ...experience } : exp)));
     };
 
-    const removeWorkExperience = (id: string) => {
-        setWorkExperience(workExperience.filter((experience) => experience.id !== id));
+    const removeWorkExperience = (_id: string) => {
+        setWorkExperience(workExperience.filter((experience) => experience._id !== _id));
     };
 
-    const [education, setEducation] = useState<Education[]>(initialResume?.education || []);
+    const [education, setEducation] = useState<Education[]>(initialResume.education);
 
     const addEducation = (educationToAdd: Education) => {
         setEducation([...education, educationToAdd]);
     };
 
-    const editEducation = (id: string, educationToEdit: EducationNoId) => {
-        setEducation(education.map((edu) => (edu.id === id ? { ...edu, ...educationToEdit } : edu)));
+    const editEducation = (_id: string, educationToEdit: EducationNoId) => {
+        setEducation(education.map((edu) => (edu._id === _id ? { ...edu, ...educationToEdit } : edu)));
     };
 
-    const removeEducation = (id: string) => {
-        setEducation(education.filter((edu) => edu.id !== id));
+    const removeEducation = (_id: string) => {
+        setEducation(education.filter((edu) => edu._id !== _id));
     };
 
-    const [languages, setLanguages] = useState<Language[]>(initialResume?.languages || []);
+    const [languages, setLanguages] = useState<Language[]>(initialResume.languages);
 
     const addLanguage = (language: Language) => {
         setLanguages([...languages, language]);
     };
 
-    const editLanguage = (id: string, language: LanguageNoId) => {
-        setLanguages(languages.map((lang) => (lang.id === id ? { ...lang, ...language } : lang)));
+    const editLanguage = (_id: string, language: LanguageNoId) => {
+        setLanguages(languages.map((lang) => (lang._id === _id ? { ...lang, ...language } : lang)));
     };
 
-    const removeLanguage = (id: string) => {
-        setLanguages(languages.filter((lang) => lang.id !== id));
+    const removeLanguage = (_id: string) => {
+        setLanguages(languages.filter((lang) => lang._id !== _id));
     };
 
-    const [training, setTraining] = useState<Training[]>(initialResume?.training || []);
+    const [training, setTraining] = useState<Training[]>(initialResume.training);
 
     const addTraining = (trainingToAdd: Training) => {
         setTraining([...training, trainingToAdd]);
     };
 
-    const editTraining = (id: string, trainingToEdit: TrainingNoId) => {
-        setTraining(training.map((t) => (t.id === id ? { ...t, ...trainingToEdit } : t)));
+    const editTraining = (_id: string, trainingToEdit: TrainingNoId) => {
+        setTraining(training.map((t) => (t._id === _id ? { ...t, ...trainingToEdit } : t)));
     };
 
-    const removeTraining = (id: string) => {
-        setTraining(training.filter((t) => t.id !== id));
+    const removeTraining = (_id: string) => {
+        setTraining(training.filter((t) => t._id !== _id));
     };
 
-    const [skills, setSkills] = useState<Skill[]>(initialResume?.skills || []);
+    const [skills, setSkills] = useState<Skill[]>(initialResume.skills);
 
     const addSkill = (skill: Skill) => {
         setSkills([...skills, skill]);
     };
 
-    const removeSkill = (id: string) => {
-        setSkills(skills.filter((skill) => skill.id !== id));
+    const removeSkill = (_id: string) => {
+        setSkills(skills.filter((skill) => skill._id !== _id));
     };
 
-    const [activities, setActivities] = useState<Activity[]>(initialResume?.activities || []);
+    const [activities, setActivities] = useState<Activity[]>(initialResume.activities);
 
     const addActivity = (activity: Activity) => {
         setActivities([...activities, activity]);
     };
 
-    const editActivity = (id: string, activity: ActivityNoId) => {
-        setActivities(activities.map((act) => (act.id === id ? { ...act, ...activity } : act)));
+    const editActivity = (_id: string, activity: ActivityNoId) => {
+        setActivities(activities.map((act) => (act._id === _id ? { ...act, ...activity } : act)));
     };
 
-    const removeActivity = (id: string) => {
-        setActivities(activities.filter((act) => act.id !== id));
+    const removeActivity = (_id: string) => {
+        setActivities(activities.filter((act) => act._id !== _id));
     };
 
-    const [interests, setInterests] = useState<string>(initialResume?.interests || "");
+    const [interests, setInterests] = useState<string>(initialResume.interests);
 
-    const [links, setLinks] = useState<Link[]>(initialResume?.links || []);
+    const [links, setLinks] = useState<Link[]>(initialResume.links);
 
     const addLink = (link: Link) => {
         setLinks([...links, link]);
     };
 
-    const editLink = (id: string, link: LinkNoId) => {
-        setLinks(links.map((l) => (l.id === id ? { ...l, ...link } : l)));
+    const editLink = (_id: string, link: LinkNoId) => {
+        setLinks(links.map((l) => (l._id === _id ? { ...l, ...link } : l)));
     };
 
-    const removeLink = (id: string) => {
-        setLinks(links.filter((l) => l.id !== id));
+    const removeLink = (_id: string) => {
+        setLinks(links.filter((l) => l._id !== _id));
     };
 
     const [step, setStep] = useState(1);
@@ -215,7 +213,7 @@ export const ResumeCreatorProvider = ({ children, initialResume }: { children: R
         }
     };
 
-    const resumeToSave = {
+    const draftResume = {
         imageOptions,
         firstName,
         lastName,
@@ -232,22 +230,42 @@ export const ResumeCreatorProvider = ({ children, initialResume }: { children: R
         activities,
         interests,
         links,
-        createdAt: initialResume?.createdAt || formatTimestamp(new Date()),
-        name: initialResume?.name,
-        description: initialResume?.description,
-        id: initialResume?.id || uniqid()
+        createdAt: initialResume.createdAt,
+        name: initialResume.name,
+        description: initialResume.description,
+        _id: initialResume._id,
+        _rev: rev
     };
 
     useEffect(() => {
-        saveResume(resumeToSave);
-    }, [resumeToSave]);
+        db.put(draftResume).then((res) => {
+            setRev(res.rev);
+        });
+    }, [
+        imageOptions,
+        firstName,
+        lastName,
+        dateOfBirth,
+        country,
+        city,
+        email,
+        phone,
+        workExperience,
+        education,
+        languages,
+        training,
+        skills,
+        activities,
+        interests,
+        links
+    ]);
 
     return (
         <ResumeCreatorContext.Provider
             value={{
                 previewState,
                 togglePreviewState,
-                resumeToSave,
+                draftResume: { ...draftResume, _rev: rev },
                 imageOptions,
                 setImageOptions,
                 firstName,

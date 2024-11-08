@@ -15,7 +15,7 @@ export default function Training() {
 
             <div className="flex flex-col gap-9 my-6">
                 {training.map((training) => (
-                    <Card className="relative break-words" key={training.id}>
+                    <Card className="relative break-words" key={training._id}>
                         <div className="flex justify-between pr-6">
                             <CardHeader className="truncate">
                                 <CardTitle className="truncate">{training.name}</CardTitle>

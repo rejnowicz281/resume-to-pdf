@@ -3,13 +3,13 @@ import { Button } from "@/components/ui/button";
 import { getSampleResume } from "@/lib/constants/sample-resume";
 import { Resume } from "@/lib/types/resume";
 import { mapResume } from "@/lib/utils/mappers/resume";
-import { useLocalResumes } from "@/providers/local-resumes-provider";
+import { useResumesList } from "@/providers/resumes-list-provider";
 import { FileJson2 } from "lucide-react";
 import { useRef, useState } from "react";
 import { Trans, useTranslation } from "react-i18next";
 
 export default function Importer({ onSuccess }: { onSuccess?: () => void }) {
-    const { addManyResumes } = useLocalResumes();
+    const { addManyResumes } = useResumesList();
     const inputRef = useRef<HTMLInputElement>(null);
     const [resumes, setResumes] = useState<Resume[]>([]);
     const [jsonInput, setJsonInput] = useState<string>("");
@@ -128,7 +128,7 @@ export default function Importer({ onSuccess }: { onSuccess?: () => void }) {
                                             [
                                                 getSampleResume(),
                                                 {
-                                                    id: "sample-resume-2",
+                                                    _id: "sample-resume-2",
                                                     createdAt: "19.07.2024",
                                                     name: "An empty resume",
                                                     description: "This resume is empty."

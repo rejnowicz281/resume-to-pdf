@@ -68,8 +68,8 @@ export function useActivityForm(initialActivity?: Activity) {
             location: values.location
         };
 
-        if (initialActivity?.id) {
-            editActivity(initialActivity.id, newActivity);
+        if (initialActivity?._id) {
+            editActivity(initialActivity._id, newActivity);
         } else {
             addActivity(withID(newActivity));
         }
@@ -114,7 +114,7 @@ export function useLinkForm(initialLink?: Link) {
 
     function onSubmit(values: z.infer<typeof linkSchema>) {
         if (initialLink) {
-            editLink(initialLink.id, values);
+            editLink(initialLink._id, values);
         } else {
             addLink(withID(values));
         }

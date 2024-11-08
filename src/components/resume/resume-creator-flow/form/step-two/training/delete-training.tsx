@@ -39,7 +39,7 @@ export default function DeleteTraining({ training }: { training: Training }) {
                 </AlertDialogHeader>
                 <AlertDialogFooter>
                     <AlertDialogCancel>{t("resumeCreator.stepTwo.deleteTraining.cancelButton")}</AlertDialogCancel>
-                    <AlertDialogAction onClick={() => removeTraining(training.id)}>
+                    <AlertDialogAction onClick={() => removeTraining(training._id)}>
                         q{t("resumeCreator.stepTwo.deleteTraining.deleteButton")}
                     </AlertDialogAction>
                 </AlertDialogFooter>

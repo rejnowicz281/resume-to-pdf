@@ -6,7 +6,7 @@ import ThemeButton from "./components/general/theme-button";
 import HomePage from "./pages";
 import ResumePage from "./pages/resume";
 import SettingsPage from "./pages/settings";
-import { LocalResumesProvider } from "./providers/local-resumes-provider";
+import { ResumesListProvider } from "./providers/resumes-list-provider";
 
 pdfjs.GlobalWorkerOptions.workerSrc = new URL("pdfjs-dist/build/pdf.worker.min.mjs", import.meta.url).toString();
 
@@ -19,10 +19,10 @@ export default function App() {
                     <Routes>
                         <Route
                             element={
-                                <LocalResumesProvider>
+                                <ResumesListProvider>
                                     <SettingsButton />
                                     <Outlet />
-                                </LocalResumesProvider>
+                                </ResumesListProvider>
                             }
                         >
                             <Route path="/" element={<HomePage />} />

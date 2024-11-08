@@ -8,7 +8,7 @@ import { Plus } from "lucide-react";
 import { useTranslation } from "react-i18next";
 
 export default function ResumeForm({ resume, afterSubmit }: { resume: Resume; afterSubmit?: () => void }) {
-    const { form, onSubmit } = useResumeForm(resume.id);
+    const { form, onSubmit } = useResumeForm(resume._id);
     const { t } = useTranslation();
 
     return (

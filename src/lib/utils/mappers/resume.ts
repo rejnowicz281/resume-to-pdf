@@ -9,7 +9,7 @@ const mapWorkExperience = (arr: any[]) => {
 
     return arr.map((obj) => {
         return {
-            id: mapString(obj.id) || uniqid(),
+            _id: mapString(obj._id) || uniqid(),
             title: mapString(obj.title),
             company: mapString(obj.company),
             location: mapString(obj.location),
@@ -25,7 +25,7 @@ const mapEducation = (arr: any[]) => {
 
     return arr.map((obj) => {
         return {
-            id: mapString(obj.id) || uniqid(),
+            _id: mapString(obj._id) || uniqid(),
             institution: mapString(obj.institution),
             startDate: mapString(obj.startDate),
             endDate: mapString(obj.endDate),
@@ -41,7 +41,7 @@ const mapLanguages = (arr: any[]) => {
 
     return arr.map((obj) => {
         return {
-            id: mapString(obj.id) || uniqid(),
+            _id: mapString(obj._id) || uniqid(),
             language: mapString(obj.language),
             level: mapString(obj.level)
         };
@@ -53,7 +53,7 @@ const mapTraining = (arr: any[]) => {
 
     return arr.map((obj) => {
         return {
-            id: mapString(obj.id) || uniqid(),
+            _id: mapString(obj._id) || uniqid(),
             name: mapString(obj.name),
             issueDate: mapString(obj.issueDate),
             organization: mapString(obj.organization),
@@ -67,7 +67,7 @@ const mapSkills = (arr: any[]) => {
 
     return arr.map((obj) => {
         return {
-            id: mapString(obj.id) || uniqid(),
+            _id: mapString(obj._id) || uniqid(),
             name: mapString(obj.name)
         };
     });
@@ -78,7 +78,7 @@ const mapActivities = (arr: any[]) => {
 
     return arr.map((obj) => {
         return {
-            id: mapString(obj.id) || uniqid(),
+            _id: mapString(obj._id) || uniqid(),
             name: mapString(obj.name),
             location: mapString(obj.location),
             startDate: mapString(obj.startDate),
@@ -93,7 +93,7 @@ const mapLinks = (arr: any[]) => {
 
     return arr.map((obj) => {
         return {
-            id: mapString(obj.id) || uniqid(),
+            _id: mapString(obj._id) || uniqid(),
             description: mapString(obj.description),
             url: mapString(obj.url)
         };
@@ -102,7 +102,7 @@ const mapLinks = (arr: any[]) => {
 
 export const mapResume = (object: Record<string, any>): Resume => {
     const resume: Resume = {
-        id: mapString(object.id) || uniqid(),
+        _id: mapString(object._id) || uniqid(),
         name: mapString(object.name),
         description: mapString(object.description),
         createdAt: mapString(object.createdAt) || formatTimestamp(new Date()),

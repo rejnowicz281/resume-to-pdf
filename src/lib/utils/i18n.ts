@@ -73,7 +73,7 @@ i18next
                             paste: "You can also paste your JSON data here:",
                             lookLikeTitle: "What should my JSON data look like?",
                             lookLikeDescription:
-                                "Your JSON data should adhere to the following format. <br /> All fields are optional. If some fields are missing (id, creation dates), they will be automatically filled in."
+                                "Your JSON data should adhere to the following format. <br /> All fields are optional. If some fields are missing (_id, creation dates), they will be automatically filled in."
                         }
                     },
                     editResume: {
@@ -378,7 +378,7 @@ i18next
                             paste: "Możesz również wkleić dane JSON tutaj:",
                             lookLikeTitle: "Jak powinny wyglądać dane JSON?",
                             lookLikeDescription:
-                                "Dane JSON powinny być zgodne z poniższym formatem. <br /> Wszystkie pola są opcjonalne. W przypadku braku niektórych pól (id, daty utworzenia) zostaną one uzupełnione automatycznie."
+                                "Dane JSON powinny być zgodne z poniższym formatem. <br /> Wszystkie pola są opcjonalne. W przypadku braku niektórych pól (_id, daty utworzenia) zostaną one uzupełnione automatycznie."
                         }
                     },
                     editResume: {
