@@ -40,7 +40,7 @@ export default function DeleteResume({ resume }: { resume: Resume }) {
                 </AlertDialogHeader>
                 <AlertDialogFooter>
                     <AlertDialogCancel>{t("deleteResume.cancel")}</AlertDialogCancel>
-                    <AlertDialogAction onClick={() => removeResume(resume)}>
+                    <AlertDialogAction onClick={async () => await removeResume(resume)}>
                         {t("deleteResume.delete")}
                     </AlertDialogAction>
                 </AlertDialogFooter>

@@ -129,7 +129,7 @@ export default function Importer({ onSuccess }: { onSuccess?: () => void }) {
                                                 getSampleResume(),
                                                 {
                                                     _id: "sample-resume-2",
-                                                    createdAt: "19.07.2024",
+                                                    createdAt: "19.07.2024 11:00",
                                                     name: "An empty resume",
                                                     description: "This resume is empty."
                                                 }

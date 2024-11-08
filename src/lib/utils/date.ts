@@ -1,6 +1,6 @@
 import i18next from "i18next";
 
-export function formatTimestamp(timestamp: string | Date) {
+export function formatDate(timestamp: string | Date, format: "dd.mm.yyyy" | "dd.mm.yyyy hh:mm" = "dd.mm.yyyy") {
     const date = typeof timestamp === "string" ? new Date(timestamp) : timestamp;
     const day = date.getDate();
     const month = date.getMonth() + 1;
@@ -9,7 +9,20 @@ export function formatTimestamp(timestamp: string | Date) {
     const formattedDay = day < 10 ? `0${day}` : day;
     const formattedMonth = month < 10 ? `0${month}` : month;
 
-    return `${formattedDay}.${formattedMonth}.${year}`;
+    switch (format) {
+        case "dd.mm.yyyy":
+            return `${formattedDay}.${formattedMonth}.${year}`;
+        case "dd.mm.yyyy hh:mm":
+            const hours = date.getHours();
+            const minutes = date.getMinutes();
+
+            const formattedHours = hours < 10 ? `0${hours}` : hours;
+            const formattedMinutes = minutes < 10 ? `0${minutes}` : minutes;
+
+            return `${formattedDay}.${formattedMonth}.${year} ${formattedHours}:${formattedMinutes}`;
+        default:
+            return `${formattedDay}.${formattedMonth}.${year}`;
+    }
 }
 
 export function dateToString(date?: Date, format: "dd.mm.yyyy" | "mm.yyyy" | "yyyy-mm-dd" = "mm.yyyy") {

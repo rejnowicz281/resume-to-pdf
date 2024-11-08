@@ -1,7 +1,7 @@
 import i18next from "i18next";
 import uniqid from "uniqid";
 import { Resume } from "../types/resume";
-import { formatTimestamp } from "../utils/date";
+import { formatDate } from "../utils/date";
 
 export const SAMPLE_RESUME_EN: Resume = {
     _id: "sample-resume",
@@ -101,7 +101,7 @@ export const SAMPLE_RESUME_EN: Resume = {
         { _id: uniqid(), description: "LinkedIn", url: "https://www.linkedin.com/" },
         { _id: uniqid(), description: "GitHub", url: "https://github.com/rejnowicz281" }
     ],
-    createdAt: formatTimestamp(new Date())
+    createdAt: formatDate(new Date(), "dd.mm.yyyy hh:mm")
 };
 
 export const SAMPLE_RESUME_PL: Resume = {
@@ -203,7 +203,7 @@ export const SAMPLE_RESUME_PL: Resume = {
         { _id: uniqid(), description: "LinkedIn", url: "https://www.linkedin.com" },
         { _id: uniqid(), description: "GitHub", url: "https://github.com/rejnowicz281" }
     ],
-    createdAt: formatTimestamp(new Date())
+    createdAt: formatDate(new Date(), "dd.mm.yyyy hh:mm")
 };
 
 export const getSampleResume = () => (i18next.language === "pl-PL" ? SAMPLE_RESUME_PL : SAMPLE_RESUME_EN);

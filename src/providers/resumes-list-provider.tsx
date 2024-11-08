@@ -1,21 +1,21 @@
 import { Resume } from "@/lib/types/resume";
-import { formatTimestamp } from "@/lib/utils/date";
+import { formatDate } from "@/lib/utils/date";
 import { db, getResumes } from "@/lib/utils/db";
 import { createContext, ReactNode, useContext, useEffect, useState } from "react";
 
 export type ResumesListContextType = {
     resumes: Resume[];
     getResume: (id: string) => Resume | undefined;
-    addResume: (resume: Resume) => void;
-    editResume: (resume: Partial<Resume>) => void;
-    removeResume: (id: string) => void;
-    addManyResumes: (resumes: Resume[]) => void;
+    addResume: (resume: Resume) => Promise<void>;
+    editResume: (resume: Partial<Resume>) => Promise<void>;
+    removeResume: (resume: Resume) => Promise<void>;
+    addManyResumes: (resumes: Resume[]) => Promise<void>;
 };
 
 const ResumesListContext = createContext<ResumesListContextType | undefined>(undefined);
 
 export const ResumesListProvider = ({ children }: { children: ReactNode }) => {
-    const [resumes, setResumes] = useState(null);
+    const [resumes, setResumes] = useState<Resume[] | null>(null);
 
     useEffect(() => {
         getResumes().then((resumes) => {
@@ -23,13 +23,14 @@ export const ResumesListProvider = ({ children }: { children: ReactNode }) => {
         });
     }, []);
 
+    // TODO: This shouldn't be here?
+    if (!resumes) return "...";
+
     const getResume = (id: string) => {
         return resumes.find((resume) => resume._id === id);
     };
 
-    const removeResume = (resume: Resume) => {
-        db.remove(resume);
-
+    const removeResume = async (resume: Resume) => {
         const deleteId = resume._id;
 
         setResumes((prev) => {
@@ -37,11 +38,11 @@ export const ResumesListProvider = ({ children }: { children: ReactNode }) => {
 
             return newResumes;
         });
+
+        await db.remove(resume);
     };
 
-    const addResume = (resume: Resume) => {
-        db.put(resume);
-
+    const addResume = async (resume: Resume) => {
         setResumes((prev) => {
             const newResumes = prev;
 
@@ -49,9 +50,11 @@ export const ResumesListProvider = ({ children }: { children: ReactNode }) => {
 
             return [...newResumes];
         });
+
+        await db.put(resume);
     };
 
-    const editResume = (resume: Partial<Resume>) => {
+    const editResume = async (resume: Partial<Resume>) => {
         const _id = resume._id;
 
         if (!_id) return;
@@ -61,23 +64,27 @@ export const ResumesListProvider = ({ children }: { children: ReactNode }) => {
         const index = newResumes.findIndex((resume) => resume._id === _id);
         const newResume = { ...newResumes[index], ...resume };
 
-        db.put(newResume);
-
         newResumes[index] = newResume;
 
         setResumes(newResumes);
+
+        await db.put(newResume);
     };
 
-    const addManyResumes = (resumesArray: Resume[]) => {
+    const addManyResumes = async (resumesArray: Resume[]) => {
         const newResumes = [...resumes];
 
         resumesArray.forEach((resume) => {
             if (newResumes.find((r) => r._id === resume._id))
-                newResumes.push({ ...resume, _id: `${resume._id}-copy`, createdAt: formatTimestamp(new Date()) });
+                newResumes.push({
+                    ...resume,
+                    _id: `${resume._id}-copy`,
+                    createdAt: formatDate(new Date(), "dd.mm.yyyy hh:mm")
+                });
             else newResumes.push(resume);
         });
 
-        db.bulkDocs(resumesArray);
+        await db.bulkDocs(resumesArray);
 
         setResumes(newResumes);
     };

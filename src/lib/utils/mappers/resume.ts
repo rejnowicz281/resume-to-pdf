@@ -1,6 +1,6 @@
 import { Resume } from "@/lib/types/resume";
 import uniqid from "uniqid";
-import { formatTimestamp } from "../date";
+import { formatDate } from "../date";
 
 const mapString = (str: any) => (typeof str === "string" && str.length > 0 ? str : "");
 
@@ -105,7 +105,7 @@ export const mapResume = (object: Record<string, any>): Resume => {
         _id: mapString(object._id) || uniqid(),
         name: mapString(object.name),
         description: mapString(object.description),
-        createdAt: mapString(object.createdAt) || formatTimestamp(new Date()),
+        createdAt: mapString(object.createdAt) || formatDate(new Date(), "dd.mm.yyyy hh:mm"),
         firstName: mapString(object.firstName),
         imageOptions: {
             show: object.imageOptions?.show || false,
