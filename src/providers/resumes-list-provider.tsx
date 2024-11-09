@@ -17,10 +17,19 @@ const ResumesListContext = createContext<ResumesListContextType | undefined>(und
 export const ResumesListProvider = ({ children }: { children: ReactNode }) => {
     const [resumes, setResumes] = useState<Resume[] | null>(null);
 
+    const updateResumes = async () => {
+        const newResumes = await getResumes();
+
+        setResumes(newResumes);
+    };
+
     useEffect(() => {
-        getResumes().then((resumes) => {
-            setResumes(resumes);
-        });
+        updateResumes();
+
+        db.changes({
+            since: "now",
+            live: true
+        }).on("change", () => updateResumes());
     }, []);
 
     const getResume = (id: string) => {

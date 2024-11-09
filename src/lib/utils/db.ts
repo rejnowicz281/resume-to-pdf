@@ -4,6 +4,12 @@ import { Resume } from "../types/resume";
 
 export const db = new PouchDB("resume-to-pdf");
 
+const remoteCouch = "http://alan:123@127.0.0.1:5984/resume-to-pdf";
+
+var opts = { live: true };
+db.replicate.to(remoteCouch, opts);
+db.replicate.from(remoteCouch, opts);
+
 export const getResumes = async () => {
     const resumes = await db.allDocs({ include_docs: true });
 
