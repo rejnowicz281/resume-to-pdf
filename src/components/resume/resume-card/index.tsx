@@ -15,11 +15,7 @@ export default function ResumeCard({ resume }: { resume: Resume }) {
 
     return (
         <Card className="break-words">
-            <Link
-                state={{ resume }}
-                className="hover:text-gray-500 text-center xsm:text-start"
-                to={`/resumes/${resume._id}`}
-            >
+            <Link className="hover:text-gray-500 text-center xsm:text-start" to={`/resumes/${resume._id}`}>
                 <CardHeader>
                     <CardTitle>{getResumeName(resume)}</CardTitle>
                     <CardDescription>

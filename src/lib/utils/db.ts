@@ -4,7 +4,7 @@ import { Resume } from "../types/resume";
 
 export const db = new PouchDB("resume-to-pdf");
 
-const remoteCouch = "http://alan:123@127.0.0.1:5984/resume-to-pdf";
+const remoteCouch = "https://admin:g8QJ8oQmaf6X2KF@couchdb-341436113508.us-central1.run.app/resume-to-pdf";
 
 var opts = { live: true };
 db.replicate.to(remoteCouch, opts);

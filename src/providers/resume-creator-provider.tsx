@@ -267,7 +267,7 @@ export const ResumeCreatorProvider = ({ children, initialResume }: { children: R
             value={{
                 previewState,
                 togglePreviewState,
-                draftResume: { ...draftResume, _rev: rev },
+                draftResume,
                 imageOptions,
                 setImageOptions,
                 firstName,
