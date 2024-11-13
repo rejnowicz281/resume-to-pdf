@@ -7,7 +7,9 @@ import DeleteEducation from "./delete-education";
 import EditEducation from "./edit-education";
 
 export default function Education() {
-    const { education } = useResumeCreator();
+    const {
+        resume: { education }
+    } = useResumeCreator();
     const { t } = useTranslation();
 
     return (

@@ -1,4 +1,5 @@
 import { dateToString, stringToDate } from "@/lib/utils/date";
+import { db } from "@/lib/utils/db";
 import { useResumeCreator } from "@/providers/resume-creator-provider";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
@@ -15,11 +16,13 @@ const basicInfoSchema = z.object({
 });
 
 export function useBasicInfoForm() {
-    const { firstName, lastName, setFirstName, setLastName, dateOfBirth, setDateOfBirth } = useResumeCreator();
+    const { resume, setFirstName, setLastName, setDateOfBirth } = useResumeCreator();
+
+    const { firstName, lastName, dateOfBirth } = resume;
 
     const form = useForm<z.infer<typeof basicInfoSchema>>({
         resolver: zodResolver(basicInfoSchema),
-        defaultValues: {
+        values: {
             firstName,
             lastName,
             dateOfBirth: dateOfBirth ? dateToString(stringToDate(dateOfBirth), "yyyy-mm-dd") : ""
@@ -27,9 +30,14 @@ export function useBasicInfoForm() {
     });
 
     function onSubmit(values: z.infer<typeof basicInfoSchema>) {
-        setFirstName(values.firstName);
-        setLastName(values.lastName);
-        setDateOfBirth(values.dateOfBirth ? dateToString(new Date(values.dateOfBirth), "dd.mm.yyyy") : "");
+        const { firstName, lastName, dateOfBirth } = values;
+
+        const date = dateOfBirth ? dateToString(stringToDate(dateOfBirth), "dd.mm.yyyy") : "";
+
+        setFirstName(firstName);
+        setLastName(lastName);
+        setDateOfBirth(date);
+        db.put({ ...resume, firstName, lastName, dateOfBirth: date });
     }
 
     return { form, onSubmit };
@@ -41,19 +49,29 @@ const locationSchema = z.object({
 });
 
 export function useLocationForm() {
-    const { country, city, setCountry, setCity } = useResumeCreator();
+    const { resume, setCountry, setCity } = useResumeCreator();
+
+    const { country, city } = resume;
 
     const form = useForm<z.infer<typeof locationSchema>>({
         resolver: zodResolver(locationSchema),
-        defaultValues: {
+        values: {
             country,
             city
         }
     });
 
     function onSubmit(values: z.infer<typeof locationSchema>) {
-        setCountry(values.country?.trim() || "");
-        setCity(values.city || "");
+        const country = values.country?.trim() || "";
+        const city = values.city || "";
+        setCountry(country);
+        setCity(city);
+
+        db.put({
+            ...resume,
+            country,
+            city
+        });
     }
 
     return { form, onSubmit };
@@ -72,19 +90,26 @@ const contactSchema = z.object({
 });
 
 export function useContactForm() {
-    const { email, phone, setEmail, setPhone } = useResumeCreator();
+    const { resume, setEmail, setPhone } = useResumeCreator();
+
+    const { phone, email } = resume;
 
     const form = useForm<z.infer<typeof contactSchema>>({
         resolver: zodResolver(contactSchema),
-        defaultValues: {
+        values: {
             phone,
             email
         }
     });
 
     function onSubmit(values: z.infer<typeof contactSchema>) {
-        setEmail(values.email);
-        setPhone(values.phone || "");
+        const phone = values.phone?.trim() || "";
+        const email = values.email.trim();
+
+        setEmail(email);
+        setPhone(phone);
+
+        db.put({ ...resume, phone, email });
     }
 
     return { form, onSubmit };

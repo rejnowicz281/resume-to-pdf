@@ -7,7 +7,9 @@ import DeleteExperience from "./delete-experience";
 import EditExperience from "./edit-experience";
 
 export default function WorkExperience() {
-    const { workExperience } = useResumeCreator();
+    const {
+        resume: { workExperience }
+    } = useResumeCreator();
     const { t } = useTranslation();
 
     return (

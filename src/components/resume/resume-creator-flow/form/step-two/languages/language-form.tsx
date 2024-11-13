@@ -46,7 +46,7 @@ export default function LanguageForm({ language, afterSubmit }: { language?: Lan
                         <FormItem>
                             <FormLabel>{t("resumeCreator.stepTwo.languageForm.level")} *</FormLabel>
                             <FormControl>
-                                <Select onValueChange={field.onChange} defaultValue={field.value}>
+                                <Select onValueChange={field.onChange} value={field.value}>
                                     <SelectTrigger>
                                         <SelectValue
                                             placeholder={t("resumeCreator.stepTwo.languageForm.levelPlaceholder")}

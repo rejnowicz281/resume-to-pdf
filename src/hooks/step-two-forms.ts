@@ -22,8 +22,9 @@ export function useWorkExperienceForm(initialExperience?: WorkExperience) {
 
     const form = useForm<z.infer<typeof workExperienceSchema>>({
         resolver: zodResolver(workExperienceSchema),
-        defaultValues: {
+        values: {
             ...initialExperience,
+            title: initialExperience?.title || "",
             startDate: initialExperience?.startDate
                 ? dateToString(stringToDate(initialExperience.startDate), "yyyy-mm-dd")
                 : "",
@@ -75,8 +76,10 @@ export function useEducationForm(initialEducation?: Education) {
 
     const form = useForm<z.infer<typeof educationSchema>>({
         resolver: zodResolver(educationSchema),
-        defaultValues: {
+        values: {
             ...initialEducation,
+            institution: initialEducation?.institution || "",
+            level: initialEducation?.level || "",
             startDate: initialEducation?.startDate
                 ? dateToString(stringToDate(initialEducation.startDate), "yyyy-mm-dd")
                 : "",
@@ -122,7 +125,7 @@ export const useLanguageForm = (initialLanguage?: Language) => {
 
     const form = useForm<z.infer<typeof languageSchema>>({
         resolver: zodResolver(languageSchema),
-        defaultValues: initialLanguage
+        values: initialLanguage
     });
 
     const onSubmit = (values: z.infer<typeof languageSchema>) => {
@@ -152,8 +155,10 @@ export const useTrainingForm = (initialTraining?: Training) => {
 
     const form = useForm<z.infer<typeof trainingSchema>>({
         resolver: zodResolver(trainingSchema),
-        defaultValues: {
+        values: {
             ...initialTraining,
+            name: initialTraining?.name || "",
+            organization: initialTraining?.organization || "",
             issueDate: initialTraining?.issueDate
                 ? dateToString(stringToDate(initialTraining.issueDate), "yyyy-mm-dd")
                 : ""

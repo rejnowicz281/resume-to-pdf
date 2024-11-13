@@ -6,7 +6,9 @@ import DeleteTraining from "./delete-training";
 import EditTraining from "./edit-training";
 
 export default function Training() {
-    const { training } = useResumeCreator();
+    const {
+        resume: { training }
+    } = useResumeCreator();
     const { t } = useTranslation();
 
     return (

@@ -10,17 +10,13 @@ import { useParams } from "react-router-dom";
 
 export default function ResumePage() {
     const { id } = useParams();
-    const [resume, setResume] = useState<Resume | null>(null);
-
-    const initializeResume = () => setResume(newEmptyResume());
+    const [resume, setResume] = useState<Resume>({} as Resume);
 
     const getResumeFromDb = async () => {
-        if (!id) return;
-
-        const resume = await getResumeById(id);
+        const resume = await getResumeById(id || "");
 
         if (!resume) {
-            initializeResume();
+            setResume(newEmptyResume());
             return;
         }
 
@@ -28,13 +24,7 @@ export default function ResumePage() {
     };
 
     useEffect(() => {
-        if (!id) initializeResume();
-        else {
-            getResumeById(id).then((resume) => {
-                if (!resume) initializeResume();
-                else setResume(resume);
-            });
-        }
+        getResumeFromDb();
 
         db.changes({
             since: "now",
@@ -45,10 +35,10 @@ export default function ResumePage() {
         });
     }, [id]);
 
-    if (!resume) return <Loading />;
+    if (!Object.keys(resume).length) return <Loading />;
 
     return (
-        <ResumeCreatorProvider initialResume={resume}>
+        <ResumeCreatorProvider resume={resume} setResume={setResume}>
             <div className="flex flex-1">
                 <ResumePDF />
 

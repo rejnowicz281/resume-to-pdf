@@ -1,5 +1,6 @@
 import { Activity, ActivityNoId, Link } from "@/lib/types/resume";
 import { dateToString, stringToDate } from "@/lib/utils/date";
+import { db } from "@/lib/utils/db";
 import { withID } from "@/lib/utils/general";
 import { useResumeCreator } from "@/providers/resume-creator-provider";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -46,8 +47,9 @@ export function useActivityForm(initialActivity?: Activity) {
 
     const form = useForm<z.infer<typeof activitySchema>>({
         resolver: zodResolver(activitySchema),
-        defaultValues: {
+        values: {
             ...initialActivity,
+            name: initialActivity?.name || "",
             startDate: initialActivity?.startDate
                 ? dateToString(stringToDate(initialActivity.startDate), "yyyy-mm-dd")
                 : "",
@@ -83,17 +85,26 @@ const interestsSchema = z.object({
 });
 
 export function useInterestsForm() {
-    const { setInterests, interests } = useResumeCreator();
+    const { setInterests, resume } = useResumeCreator();
+
+    const { interests } = resume;
 
     const form = useForm<z.infer<typeof interestsSchema>>({
         resolver: zodResolver(interestsSchema),
-        defaultValues: {
+        values: {
             interests
         }
     });
 
     function onSubmit(values: z.infer<typeof interestsSchema>) {
-        setInterests(values.interests || "");
+        const interests = values.interests || "";
+
+        setInterests(interests);
+
+        db.put({
+            ...resume,
+            interests
+        });
     }
 
     return { form, onSubmit };
@@ -109,7 +120,7 @@ export function useLinkForm(initialLink?: Link) {
 
     const form = useForm<z.infer<typeof linkSchema>>({
         resolver: zodResolver(linkSchema),
-        defaultValues: initialLink
+        values: initialLink
     });
 
     function onSubmit(values: z.infer<typeof linkSchema>) {

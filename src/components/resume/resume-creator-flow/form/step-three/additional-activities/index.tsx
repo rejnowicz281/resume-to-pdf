@@ -7,7 +7,9 @@ import DeleteActivity from "./delete-activity";
 import EditActivity from "./edit-activity";
 
 export default function Activities() {
-    const { activities } = useResumeCreator();
+    const {
+        resume: { activities }
+    } = useResumeCreator();
     const { t } = useTranslation();
 
     return (

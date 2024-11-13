@@ -12,7 +12,7 @@ import "react-pdf/dist/esm/Page/AnnotationLayer.css";
 import "react-pdf/dist/esm/Page/TextLayer.css";
 
 export default function ResumePDF() {
-    const { draftResume, previewState } = useResumeCreator();
+    const { resume, previewState } = useResumeCreator();
     const containerRef = useRef<HTMLDivElement>(null);
     const [width, setWidth] = useState(200);
     const [numPages, setNumPages] = useState(1);
@@ -59,7 +59,7 @@ export default function ResumePDF() {
             )}
         >
             <div className={cn("absolute inset-0 overflow-x-hidden overflow-y-auto", numPages > 1 && "pb-9")}>
-                <BlobProvider document={<ResumeDocument resume={draftResume} />}>
+                <BlobProvider document={<ResumeDocument resume={resume} />}>
                     {({ loading, url, blob }) => {
                         return loading || !blob ? (
                             <Loading />

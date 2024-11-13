@@ -6,7 +6,9 @@ import { useTranslation } from "react-i18next";
 
 const ImagePicker = () => {
     const {
-        imageOptions: { show, url },
+        resume: {
+            imageOptions: { show, url }
+        },
         setImageOptions
     } = useResumeCreator();
     const inputRef = useRef<HTMLInputElement>(null);

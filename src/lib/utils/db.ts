@@ -4,7 +4,7 @@ import { Resume } from "../types/resume";
 
 export const db = new PouchDB("resume-to-pdf");
 
-const remoteCouch = "https://admin:g8QJ8oQmaf6X2KF@couchdb-341436113508.us-central1.run.app/resume-to-pdf";
+const remoteCouch = "http://alan:123@localhost:5984/resume-to-pdf";
 
 var opts = { live: true };
 db.replicate.to(remoteCouch, opts);
@@ -14,7 +14,7 @@ export const getResumes = async () => {
     const resumes = await db.allDocs({ include_docs: true });
 
     if (resumes.total_rows === 0) {
-        const sampleResume = getSampleResume();
+        const sampleResume = getSampleResume() as Resume;
         const newRes = await db.put(sampleResume);
 
         return [{ ...sampleResume, _rev: newRes.rev }];

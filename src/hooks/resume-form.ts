@@ -16,7 +16,7 @@ export function useResumeForm(_id: string) {
 
     const form = useForm<z.infer<typeof resumeSchema>>({
         resolver: zodResolver(resumeSchema),
-        defaultValues: {
+        values: {
             name: resume?.name,
             description: resume?.description
         }

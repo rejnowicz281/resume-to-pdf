@@ -6,7 +6,9 @@ import DeleteLink from "./delete-link";
 import EditLink from "./edit-link";
 
 export default function Links() {
-    const { links } = useResumeCreator();
+    const {
+        resume: { links }
+    } = useResumeCreator();
     const { t } = useTranslation();
 
     return (

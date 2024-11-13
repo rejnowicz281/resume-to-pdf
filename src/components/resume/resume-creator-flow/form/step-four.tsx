@@ -6,14 +6,14 @@ import DownloadPdfButton from "../../download-pdf-button";
 
 export default function StepFour() {
     const { t } = useTranslation();
-    const { draftResume } = useResumeCreator();
+    const { resume } = useResumeCreator();
 
     return (
         <div className="flex flex-col flex-1 justify-center items-center gap-6">
             <h1 className="text-4xl md:text-6xl text-center">{t("resumeCreator.stepFour.title")}</h1>
             <p className="text-gray-500 text-sm md:text-base text-center">{t("resumeCreator.stepFour.description")}</p>
             <DownloadPdfButton
-                resume={draftResume}
+                resume={resume}
                 content={(loading: boolean) => (
                     <Button
                         disabled={loading}

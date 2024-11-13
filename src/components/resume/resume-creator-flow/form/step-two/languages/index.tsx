@@ -6,7 +6,9 @@ import DeleteLanguage from "./delete-language";
 import EditLanguage from "./edit-language";
 
 export default function Languages() {
-    const { languages } = useResumeCreator();
+    const {
+        resume: { languages }
+    } = useResumeCreator();
     const { t } = useTranslation();
 
     return (

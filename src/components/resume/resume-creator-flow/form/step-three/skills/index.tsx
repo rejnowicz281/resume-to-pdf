@@ -5,7 +5,10 @@ import { useTranslation } from "react-i18next";
 import SkillForm from "./skill-form";
 
 export default function Skills() {
-    const { skills, removeSkill } = useResumeCreator();
+    const {
+        resume: { skills },
+        removeSkill
+    } = useResumeCreator();
     const { t } = useTranslation();
 
     return (

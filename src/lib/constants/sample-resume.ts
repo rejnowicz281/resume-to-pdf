@@ -3,7 +3,7 @@ import uniqid from "uniqid";
 import { Resume } from "../types/resume";
 import { formatDate } from "../utils/date";
 
-export const SAMPLE_RESUME_EN: Resume = {
+export const SAMPLE_RESUME_EN: Partial<Resume> = {
     _id: "sample-resume",
     imageOptions: {
         show: false,
@@ -104,7 +104,7 @@ export const SAMPLE_RESUME_EN: Resume = {
     createdAt: formatDate(new Date(), "dd.mm.yyyy hh:mm")
 };
 
-export const SAMPLE_RESUME_PL: Resume = {
+export const SAMPLE_RESUME_PL: Partial<Resume> = {
     _id: "sample-resume",
     imageOptions: {
         show: false,

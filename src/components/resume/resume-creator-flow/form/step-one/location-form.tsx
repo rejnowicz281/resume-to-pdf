@@ -23,7 +23,7 @@ export function LocationForm() {
                             <FormItem>
                                 <FormLabel>{t("resumeCreator.stepOne.locationForm.country")}</FormLabel>
                                 <FormControl>
-                                    <Select onValueChange={field.onChange} defaultValue={field.value || ""}>
+                                    <Select onValueChange={field.onChange} value={field.value || ""}>
                                         <SelectTrigger>
                                             <SelectValue
                                                 placeholder={t("resumeCreator.stepOne.locationForm.countryPlaceholder")}
