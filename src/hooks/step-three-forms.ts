@@ -1,7 +1,7 @@
 import { Activity, ActivityNoId, Link } from "@/lib/types/resume";
 import { dateToString, stringToDate } from "@/lib/utils/date";
-import { db } from "@/lib/utils/db";
 import { withID } from "@/lib/utils/general";
+import { usePouchDB } from "@/providers/pouchdb-provider";
 import { useResumeCreator } from "@/providers/resume-creator-provider";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useEffect } from "react";
@@ -86,6 +86,7 @@ const interestsSchema = z.object({
 
 export function useInterestsForm() {
     const { setInterests, resume } = useResumeCreator();
+    const { db } = usePouchDB();
 
     const { interests } = resume;
 

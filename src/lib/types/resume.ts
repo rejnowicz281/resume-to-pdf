@@ -73,7 +73,7 @@ export type LinkNoId = Omit<Link, "_id">;
 
 export type Resume = {
     _id: string;
-    _rev: string;
+    _rev?: string;
     name: string;
     createdAt: string;
     description: string;

@@ -1,32 +1,37 @@
-import PouchDB from "pouchdb";
-import { getSampleResume } from "../constants/sample-resume";
-import { Resume } from "../types/resume";
+import { couchAPI } from "./axios";
 
-export const db = new PouchDB("resume-to-pdf");
+export const login = async (name: string, password: string) => {
+    try {
+        const res = await couchAPI.post("_session", { name, password });
+        console.log("post _session response", res);
 
-const remoteCouch = "http://alan:123@localhost:5984/resume-to-pdf";
-
-var opts = { live: true };
-db.replicate.to(remoteCouch, opts);
-db.replicate.from(remoteCouch, opts);
-
-export const getResumes = async () => {
-    const resumes = await db.allDocs({ include_docs: true });
-
-    if (resumes.total_rows === 0) {
-        const sampleResume = getSampleResume() as Resume;
-        const newRes = await db.put(sampleResume);
-
-        return [{ ...sampleResume, _rev: newRes.rev }];
+        return res.data;
+    } catch (error: any) {
+        console.error("Login failed", error.response.data);
+        throw error;
     }
-
-    return resumes.rows.map((row) => row.doc) as Resume[];
 };
 
-export const getResumeById = async (_id: string) => {
+export const logout = async () => {
     try {
-        return (await db.get(_id)) as Resume;
-    } catch (error) {
-        return null;
+        const res = await couchAPI.delete("_session");
+        console.log("delete _session response", res);
+
+        return res.data;
+    } catch (error: any) {
+        console.error("Logout failed", error.response.data);
+        throw error;
+    }
+};
+
+export const authenticate = async () => {
+    try {
+        const res = await couchAPI.get("_session");
+        console.log("get _session response", res);
+
+        return res.data;
+    } catch (error: any) {
+        console.error("Authentication failed", error.response.data);
+        throw error;
     }
 };

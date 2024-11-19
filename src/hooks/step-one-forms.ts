@@ -1,5 +1,5 @@
 import { dateToString, stringToDate } from "@/lib/utils/date";
-import { db } from "@/lib/utils/db";
+import { usePouchDB } from "@/providers/pouchdb-provider";
 import { useResumeCreator } from "@/providers/resume-creator-provider";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
@@ -17,6 +17,7 @@ const basicInfoSchema = z.object({
 
 export function useBasicInfoForm() {
     const { resume, setFirstName, setLastName, setDateOfBirth } = useResumeCreator();
+    const { db } = usePouchDB();
 
     const { firstName, lastName, dateOfBirth } = resume;
 
@@ -50,6 +51,7 @@ const locationSchema = z.object({
 
 export function useLocationForm() {
     const { resume, setCountry, setCity } = useResumeCreator();
+    const { db } = usePouchDB();
 
     const { country, city } = resume;
 
@@ -91,6 +93,7 @@ const contactSchema = z.object({
 
 export function useContactForm() {
     const { resume, setEmail, setPhone } = useResumeCreator();
+    const { db } = usePouchDB();
 
     const { phone, email } = resume;
 

@@ -1,9 +1,12 @@
 import DownloadResumesButton from "@/components/resume/download-resumes-button";
+import { Button } from "@/components/ui/button";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { useAuth } from "@/providers/auth-provider";
 import { useTranslation } from "react-i18next";
 
 export default function SettingsPage() {
     const { t, i18n } = useTranslation();
+    const { login, register, logout, user } = useAuth();
 
     return (
         <div className="flex-1 flex justify-center">
@@ -12,6 +15,34 @@ export default function SettingsPage() {
                     <h1 className="text-3xl font-semibold">{t("settings")}</h1>
                 </div>
                 <div className="flex flex-col gap-8">
+                    <div className="flex flex-col gap-4 items-start">
+                        <div className="flex flex-col gap-1">
+                            <h2 className="font-semibold text-xl">Register</h2>
+                            <p className="text-gray-500 dark:text-gray-400">
+                                Make a new account to sync your resumes across devices
+                            </p>
+                        </div>
+                        <Button onClick={async () => await register("defaulter", "123")}>Register</Button>
+                    </div>
+
+                    <div className="flex flex-col gap-4 items-start">
+                        <div className="flex flex-col gap-1">
+                            <h2 className="font-semibold text-xl">{user ? "Log out" : "Log in"}</h2>
+                            <p className="text-gray-500 dark:text-gray-400">
+                                {user ? (
+                                    <>
+                                        Logged in as <b>{user.name}</b>
+                                    </>
+                                ) : (
+                                    "Log in to sync your resumes across devices"
+                                )}
+                            </p>
+                        </div>
+                        <Button onClick={async () => (user ? await logout() : await login("default", "123"))}>
+                            {user ? "Log out" : "Log in"}
+                        </Button>
+                    </div>
+
                     <div className="flex flex-col gap-4 items-start">
                         <div className="flex flex-col gap-1">
                             <h2 className="font-semibold text-xl">{t("settingsPage.downloadResumes")}</h2>

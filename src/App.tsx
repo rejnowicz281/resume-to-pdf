@@ -6,6 +6,8 @@ import ThemeButton from "./components/general/theme-button";
 import HomePage from "./pages";
 import ResumePage from "./pages/resume";
 import SettingsPage from "./pages/settings";
+import { AuthProvider } from "./providers/auth-provider";
+import { PouchDBProvider } from "./providers/pouchdb-provider";
 import { ResumesListProvider } from "./providers/resumes-list-provider";
 
 pdfjs.GlobalWorkerOptions.workerSrc = new URL("pdfjs-dist/build/pdf.worker.min.mjs", import.meta.url).toString();
@@ -19,16 +21,26 @@ export default function App() {
                     <Routes>
                         <Route
                             element={
-                                <ResumesListProvider>
-                                    <SettingsButton />
-                                    <Outlet />
-                                </ResumesListProvider>
+                                <AuthProvider>
+                                    <PouchDBProvider>
+                                        <Outlet />
+                                    </PouchDBProvider>
+                                </AuthProvider>
                             }
                         >
-                            <Route path="/" element={<HomePage />} />
-                            <Route path="/settings" element={<SettingsPage />} />
+                            <Route
+                                element={
+                                    <ResumesListProvider>
+                                        <SettingsButton />
+                                        <Outlet />
+                                    </ResumesListProvider>
+                                }
+                            >
+                                <Route path="/" element={<HomePage />} />
+                                <Route path="/settings" element={<SettingsPage />} />
+                            </Route>
+                            <Route path="/resumes/:id" element={<ResumePage />} />
                         </Route>
-                        <Route path="/resumes/:id" element={<ResumePage />} />
                     </Routes>
                 </BrowserRouter>
             </ThemeProvider>

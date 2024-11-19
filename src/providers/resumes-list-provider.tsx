@@ -1,7 +1,7 @@
 import { Resume } from "@/lib/types/resume";
 import { formatDate } from "@/lib/utils/date";
-import { db, getResumes } from "@/lib/utils/db";
 import { createContext, ReactNode, useContext, useEffect, useState } from "react";
+import { usePouchDB } from "./pouchdb-provider";
 
 export type ResumesListContextType = {
     resumes: Resume[] | null;
@@ -16,6 +16,7 @@ const ResumesListContext = createContext<ResumesListContextType | undefined>(und
 
 export const ResumesListProvider = ({ children }: { children: ReactNode }) => {
     const [resumes, setResumes] = useState<Resume[] | null>(null);
+    const { db, getResumes } = usePouchDB();
 
     const updateResumes = async () => {
         const newResumes = await getResumes();
@@ -26,10 +27,20 @@ export const ResumesListProvider = ({ children }: { children: ReactNode }) => {
     useEffect(() => {
         updateResumes();
 
-        db.changes({
-            since: "now",
-            live: true
-        }).on("change", () => updateResumes());
+        const changes = db
+            .changes({
+                since: "now",
+                live: true
+            })
+            .on("change", (res) => {
+                console.log("Resumes list changed", res);
+                updateResumes();
+            });
+
+        return () => {
+            console.log("Cancelling resumes list changes");
+            changes.cancel();
+        };
     }, []);
 
     const getResume = (id: string) => {

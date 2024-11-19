@@ -1,5 +1,6 @@
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { Button } from "@/components/ui/button";
+import { Textarea } from "@/components/ui/textarea";
 import { getSampleResume } from "@/lib/constants/sample-resume";
 import { Resume } from "@/lib/types/resume";
 import { mapResume } from "@/lib/utils/mappers/resume";
@@ -7,6 +8,7 @@ import { useResumesList } from "@/providers/resumes-list-provider";
 import { FileJson2 } from "lucide-react";
 import { useRef, useState } from "react";
 import { Trans, useTranslation } from "react-i18next";
+import uniqid from "uniqid";
 
 export default function Importer({ onSuccess }: { onSuccess?: () => void }) {
     const { addManyResumes } = useResumesList();
@@ -45,7 +47,7 @@ export default function Importer({ onSuccess }: { onSuccess?: () => void }) {
             const array = Array.isArray(parsed) ? parsed : [parsed];
 
             return array.map((resume: Record<string, any>) => {
-                return mapResume(resume);
+                return mapResume({ ...resume, _id: uniqid() });
             });
         } catch (error) {
             alert("Failed to parse JSON data\n" + error);
@@ -99,11 +101,7 @@ export default function Importer({ onSuccess }: { onSuccess?: () => void }) {
                         <span className="text-sm text-zinc-500 dark:text-zinc-400">
                             {t("resumeJsonImport.importer.paste")}
                         </span>
-                        <textarea
-                            value={jsonInput}
-                            onChange={(e) => setJsonInput(e.target.value)}
-                            className="w-full p-2 mt-2 border border-gray-300 rounded-md"
-                        />
+                        <Textarea value={jsonInput} onChange={(e) => setJsonInput(e.target.value)} />
                         <Button
                             onClick={() => {
                                 const parsed = parseJSON(jsonInput);
@@ -129,7 +127,6 @@ export default function Importer({ onSuccess }: { onSuccess?: () => void }) {
                                                 getSampleResume(),
                                                 {
                                                     _id: "sample-resume-2",
-                                                    createdAt: "19.07.2024 11:00",
                                                     name: "An empty resume",
                                                     description: "This resume is empty."
                                                 }

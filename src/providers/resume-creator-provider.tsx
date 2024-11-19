@@ -15,9 +15,9 @@ import {
     WorkExperience,
     WorkExperienceNoId
 } from "@/lib/types/resume";
-import { db } from "@/lib/utils/db";
 import React, { createContext, ReactNode, useContext, useState } from "react";
 import { useTranslation } from "react-i18next";
+import { usePouchDB } from "./pouchdb-provider";
 
 export type ResumeCreatorContextType = {
     previewState: boolean;
@@ -80,6 +80,7 @@ export const ResumeCreatorProvider = ({
     setResume: React.Dispatch<React.SetStateAction<Resume>>;
 }) => {
     const { t } = useTranslation();
+    const { db } = usePouchDB();
 
     const [previewState, setPreviewState] = useState(false);
 
