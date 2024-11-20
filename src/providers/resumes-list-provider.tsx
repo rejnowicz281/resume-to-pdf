@@ -109,9 +109,9 @@ export const ResumesListProvider = ({ children }: { children: ReactNode }) => {
             else newResumes.push(resume);
         });
 
-        await db.bulkDocs(resumesArray);
-
         setResumes(newResumes);
+
+        await db.bulkDocs(resumesArray);
     };
 
     return (
