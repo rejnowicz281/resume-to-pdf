@@ -1,5 +1,5 @@
 import { Button } from "@/components/ui/button";
-import { Form, FormControl, FormField, FormItem, FormLabel } from "@/components/ui/form";
+import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { UseFormReturn } from "react-hook-form";
 import { TypeOf, ZodObject, ZodString, ZodTypeAny } from "zod";
@@ -61,6 +61,7 @@ export default function AuthForm({
                                 <FormControl className="col-span-3">
                                     <Input placeholder="John Doe" {...field} />
                                 </FormControl>
+                                <FormMessage className="col-start-2 pl-3 py-1 col-span-3 !text-red-500 text-sm" />
                             </FormItem>
                         )}
                     />
@@ -75,6 +76,7 @@ export default function AuthForm({
                                     className="col-span-3"
                                     field={field}
                                 />
+                                <FormMessage className="col-start-2 pl-3 py-1 col-span-3 !text-red-500 text-sm" />
                             </FormItem>
                         )}
                     />
