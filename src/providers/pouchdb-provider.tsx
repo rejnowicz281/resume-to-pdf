@@ -1,5 +1,6 @@
 import { getSampleResume } from "@/lib/constants/sample-resume";
 import { Resume } from "@/lib/types/resume";
+import { COUCHDB_URL } from "@/lib/utils/config";
 import { newEmptyResume } from "@/lib/utils/resume";
 import PouchDB from "pouchdb";
 import { createContext, ReactNode, useContext, useEffect, useState } from "react";
@@ -20,7 +21,7 @@ export const PouchDBProvider = ({ children }: { children: ReactNode }) => {
 
     useEffect(() => {
         if (user) {
-            const remoteCouch = `https://custom-couchdb-railway-template-production.up.railway.app/resumes-${user.name}`;
+            const remoteCouch = `${COUCHDB_URL}/resumes-${user.name}`;
 
             const sync = db
                 .sync(remoteCouch, { live: true, retry: true })
