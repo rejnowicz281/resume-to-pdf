@@ -1,7 +1,8 @@
 import axios from "axios";
+import { COUCHDB_URL, EXPRESS_URL } from "./config";
 
 export const couchAPI = axios.create({
-    baseURL: "https://custom-couchdb-railway-template-production.up.railway.app",
+    baseURL: COUCHDB_URL,
     withCredentials: true,
     headers: {
         "Content-Type": "application/json"
@@ -9,7 +10,7 @@ export const couchAPI = axios.create({
 });
 
 export const expressAPI = axios.create({
-    baseURL: "https://calm-anchorage-52600-ec637b7ee2c6.herokuapp.com",
+    baseURL: EXPRESS_URL,
     withCredentials: true,
     headers: {
         "Content-Type": "application/json"
