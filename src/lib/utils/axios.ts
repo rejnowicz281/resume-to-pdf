@@ -9,7 +9,7 @@ export const couchAPI = axios.create({
 });
 
 export const expressAPI = axios.create({
-    baseURL: "https://gentle-thicket-79000-425b824260de.herokuapp.com",
+    baseURL: "https://calm-anchorage-52600-ec637b7ee2c6.herokuapp.com",
     withCredentials: true,
     headers: {
         "Content-Type": "application/json"
