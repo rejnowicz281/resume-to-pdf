@@ -20,7 +20,7 @@ export const PouchDBProvider = ({ children }: { children: ReactNode }) => {
 
     useEffect(() => {
         if (user) {
-            const remoteCouch = `http://localhost:5984/resumes-${user.name}`;
+            const remoteCouch = `https://custom-couchdb-railway-template-production.up.railway.app/resumes-${user.name}`;
 
             const sync = db
                 .sync(remoteCouch, { live: true, retry: true })
