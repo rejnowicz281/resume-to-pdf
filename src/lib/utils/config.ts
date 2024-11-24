@@ -5,7 +5,7 @@ export const COUCHDB_URL =
 
 export const EXPRESS_URL =
     process.env.NODE_ENV === "production"
-        ? "https://calm-anchorage-52600-ec637b7ee2c6.herokuapp.com"
+        ? "https://resume-to-pdf-api-bd4378b476af.herokuapp.com"
         : "http://localhost:3000";
 
 export const GITHUB_CLIENT_ID = "Ov23liY5r3YBvIlRbbe3";
