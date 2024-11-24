@@ -49,14 +49,22 @@ For the components, the **shadcn** component library was used. For the icons, th
 -   [x] JSON Export/Import
 -   [x] Localization
 -   [x] PWA Offline Functionality
+-   [x] PouchDB/CouchDB integration
 -   [ ] Cover Letters
 -   [ ] Multiple PDF themes
 
-## Local Storage
+## PouchDB/CouchDB real-time synchronization
 
-The project uses **localStorage** to store the resumes.
-This means that the resumes are stored in the browser's local storage and are not shared with any server. This also means that the resumes are not available on other devices.\
-To transport your resumes to another device, you can download them as a JSON file and then import them on another device. Although not the most convenient, it is the only option available at the moment. Might add a dedicated server to store the resumes in the future.
+The project integrates **PouchDB** and **CouchDB** databases for remote replication and synchronization. This means that your resumes are stored locally in the browser's PouchDB database and synchronized with a remote CouchDB server after logging in. This allows you to access your resumes from any device with changes shown in real-time, as long as you are logged in.
+
+To transport your resumes to another device, you can also download them as a JSON file and then import them on another device.
+
+## Authentication
+
+The project uses access and refresh tokens for authentication.\
+The access token is stored in memory and the refresh token is stored in a secure HTTP-only cookie.\
+The refresh token is used to generate a new access token when the old one expires.
+You can log in after registering an account with a unique username and a password.
 
 ## Localization
 

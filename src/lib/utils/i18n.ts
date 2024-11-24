@@ -74,7 +74,7 @@ i18next
                             paste: "You can also paste your JSON data here:",
                             lookLikeTitle: "What should my JSON data look like?",
                             lookLikeDescription:
-                                "Your JSON data should adhere to the following format. <br /> All fields are optional. If some fields are missing (_id, creation dates), they will be automatically filled in."
+                                "Your JSON data should adhere to the following format. <br /> All fields are optional. Some fields like (_id, creation dates) will be automatically filled in if missing."
                         }
                     },
                     editResume: {
