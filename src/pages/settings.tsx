@@ -29,7 +29,7 @@ export default function SettingsPage() {
                                 )}
                             </p>
                         </div>
-                        {user ? <Button onClick={logout}>{t("logOut")}</Button> : <AuthDialog />}
+                        {user ? <Button onClick={logout}>{t("logout")}</Button> : <AuthDialog />}
                     </div>
 
                     <div className="flex flex-col gap-4 items-start">

@@ -12,6 +12,7 @@ i18next
         resources: {
             en: {
                 translation: {
+                    logout: "Logout",
                     page: "Page",
                     complete: "Complete",
                     created: "Created",
