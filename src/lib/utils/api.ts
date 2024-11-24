@@ -61,3 +61,22 @@ export const apiRefresh = async () => {
         return error.response;
     }
 };
+
+export const apiGithubLogin = async (code: string) => {
+    try {
+        const tokenRes = await API.post("github/token", { code });
+
+        debug.log("post express github token response", tokenRes);
+
+        if (!tokenRes.data.token) throw new Error("Could not get github access token");
+
+        const loginRes = await API.post("github/login", { access_token: tokenRes.data.token });
+
+        debug.log("post express github login response", loginRes);
+
+        return loginRes;
+    } catch (error: any) {
+        debug.error("Github token failed", error.response.data);
+        return error.response;
+    }
+};

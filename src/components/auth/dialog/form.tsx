@@ -1,56 +1,15 @@
 import { Button } from "@/components/ui/button";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { UseFormReturn } from "react-hook-form";
-import { TypeOf, ZodObject, ZodString, ZodTypeAny } from "zod";
-import PasswordInputControl from "../../password-input/control-version";
+import { useAuthForm } from "@/hooks/auth-form";
+import PasswordInputControl from "../password-input/control-version";
 
-export default function AuthForm({
-    closeDialog,
-    form,
-    onSubmit,
-    title
-}: {
-    closeDialog: () => void;
-    form: UseFormReturn<
-        {
-            name: string;
-            password: string;
-        },
-        any,
-        undefined
-    >;
-    onSubmit: (
-        values: TypeOf<
-            ZodObject<
-                {
-                    name: ZodString;
-                    password: ZodString;
-                },
-                "strip",
-                ZodTypeAny,
-                {
-                    name: string;
-                    password: string;
-                },
-                {
-                    name: string;
-                    password: string;
-                }
-            >
-        >
-    ) => void;
-    title: string;
-}) {
+export default function AuthForm({ closeDialog }: { closeDialog: () => void }) {
+    const { form, onLoginSubmit, onRegisterSubmit } = useAuthForm();
+
     return (
         <Form {...form}>
-            <form
-                onSubmit={form.handleSubmit((e) => {
-                    onSubmit(e);
-                    closeDialog();
-                })}
-                className="flex flex-col gap-6"
-            >
+            <form className="flex flex-col gap-6">
                 <div className="flex flex-col">
                     <FormField
                         control={form.control}
@@ -82,9 +41,27 @@ export default function AuthForm({
                     />
                 </div>
 
-                <Button className="dark:bg-zinc-800 dark:text-white dark:border dark:border-neutral-700 dark:hover:bg-zinc-700 font-semibold flex items-center gap-1">
-                    {title}
-                </Button>
+                <div className="flex flex-col gap-3">
+                    <Button
+                        onClick={form.handleSubmit((e) => {
+                            onLoginSubmit(e);
+                            closeDialog();
+                        })}
+                        className="dark:bg-zinc-800 dark:text-white dark:border dark:border-neutral-700 dark:hover:bg-zinc-700 font-semibold flex items-center gap-1"
+                    >
+                        Login
+                    </Button>
+                    <Button
+                        variant="outline"
+                        className="dark:bg-zinc-800 dark:text-white dark:border dark:border-neutral-700 dark:hover:bg-zinc-700 font-semibold flex items-center gap-1"
+                        onClick={form.handleSubmit((e) => {
+                            onRegisterSubmit(e);
+                            closeDialog();
+                        })}
+                    >
+                        Register
+                    </Button>
+                </div>
             </form>
         </Form>
     );

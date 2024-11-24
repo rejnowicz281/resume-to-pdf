@@ -21,20 +21,17 @@ export const PouchDBProvider = ({ children }: { children: ReactNode }) => {
     const [db] = useState(new PouchDB("resume-to-pdf"));
 
     useEffect(() => {
-        if (user) {
-            const remoteCouch = new PouchDB(`${COUCHDB_URL}/resumes-${user.name}`, {
+        if (user && token) {
+            const dbUrl = `${COUCHDB_URL}/resumes-${user.name}`;
+
+            const remoteCouch = new PouchDB(dbUrl, {
                 // @ts-ignore
                 headers: { Authorization: `Bearer ${token}` }
             });
 
-            const sync = db
-                .sync(remoteCouch, { live: true, retry: true })
-                .on("complete", () => {
-                    console.log("Sync with", remoteCouch);
-                })
-                .on("error", (err) => {
-                    console.log("Sync error", err);
-                });
+            const sync = db.sync(remoteCouch, { live: true, retry: true }).on("error", (err) => {
+                console.log("Sync error", err);
+            });
 
             return () => {
                 console.log("Canceling sync for user", user.name);

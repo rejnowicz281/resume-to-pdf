@@ -1,10 +1,9 @@
-import { z } from "zod";
-
 import { useAuth } from "@/providers/auth-provider";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
+import { z } from "zod";
 
-const registerSchema = z.object({
+const authSchema = z.object({
     name: z
         .string()
         .trim()
@@ -21,18 +20,24 @@ const registerSchema = z.object({
     password: z.string().trim().min(3, "Password must be at least 3 characters")
 });
 
-export const useRegisterForm = () => {
-    const { register } = useAuth();
+export const useAuthForm = () => {
+    const { login, register } = useAuth();
 
-    const form = useForm<z.infer<typeof registerSchema>>({
-        resolver: zodResolver(registerSchema)
+    const form = useForm<z.infer<typeof authSchema>>({
+        resolver: zodResolver(authSchema)
     });
 
-    function onSubmit(values: z.infer<typeof registerSchema>) {
+    function onLoginSubmit(values: z.infer<typeof authSchema>) {
+        const { name, password } = values;
+
+        login(name, password);
+    }
+
+    function onRegisterSubmit(values: z.infer<typeof authSchema>) {
         const { name, password } = values;
 
         register(name, password);
     }
 
-    return { form, onSubmit };
+    return { form, onLoginSubmit, onRegisterSubmit };
 };
