@@ -1,6 +1,8 @@
 import { getSampleResume } from "@/lib/constants/sample-resume";
 import { Resume } from "@/lib/types/resume";
 import { COUCHDB_URL } from "@/lib/utils/config";
+import { withID } from "@/lib/utils/general";
+import { mapResume } from "@/lib/utils/mappers/resume";
 import { newEmptyResume } from "@/lib/utils/resume";
 import PouchDB from "pouchdb";
 import { createContext, ReactNode, useContext, useEffect, useState } from "react";
@@ -42,6 +44,21 @@ export const PouchDBProvider = ({ children }: { children: ReactNode }) => {
     }, [token]);
 
     useEffect(() => {
+        const localResumes = localStorage.getItem("resumes");
+
+        if (localResumes) {
+            const resumes = JSON.parse(localResumes);
+
+            const values = typeof resumes === "object" ? Object.values(resumes) : Array.isArray(resumes) ? resumes : [];
+
+            if (values.length > 0)
+                values.forEach((resume: any) => {
+                    db.put(mapResume(withID(resume)));
+                });
+
+            localStorage.removeItem("resumes");
+        }
+
         db.allDocs().then((res) => {
             const length = res.total_rows;
 

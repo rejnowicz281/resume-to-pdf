@@ -3,12 +3,12 @@ import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import { getSampleResume } from "@/lib/constants/sample-resume";
 import { Resume } from "@/lib/types/resume";
+import { withID } from "@/lib/utils/general";
 import { mapResume } from "@/lib/utils/mappers/resume";
 import { useResumesList } from "@/providers/resumes-list-provider";
 import { FileJson2 } from "lucide-react";
 import { useRef, useState } from "react";
 import { Trans, useTranslation } from "react-i18next";
-import uniqid from "uniqid";
 
 export default function Importer({ onSuccess }: { onSuccess?: () => void }) {
     const { addManyResumes } = useResumesList();
@@ -47,7 +47,7 @@ export default function Importer({ onSuccess }: { onSuccess?: () => void }) {
             const array = Array.isArray(parsed) ? parsed : [parsed];
 
             return array.map((resume: Record<string, any>) => {
-                return mapResume({ ...resume, _id: uniqid() });
+                return mapResume(withID(resume));
             });
         } catch (error) {
             alert("Failed to parse JSON data\n" + error);
