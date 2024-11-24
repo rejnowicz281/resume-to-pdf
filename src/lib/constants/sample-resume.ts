@@ -34,6 +34,12 @@ export const SAMPLE_RESUME_EN: Partial<Resume> = {
             startDate: "01.2021",
             endDate: "09.2021",
             description: "Developed web applications using React."
+        },
+        {
+            title: "Hidden Position",
+            _id: uniqid(),
+            startDate: "01.2021",
+            hidden: true
         }
     ],
     education: [
@@ -135,6 +141,12 @@ export const SAMPLE_RESUME_PL: Partial<Resume> = {
             startDate: "01.2021",
             endDate: "09.2021",
             description: "Tworzenie aplikacji webowych przy użyciu React."
+        },
+        {
+            title: "Ukryte stanowisko",
+            _id: uniqid(),
+            startDate: "01.2021",
+            hidden: true
         }
     ],
     education: [

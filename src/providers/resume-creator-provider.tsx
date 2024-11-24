@@ -36,18 +36,22 @@ export type ResumeCreatorContextType = {
 
     addWorkExperience: (experience: WorkExperience) => void;
     editWorkExperience: (id: string, experience: WorkExperienceNoId) => void;
+    toggleWorkExperienceVisibility: (experience: WorkExperience) => void;
     removeWorkExperience: (id: string) => void;
 
     addEducation: (education: Education) => void;
     editEducation: (id: string, education: EducationNoId) => void;
+    toggleEducationVisibility: (education: Education) => void;
     removeEducation: (id: string) => void;
 
     addLanguage: (language: Language) => void;
     editLanguage: (id: string, language: LanguageNoId) => void;
+    toggleLanguageVisibility: (language: Language) => void;
     removeLanguage: (id: string) => void;
 
     addTraining: (training: Training) => void;
     editTraining: (id: string, training: TrainingNoId) => void;
+    toggleTrainingVisibility: (training: Training) => void;
     removeTraining: (id: string) => void;
 
     addSkill: (skill: Skill) => void;
@@ -55,12 +59,14 @@ export type ResumeCreatorContextType = {
 
     addActivity: (activity: Activity) => void;
     editActivity: (id: string, activity: ActivityNoId) => void;
+    toggleActivityVisibility: (activity: Activity) => void;
     removeActivity: (id: string) => void;
 
     setInterests: (interests: string) => void;
 
     addLink: (link: Link) => void;
     editLink: (id: string, link: LinkNoId) => void;
+    toggleLinkVisibility: (link: Link) => void;
     removeLink: (id: string) => void;
 
     step: number;
@@ -115,6 +121,12 @@ export const ResumeCreatorProvider = ({
     const editWorkExperience = (_id: string, experience: WorkExperienceNoId) =>
         setWorkExperience(resume.workExperience.map((exp) => (exp._id === _id ? { ...exp, ...experience } : exp)));
 
+    const toggleWorkExperienceVisibility = (experience: WorkExperience) => {
+        const newExperience = { ...experience, hidden: !experience.hidden };
+
+        editWorkExperience(experience._id, newExperience);
+    };
+
     const removeWorkExperience = (_id: string) =>
         setWorkExperience(resume.workExperience.filter((experience) => experience._id !== _id));
 
@@ -131,6 +143,12 @@ export const ResumeCreatorProvider = ({
     const editEducation = (_id: string, educationToEdit: EducationNoId) =>
         setEducation(resume.education.map((edu) => (edu._id === _id ? { ...edu, ...educationToEdit } : edu)));
 
+    const toggleEducationVisibility = (education: Education) => {
+        const newEducation = { ...education, hidden: !education.hidden };
+
+        editEducation(education._id, newEducation);
+    };
+
     const removeEducation = (_id: string) => setEducation(resume.education.filter((edu) => edu._id !== _id));
 
     const setLanguages = (languages: Language[]) => {
@@ -146,6 +164,12 @@ export const ResumeCreatorProvider = ({
     const editLanguage = (_id: string, language: LanguageNoId) =>
         setLanguages(resume.languages.map((lang) => (lang._id === _id ? { ...lang, ...language } : lang)));
 
+    const toggleLanguageVisibility = (language: Language) => {
+        const newLanguage = { ...language, hidden: !language.hidden };
+
+        editLanguage(language._id, newLanguage);
+    };
+
     const removeLanguage = (_id: string) => setLanguages(resume.languages.filter((lang) => lang._id !== _id));
 
     const setTraining = (training: Training[]) => {
@@ -160,6 +184,12 @@ export const ResumeCreatorProvider = ({
 
     const editTraining = (_id: string, trainingToEdit: TrainingNoId) =>
         setTraining(resume.training.map((t) => (t._id === _id ? { ...t, ...trainingToEdit } : t)));
+
+    const toggleTrainingVisibility = (training: Training) => {
+        const newTraining = { ...training, hidden: !training.hidden };
+
+        editTraining(training._id, newTraining);
+    };
 
     const removeTraining = (_id: string) => setTraining(resume.training.filter((t) => t._id !== _id));
 
@@ -188,6 +218,12 @@ export const ResumeCreatorProvider = ({
     const editActivity = (_id: string, activity: ActivityNoId) =>
         setActivities(resume.activities.map((act) => (act._id === _id ? { ...act, ...activity } : act)));
 
+    const toggleActivityVisibility = (activity: Activity) => {
+        const newActivity = { ...activity, hidden: !activity.hidden };
+
+        editActivity(activity._id, newActivity);
+    };
+
     const removeActivity = (_id: string) => setActivities(resume.activities.filter((act) => act._id !== _id));
 
     const setInterests = (interests: string) => setResume({ ...resume, interests });
@@ -204,6 +240,12 @@ export const ResumeCreatorProvider = ({
 
     const editLink = (_id: string, link: LinkNoId) =>
         setLinks(resume.links.map((l) => (l._id === _id ? { ...l, ...link } : l)));
+
+    const toggleLinkVisibility = (link: Link) => {
+        const newLink = { ...link, hidden: !link.hidden };
+
+        editLink(link._id, newLink);
+    };
 
     const removeLink = (_id: string) => setLinks(resume.links.filter((l) => l._id !== _id));
 
@@ -243,18 +285,22 @@ export const ResumeCreatorProvider = ({
 
                 addWorkExperience,
                 editWorkExperience,
+                toggleWorkExperienceVisibility,
                 removeWorkExperience,
 
                 addEducation,
                 editEducation,
+                toggleEducationVisibility,
                 removeEducation,
 
                 addLanguage,
                 editLanguage,
+                toggleLanguageVisibility,
                 removeLanguage,
 
                 addTraining,
                 editTraining,
+                toggleTrainingVisibility,
                 removeTraining,
 
                 addSkill,
@@ -262,12 +308,14 @@ export const ResumeCreatorProvider = ({
 
                 addActivity,
                 editActivity,
+                toggleActivityVisibility,
                 removeActivity,
 
                 setInterests,
 
                 addLink,
                 editLink,
+                toggleLinkVisibility,
                 removeLink,
 
                 step,

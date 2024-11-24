@@ -1,10 +1,12 @@
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { getDuration } from "@/lib/utils/date";
+import { cn } from "@/lib/utils/general";
 import { useResumeCreator } from "@/providers/resume-creator-provider";
 import { useTranslation } from "react-i18next";
 import AddActivity from "./add-activity";
 import DeleteActivity from "./delete-activity";
 import EditActivity from "./edit-activity";
+import HideActivity from "./hide-activity";
 
 export default function Activities() {
     const {
@@ -18,7 +20,13 @@ export default function Activities() {
 
             <div className="flex flex-col gap-9 my-6">
                 {activities.map((activity) => (
-                    <Card className="relative break-words" key={activity._id}>
+                    <Card
+                        className={cn(
+                            activity.hidden && "text-sm text-zinc-500 dark:text-zinc-400",
+                            "relative break-words"
+                        )}
+                        key={activity._id}
+                    >
                         <div className="flex justify-between pr-6">
                             <CardHeader className="truncate">
                                 <CardTitle className="truncate">{activity.name}</CardTitle>
@@ -38,6 +46,7 @@ export default function Activities() {
                                 </CardDescription>
                             </CardHeader>
                             <div className="flex pt-4">
+                                <HideActivity activity={activity} />
                                 <EditActivity activity={activity} />
                                 <DeleteActivity activity={activity} />
                             </div>

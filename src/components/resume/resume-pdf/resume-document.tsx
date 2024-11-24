@@ -62,6 +62,15 @@ export default function ResumeDocument({ resume }: { resume: Resume }) {
     });
     const { t } = useTranslation();
 
+    const filteredResume = { ...resume };
+
+    filteredResume.workExperience = resume.workExperience.filter((exp) => !exp.hidden);
+    filteredResume.education = resume.education.filter((edu) => !edu.hidden);
+    filteredResume.languages = resume.languages.filter((lang) => !lang.hidden);
+    filteredResume.training = resume.training.filter((cert) => !cert.hidden);
+    filteredResume.activities = resume.activities.filter((act) => !act.hidden);
+    filteredResume.links = resume.links.filter((link) => !link.hidden);
+
     const {
         firstName,
         lastName,
@@ -79,7 +88,7 @@ export default function ResumeDocument({ resume }: { resume: Resume }) {
         interests,
         links,
         imageOptions
-    } = resume;
+    } = filteredResume;
 
     return (
         <Document>

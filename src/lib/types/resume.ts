@@ -11,6 +11,7 @@ export type WorkExperience = {
     startDate: string;
     endDate?: string;
     description?: string;
+    hidden?: boolean;
 };
 
 export type WorkExperienceNoId = Omit<WorkExperience, "_id">;
@@ -23,6 +24,7 @@ export type Education = {
     specialization?: string;
     level: string;
     description?: string;
+    hidden?: boolean;
 };
 
 export type EducationNoId = Omit<Education, "_id">;
@@ -31,6 +33,7 @@ export type Language = {
     _id: string;
     language: string;
     level: string;
+    hidden?: boolean;
 };
 
 export type LanguageNoId = Omit<Language, "_id">;
@@ -41,6 +44,7 @@ export type Training = {
     issueDate: string;
     organization: string;
     description?: string;
+    hidden?: boolean;
 };
 
 export type TrainingNoId = Omit<Training, "_id">;
@@ -52,6 +56,7 @@ export type Activity = {
     startDate: string;
     endDate?: string;
     description?: string;
+    hidden?: boolean;
 };
 
 export type ActivityNoId = Omit<Activity, "_id">;
@@ -67,6 +72,7 @@ export type Link = {
     _id: string;
     description?: string;
     url: string;
+    hidden?: boolean;
 };
 
 export type LinkNoId = Omit<Link, "_id">;

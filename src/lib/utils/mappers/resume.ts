@@ -15,7 +15,8 @@ const mapWorkExperience = (arr: any[]) => {
             location: mapString(obj.location),
             startDate: mapString(obj.startDate),
             endDate: mapString(obj.endDate),
-            description: mapString(obj.description)
+            description: mapString(obj.description),
+            hidden: obj.hidden || false
         };
     });
 };
@@ -31,7 +32,8 @@ const mapEducation = (arr: any[]) => {
             endDate: mapString(obj.endDate),
             specialization: mapString(obj.specialization),
             level: mapString(obj.level),
-            description: mapString(obj.description)
+            description: mapString(obj.description),
+            hidden: obj.hidden || false
         };
     });
 };
@@ -43,7 +45,8 @@ const mapLanguages = (arr: any[]) => {
         return {
             _id: mapString(obj._id) || uniqid(),
             language: mapString(obj.language),
-            level: mapString(obj.level)
+            level: mapString(obj.level),
+            hidden: obj.hidden || false
         };
     });
 };
@@ -57,7 +60,8 @@ const mapTraining = (arr: any[]) => {
             name: mapString(obj.name),
             issueDate: mapString(obj.issueDate),
             organization: mapString(obj.organization),
-            description: mapString(obj.description)
+            description: mapString(obj.description),
+            hidden: obj.hidden || false
         };
     });
 };
@@ -83,7 +87,8 @@ const mapActivities = (arr: any[]) => {
             location: mapString(obj.location),
             startDate: mapString(obj.startDate),
             endDate: mapString(obj.endDate),
-            description: mapString(obj.description)
+            description: mapString(obj.description),
+            hidden: obj.hidden || false
         };
     });
 };
@@ -95,7 +100,8 @@ const mapLinks = (arr: any[]) => {
         return {
             _id: mapString(obj._id) || uniqid(),
             description: mapString(obj.description),
-            url: mapString(obj.url)
+            url: mapString(obj.url),
+            hidden: obj.hidden || false
         };
     });
 };
