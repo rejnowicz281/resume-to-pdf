@@ -27,16 +27,20 @@ export const useAuthForm = () => {
         resolver: zodResolver(authSchema)
     });
 
-    function onLoginSubmit(values: z.infer<typeof authSchema>) {
+    async function onLoginSubmit(values: z.infer<typeof authSchema>) {
         const { name, password } = values;
 
-        login(name, password);
+        const res = await login(name, password);
+
+        return res;
     }
 
-    function onRegisterSubmit(values: z.infer<typeof authSchema>) {
+    async function onRegisterSubmit(values: z.infer<typeof authSchema>) {
         const { name, password } = values;
 
-        register(name, password);
+        const res = await register(name, password);
+
+        return res;
     }
 
     return { form, onLoginSubmit, onRegisterSubmit };

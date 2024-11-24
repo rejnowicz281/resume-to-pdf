@@ -1,12 +1,13 @@
 import { User } from "@/lib/types/auth";
 import { apiLogin, apiLogout, apiRefresh, apiRegister } from "@/lib/utils/api";
+import { AxiosResponse } from "axios";
 import { jwtDecode } from "jwt-decode";
 import { createContext, ReactNode, useContext, useEffect, useState } from "react";
 
 export type AuthContextType = {
-    login: (username: string, password: string) => Promise<void>;
-    register: (username: string, password: string) => Promise<void>;
-    logout: () => Promise<void>;
+    login: (username: string, password: string) => Promise<AxiosResponse<any>>;
+    register: (username: string, password: string) => Promise<AxiosResponse<any>>;
+    logout: () => Promise<AxiosResponse<any>>;
     user: User | null;
     token: string | null;
     setUser: React.Dispatch<React.SetStateAction<User | null>>;
@@ -49,6 +50,8 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
             setUser({ name });
             setToken(res.data.accessToken);
         }
+
+        return res;
     };
 
     const register = async (name: string, password: string) => {
@@ -58,6 +61,8 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
             setUser({ name });
             setToken(res.data.accessToken);
         }
+
+        return res;
     };
 
     const logout = async () => {
@@ -67,6 +72,8 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
             setUser(null);
             setToken(null);
         }
+
+        return res;
     };
 
     return (

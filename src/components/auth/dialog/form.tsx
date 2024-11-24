@@ -6,6 +6,7 @@ import PasswordInputControl from "../password-input/control-version";
 
 export default function AuthForm({ closeDialog }: { closeDialog: () => void }) {
     const { form, onLoginSubmit, onRegisterSubmit } = useAuthForm();
+    const { isSubmitting } = form.formState;
 
     return (
         <Form {...form}>
@@ -43,20 +44,39 @@ export default function AuthForm({ closeDialog }: { closeDialog: () => void }) {
 
                 <div className="flex flex-col gap-3">
                     <Button
-                        onClick={form.handleSubmit((e) => {
-                            onLoginSubmit(e);
-                            closeDialog();
+                        disabled={isSubmitting}
+                        onClick={form.handleSubmit(async (e) => {
+                            const res = await onLoginSubmit(e);
+
+                            if (res.status === 200) closeDialog();
+                            else {
+                                form.setError("name", {
+                                    type: "manual",
+                                    message: "Invalid username or password"
+                                });
+                                form.setError("password", {
+                                    type: "manual",
+                                    message: "Invalid username or password"
+                                });
+                            }
                         })}
                         className="dark:bg-zinc-800 dark:text-white dark:border dark:border-neutral-700 dark:hover:bg-zinc-700 font-semibold flex items-center gap-1"
                     >
                         Login
                     </Button>
                     <Button
+                        disabled={isSubmitting}
                         variant="outline"
                         className="dark:bg-zinc-800 dark:text-white dark:border dark:border-neutral-700 dark:hover:bg-zinc-700 font-semibold flex items-center gap-1"
-                        onClick={form.handleSubmit((e) => {
-                            onRegisterSubmit(e);
-                            closeDialog();
+                        onClick={form.handleSubmit(async (e) => {
+                            const res = await onRegisterSubmit(e);
+
+                            if (res.status === 200) closeDialog();
+                            else
+                                form.setError("name", {
+                                    type: "manual",
+                                    message: "Username already taken"
+                                });
                         })}
                     >
                         Register

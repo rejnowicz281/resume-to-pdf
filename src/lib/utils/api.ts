@@ -1,4 +1,4 @@
-import axios from "axios";
+import axios, { AxiosResponse } from "axios";
 import { EXPRESS_URL } from "./config";
 import debug from "./debug";
 
@@ -10,7 +10,7 @@ export const API = axios.create({
     }
 });
 
-export const apiRegister = async (username: string, password: string) => {
+export const apiRegister = async (username: string, password: string): Promise<AxiosResponse<any>> => {
     try {
         const res = await API.post("register", { username, password });
 
@@ -23,7 +23,7 @@ export const apiRegister = async (username: string, password: string) => {
     }
 };
 
-export const apiLogin = async (username: string, password: string) => {
+export const apiLogin = async (username: string, password: string): Promise<AxiosResponse<any>> => {
     try {
         const res = await API.post("login", { username, password });
 
@@ -36,7 +36,7 @@ export const apiLogin = async (username: string, password: string) => {
     }
 };
 
-export const apiLogout = async () => {
+export const apiLogout = async (): Promise<AxiosResponse<any>> => {
     try {
         const res = await API.delete("logout");
 
@@ -49,7 +49,7 @@ export const apiLogout = async () => {
     }
 };
 
-export const apiRefresh = async () => {
+export const apiRefresh = async (): Promise<AxiosResponse<any>> => {
     try {
         const res = await API.post("refresh");
 
@@ -62,7 +62,7 @@ export const apiRefresh = async () => {
     }
 };
 
-export const apiGithubLogin = async (code: string) => {
+export const apiGithubLogin = async (code: string): Promise<AxiosResponse<any>> => {
     try {
         const tokenRes = await API.post("github/token", { code });
 
