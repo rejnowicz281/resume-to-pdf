@@ -42,7 +42,7 @@ export default function ResumeCreatorForm() {
                 </Button>
             </div>
             <div className="flex flex-col py-6 px-8 gap-4 border-t border-t-zinc-200 dark:border-t-zinc-800">
-                <h1 className="text-2xl text-center">
+                <h1 className="text-2xl text-center hidden xsm:block">
                     {t("step")} {step} - {getStepName()}
                 </h1>
                 <div className="flex gap-8 items-center justify-between">
