@@ -1,18 +1,17 @@
 import { Switch } from "@/components/ui/switch";
+import { usePouchDB } from "@/providers/pouchdb-provider";
 import { useResumeCreator } from "@/providers/resume-creator-provider";
 import { Camera, Trash2 } from "lucide-react";
 import { useRef } from "react";
 import { useTranslation } from "react-i18next";
 
 const ImagePicker = () => {
-    const {
-        resume: {
-            imageOptions: { show, url }
-        },
-        setImageOptions
-    } = useResumeCreator();
+    const { resume, setImageOptions } = useResumeCreator();
     const inputRef = useRef<HTMLInputElement>(null);
     const { t } = useTranslation();
+    const { db } = usePouchDB();
+
+    const { show, url } = resume.imageOptions;
 
     const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         if (e.target.files && e.target.files[0]) {
@@ -27,7 +26,9 @@ const ImagePicker = () => {
             const reader = new FileReader();
 
             reader.onload = function (event) {
-                setImageOptions({ show: true, url: event.target?.result as string });
+                const newImageOptions = { show: true, url: event.target?.result as string };
+                setImageOptions(newImageOptions);
+                db.put({ ...resume, imageOptions: newImageOptions });
             };
 
             reader.readAsDataURL(e.target.files[0]);
@@ -35,8 +36,16 @@ const ImagePicker = () => {
     };
 
     const handleRemoveImage = () => {
-        setImageOptions({ show: false, url: "" });
+        const newImageOptions = { show: false, url: "" };
+        setImageOptions(newImageOptions);
+        db.put({ ...resume, imageOptions: newImageOptions });
         if (inputRef.current) inputRef.current.value = "";
+    };
+
+    const handleCheckedChange = () => {
+        const newImageOptions = { show: !show, url };
+        setImageOptions(newImageOptions);
+        db.put({ ...resume, imageOptions: newImageOptions });
     };
 
     return (
@@ -44,7 +53,7 @@ const ImagePicker = () => {
             {url ? (
                 <div className="flex flex-col gap-6">
                     <div className="flex gap-2 items-center">
-                        <Switch checked={show} onCheckedChange={() => setImageOptions({ show: !show, url })} />
+                        <Switch checked={show} onCheckedChange={handleCheckedChange} />
                         <span className="font-semibold text-sm">
                             {t("resumeCreator.stepOne.imagePicker.showImage")}
                         </span>
