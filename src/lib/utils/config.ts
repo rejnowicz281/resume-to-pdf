@@ -1,6 +1,6 @@
 export const COUCHDB_URL =
     process.env.NODE_ENV === "production"
-        ? "https://custom-couchdb-railway-template-production.up.railway.app"
+        ? "https://fancy-couchdb-templ-production.up.railway.app"
         : "http://localhost:5984";
 
 export const EXPRESS_URL =
