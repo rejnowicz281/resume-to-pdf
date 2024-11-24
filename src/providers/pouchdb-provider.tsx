@@ -15,13 +15,15 @@ export type PouchDBContextType = {
 const PouchDBContext = createContext<PouchDBContextType | undefined>(undefined);
 
 export const PouchDBProvider = ({ children }: { children: ReactNode }) => {
-    const { user } = useAuth();
-
+    const { user, token } = useAuth();
     const [db] = useState(new PouchDB("resume-to-pdf"));
 
     useEffect(() => {
         if (user) {
-            const remoteCouch = `${COUCHDB_URL}/resumes-${user.name}`;
+            const remoteCouch = new PouchDB(`${COUCHDB_URL}/resumes-${user.name}`, {
+                // @ts-ignore
+                headers: { Authorization: `Bearer ${token}` }
+            });
 
             const sync = db
                 .sync(remoteCouch, { live: true, retry: true })
@@ -37,7 +39,7 @@ export const PouchDBProvider = ({ children }: { children: ReactNode }) => {
                 sync.cancel();
             };
         }
-    }, [user]);
+    }, [token]);
 
     useEffect(() => {
         db.allDocs().then((res) => {
