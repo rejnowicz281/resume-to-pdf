@@ -25,7 +25,7 @@ export const apiRegister = async (username: string, password: string) => {
 
 export const apiLogin = async (username: string, password: string) => {
     try {
-        const res = await API.post("rf", { username, password });
+        const res = await API.post("login", { username, password });
 
         debug.log("post express login response", res);
 
