@@ -66,6 +66,10 @@ The access token is stored in memory and the refresh token is stored in a secure
 The refresh token is used to generate a new access token when the old one expires.
 You can log in after registering an account with a unique username and a password.
 
+## API
+
+The project uses an [express.js API](https://github.com/rejnowicz281/resume-to-pdf-api), mainly for user authentication.
+
 ## Localization
 
 The project is available in two languages: **English** and **Polish**.\

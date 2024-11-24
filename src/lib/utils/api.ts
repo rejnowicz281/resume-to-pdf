@@ -1,5 +1,6 @@
 import axios from "axios";
 import { EXPRESS_URL } from "./config";
+import debug from "./debug";
 
 export const API = axios.create({
     baseURL: EXPRESS_URL,
@@ -12,43 +13,51 @@ export const API = axios.create({
 export const apiRegister = async (username: string, password: string) => {
     try {
         const res = await API.post("register", { username, password });
-        console.log("post express register response", res);
+
+        debug.log("post express register response", res);
+
         return res;
     } catch (error: any) {
-        console.error("Registration failed", error.response.data);
-        throw error;
+        debug.error("Registration failed", error.response.data);
+        return error.response;
     }
 };
 
 export const apiLogin = async (username: string, password: string) => {
     try {
-        const res = await API.post("login", { username, password });
-        console.log("post express login response", res);
+        const res = await API.post("rf", { username, password });
+
+        debug.log("post express login response", res);
+
         return res;
     } catch (error: any) {
-        console.error("Login failed", error.response.data);
-        throw error;
+        debug.error("Login failed", error.response.data);
+        return error.response;
     }
 };
 
 export const apiLogout = async () => {
     try {
         const res = await API.delete("logout");
-        console.log("delete express logout response", res);
+
+        debug.log("delete express logout response", res);
+
         return res;
     } catch (error: any) {
-        console.error("Logout failed", error.response.data);
-        throw error;
+        debug.error("Logout failed", error.response.data);
+        return error.response;
     }
 };
 
 export const apiRefresh = async () => {
     try {
         const res = await API.post("refresh");
-        console.log("post express refresh response", res);
+
+        debug.log("post express refresh response", res);
+
         return res;
     } catch (error: any) {
-        console.error("Refresh failed", error.response.data);
-        throw error;
+        debug.error("Refresh failed", error.response.data);
+        return error.response;
     }
 };

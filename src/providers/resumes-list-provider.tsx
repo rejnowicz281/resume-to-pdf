@@ -32,13 +32,11 @@ export const ResumesListProvider = ({ children }: { children: ReactNode }) => {
                 since: "now",
                 live: true
             })
-            .on("change", (res) => {
-                console.log("Resumes list changed", res);
+            .on("change", () => {
                 updateResumes();
             });
 
         return () => {
-            console.log("Cancelling resumes list changes");
             changes.cancel();
         };
     }, []);

@@ -32,13 +32,11 @@ export default function ResumePage() {
                 since: "now",
                 live: true
             })
-            .on("change", (res) => {
+            .on("change", () => {
                 getResumeFromDb();
-                console.log("Resume changed", res);
             });
 
         return () => {
-            console.log("Cancelling", id, "changes");
             changes.cancel();
         };
     }, [id]);

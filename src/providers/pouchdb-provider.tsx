@@ -30,10 +30,10 @@ export const PouchDBProvider = ({ children }: { children: ReactNode }) => {
             const sync = db
                 .sync(remoteCouch, { live: true, retry: true })
                 .on("complete", () => {
-                    console.log("Replicating to", remoteCouch);
+                    console.log("Sync with", remoteCouch);
                 })
                 .on("error", (err) => {
-                    console.log(err);
+                    console.log("Sync error", err);
                 });
 
             return () => {

@@ -30,7 +30,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
                         setToken(token);
                         setUser({ name: decodedToken.sub! });
                     } catch (error: any) {
-                        console.error("Token decode failed", error);
+                        console.error("Token decode fail", error);
                         setToken(null);
                     }
                 }
