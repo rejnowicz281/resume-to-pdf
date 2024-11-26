@@ -3,7 +3,7 @@ import DownloadResumesButton from "@/components/resume/download-resumes-button";
 import { Button } from "@/components/ui/button";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { useAuth } from "@/providers/auth-provider";
-import { useTranslation } from "react-i18next";
+import { Trans, useTranslation } from "react-i18next";
 
 export default function SettingsPage() {
     const { t, i18n } = useTranslation();
@@ -18,14 +18,16 @@ export default function SettingsPage() {
                 <div className="flex flex-col gap-8">
                     <div className="flex flex-col gap-4 items-start">
                         <div className="flex flex-col gap-1">
-                            <h2 className="font-semibold text-xl">{user ? "Log out" : "Log in"}</h2>
+                            <h2 className="font-semibold text-xl">{user ? t("logout") : t("login")}</h2>
                             <p className="text-gray-500 dark:text-gray-400">
                                 {user ? (
-                                    <>
-                                        Logged in as <b>{user.name}</b>
-                                    </>
+                                    <Trans
+                                        i18nKey="settingsPage.loggedInDescription"
+                                        values={{ username: user.name }}
+                                        components={{ b: <strong /> }}
+                                    />
                                 ) : (
-                                    "Log in to sync your resumes across devices"
+                                    t("settingsPage.loginDescription")
                                 )}
                             </p>
                         </div>

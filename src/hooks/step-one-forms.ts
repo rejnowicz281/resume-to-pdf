@@ -3,21 +3,24 @@ import { usePouchDB } from "@/providers/pouchdb-provider";
 import { useResumeCreator } from "@/providers/resume-creator-provider";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
+import { useTranslation } from "react-i18next";
 import { z } from "zod";
-
-const basicInfoSchema = z.object({
-    firstName: z.string().min(1, {
-        message: "First name is required"
-    }),
-    lastName: z.string().min(1, {
-        message: "Last name is required"
-    }),
-    dateOfBirth: z.string().optional()
-});
 
 export function useBasicInfoForm() {
     const { resume, setFirstName, setLastName, setDateOfBirth } = useResumeCreator();
     const { db } = usePouchDB();
+
+    const { t } = useTranslation();
+
+    const basicInfoSchema = z.object({
+        firstName: z.string().min(1, {
+            message: t("resumeCreator.stepOne.basicInfoForm.firstNameIsRequired")
+        }),
+        lastName: z.string().min(1, {
+            message: t("resumeCreator.stepOne.basicInfoForm.lastNameIsRequired")
+        }),
+        dateOfBirth: z.string().optional()
+    });
 
     const { firstName, lastName, dateOfBirth } = resume;
 
@@ -44,14 +47,14 @@ export function useBasicInfoForm() {
     return { form, onSubmit };
 }
 
-const locationSchema = z.object({
-    country: z.string().optional(),
-    city: z.string().optional()
-});
-
 export function useLocationForm() {
     const { resume, setCountry, setCity } = useResumeCreator();
     const { db } = usePouchDB();
+
+    const locationSchema = z.object({
+        country: z.string().optional(),
+        city: z.string().optional()
+    });
 
     const { country, city } = resume;
 
@@ -79,21 +82,22 @@ export function useLocationForm() {
     return { form, onSubmit };
 }
 
-const contactSchema = z.object({
-    phone: z.string().optional(),
-    email: z
-        .string()
-        .email({
-            message: "Email address is invalid"
-        })
-        .min(1, {
-            message: "Email address is required"
-        })
-});
-
 export function useContactForm() {
     const { resume, setEmail, setPhone } = useResumeCreator();
     const { db } = usePouchDB();
+    const { t } = useTranslation();
+
+    const contactSchema = z.object({
+        phone: z.string().optional(),
+        email: z
+            .string()
+            .email({
+                message: t("resumeCreator.stepOne.contactForm.invalidEmail")
+            })
+            .min(1, {
+                message: t("resumeCreator.stepOne.contactForm.emailIsRequired")
+            })
+    });
 
     const { phone, email } = resume;
 

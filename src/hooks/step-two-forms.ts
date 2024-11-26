@@ -4,21 +4,23 @@ import { withID } from "@/lib/utils/general";
 import { useResumeCreator } from "@/providers/resume-creator-provider";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
+import { useTranslation } from "react-i18next";
 import { z } from "zod";
-
-const workExperienceSchema = z.object({
-    title: z.string().min(1, {
-        message: "Title is required"
-    }),
-    company: z.string().optional(),
-    location: z.string().optional(),
-    startDate: z.string().date("Please select a valid date"),
-    endDate: z.string().optional(),
-    description: z.string().optional()
-});
 
 export function useWorkExperienceForm(initialExperience?: WorkExperience) {
     const { addWorkExperience, editWorkExperience } = useResumeCreator();
+    const { t } = useTranslation();
+
+    const workExperienceSchema = z.object({
+        title: z.string().min(1, {
+            message: t("resumeCreator.stepTwo.workExperienceForm.titleIsRequired")
+        }),
+        company: z.string().optional(),
+        location: z.string().optional(),
+        startDate: z.string().date(t("resumeCreator.stepTwo.workExperienceForm.startDateMustBeDate")),
+        endDate: z.string().optional(),
+        description: z.string().optional()
+    });
 
     const form = useForm<z.infer<typeof workExperienceSchema>>({
         resolver: zodResolver(workExperienceSchema),
@@ -58,21 +60,23 @@ export function useWorkExperienceForm(initialExperience?: WorkExperience) {
     return { form, onSubmit };
 }
 
-const educationSchema = z.object({
-    institution: z.string().min(1, {
-        message: "Institution is required"
-    }),
-    startDate: z.string().date("Please select a valid date"),
-    endDate: z.string().optional(),
-    specialization: z.string().optional(),
-    level: z.string().min(1, {
-        message: "Education level is required"
-    }),
-    description: z.string().optional()
-});
-
 export function useEducationForm(initialEducation?: Education) {
     const { addEducation, editEducation } = useResumeCreator();
+
+    const { t } = useTranslation();
+
+    const educationSchema = z.object({
+        institution: z.string().min(1, {
+            message: t("resumeCreator.stepTwo.educationForm.institutionIsRequired")
+        }),
+        startDate: z.string().date(t("resumeCreator.stepTwo.educationForm.startDateMustBeDate")),
+        endDate: z.string().optional(),
+        specialization: z.string().optional(),
+        level: z.string().min(1, {
+            message: t("resumeCreator.stepTwo.educationForm.levelIsRequired")
+        }),
+        description: z.string().optional()
+    });
 
     const form = useForm<z.infer<typeof educationSchema>>({
         resolver: zodResolver(educationSchema),
@@ -111,17 +115,19 @@ export function useEducationForm(initialEducation?: Education) {
     return { form, onSubmit };
 }
 
-const languageSchema = z.object({
-    language: z.string().min(1, {
-        message: "Language is required"
-    }),
-    level: z.string().min(1, {
-        message: "Level is required"
-    })
-});
-
 export const useLanguageForm = (initialLanguage?: Language) => {
     const { addLanguage, editLanguage } = useResumeCreator();
+
+    const { t } = useTranslation();
+
+    const languageSchema = z.object({
+        language: z.string().min(1, {
+            message: t("resumeCreator.stepTwo.languageForm.languageIsRequired")
+        }),
+        level: z.string().min(1, {
+            message: t("resumeCreator.stepTwo.languageForm.levelIsRequired")
+        })
+    });
 
     const form = useForm<z.infer<typeof languageSchema>>({
         resolver: zodResolver(languageSchema),
@@ -139,19 +145,21 @@ export const useLanguageForm = (initialLanguage?: Language) => {
     return { form, onSubmit };
 };
 
-const trainingSchema = z.object({
-    name: z.string().min(1, {
-        message: "Name is required"
-    }),
-    issueDate: z.string().date("Please select a valid date"),
-    organization: z.string().min(1, {
-        message: "Organization is required"
-    }),
-    description: z.string().optional()
-});
-
 export const useTrainingForm = (initialTraining?: Training) => {
     const { addTraining, editTraining } = useResumeCreator();
+
+    const { t } = useTranslation();
+
+    const trainingSchema = z.object({
+        name: z.string().min(1, {
+            message: t("resumeCreator.stepTwo.trainingForm.nameIsRequired")
+        }),
+        issueDate: z.string().date(t("resumeCreator.stepTwo.trainingForm.issueDateMustBeDate")),
+        organization: z.string().min(1, {
+            message: t("resumeCreator.stepTwo.trainingForm.organizationIsRequired")
+        }),
+        description: z.string().optional()
+    });
 
     const form = useForm<z.infer<typeof trainingSchema>>({
         resolver: zodResolver(trainingSchema),

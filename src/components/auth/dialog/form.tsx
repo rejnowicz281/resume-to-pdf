@@ -2,11 +2,13 @@ import { Button } from "@/components/ui/button";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { useAuthForm } from "@/hooks/auth-form";
+import { useTranslation } from "react-i18next";
 import PasswordInputControl from "../password-input/control-version";
 
 export default function AuthForm({ closeDialog }: { closeDialog: () => void }) {
     const { form, onLoginSubmit, onRegisterSubmit } = useAuthForm();
     const { isSubmitting } = form.formState;
+    const { t } = useTranslation();
 
     return (
         <Form {...form}>
@@ -17,9 +19,9 @@ export default function AuthForm({ closeDialog }: { closeDialog: () => void }) {
                         name="name"
                         render={({ field }) => (
                             <FormItem className="grid grid-cols-4 items-center">
-                                <FormLabel className="text-right pr-3">Username</FormLabel>
+                                <FormLabel className="text-right pr-3">{t("authForm.username")}</FormLabel>
                                 <FormControl className="col-span-3">
-                                    <Input placeholder="John Doe" {...field} />
+                                    <Input placeholder={t("authForm.usernamePlaceholder")} {...field} />
                                 </FormControl>
                                 <FormMessage className="col-start-2 pl-3 py-1 col-span-3 !text-red-500 text-sm" />
                             </FormItem>
@@ -30,9 +32,9 @@ export default function AuthForm({ closeDialog }: { closeDialog: () => void }) {
                         name="password"
                         render={({ field }) => (
                             <FormItem className="grid grid-cols-4 items-center">
-                                <FormLabel className="text-right pr-3">Password</FormLabel>
+                                <FormLabel className="text-right pr-3">{t("authForm.password")}</FormLabel>
                                 <PasswordInputControl
-                                    placeholder="Must be at least 3 characters"
+                                    placeholder={t("authForm.passwordMustBeThreeCharacters")}
                                     className="col-span-3"
                                     field={field}
                                 />
@@ -52,17 +54,17 @@ export default function AuthForm({ closeDialog }: { closeDialog: () => void }) {
                             else {
                                 form.setError("name", {
                                     type: "manual",
-                                    message: "Invalid username or password"
+                                    message: t("authForm.invalidUsernameOrPassword")
                                 });
                                 form.setError("password", {
                                     type: "manual",
-                                    message: "Invalid username or password"
+                                    message: t("authForm.invalidUsernameOrPassword")
                                 });
                             }
                         })}
                         className="dark:bg-zinc-800 dark:text-white dark:border dark:border-neutral-700 dark:hover:bg-zinc-700 font-semibold flex items-center gap-1"
                     >
-                        Login
+                        {t("login")}
                     </Button>
                     <Button
                         disabled={isSubmitting}
@@ -75,11 +77,11 @@ export default function AuthForm({ closeDialog }: { closeDialog: () => void }) {
                             else
                                 form.setError("name", {
                                     type: "manual",
-                                    message: "Username already taken"
+                                    message: t("authForm.usernameAlreadyTaken")
                                 });
                         })}
                     >
-                        Register
+                        {t("register")}
                     </Button>
                 </div>
             </form>

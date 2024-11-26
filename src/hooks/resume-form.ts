@@ -4,13 +4,13 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 
-const resumeSchema = z.object({
-    name: z.string().optional(),
-    description: z.string().optional()
-});
-
 export function useResumeForm(_id: string) {
     const { getResume, addResume, editResume } = useResumesList();
+
+    const resumeSchema = z.object({
+        name: z.string().optional(),
+        description: z.string().optional()
+    });
 
     const resume = getResume(_id);
 

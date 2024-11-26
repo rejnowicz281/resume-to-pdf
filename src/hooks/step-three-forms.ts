@@ -6,16 +6,19 @@ import { useResumeCreator } from "@/providers/resume-creator-provider";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useEffect } from "react";
 import { useForm } from "react-hook-form";
+import { useTranslation } from "react-i18next";
 import { z } from "zod";
-
-const skillSchema = z.object({
-    name: z.string().min(1, {
-        message: "Skill is required"
-    })
-});
 
 export function useSkillForm() {
     const { addSkill } = useResumeCreator();
+
+    const { t } = useTranslation();
+
+    const skillSchema = z.object({
+        name: z.string().min(1, {
+            message: t("resumeCreator.stepThree.skillForm.skillIsRequired")
+        })
+    });
 
     const form = useForm<z.infer<typeof skillSchema>>({
         resolver: zodResolver(skillSchema)
@@ -32,18 +35,20 @@ export function useSkillForm() {
     return { form, onSubmit };
 }
 
-const activitySchema = z.object({
-    name: z.string().min(1, {
-        message: "Name is required"
-    }),
-    location: z.string().optional(),
-    startDate: z.string().date("Please select a valid date"),
-    endDate: z.string().optional(),
-    description: z.string().optional()
-});
-
 export function useActivityForm(initialActivity?: Activity) {
     const { addActivity, editActivity } = useResumeCreator();
+
+    const { t } = useTranslation();
+
+    const activitySchema = z.object({
+        name: z.string().min(1, {
+            message: t("resumeCreator.stepThree.activityForm.nameIsRequired")
+        }),
+        location: z.string().optional(),
+        startDate: z.string().date(t("resumeCreator.stepThree.activityForm.startDateMustBeDate")),
+        endDate: z.string().optional(),
+        description: z.string().optional()
+    });
 
     const form = useForm<z.infer<typeof activitySchema>>({
         resolver: zodResolver(activitySchema),
@@ -80,13 +85,13 @@ export function useActivityForm(initialActivity?: Activity) {
     return { form, onSubmit };
 }
 
-const interestsSchema = z.object({
-    interests: z.string().optional()
-});
-
 export function useInterestsForm() {
     const { setInterests, resume } = useResumeCreator();
     const { db } = usePouchDB();
+
+    const interestsSchema = z.object({
+        interests: z.string().optional()
+    });
 
     const { interests } = resume;
 
@@ -111,13 +116,14 @@ export function useInterestsForm() {
     return { form, onSubmit };
 }
 
-const linkSchema = z.object({
-    url: z.string().url("Please enter a valid URL"),
-    description: z.string().optional()
-});
-
 export function useLinkForm(initialLink?: Link) {
     const { addLink, editLink } = useResumeCreator();
+    const { t } = useTranslation();
+
+    const linkSchema = z.object({
+        url: z.string().url(t("resumeCreator.stepThree.linkForm.urlMustBeValid")),
+        description: z.string().optional()
+    });
 
     const form = useForm<z.infer<typeof linkSchema>>({
         resolver: zodResolver(linkSchema),

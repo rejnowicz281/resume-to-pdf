@@ -3,6 +3,7 @@ import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
 import { apiGithubLogin } from "@/lib/utils/api";
 import { useAuth } from "@/providers/auth-provider";
 import { useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
 import GithubLoginButton from "../github-login-button";
 import AuthForm from "./form";
 
@@ -10,6 +11,7 @@ export default function AuthDialog() {
     const [open, setOpen] = useState(false);
     const { setUser, setToken } = useAuth();
     const [loading, setLoading] = useState(false);
+    const { t } = useTranslation();
 
     const githubInit = async () => {
         const queryString = window.location.search;
@@ -51,9 +53,9 @@ export default function AuthDialog() {
     return (
         <Dialog open={open} onOpenChange={setOpen}>
             <DialogTrigger asChild>
-                <Button>Log in</Button>
+                <Button>{t("login")}</Button>
             </DialogTrigger>
-            <DialogContent className="p-10">
+            <DialogContent className="max-w-[650px] p-10">
                 <AuthForm closeDialog={() => setOpen(false)} />
 
                 <div className="relative">
@@ -62,7 +64,7 @@ export default function AuthDialog() {
                     </div>
                     <div className="relative flex justify-center text-xs uppercase">
                         <span className="dark:bg-[#121212] bg-white px-2 font-semibold tracking-widest text-gray-500">
-                            OR CONTINUE WITH
+                            {t("authForm.orContinueWith")}
                         </span>
                     </div>
                 </div>
