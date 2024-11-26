@@ -113,29 +113,29 @@ export default function ResumeDocument({ resume }: { resume: Resume }) {
                     )}
 
                     <View style={{ marginTop: 10 }}>
-                        {(email || phone || dateOfBirth || city || country) && (
+                        {email || phone || dateOfBirth || city || country ? (
                             <>
                                 <Text style={styles.sectionTitle}>{t("resumePdf.contact")}</Text>
                                 <View style={js(styles.flexColumn, { gap: 6 })}>
-                                    {!!email && (
+                                    {email && (
                                         <View>
                                             <Text>E-Mail:</Text>
                                             <Text style={styles.bold}>{email}</Text>
                                         </View>
                                     )}
-                                    {!!phone && (
+                                    {phone && (
                                         <View>
                                             <Text>{t("resumePdf.phone")}:</Text>
                                             <Text style={styles.bold}>{phone}</Text>
                                         </View>
                                     )}
-                                    {!!dateOfBirth && (
+                                    {dateOfBirth && (
                                         <View>
                                             <Text>{t("resumePdf.dateOfBirth")}:</Text>
                                             <Text>{dateOfBirth}</Text>
                                         </View>
                                     )}
-                                    {(city || country) && (
+                                    {city || country ? (
                                         <View>
                                             <Text>{t("resumePdf.location")}:</Text>
                                             <Text>
@@ -148,10 +148,10 @@ export default function ResumeDocument({ resume }: { resume: Resume }) {
                                                 {country}
                                             </Text>
                                         </View>
-                                    )}
+                                    ) : null}
                                 </View>
                             </>
-                        )}
+                        ) : null}
                     </View>
 
                     {/* Skills */}
@@ -195,7 +195,7 @@ export default function ResumeDocument({ resume }: { resume: Resume }) {
                 {/* Right Section */}
                 <View style={styles.rightSection}>
                     {/* Name */}
-                    {(firstName || lastName) && <Text style={styles.nameHeader}>{`${firstName} ${lastName}`}</Text>}
+                    {firstName || lastName ? <Text style={styles.nameHeader}>{`${firstName} ${lastName}`}</Text> : null}
 
                     {/* Work Experience */}
                     <View style={js(styles.flexColumn, { gap: 16 })}>
@@ -280,9 +280,9 @@ export default function ResumeDocument({ resume }: { resume: Resume }) {
                                             <Text>
                                                 {t("resumePdf.training.organization")}: {cert.organization}
                                             </Text>
-                                            {cert.description && (
+                                            {cert.description ? (
                                                 <Text style={{ marginTop: 4 }}>{cert.description}</Text>
-                                            )}
+                                            ) : null}
                                         </View>
                                     ))}
                                 </View>
