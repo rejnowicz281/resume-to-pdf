@@ -95,7 +95,7 @@ export default function ResumeDocument({ resume }: { resume: Resume }) {
             <Page size="A4" style={styles.page}>
                 {/* Left Section */}
                 <View style={styles.leftSection}>
-                    {imageOptions?.show && imageOptions?.url && (
+                    {imageOptions?.show && imageOptions?.url ? (
                         <Image
                             src={{
                                 uri: imageOptions.url,
@@ -110,41 +110,41 @@ export default function ResumeDocument({ resume }: { resume: Resume }) {
                                 borderRadius: 50
                             }}
                         />
-                    )}
+                    ) : null}
 
                     <View style={{ marginTop: 10 }}>
                         {email || phone || dateOfBirth || city || country ? (
                             <>
                                 <Text style={styles.sectionTitle}>{t("resumePdf.contact")}</Text>
                                 <View style={js(styles.flexColumn, { gap: 6 })}>
-                                    {email && (
+                                    {email ? (
                                         <View>
                                             <Text>E-Mail:</Text>
                                             <Text style={styles.bold}>{email}</Text>
                                         </View>
-                                    )}
-                                    {phone && (
+                                    ) : null}
+                                    {phone ? (
                                         <View>
                                             <Text>{t("resumePdf.phone")}:</Text>
                                             <Text style={styles.bold}>{phone}</Text>
                                         </View>
-                                    )}
-                                    {dateOfBirth && (
+                                    ) : null}
+                                    {dateOfBirth ? (
                                         <View>
                                             <Text>{t("resumePdf.dateOfBirth")}:</Text>
                                             <Text>{dateOfBirth}</Text>
                                         </View>
-                                    )}
+                                    ) : null}
                                     {city || country ? (
                                         <View>
                                             <Text>{t("resumePdf.location")}:</Text>
                                             <Text>
-                                                {city && (
+                                                {city ? (
                                                     <>
                                                         {city}
-                                                        {country && ", "}
+                                                        {country ? ", " : null}
                                                     </>
-                                                )}
+                                                ) : null}
                                                 {country}
                                             </Text>
                                         </View>
@@ -155,7 +155,7 @@ export default function ResumeDocument({ resume }: { resume: Resume }) {
                     </View>
 
                     {/* Skills */}
-                    {skills && skills.length > 0 && (
+                    {skills && skills.length > 0 ? (
                         <View style={{ borderTop: 0.5, marginTop: 10, paddingTop: 10, borderTopColor: "#D3D3D3" }}>
                             <Text style={styles.sectionTitle}>{t("resumePdf.skills")}</Text>
                             {skills.map((skill) => (
@@ -172,10 +172,10 @@ export default function ResumeDocument({ resume }: { resume: Resume }) {
                                 </View>
                             ))}
                         </View>
-                    )}
+                    ) : null}
 
                     {/* Languages */}
-                    {languages && languages.length > 0 && (
+                    {languages && languages.length > 0 ? (
                         <View style={{ borderTop: 0.5, marginTop: 10, paddingTop: 10, borderTopColor: "#D3D3D3" }}>
                             <Text style={styles.sectionTitle}>{t("resumePdf.languages")}</Text>
                             {languages.map((language) => (
@@ -189,7 +189,7 @@ export default function ResumeDocument({ resume }: { resume: Resume }) {
                                 </View>
                             ))}
                         </View>
-                    )}
+                    ) : null}
                 </View>
 
                 {/* Right Section */}
@@ -199,7 +199,7 @@ export default function ResumeDocument({ resume }: { resume: Resume }) {
 
                     {/* Work Experience */}
                     <View style={js(styles.flexColumn, { gap: 16 })}>
-                        {workExperience && workExperience.length > 0 && (
+                        {workExperience && workExperience.length > 0 ? (
                             <View>
                                 <Text style={styles.sectionTitle}>{t("resumePdf.workExperience")}</Text>
                                 <View style={js(styles.flexColumn, { gap: 12 })}>
@@ -209,18 +209,18 @@ export default function ResumeDocument({ resume }: { resume: Resume }) {
                                                 <ListItem>
                                                     <Text style={styles.bold}>{experience.title}</Text>
                                                 </ListItem>
-                                                {experience.company && (
+                                                {experience.company ? (
                                                     <>
                                                         <Text>/</Text>
                                                         <Text>{experience.company}</Text>
                                                     </>
-                                                )}
-                                                {experience.location && (
+                                                ) : null}
+                                                {experience.location ? (
                                                     <>
                                                         <Text>/</Text>
                                                         <Text>{experience.location}</Text>
                                                     </>
-                                                )}
+                                                ) : null}
                                             </View>
                                             <View style={js(styles.flexRow, { gap: 3 })}>
                                                 <Text style={styles.date}>
@@ -228,16 +228,16 @@ export default function ResumeDocument({ resume }: { resume: Resume }) {
                                                 </Text>
                                                 <Text style={{ fontSize: 8 }}>[{getDuration(experience)}]</Text>
                                             </View>
-                                            {experience.description && (
+                                            {experience.description ? (
                                                 <Text style={{ marginTop: 4 }}>{experience.description}</Text>
-                                            )}
+                                            ) : null}
                                         </View>
                                     ))}
                                 </View>
                             </View>
-                        )}
+                        ) : null}
                         {/* Education */}
-                        {education && education.length > 0 && (
+                        {education && education.length > 0 ? (
                             <View>
                                 <Text style={styles.sectionTitle}>{t("resumePdf.education.title")}</Text>
                                 <View style={js(styles.flexColumn, { gap: 12 })}>
@@ -252,22 +252,24 @@ export default function ResumeDocument({ resume }: { resume: Resume }) {
                                                 </Text>
                                                 <Text style={{ fontSize: 8 }}>[{getDuration(edu)}]</Text>
                                             </View>
-                                            {edu.specialization && (
+                                            {edu.specialization ? (
                                                 <Text>
                                                     {t("resumePdf.education.specialization")}: {edu.specialization}
                                                 </Text>
-                                            )}
+                                            ) : null}
                                             <Text>
                                                 {t("resumePdf.education.level")}: {edu.level}
                                             </Text>
-                                            {edu.description && <Text style={{ marginTop: 4 }}>{edu.description}</Text>}
+                                            {edu.description ? (
+                                                <Text style={{ marginTop: 4 }}>{edu.description}</Text>
+                                            ) : null}
                                         </View>
                                     ))}
                                 </View>
                             </View>
-                        )}
+                        ) : null}
                         {/* Training and Certification */}
-                        {training && training.length > 0 && (
+                        {training && training.length > 0 ? (
                             <View>
                                 <Text style={styles.sectionTitle}>{t("resumePdf.training.title")}</Text>
                                 <View style={js(styles.flexColumn, { gap: 12 })}>
@@ -287,9 +289,9 @@ export default function ResumeDocument({ resume }: { resume: Resume }) {
                                     ))}
                                 </View>
                             </View>
-                        )}
+                        ) : null}
                         {/* Additional Activities */}
-                        {activities && activities.length > 0 && (
+                        {activities && activities.length > 0 ? (
                             <View>
                                 <Text style={styles.sectionTitle}>{t("resumePdf.additionalActivity")}</Text>
                                 <View style={js(styles.flexColumn, { gap: 12 })}>
@@ -299,12 +301,12 @@ export default function ResumeDocument({ resume }: { resume: Resume }) {
                                                 <ListItem>
                                                     <Text style={styles.bold}>{activity.name}</Text>
                                                 </ListItem>
-                                                {activity.location && (
+                                                {activity.location ? (
                                                     <>
                                                         <Text>/</Text>
                                                         <Text>{activity.location}</Text>
                                                     </>
-                                                )}
+                                                ) : null}
                                             </View>
                                             <View style={js(styles.flexRow, { gap: 3 })}>
                                                 <Text style={styles.date}>
@@ -312,29 +314,31 @@ export default function ResumeDocument({ resume }: { resume: Resume }) {
                                                 </Text>
                                                 <Text style={{ fontSize: 8 }}>[{getDuration(activity)}]</Text>
                                             </View>
-                                            {activity.description && (
+                                            {activity.description ? (
                                                 <Text style={{ marginTop: 4 }}>{activity.description}</Text>
-                                            )}
+                                            ) : null}
                                         </View>
                                     ))}
                                 </View>
                             </View>
-                        )}
+                        ) : null}
                         {/* Interests */}
-                        {!!interests && (
+                        {interests ? (
                             <View>
                                 <Text style={styles.sectionTitle}>{t("resumePdf.interests")}</Text>
                                 <Text>{interests}</Text>
                             </View>
-                        )}
+                        ) : null}
                         {/* Links */}
-                        {links && links.length > 0 && (
+                        {links && links.length > 0 ? (
                             <View>
                                 <Text style={styles.sectionTitle}>{t("resumePdf.links")}</Text>
                                 <View style={js(styles.flexColumn, { gap: 12 })}>
                                     {links.map((link) => (
                                         <View key={link._id} style={js(styles.flexColumn, { gap: 1 })}>
-                                            {link.description && <Text style={styles.bold}>{link.description}</Text>}
+                                            {link.description ? (
+                                                <Text style={styles.bold}>{link.description}</Text>
+                                            ) : null}
                                             <Link style={styles.link} src={link.url}>
                                                 {link.url}
                                             </Link>
@@ -342,7 +346,7 @@ export default function ResumeDocument({ resume }: { resume: Resume }) {
                                     ))}
                                 </View>
                             </View>
-                        )}
+                        ) : null}
                     </View>
                 </View>
             </Page>
