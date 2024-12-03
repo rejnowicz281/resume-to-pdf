@@ -36,7 +36,7 @@ export function useBasicInfoForm() {
     function onSubmit(values: z.infer<typeof basicInfoSchema>) {
         const { firstName, lastName, dateOfBirth } = values;
 
-        const date = dateOfBirth ? dateToString(stringToDate(dateOfBirth), "dd.mm.yyyy") : "";
+        const date = dateOfBirth ? dateToString(new Date(dateOfBirth), "dd.mm.yyyy") : "";
 
         setFirstName(firstName);
         setLastName(lastName);
