@@ -99,6 +99,8 @@ export type Resume = {
     activities: Activity[];
     interests: string;
     links: Link[];
+    includeRodoClause: boolean;
+    includeDataProcessingConsent: boolean;
 };
 
 export type ResumeNoId = Omit<Resume, "_id">;

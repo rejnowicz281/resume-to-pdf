@@ -49,6 +49,12 @@ const styles = StyleSheet.create({
     date: {
         fontSize: 8,
         fontWeight: "bold"
+    },
+    privacySection: {
+        marginTop: 20
+    },
+    privacyText: {
+        color: "gray"
     }
 });
 
@@ -87,7 +93,9 @@ export default function ResumeDocument({ resume }: { resume: Resume }) {
         activities,
         interests,
         links,
-        imageOptions
+        imageOptions,
+        includeRodoClause,
+        includeDataProcessingConsent
     } = filteredResume;
 
     return (
@@ -191,7 +199,6 @@ export default function ResumeDocument({ resume }: { resume: Resume }) {
                         </View>
                     ) : null}
                 </View>
-
                 {/* Right Section */}
                 <View style={styles.rightSection}>
                     {/* Name */}
@@ -345,6 +352,19 @@ export default function ResumeDocument({ resume }: { resume: Resume }) {
                                         </View>
                                     ))}
                                 </View>
+                            </View>
+                        ) : null}
+                        {/* Confidentiality */}
+                        {includeRodoClause || includeDataProcessingConsent ? (
+                            <View style={styles.privacySection}>
+                                {includeRodoClause ? (
+                                    <Text style={styles.privacyText}>{t("resumePdf.rodoClause")}</Text>
+                                ) : null}
+                                {includeDataProcessingConsent ? (
+                                    <Text style={styles.privacyText}>
+                                        {t("resumePdf.consentToFurtherDataProcessing")}
+                                    </Text>
+                                ) : null}
                             </View>
                         ) : null}
                     </View>

@@ -25,6 +25,9 @@ export type ResumeCreatorContextType = {
 
     resume: Resume;
 
+    setIncludeRodoClause: (includeRodoClause: boolean) => void;
+    setIncludeDataProcessingConsent: (includeDataProcessingConsent: boolean) => void;
+
     setImageOptions: (options: ImageOptions) => void;
     setFirstName: (name: string) => void;
     setLastName: (name: string) => void;
@@ -91,6 +94,22 @@ export const ResumeCreatorProvider = ({
     const [previewState, setPreviewState] = useState(false);
 
     const togglePreviewState = () => setPreviewState(!previewState);
+
+    const setIncludeRodoClause = (includeRodoClause: boolean) => {
+        const newResume = { ...resume, includeRodoClause };
+
+        setResume(newResume);
+
+        db.put(newResume);
+    };
+
+    const setIncludeDataProcessingConsent = (includeDataProcessingConsent: boolean) => {
+        const newResume = { ...resume, includeDataProcessingConsent };
+
+        setResume(newResume);
+
+        db.put(newResume);
+    };
 
     const setImageOptions = (options: ImageOptions) => setResume({ ...resume, imageOptions: options });
 
@@ -273,6 +292,9 @@ export const ResumeCreatorProvider = ({
                 togglePreviewState,
 
                 resume,
+
+                setIncludeRodoClause,
+                setIncludeDataProcessingConsent,
 
                 setImageOptions,
                 setFirstName,

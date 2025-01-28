@@ -39,7 +39,10 @@ const enTranslation = {
         },
         additionalActivity: "Additional activity",
         interests: "Interests",
-        links: "Links"
+        links: "Links",
+        rodoClause: "I hereby consent to my data being processed for the purpose of considering this application.",
+        consentToFurtherDataProcessing:
+            "I consent to the processing of my personal data for multiple recruitment processes."
     },
     authForm: {
         username: "Username",
@@ -98,6 +101,13 @@ const enTranslation = {
     resumeCreator: {
         stepOne: {
             name: "Basic Info",
+            confidentiality: {
+                title: "Confidentiality",
+                includeRodoClause: "Include RODO clause",
+                includeDataProcessingConsent:
+                    "Include consent to further data processing for multiple recruitment processes"
+            },
+
             imagePicker: {
                 showImage: "Show Image",
                 upload: "Upload an image from disk",

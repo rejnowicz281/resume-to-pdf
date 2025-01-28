@@ -130,7 +130,9 @@ export const mapResume = (object: Record<string, any>): Resume => {
         skills: mapSkills(object.skills),
         activities: mapActivities(object.activities),
         interests: mapString(object.interests),
-        links: mapLinks(object.links)
+        links: mapLinks(object.links),
+        includeRodoClause: object.includeRodoClause || false,
+        includeDataProcessingConsent: object.includeDataProcessingConsent || false
     };
 
     return resume;
