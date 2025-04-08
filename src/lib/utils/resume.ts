@@ -21,7 +21,17 @@ export const newEmptyResume = (_id: string = uniqid()): Resume => {
 };
 
 export const getResumeProgress = (resume: Resume) => {
-    const { _id, _rev, name, createdAt, description, imageOptions, ...progressFields } = resume;
+    const {
+        _id,
+        _rev,
+        name,
+        createdAt,
+        description,
+        imageOptions,
+        includeRodoClause,
+        includeDataProcessingConsent,
+        ...progressFields
+    } = resume;
 
     const totalFields = Object.keys(progressFields).length;
 
