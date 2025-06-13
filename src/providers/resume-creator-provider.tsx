@@ -61,6 +61,7 @@ export type ResumeCreatorContextType = {
     toggleTrainingVisibility: (training: Training) => void;
     removeTraining: (id: string) => void;
 
+    moveSkill: (_id: string, _idTarget: string) => void;
     addSkill: (skill: Skill) => void;
     removeSkill: (id: string) => void;
 
@@ -283,6 +284,23 @@ export const ResumeCreatorProvider = ({
         db.put(newResume);
     };
 
+    const moveSkill = (_id: string, _idTarget: string) => {
+        const fromIndex = resume.skills.findIndex((skill) => skill._id === _id);
+        const toIndex = resume.skills.findIndex((skill) => skill._id === _idTarget);
+
+        if (fromIndex === -1 || toIndex === -1 || fromIndex === toIndex) return;
+
+        const newSkills = [...resume.skills];
+
+        const [movedSkill] = newSkills.splice(fromIndex, 1);
+
+        const insertAt = fromIndex < toIndex ? toIndex : toIndex;
+
+        newSkills.splice(insertAt, 0, movedSkill);
+
+        setSkills(newSkills);
+    };
+
     const addSkill = (skill: Skill) => setSkills([...resume.skills, skill]);
 
     const removeSkill = (_id: string) => setSkills(resume.skills.filter((skill) => skill._id !== _id));
@@ -416,6 +434,7 @@ export const ResumeCreatorProvider = ({
                 toggleTrainingVisibility,
                 removeTraining,
 
+                moveSkill,
                 addSkill,
                 removeSkill,
 

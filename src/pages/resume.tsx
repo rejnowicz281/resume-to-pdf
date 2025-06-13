@@ -39,6 +39,8 @@ export default function ResumePage() {
         return () => {
             changes.cancel();
         };
+
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [id]);
 
     if (!Object.keys(resume).length) return <Loading />;
