@@ -67,7 +67,7 @@ const DroppableBadgeWrapper = ({ skill }: { skill: Skill }) => {
     }));
 
     return (
-        <div ref={drop} className="rounded-full">
+        <div ref={drop}>
             <DraggableBadge className={isOver && canDrop ? "opacity-50" : undefined} skillId={skill._id}>
                 <span className="truncate">{skill.name}</span>
                 <button onClick={() => removeSkill(skill._id)}>
