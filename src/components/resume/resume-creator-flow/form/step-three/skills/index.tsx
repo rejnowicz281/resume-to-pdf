@@ -22,7 +22,9 @@ export default function Skills() {
 
     return (
         <div className="flex flex-col">
-            <h2 className="text-3xl font-bold">{t("resumeCreator.stepThree.skills.title")}</h2>
+            <h2 className="text-3xl font-bold">
+                {t("resumeCreator.stepThree.skills.title")} ({skills.length})
+            </h2>
             <div className="flex gap-3 my-6 flex-wrap">
                 <DndProvider backend={HTML5Backend}>
                     {skills.map((skill, idx) => (
