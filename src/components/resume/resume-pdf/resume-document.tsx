@@ -166,8 +166,8 @@ export default function ResumeDocument({ resume }: { resume: Resume }) {
                     {skills && skills.length > 0 ? (
                         <View style={{ borderTop: 0.5, marginTop: 10, paddingTop: 10, borderTopColor: "#D3D3D3" }}>
                             <Text style={styles.sectionTitle}>{t("resumePdf.skills")}</Text>
-                            {skills.map((skill) => (
-                                <View key={skill._id}>
+                            {skills.map((skill, idx) => (
+                                <View key={skill._id + idx}>
                                     <ListItem>
                                         <Text
                                             style={{
@@ -186,12 +186,12 @@ export default function ResumeDocument({ resume }: { resume: Resume }) {
                     {languages && languages.length > 0 ? (
                         <View style={{ borderTop: 0.5, marginTop: 10, paddingTop: 10, borderTopColor: "#D3D3D3" }}>
                             <Text style={styles.sectionTitle}>{t("resumePdf.languages")}</Text>
-                            {languages.map((language) => (
-                                <View style={{ flexDirection: "row", gap: 6 }} key={language._id}>
+                            {languages.map((language, idx) => (
+                                <View style={{ flexDirection: "row", gap: 6 }} key={language._id + idx}>
                                     <Text>{language.language}:</Text>
                                     <Text>
                                         {language.level.split("").map((level, idx) => {
-                                            return <Text key={idx}>{level}</Text>;
+                                            return <Text key={language._id + idx + "level-letter"}>{level}</Text>;
                                         })}
                                     </Text>
                                 </View>
@@ -210,8 +210,8 @@ export default function ResumeDocument({ resume }: { resume: Resume }) {
                             <View>
                                 <Text style={styles.sectionTitle}>{t("resumePdf.workExperience")}</Text>
                                 <View style={js(styles.flexColumn, { gap: 12 })}>
-                                    {workExperience.map((experience) => (
-                                        <View key={experience._id} style={js(styles.flexColumn, { gap: 1 })}>
+                                    {workExperience.map((experience, idx) => (
+                                        <View key={experience._id + idx} style={js(styles.flexColumn, { gap: 1 })}>
                                             <View style={js(styles.flexRow, { gap: 4 })}>
                                                 <ListItem>
                                                     <Text style={styles.bold}>{experience.title}</Text>
@@ -248,8 +248,8 @@ export default function ResumeDocument({ resume }: { resume: Resume }) {
                             <View>
                                 <Text style={styles.sectionTitle}>{t("resumePdf.education.title")}</Text>
                                 <View style={js(styles.flexColumn, { gap: 12 })}>
-                                    {education.map((edu) => (
-                                        <View key={edu._id} style={js(styles.flexColumn, { gap: 1 })}>
+                                    {education.map((edu, idx) => (
+                                        <View key={edu._id + idx} style={js(styles.flexColumn, { gap: 1 })}>
                                             <ListItem>
                                                 <Text style={styles.bold}>{edu.institution}</Text>
                                             </ListItem>
@@ -280,8 +280,8 @@ export default function ResumeDocument({ resume }: { resume: Resume }) {
                             <View>
                                 <Text style={styles.sectionTitle}>{t("resumePdf.training.title")}</Text>
                                 <View style={js(styles.flexColumn, { gap: 12 })}>
-                                    {training.map((cert) => (
-                                        <View key={cert._id} style={js(styles.flexColumn, { gap: 1 })}>
+                                    {training.map((cert, idx) => (
+                                        <View key={cert._id + idx} style={js(styles.flexColumn, { gap: 1 })}>
                                             <ListItem>
                                                 <Text style={styles.bold}>{cert.name}</Text>
                                             </ListItem>
@@ -302,8 +302,8 @@ export default function ResumeDocument({ resume }: { resume: Resume }) {
                             <View>
                                 <Text style={styles.sectionTitle}>{t("resumePdf.additionalActivity")}</Text>
                                 <View style={js(styles.flexColumn, { gap: 12 })}>
-                                    {activities.map((activity) => (
-                                        <View key={activity._id} style={js(styles.flexColumn, { gap: 1 })}>
+                                    {activities.map((activity, idx) => (
+                                        <View key={activity._id + idx} style={js(styles.flexColumn, { gap: 1 })}>
                                             <View style={js(styles.flexRow, { gap: 4 })}>
                                                 <ListItem>
                                                     <Text style={styles.bold}>{activity.name}</Text>
@@ -341,8 +341,8 @@ export default function ResumeDocument({ resume }: { resume: Resume }) {
                             <View>
                                 <Text style={styles.sectionTitle}>{t("resumePdf.links")}</Text>
                                 <View style={js(styles.flexColumn, { gap: 12 })}>
-                                    {links.map((link) => (
-                                        <View key={link._id} style={js(styles.flexColumn, { gap: 1 })}>
+                                    {links.map((link, idx) => (
+                                        <View key={link._id + idx} style={js(styles.flexColumn, { gap: 1 })}>
                                             {link.description ? (
                                                 <Text style={styles.bold}>{link.description}</Text>
                                             ) : null}

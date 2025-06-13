@@ -6,6 +6,7 @@ import AddLanguage from "./add-language";
 import DeleteLanguage from "./delete-language";
 import EditLanguage from "./edit-language";
 import HideLanguage from "./hide-language";
+import MoveLanguage from "./move-language";
 
 export default function Languages() {
     const {
@@ -32,6 +33,8 @@ export default function Languages() {
                                 <CardDescription className="truncate">{language.level}</CardDescription>
                             </CardHeader>
                             <div className="flex pt-4">
+                                <MoveLanguage _id={language._id} direction="up" />
+                                <MoveLanguage _id={language._id} direction="down" />
                                 <HideLanguage language={language} />
                                 <EditLanguage language={language} />
                                 <DeleteLanguage language={language} />

@@ -6,6 +6,7 @@ import AddTraining from "./add-training";
 import DeleteTraining from "./delete-training";
 import EditTraining from "./edit-training";
 import HideTraining from "./hide-training";
+import MoveTraining from "./move-training";
 
 export default function Training() {
     const {
@@ -39,6 +40,8 @@ export default function Training() {
                                 </CardDescription>
                             </CardHeader>
                             <div className="flex pt-4">
+                                <MoveTraining _id={training._id} direction="up" />
+                                <MoveTraining _id={training._id} direction="down" />
                                 <HideTraining training={training} />
                                 <EditTraining training={training} />
                                 <DeleteTraining training={training} />

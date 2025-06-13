@@ -7,6 +7,7 @@ import AddEducation from "./add-education";
 import DeleteEducation from "./delete-education";
 import EditEducation from "./edit-education";
 import HideEducation from "./hide-education";
+import MoveEducation from "./move-education";
 
 export default function Education() {
     const {
@@ -50,6 +51,8 @@ export default function Education() {
                                 </CardDescription>
                             </CardHeader>
                             <div className="flex pt-4">
+                                <MoveEducation _id={education._id} direction="up" />
+                                <MoveEducation _id={education._id} direction="down" />
                                 <HideEducation education={education} />
                                 <EditEducation education={education} />
                                 <DeleteEducation education={education} />

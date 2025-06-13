@@ -7,6 +7,7 @@ import AddExperience from "./add-experience";
 import DeleteExperience from "./delete-experience";
 import EditExperience from "./edit-experience";
 import HideExperience from "./hide-experience";
+import MoveExperience from "./move-experience";
 
 export default function WorkExperience() {
     const {
@@ -51,6 +52,8 @@ export default function WorkExperience() {
                                 </CardDescription>
                             </CardHeader>
                             <div className="flex pt-4">
+                                <MoveExperience _id={experience._id} direction="up" />
+                                <MoveExperience _id={experience._id} direction="down" />
                                 <HideExperience experience={experience} />
                                 <EditExperience experience={experience} />
                                 <DeleteExperience experience={experience} />

@@ -7,6 +7,7 @@ import AddActivity from "./add-activity";
 import DeleteActivity from "./delete-activity";
 import EditActivity from "./edit-activity";
 import HideActivity from "./hide-activity";
+import MoveActivity from "./move-activity";
 
 export default function Activities() {
     const {
@@ -46,6 +47,8 @@ export default function Activities() {
                                 </CardDescription>
                             </CardHeader>
                             <div className="flex pt-4">
+                                <MoveActivity _id={activity._id} direction="up" />
+                                <MoveActivity _id={activity._id} direction="down" />
                                 <HideActivity activity={activity} />
                                 <EditActivity activity={activity} />
                                 <DeleteActivity activity={activity} />

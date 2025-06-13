@@ -6,6 +6,7 @@ import AddLink from "./add-link";
 import DeleteLink from "./delete-link";
 import EditLink from "./edit-link";
 import HideLink from "./hide-link";
+import MoveLink from "./move-link";
 
 export default function Links() {
     const {
@@ -35,6 +36,8 @@ export default function Links() {
                                 </CardTitle>
                             </CardHeader>
                             <div className="flex pt-4">
+                                <MoveLink _id={link._id} direction="up" />
+                                <MoveLink _id={link._id} direction="down" />
                                 <HideLink link={link} />
                                 <EditLink link={link} />
                                 <DeleteLink link={link} />

@@ -37,21 +37,25 @@ export type ResumeCreatorContextType = {
     setEmail: (email: string) => void;
     setPhone: (phone: string) => void;
 
+    moveWorkExperience: (_id: string, direction: "up" | "down") => void;
     addWorkExperience: (experience: WorkExperience) => void;
     editWorkExperience: (id: string, experience: WorkExperienceNoId) => void;
     toggleWorkExperienceVisibility: (experience: WorkExperience) => void;
     removeWorkExperience: (id: string) => void;
 
+    moveEducation: (_id: string, direction: "up" | "down") => void;
     addEducation: (education: Education) => void;
     editEducation: (id: string, education: EducationNoId) => void;
     toggleEducationVisibility: (education: Education) => void;
     removeEducation: (id: string) => void;
 
+    moveLanguage: (_id: string, direction: "up" | "down") => void;
     addLanguage: (language: Language) => void;
     editLanguage: (id: string, language: LanguageNoId) => void;
     toggleLanguageVisibility: (language: Language) => void;
     removeLanguage: (id: string) => void;
 
+    moveTraining: (_id: string, direction: "up" | "down") => void;
     addTraining: (training: Training) => void;
     editTraining: (id: string, training: TrainingNoId) => void;
     toggleTrainingVisibility: (training: Training) => void;
@@ -60,6 +64,7 @@ export type ResumeCreatorContextType = {
     addSkill: (skill: Skill) => void;
     removeSkill: (id: string) => void;
 
+    moveActivity: (_id: string, direction: "up" | "down") => void;
     addActivity: (activity: Activity) => void;
     editActivity: (id: string, activity: ActivityNoId) => void;
     toggleActivityVisibility: (activity: Activity) => void;
@@ -67,6 +72,7 @@ export type ResumeCreatorContextType = {
 
     setInterests: (interests: string) => void;
 
+    moveLink: (id: string, direction: "up" | "down") => void;
     addLink: (link: Link) => void;
     editLink: (id: string, link: LinkNoId) => void;
     toggleLinkVisibility: (link: Link) => void;
@@ -135,6 +141,27 @@ export const ResumeCreatorProvider = ({
         db.put(newResume);
     };
 
+    const moveWorkExperience = (_id: string, direction: "up" | "down") => {
+        const index = resume.workExperience.findIndex((exp) => exp._id === _id);
+
+        if (index === -1) return;
+
+        const newWorkExperience = [...resume.workExperience];
+        if (direction === "up" && index > 0) {
+            [newWorkExperience[index], newWorkExperience[index - 1]] = [
+                newWorkExperience[index - 1],
+                newWorkExperience[index]
+            ];
+        } else if (direction === "down" && index < newWorkExperience.length - 1) {
+            [newWorkExperience[index], newWorkExperience[index + 1]] = [
+                newWorkExperience[index + 1],
+                newWorkExperience[index]
+            ];
+        }
+
+        setWorkExperience(newWorkExperience);
+    };
+
     const addWorkExperience = (experience: WorkExperience) => setWorkExperience([...resume.workExperience, experience]);
 
     const editWorkExperience = (_id: string, experience: WorkExperienceNoId) =>
@@ -155,6 +182,18 @@ export const ResumeCreatorProvider = ({
         setResume(newResume);
 
         db.put(newResume);
+    };
+
+    const moveEducation = (_id: string, direction: "up" | "down") => {
+        const index = resume.education.findIndex((edu) => edu._id === _id);
+        if (index === -1) return;
+        const newEducation = [...resume.education];
+        if (direction === "up" && index > 0) {
+            [newEducation[index], newEducation[index - 1]] = [newEducation[index - 1], newEducation[index]];
+        } else if (direction === "down" && index < newEducation.length - 1) {
+            [newEducation[index], newEducation[index + 1]] = [newEducation[index + 1], newEducation[index]];
+        }
+        setEducation(newEducation);
     };
 
     const addEducation = (educationToAdd: Education) => setEducation([...resume.education, educationToAdd]);
@@ -178,6 +217,18 @@ export const ResumeCreatorProvider = ({
         db.put(newResume);
     };
 
+    const moveLanguage = (_id: string, direction: "up" | "down") => {
+        const index = resume.languages.findIndex((lang) => lang._id === _id);
+        if (index === -1) return;
+        const newLanguages = [...resume.languages];
+        if (direction === "up" && index > 0) {
+            [newLanguages[index], newLanguages[index - 1]] = [newLanguages[index - 1], newLanguages[index]];
+        } else if (direction === "down" && index < newLanguages.length - 1) {
+            [newLanguages[index], newLanguages[index + 1]] = [newLanguages[index + 1], newLanguages[index]];
+        }
+        setLanguages(newLanguages);
+    };
+
     const addLanguage = (language: Language) => setLanguages([...resume.languages, language]);
 
     const editLanguage = (_id: string, language: LanguageNoId) =>
@@ -197,6 +248,18 @@ export const ResumeCreatorProvider = ({
         setResume(newResume);
 
         db.put(newResume);
+    };
+
+    const moveTraining = (_id: string, direction: "up" | "down") => {
+        const index = resume.training.findIndex((train) => train._id === _id);
+        if (index === -1) return;
+        const newTraining = [...resume.training];
+        if (direction === "up" && index > 0) {
+            [newTraining[index], newTraining[index - 1]] = [newTraining[index - 1], newTraining[index]];
+        } else if (direction === "down" && index < newTraining.length - 1) {
+            [newTraining[index], newTraining[index + 1]] = [newTraining[index + 1], newTraining[index]];
+        }
+        setTraining(newTraining);
     };
 
     const addTraining = (trainingToAdd: Training) => setTraining([...resume.training, trainingToAdd]);
@@ -232,6 +295,18 @@ export const ResumeCreatorProvider = ({
         db.put(newResume);
     };
 
+    const moveActivity = (_id: string, direction: "up" | "down") => {
+        const index = resume.activities.findIndex((act) => act._id === _id);
+        if (index === -1) return;
+        const newActivities = [...resume.activities];
+        if (direction === "up" && index > 0) {
+            [newActivities[index], newActivities[index - 1]] = [newActivities[index - 1], newActivities[index]];
+        } else if (direction === "down" && index < newActivities.length - 1) {
+            [newActivities[index], newActivities[index + 1]] = [newActivities[index + 1], newActivities[index]];
+        }
+        setActivities(newActivities);
+    };
+
     const addActivity = (activity: Activity) => setActivities([...resume.activities, activity]);
 
     const editActivity = (_id: string, activity: ActivityNoId) =>
@@ -253,6 +328,18 @@ export const ResumeCreatorProvider = ({
         setResume(newResume);
 
         db.put(newResume);
+    };
+
+    const moveLink = (_id: string, direction: "up" | "down") => {
+        const index = resume.links.findIndex((link) => link._id === _id);
+        if (index === -1) return;
+        const newLinks = [...resume.links];
+        if (direction === "up" && index > 0) {
+            [newLinks[index], newLinks[index - 1]] = [newLinks[index - 1], newLinks[index]];
+        } else if (direction === "down" && index < newLinks.length - 1) {
+            [newLinks[index], newLinks[index + 1]] = [newLinks[index + 1], newLinks[index]];
+        }
+        setLinks(newLinks);
     };
 
     const addLink = (link: Link) => setLinks([...resume.links, link]);
@@ -305,21 +392,25 @@ export const ResumeCreatorProvider = ({
                 setEmail,
                 setPhone,
 
+                moveWorkExperience,
                 addWorkExperience,
                 editWorkExperience,
                 toggleWorkExperienceVisibility,
                 removeWorkExperience,
 
+                moveEducation,
                 addEducation,
                 editEducation,
                 toggleEducationVisibility,
                 removeEducation,
 
+                moveLanguage,
                 addLanguage,
                 editLanguage,
                 toggleLanguageVisibility,
                 removeLanguage,
 
+                moveTraining,
                 addTraining,
                 editTraining,
                 toggleTrainingVisibility,
@@ -328,6 +419,7 @@ export const ResumeCreatorProvider = ({
                 addSkill,
                 removeSkill,
 
+                moveActivity,
                 addActivity,
                 editActivity,
                 toggleActivityVisibility,
@@ -335,6 +427,7 @@ export const ResumeCreatorProvider = ({
 
                 setInterests,
 
+                moveLink,
                 addLink,
                 editLink,
                 toggleLinkVisibility,
