@@ -4,12 +4,15 @@ import { Input } from "@/components/ui/input";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { useLocationForm } from "@/hooks/step-one-forms";
 import { getCountryNames } from "@/lib/constants/country-names";
+import { useResumeCreator } from "@/providers/resume-creator-provider";
 import { Plus } from "lucide-react";
-import { useTranslation } from "react-i18next";
 
 export function LocationForm() {
     const { form, onSubmit } = useLocationForm();
-    const { t } = useTranslation();
+    const {
+        t,
+        resume: { lang }
+    } = useResumeCreator();
 
     return (
         <div>
@@ -34,7 +37,7 @@ export function LocationForm() {
                                                 {t("resumeCreator.stepOne.locationForm.noCountry")}
                                             </SelectItem>
 
-                                            {getCountryNames().map((country) => (
+                                            {getCountryNames(lang).map((country) => (
                                                 <SelectItem key={country} value={country}>
                                                     {country}
                                                 </SelectItem>

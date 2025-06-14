@@ -1,14 +1,14 @@
 import { Button } from "@/components/ui/button";
 import { Dialog, DialogContent, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 import { Language } from "@/lib/types/resume";
+import { useResumeCreator } from "@/providers/resume-creator-provider";
 import { Edit } from "lucide-react";
 import { useState } from "react";
-import { useTranslation } from "react-i18next";
 import LanguageForm from "./language-form";
 
 export default function EditLanguage({ language }: { language: Language }) {
     const [open, setOpen] = useState(false);
-    const { t } = useTranslation();
+    const { t } = useResumeCreator();
 
     return (
         <Dialog open={open} onOpenChange={setOpen}>

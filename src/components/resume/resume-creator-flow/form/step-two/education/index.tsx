@@ -2,7 +2,6 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { getDuration } from "@/lib/utils/date";
 import { cn } from "@/lib/utils/general";
 import { useResumeCreator } from "@/providers/resume-creator-provider";
-import { useTranslation } from "react-i18next";
 import AddEducation from "./add-education";
 import DeleteEducation from "./delete-education";
 import EditEducation from "./edit-education";
@@ -11,9 +10,9 @@ import MoveEducation from "./move-education";
 
 export default function Education() {
     const {
-        resume: { education }
+        resume: { education },
+        t
     } = useResumeCreator();
-    const { t } = useTranslation();
 
     return (
         <div className="flex flex-col">

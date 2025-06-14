@@ -1,14 +1,14 @@
 import { Button } from "@/components/ui/button";
 import { Dialog, DialogContent, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 import { Education } from "@/lib/types/resume";
+import { useResumeCreator } from "@/providers/resume-creator-provider";
 import { Edit } from "lucide-react";
 import { useState } from "react";
-import { useTranslation } from "react-i18next";
 import EducationForm from "./education-form";
 
 export default function EditEducation({ education }: { education: Education }) {
     const [open, setOpen] = useState(false);
-    const { t } = useTranslation();
+    const { t } = useResumeCreator();
 
     return (
         <Dialog open={open} onOpenChange={setOpen}>

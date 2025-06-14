@@ -4,12 +4,12 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { useEducationForm } from "@/hooks/step-two-forms";
 import { Education } from "@/lib/types/resume";
+import { useResumeCreator } from "@/providers/resume-creator-provider";
 import { Plus } from "lucide-react";
-import { useTranslation } from "react-i18next";
 
 export default function EducationForm({ education, afterSubmit }: { education?: Education; afterSubmit?: () => void }) {
     const { form, onSubmit } = useEducationForm(education);
-    const { t } = useTranslation();
+    const { t } = useResumeCreator();
 
     return (
         <Form {...form}>

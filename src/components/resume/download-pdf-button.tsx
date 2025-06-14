@@ -13,11 +13,13 @@ export default function DownloadPdfButton({
     resume: Resume;
     content: (loading: boolean) => ReactNode;
 }) {
-    const { t } = useTranslation();
+    const tOptions = resume.lang ? { lng: resume.lang } : undefined;
+
+    const { t } = useTranslation("", tOptions);
 
     return (
         <PDFDownloadLink
-            document={<ResumeDocument resume={resume} />}
+            document={<ResumeDocument resume={resume} t={t} />}
             fileName={`${makeUnderscore(getResumeName(resume))}_${t("resume")}.pdf`}
         >
             {({ loading }) => content(loading)}

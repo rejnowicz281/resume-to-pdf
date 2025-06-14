@@ -2,7 +2,6 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { getDuration } from "@/lib/utils/date";
 import { cn } from "@/lib/utils/general";
 import { useResumeCreator } from "@/providers/resume-creator-provider";
-import { useTranslation } from "react-i18next";
 import AddExperience from "./add-experience";
 import DeleteExperience from "./delete-experience";
 import EditExperience from "./edit-experience";
@@ -11,9 +10,9 @@ import MoveExperience from "./move-experience";
 
 export default function WorkExperience() {
     const {
-        resume: { workExperience }
+        resume: { workExperience },
+        t
     } = useResumeCreator();
-    const { t } = useTranslation();
 
     return (
         <div className="flex flex-col">

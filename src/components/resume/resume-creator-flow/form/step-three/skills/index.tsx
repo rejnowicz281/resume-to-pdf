@@ -6,7 +6,6 @@ import { X } from "lucide-react";
 import { useEffect, useState } from "react";
 import { DndProvider, useDrag, useDrop } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
-import { useTranslation } from "react-i18next";
 import SkillForm from "./skill-form";
 
 interface SkillDragItem {
@@ -15,10 +14,9 @@ interface SkillDragItem {
 
 export default function Skills() {
     const {
-        resume: { skills }
+        resume: { skills },
+        t
     } = useResumeCreator();
-
-    const { t } = useTranslation();
 
     return (
         <div className="flex flex-col">

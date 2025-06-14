@@ -1,7 +1,6 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { cn } from "@/lib/utils/general";
 import { useResumeCreator } from "@/providers/resume-creator-provider";
-import { useTranslation } from "react-i18next";
 import AddLink from "./add-link";
 import DeleteLink from "./delete-link";
 import EditLink from "./edit-link";
@@ -10,9 +9,9 @@ import MoveLink from "./move-link";
 
 export default function Links() {
     const {
-        resume: { links }
+        resume: { links },
+        t
     } = useResumeCreator();
-    const { t } = useTranslation();
 
     return (
         <div className="flex flex-col">

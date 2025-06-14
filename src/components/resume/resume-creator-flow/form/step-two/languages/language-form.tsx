@@ -6,12 +6,15 @@ import { useLanguageForm } from "@/hooks/step-two-forms";
 import { getLanguageLevels } from "@/lib/constants/language-levels";
 
 import { Language } from "@/lib/types/resume";
+import { useResumeCreator } from "@/providers/resume-creator-provider";
 import { Plus } from "lucide-react";
-import { useTranslation } from "react-i18next";
 
 export default function LanguageForm({ language, afterSubmit }: { language?: Language; afterSubmit?: () => void }) {
     const { form, onSubmit } = useLanguageForm(language);
-    const { t } = useTranslation();
+    const {
+        t,
+        resume: { lang }
+    } = useResumeCreator();
 
     return (
         <Form {...form}>
@@ -53,7 +56,7 @@ export default function LanguageForm({ language, afterSubmit }: { language?: Lan
                                         />
                                     </SelectTrigger>
                                     <SelectContent>
-                                        {getLanguageLevels().map((level) => (
+                                        {getLanguageLevels(lang).map((level) => (
                                             <SelectItem key={level} value={level}>
                                                 {level}
                                             </SelectItem>

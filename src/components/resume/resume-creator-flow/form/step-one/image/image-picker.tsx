@@ -3,12 +3,11 @@ import { usePouchDB } from "@/providers/pouchdb-provider";
 import { useResumeCreator } from "@/providers/resume-creator-provider";
 import { Camera, Trash2 } from "lucide-react";
 import { useRef } from "react";
-import { useTranslation } from "react-i18next";
 
 const ImagePicker = () => {
-    const { resume, setImageOptions } = useResumeCreator();
+    const { resume, setImageOptions, t } = useResumeCreator();
     const inputRef = useRef<HTMLInputElement>(null);
-    const { t } = useTranslation();
+
     const { db } = usePouchDB();
 
     const { show, url } = resume.imageOptions;

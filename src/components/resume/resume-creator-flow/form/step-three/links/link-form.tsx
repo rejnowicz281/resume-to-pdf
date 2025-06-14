@@ -3,12 +3,12 @@ import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "
 import { Input } from "@/components/ui/input";
 import { useLinkForm } from "@/hooks/step-three-forms";
 import { Link } from "@/lib/types/resume";
+import { useResumeCreator } from "@/providers/resume-creator-provider";
 import { Plus } from "lucide-react";
-import { useTranslation } from "react-i18next";
 
 export default function LinkForm({ link, afterSubmit }: { link?: Link; afterSubmit?: () => void }) {
     const { form, onSubmit } = useLinkForm(link);
-    const { t } = useTranslation();
+    const { t } = useResumeCreator();
 
     return (
         <Form {...form}>

@@ -1,13 +1,13 @@
 import { Button } from "@/components/ui/button";
 import { Dialog, DialogContent, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
+import { useResumeCreator } from "@/providers/resume-creator-provider";
 import { Plus } from "lucide-react";
 import { useState } from "react";
-import { useTranslation } from "react-i18next";
 import ActivityForm from "./activity-form";
 
 export default function AddActivity() {
     const [open, setOpen] = useState(false);
-    const { t } = useTranslation();
+    const { t } = useResumeCreator();
 
     return (
         <Dialog open={open} onOpenChange={setOpen}>

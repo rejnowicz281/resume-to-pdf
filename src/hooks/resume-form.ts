@@ -9,16 +9,18 @@ export function useResumeForm(_id: string) {
 
     const resumeSchema = z.object({
         name: z.string().optional(),
-        description: z.string().optional()
+        description: z.string().optional(),
+        lang: z.string().optional()
     });
 
     const resume = getResume(_id);
 
     const form = useForm<z.infer<typeof resumeSchema>>({
         resolver: zodResolver(resumeSchema),
-        values: {
+        defaultValues: {
             name: resume?.name,
-            description: resume?.description
+            description: resume?.description,
+            lang: resume?.lang
         }
     });
 

@@ -1,7 +1,6 @@
 import { Card, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { cn } from "@/lib/utils/general";
 import { useResumeCreator } from "@/providers/resume-creator-provider";
-import { useTranslation } from "react-i18next";
 import AddLanguage from "./add-language";
 import DeleteLanguage from "./delete-language";
 import EditLanguage from "./edit-language";
@@ -10,9 +9,9 @@ import MoveLanguage from "./move-language";
 
 export default function Languages() {
     const {
-        resume: { languages }
+        resume: { languages },
+        t
     } = useResumeCreator();
-    const { t } = useTranslation();
 
     return (
         <div className="flex flex-col">

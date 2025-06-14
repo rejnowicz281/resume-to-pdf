@@ -1,8 +1,8 @@
-import { useTranslation } from "react-i18next";
+import { useResumeCreator } from "@/providers/resume-creator-provider";
 import ImagePicker from "./image-picker";
 
 export default function Image() {
-    const { t } = useTranslation();
+    const { t } = useResumeCreator();
 
     return (
         <div>

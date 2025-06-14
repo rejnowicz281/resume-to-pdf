@@ -6,18 +6,16 @@ import { BlobProvider } from "@react-pdf/renderer";
 import { ChevronLeft, ChevronRight, LucideLoader } from "lucide-react";
 import type { PDFDocumentProxy } from "pdfjs-dist";
 import { useEffect, useRef, useState } from "react";
-import { useTranslation } from "react-i18next";
 import { Document, Page } from "react-pdf";
 import "react-pdf/dist/esm/Page/AnnotationLayer.css";
 import "react-pdf/dist/esm/Page/TextLayer.css";
 
 export default function ResumePDF() {
-    const { resume, previewState } = useResumeCreator();
+    const { resume, previewState, t } = useResumeCreator();
     const containerRef = useRef<HTMLDivElement>(null);
     const [width, setWidth] = useState(200);
     const [numPages, setNumPages] = useState(1);
     const [currentPage, setCurrentPage] = useState(1);
-    const { t } = useTranslation();
 
     useEffect(() => {
         setWidth(getWidth());
@@ -59,7 +57,7 @@ export default function ResumePDF() {
             )}
         >
             <div className={cn("absolute inset-0 overflow-x-hidden overflow-y-auto", numPages > 1 && "pb-9")}>
-                <BlobProvider document={<ResumeDocument resume={resume} />}>
+                <BlobProvider document={<ResumeDocument resume={resume} t={t} />}>
                     {({ loading, url, blob }) => {
                         return loading || !blob ? (
                             <Loading />

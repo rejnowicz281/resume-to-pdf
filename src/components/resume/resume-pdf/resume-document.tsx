@@ -2,7 +2,7 @@ import { Resume } from "@/lib/types/resume";
 import { getDuration } from "@/lib/utils/date";
 import { js } from "@/lib/utils/general";
 import { Document, Font, Image, Link, Page, StyleSheet, Text, View } from "@react-pdf/renderer";
-import { useTranslation } from "react-i18next";
+import { TFunction } from "i18next";
 import ListItem from "./list-item";
 
 // Styles for the PDF document
@@ -58,7 +58,7 @@ const styles = StyleSheet.create({
     }
 });
 
-export default function ResumeDocument({ resume }: { resume: Resume }) {
+export default function ResumeDocument({ resume, t }: { resume: Resume; t: TFunction<"", undefined> }) {
     Font.register({
         family: "OpenSans",
         fonts: [
@@ -66,7 +66,6 @@ export default function ResumeDocument({ resume }: { resume: Resume }) {
             { src: "/fonts/Arial-Bold.ttf", fontWeight: "bold" }
         ]
     });
-    const { t } = useTranslation();
 
     const filteredResume = { ...resume };
 

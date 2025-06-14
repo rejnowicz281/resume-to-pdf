@@ -13,11 +13,10 @@ import { Button } from "@/components/ui/button";
 import { Activity } from "@/lib/types/resume";
 import { useResumeCreator } from "@/providers/resume-creator-provider";
 import { Trash } from "lucide-react";
-import { Trans, useTranslation } from "react-i18next";
+import { Trans } from "react-i18next";
 
 export default function DeleteActivity({ activity }: { activity: Activity }) {
-    const { removeActivity } = useResumeCreator();
-    const { t } = useTranslation();
+    const { removeActivity, t } = useResumeCreator();
 
     return (
         <AlertDialog>

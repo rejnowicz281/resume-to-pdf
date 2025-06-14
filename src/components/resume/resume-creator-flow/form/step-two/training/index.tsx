@@ -1,7 +1,6 @@
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { cn } from "@/lib/utils/general";
 import { useResumeCreator } from "@/providers/resume-creator-provider";
-import { useTranslation } from "react-i18next";
 import AddTraining from "./add-training";
 import DeleteTraining from "./delete-training";
 import EditTraining from "./edit-training";
@@ -10,9 +9,9 @@ import MoveTraining from "./move-training";
 
 export default function Training() {
     const {
-        resume: { training }
+        resume: { training },
+        t
     } = useResumeCreator();
-    const { t } = useTranslation();
 
     return (
         <div className="flex flex-col">

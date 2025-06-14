@@ -4,8 +4,8 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { useWorkExperienceForm } from "@/hooks/step-two-forms";
 import { WorkExperience } from "@/lib/types/resume";
+import { useResumeCreator } from "@/providers/resume-creator-provider";
 import { Plus } from "lucide-react";
-import { useTranslation } from "react-i18next";
 
 export default function ExperienceForm({
     experience,
@@ -15,7 +15,7 @@ export default function ExperienceForm({
     afterSubmit?: () => void;
 }) {
     const { form, onSubmit } = useWorkExperienceForm(experience);
-    const { t } = useTranslation();
+    const { t } = useResumeCreator();
 
     return (
         <Form {...form}>

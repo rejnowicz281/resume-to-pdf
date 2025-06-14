@@ -4,12 +4,12 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { useActivityForm } from "@/hooks/step-three-forms";
 import { Activity } from "@/lib/types/resume";
+import { useResumeCreator } from "@/providers/resume-creator-provider";
 import { Plus } from "lucide-react";
-import { useTranslation } from "react-i18next";
 
 export default function ActivityForm({ activity, afterSubmit }: { activity?: Activity; afterSubmit?: () => void }) {
     const { form, onSubmit } = useActivityForm(activity);
-    const { t } = useTranslation();
+    const { t } = useResumeCreator();
 
     return (
         <Form {...form}>

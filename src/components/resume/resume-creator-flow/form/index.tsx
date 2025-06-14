@@ -2,7 +2,6 @@ import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils/general";
 import { useResumeCreator } from "@/providers/resume-creator-provider";
 import { ArrowLeft, ArrowRight, Edit, FileSearch2, Home } from "lucide-react";
-import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 import ProgressBar from "./progress-bar";
 import StepFour from "./step-four";
@@ -11,8 +10,7 @@ import StepThree from "./step-three";
 import StepTwo from "./step-two";
 
 export default function ResumeCreatorForm() {
-    const { step, setStep, getStepName, togglePreviewState, previewState } = useResumeCreator();
-    const { t } = useTranslation();
+    const { step, setStep, getStepName, togglePreviewState, previewState, t } = useResumeCreator();
 
     const renderStep = () => {
         switch (step) {

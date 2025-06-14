@@ -6,13 +6,10 @@ import { useResumeCreator } from "@/providers/resume-creator-provider";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useEffect } from "react";
 import { useForm } from "react-hook-form";
-import { useTranslation } from "react-i18next";
 import { z } from "zod";
 
 export function useSkillForm() {
-    const { addSkill } = useResumeCreator();
-
-    const { t } = useTranslation();
+    const { addSkill, t } = useResumeCreator();
 
     const skillSchema = z.object({
         name: z.string().min(1, {
@@ -36,9 +33,7 @@ export function useSkillForm() {
 }
 
 export function useActivityForm(initialActivity?: Activity) {
-    const { addActivity, editActivity } = useResumeCreator();
-
-    const { t } = useTranslation();
+    const { addActivity, editActivity, t } = useResumeCreator();
 
     const activitySchema = z.object({
         name: z.string().min(1, {
@@ -117,8 +112,7 @@ export function useInterestsForm() {
 }
 
 export function useLinkForm(initialLink?: Link) {
-    const { addLink, editLink } = useResumeCreator();
-    const { t } = useTranslation();
+    const { addLink, editLink, t } = useResumeCreator();
 
     const linkSchema = z.object({
         url: z.string().url(t("resumeCreator.stepThree.linkForm.urlMustBeValid")),

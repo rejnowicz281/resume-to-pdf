@@ -2,7 +2,6 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { getDuration } from "@/lib/utils/date";
 import { cn } from "@/lib/utils/general";
 import { useResumeCreator } from "@/providers/resume-creator-provider";
-import { useTranslation } from "react-i18next";
 import AddActivity from "./add-activity";
 import DeleteActivity from "./delete-activity";
 import EditActivity from "./edit-activity";
@@ -11,9 +10,9 @@ import MoveActivity from "./move-activity";
 
 export default function Activities() {
     const {
-        resume: { activities }
+        resume: { activities },
+        t
     } = useResumeCreator();
-    const { t } = useTranslation();
 
     return (
         <div className="flex flex-col">

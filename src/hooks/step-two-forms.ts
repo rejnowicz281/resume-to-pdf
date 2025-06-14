@@ -4,12 +4,10 @@ import { withID } from "@/lib/utils/general";
 import { useResumeCreator } from "@/providers/resume-creator-provider";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
-import { useTranslation } from "react-i18next";
 import { z } from "zod";
 
 export function useWorkExperienceForm(initialExperience?: WorkExperience) {
-    const { addWorkExperience, editWorkExperience } = useResumeCreator();
-    const { t } = useTranslation();
+    const { addWorkExperience, editWorkExperience, t } = useResumeCreator();
 
     const workExperienceSchema = z.object({
         title: z.string().min(1, {
@@ -61,9 +59,7 @@ export function useWorkExperienceForm(initialExperience?: WorkExperience) {
 }
 
 export function useEducationForm(initialEducation?: Education) {
-    const { addEducation, editEducation } = useResumeCreator();
-
-    const { t } = useTranslation();
+    const { addEducation, editEducation, t } = useResumeCreator();
 
     const educationSchema = z.object({
         institution: z.string().min(1, {
@@ -116,9 +112,7 @@ export function useEducationForm(initialEducation?: Education) {
 }
 
 export const useLanguageForm = (initialLanguage?: Language) => {
-    const { addLanguage, editLanguage } = useResumeCreator();
-
-    const { t } = useTranslation();
+    const { addLanguage, editLanguage, t } = useResumeCreator();
 
     const languageSchema = z.object({
         language: z.string().min(1, {
@@ -146,9 +140,7 @@ export const useLanguageForm = (initialLanguage?: Language) => {
 };
 
 export const useTrainingForm = (initialTraining?: Training) => {
-    const { addTraining, editTraining } = useResumeCreator();
-
-    const { t } = useTranslation();
+    const { addTraining, editTraining, t } = useResumeCreator();
 
     const trainingSchema = z.object({
         name: z.string().min(1, {

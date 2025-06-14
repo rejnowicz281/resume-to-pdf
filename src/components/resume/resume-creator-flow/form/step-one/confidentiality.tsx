@@ -1,14 +1,13 @@
 import { Checkbox } from "@/components/ui/checkbox"; // Ensure Checkbox component accepts onChange of type React.ChangeEvent<HTMLInputElement>
 import { Label } from "@/components/ui/label";
 import { useResumeCreator } from "@/providers/resume-creator-provider";
-import { useTranslation } from "react-i18next";
 
 export default function Confidentiality() {
-    const { t } = useTranslation();
     const {
         resume: { includeDataProcessingConsent, includeRodoClause },
         setIncludeDataProcessingConsent,
-        setIncludeRodoClause
+        setIncludeRodoClause,
+        t
     } = useResumeCreator();
 
     return (

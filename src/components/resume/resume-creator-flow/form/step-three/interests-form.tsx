@@ -2,12 +2,12 @@ import { Button } from "@/components/ui/button";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { Textarea } from "@/components/ui/textarea";
 import { useInterestsForm } from "@/hooks/step-three-forms";
+import { useResumeCreator } from "@/providers/resume-creator-provider";
 import { Plus } from "lucide-react";
-import { useTranslation } from "react-i18next";
 
 export default function InterestsForm() {
     const { form, onSubmit } = useInterestsForm();
-    const { t } = useTranslation();
+    const { t } = useResumeCreator();
 
     return (
         <Form {...form}>

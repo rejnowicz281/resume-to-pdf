@@ -1,5 +1,3 @@
-import i18next from "i18next";
-
 export const COUNTRY_NAMES_EN = [
     "Algeria",
     "Andorra",
@@ -496,4 +494,4 @@ export const COUNTRY_NAMES_PL = [
     "Zjednoczone Stany Mniejsze Odległe"
 ];
 
-export const getCountryNames = () => (i18next.language === "pl-PL" ? COUNTRY_NAMES_PL : COUNTRY_NAMES_EN);
+export const getCountryNames = (lang: string) => (lang === "pl-PL" ? COUNTRY_NAMES_PL : COUNTRY_NAMES_EN);

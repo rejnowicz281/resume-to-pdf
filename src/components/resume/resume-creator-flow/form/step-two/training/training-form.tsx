@@ -4,12 +4,12 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { useTrainingForm } from "@/hooks/step-two-forms";
 import { Training } from "@/lib/types/resume";
+import { useResumeCreator } from "@/providers/resume-creator-provider";
 import { Plus } from "lucide-react";
-import { useTranslation } from "react-i18next";
 
 export default function TrainingForm({ training, afterSubmit }: { training?: Training; afterSubmit?: () => void }) {
     const { form, onSubmit } = useTrainingForm(training);
-    const { t } = useTranslation();
+    const { t } = useResumeCreator();
 
     return (
         <Form {...form}>

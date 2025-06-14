@@ -3,14 +3,11 @@ import { usePouchDB } from "@/providers/pouchdb-provider";
 import { useResumeCreator } from "@/providers/resume-creator-provider";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
-import { useTranslation } from "react-i18next";
 import { z } from "zod";
 
 export function useBasicInfoForm() {
-    const { resume, setFirstName, setLastName, setDateOfBirth } = useResumeCreator();
+    const { resume, setFirstName, setLastName, setDateOfBirth, t } = useResumeCreator();
     const { db } = usePouchDB();
-
-    const { t } = useTranslation();
 
     const basicInfoSchema = z.object({
         firstName: z.string().min(1, {
@@ -83,9 +80,8 @@ export function useLocationForm() {
 }
 
 export function useContactForm() {
-    const { resume, setEmail, setPhone } = useResumeCreator();
+    const { resume, setEmail, setPhone, t } = useResumeCreator();
     const { db } = usePouchDB();
-    const { t } = useTranslation();
 
     const contactSchema = z.object({
         phone: z.string().optional(),
