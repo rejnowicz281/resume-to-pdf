@@ -99,7 +99,11 @@ const plTranslation: typeof enTranslation = {
     resumeForm: {
         name: "Nazwa",
         description: "Opis",
-        descriptionPlaceholder: "Opis CV"
+        descriptionPlaceholder: "Opis CV",
+        lang: "Język",
+        langPlaceholder: "Przejmij z ustawień",
+        langInheritDescription:
+            "Wybierając tę opcję, CV będzie używać języka ustawionego w twoich ustawieniach aplikacji"
     },
     resumeCreator: {
         stepOne: {

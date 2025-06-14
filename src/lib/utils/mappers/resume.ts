@@ -110,6 +110,7 @@ export const mapResume = (object: Record<string, any>): Resume => {
     const resume: Resume = {
         _id: mapString(object._id) || uniqid(),
         name: mapString(object.name),
+        lang: mapString(object.lang) || "inherit",
         description: mapString(object.description),
         createdAt: mapString(object.createdAt) || formatDate(new Date(), "dd.mm.yyyy hh:mm"),
         firstName: mapString(object.firstName),

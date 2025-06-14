@@ -15,11 +15,14 @@ import {
     WorkExperience,
     WorkExperienceNoId
 } from "@/lib/types/resume";
+import { TFunction } from "i18next";
 import React, { createContext, ReactNode, useContext, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { usePouchDB } from "./pouchdb-provider";
 
 export type ResumeCreatorContextType = {
+    t: TFunction<"", undefined>;
+
     previewState: boolean;
     togglePreviewState: () => void;
 
@@ -95,7 +98,10 @@ export const ResumeCreatorProvider = ({
     resume: Resume;
     setResume: React.Dispatch<React.SetStateAction<Resume>>;
 }) => {
-    const { t } = useTranslation();
+    const tOptions = resume.lang ? { lng: resume.lang } : undefined;
+
+    const { t } = useTranslation("", tOptions);
+
     const { db } = usePouchDB();
 
     const [previewState, setPreviewState] = useState(false);
@@ -393,6 +399,8 @@ export const ResumeCreatorProvider = ({
     return (
         <ResumeCreatorContext.Provider
             value={{
+                t,
+
                 previewState,
                 togglePreviewState,
 

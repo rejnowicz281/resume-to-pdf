@@ -96,7 +96,10 @@ const enTranslation = {
     resumeForm: {
         name: "Custom Name",
         description: "Description",
-        descriptionPlaceholder: "Resume Description"
+        descriptionPlaceholder: "Resume Description",
+        lang: "Language",
+        langPlaceholder: "Inherit",
+        langInheritDescription: "By choosing 'Inherit', the resume will use the language from your app settings"
     },
     resumeCreator: {
         stepOne: {

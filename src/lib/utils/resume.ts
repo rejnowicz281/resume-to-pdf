@@ -25,6 +25,7 @@ export const getResumeProgress = (resume: Resume) => {
         _id,
         _rev,
         name,
+        lang,
         createdAt,
         description,
         imageOptions,

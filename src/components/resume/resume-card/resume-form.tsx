@@ -1,5 +1,6 @@
+import { LanguageSelect } from "@/components/general/language-select";
 import { Button } from "@/components/ui/button";
-import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
+import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { useResumeForm } from "@/hooks/resume-form";
 import { Resume } from "@/lib/types/resume";
@@ -43,6 +44,30 @@ export default function ResumeForm({ resume, afterSubmit }: { resume: Resume; af
                             <FormControl>
                                 <Input placeholder={t("resumeForm.descriptionPlaceholder")} {...field} />
                             </FormControl>
+                            <FormMessage />
+                        </FormItem>
+                    )}
+                />
+
+                <FormField
+                    control={form.control}
+                    name="lang"
+                    render={({ field }) => (
+                        <FormItem>
+                            <FormLabel>{t("resumeForm.lang")}</FormLabel>
+                            <FormControl>
+                                <LanguageSelect
+                                    clearable={{
+                                        value: "inherit"
+                                    }}
+                                    placeholder={t("resumeForm.langPlaceholder")}
+                                    {...field}
+                                    onValueChange={field.onChange}
+                                />
+                            </FormControl>
+                            {(field.value === "inherit" || !field.value) && (
+                                <FormDescription>{t("resumeForm.langInheritDescription")}</FormDescription>
+                            )}
                             <FormMessage />
                         </FormItem>
                     )}

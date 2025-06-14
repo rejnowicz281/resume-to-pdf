@@ -101,6 +101,7 @@ export type Resume = {
     links: Link[];
     includeRodoClause: boolean;
     includeDataProcessingConsent: boolean;
+    lang: string;
 };
 
 export type ResumeNoId = Omit<Resume, "_id">;

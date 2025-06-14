@@ -1,7 +1,7 @@
 import AuthDialog from "@/components/auth/dialog";
+import { LanguageSelect } from "@/components/general/language-select";
 import DownloadResumesButton from "@/components/resume/download-resumes-button";
 import { Button } from "@/components/ui/button";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { useAuth } from "@/providers/auth-provider";
 import { Trans, useTranslation } from "react-i18next";
 
@@ -52,15 +52,11 @@ export default function SettingsPage() {
                             </p>
                         </div>
                         <div>
-                            <Select value={i18n.language} onValueChange={(val) => i18n.changeLanguage(val)}>
-                                <SelectTrigger className="flex gap-3">
-                                    <SelectValue placeholder="Select app language" />
-                                </SelectTrigger>
-                                <SelectContent>
-                                    <SelectItem value="en">English</SelectItem>
-                                    <SelectItem value="pl-PL">Polski</SelectItem>
-                                </SelectContent>
-                            </Select>
+                            <LanguageSelect
+                                placeholder="Select app language"
+                                value={i18n.language}
+                                onValueChange={(val) => i18n.changeLanguage(val)}
+                            />
                         </div>
                     </div>
                 </div>
