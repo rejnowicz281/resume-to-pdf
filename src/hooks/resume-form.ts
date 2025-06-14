@@ -25,6 +25,8 @@ export function useResumeForm(_id: string) {
     });
 
     function onSubmit(values: z.infer<typeof resumeSchema>) {
+        if (values.lang === "inherit") values.lang = undefined;
+
         if (!resume) addResume({ ...newEmptyResume(_id), ...values });
         else editResume({ _id, ...values });
     }
