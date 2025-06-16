@@ -76,14 +76,16 @@ export function calculateMonthsBetweenDates(startDate: Date, endDate?: Date) {
 }
 
 // take in any object that has startDate and optional endDate properties, can have any other properties
-export function getDuration(object: Record<string, any> & { startDate: string; endDate?: string }) {
+export function getDuration(object: Record<string, any> & { startDate: string; endDate?: string }, lang?: string) {
     const startDate = stringToDate(object.startDate);
     const endDate = object.endDate ? stringToDate(object.endDate) : new Date();
+
+    const language = lang || i18next.language;
 
     const months = calculateMonthsBetweenDates(startDate, endDate);
 
     if (months < 12) {
-        switch (i18next.language) {
+        switch (language) {
             case "en":
                 return `${months} month${months > 1 ? "s" : ""}`;
             case "pl-PL":
@@ -112,7 +114,7 @@ export function getDuration(object: Record<string, any> & { startDate: string; e
     const remainingMonths = months % 12;
 
     if (remainingMonths === 0) {
-        switch (i18next.language) {
+        switch (language) {
             case "en":
                 return `${years} year${years > 1 ? "s" : ""}`;
             case "pl-PL":
@@ -141,7 +143,7 @@ export function getDuration(object: Record<string, any> & { startDate: string; e
         }
     }
 
-    switch (i18next.language) {
+    switch (language) {
         case "en":
             return `${years} year${years > 1 ? "s" : ""} ${remainingMonths} month${remainingMonths > 1 ? "s" : ""}`;
         case "pl-PL":

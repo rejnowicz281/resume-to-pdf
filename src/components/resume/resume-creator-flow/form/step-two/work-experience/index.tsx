@@ -10,7 +10,7 @@ import MoveExperience from "./move-experience";
 
 export default function WorkExperience() {
     const {
-        resume: { workExperience },
+        resume: { workExperience, lang },
         t
     } = useResumeCreator();
 
@@ -46,7 +46,7 @@ export default function WorkExperience() {
                                             {t("resumeCreator.stepTwo.workExperience.duration")}: {experience.startDate}{" "}
                                             - {experience.endDate || t("present")}
                                         </span>
-                                        <span className="truncate">[{getDuration(experience)}]</span>
+                                        <span className="truncate">[{getDuration(experience, lang)}]</span>
                                     </span>
                                 </CardDescription>
                             </CardHeader>

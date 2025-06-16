@@ -10,7 +10,7 @@ import MoveActivity from "./move-activity";
 
 export default function Activities() {
     const {
-        resume: { activities },
+        resume: { activities, lang },
         t
     } = useResumeCreator();
 
@@ -41,7 +41,7 @@ export default function Activities() {
                                             {t("resumeCreator.stepThree.activities.duration")}: {activity.startDate} -{" "}
                                             {activity.endDate || t("present")}
                                         </span>
-                                        <span className="truncate">[{getDuration(activity)}]</span>
+                                        <span className="truncate">[{getDuration(activity, lang)}]</span>
                                     </span>
                                 </CardDescription>
                             </CardHeader>

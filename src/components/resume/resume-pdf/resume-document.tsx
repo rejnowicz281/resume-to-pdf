@@ -232,7 +232,9 @@ export default function ResumeDocument({ resume, t }: { resume: Resume; t: TFunc
                                                 <Text style={styles.date}>
                                                     {experience.startDate} - {experience.endDate || t("present")}
                                                 </Text>
-                                                <Text style={{ fontSize: 8 }}>[{getDuration(experience)}]</Text>
+                                                <Text style={{ fontSize: 8 }}>
+                                                    [{getDuration(experience, resume.lang)}]
+                                                </Text>
                                             </View>
                                             {experience.description ? (
                                                 <Text style={{ marginTop: 4 }}>{experience.description}</Text>
@@ -256,7 +258,7 @@ export default function ResumeDocument({ resume, t }: { resume: Resume; t: TFunc
                                                 <Text style={styles.date}>
                                                     {edu.startDate} - {edu.endDate || t("present")}
                                                 </Text>
-                                                <Text style={{ fontSize: 8 }}>[{getDuration(edu)}]</Text>
+                                                <Text style={{ fontSize: 8 }}>[{getDuration(edu, resume.lang)}]</Text>
                                             </View>
                                             {edu.specialization ? (
                                                 <Text>
@@ -318,7 +320,9 @@ export default function ResumeDocument({ resume, t }: { resume: Resume; t: TFunc
                                                 <Text style={styles.date}>
                                                     {activity.startDate} - {activity.endDate || t("present")}
                                                 </Text>
-                                                <Text style={{ fontSize: 8 }}>[{getDuration(activity)}]</Text>
+                                                <Text style={{ fontSize: 8 }}>
+                                                    [{getDuration(activity, resume.lang)}]
+                                                </Text>
                                             </View>
                                             {activity.description ? (
                                                 <Text style={{ marginTop: 4 }}>{activity.description}</Text>

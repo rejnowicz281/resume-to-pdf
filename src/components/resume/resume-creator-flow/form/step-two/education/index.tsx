@@ -10,7 +10,7 @@ import MoveEducation from "./move-education";
 
 export default function Education() {
     const {
-        resume: { education },
+        resume: { education, lang },
         t
     } = useResumeCreator();
 
@@ -45,7 +45,7 @@ export default function Education() {
                                             {t("resumeCreator.stepTwo.education.duration")}: {education.startDate} -{" "}
                                             {education.endDate || t("present")}
                                         </span>
-                                        <span className="truncate">[{getDuration(education)}]</span>
+                                        <span className="truncate">[{getDuration(education, lang)}]</span>
                                     </span>
                                 </CardDescription>
                             </CardHeader>
