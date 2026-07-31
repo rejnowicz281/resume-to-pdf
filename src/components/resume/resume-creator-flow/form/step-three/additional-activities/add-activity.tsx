@@ -17,7 +17,7 @@ export default function AddActivity() {
                     {t("resumeCreator.stepThree.addActivity.buttonContent")}
                 </Button>
             </DialogTrigger>
-            <DialogContent>
+            <DialogContent className="max-w-4xl">
                 <DialogTitle className="text-3xl font-bold">
                     {t("resumeCreator.stepThree.addActivity.dialogTitle")}
                 </DialogTitle>

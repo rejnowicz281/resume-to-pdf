@@ -17,7 +17,7 @@ export default function AddTraining() {
                     {t("resumeCreator.stepTwo.addTraining.buttonContent")}
                 </Button>
             </DialogTrigger>
-            <DialogContent>
+            <DialogContent className="max-w-4xl">
                 <DialogTitle className="text-3xl font-bold">
                     {t("resumeCreator.stepTwo.addTraining.dialogTitle")}
                 </DialogTitle>

@@ -17,7 +17,7 @@ export default function EditEducation({ education }: { education: Education }) {
                     <Edit size={20} className="text-gray-500" />
                 </Button>
             </DialogTrigger>
-            <DialogContent>
+            <DialogContent className="max-w-4xl">
                 <DialogTitle className="text-3xl font-bold">
                     {t("resumeCreator.stepTwo.editEducation.dialogTitle")}
                 </DialogTitle>
